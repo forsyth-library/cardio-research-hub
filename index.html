@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cardiovascular Research Hub · PBAT Guide</title>
+<meta name="description" content="Research guide for the cardiovascular system PBAT: topic pathways, vetted free sources, source evaluation, citation builder, and a blood-flow tracer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    color-scheme: light;
+    --bg: #faf8f5;
+    --surface: #ffffff;
+    --surface-2: #f4f1ec;
+    --ink: #1c1917;
+    --muted: #57534e;
+    --faint: #78716c;
+    --line: #e7e2dc;
+    --accent: #9b1c1c;
+    --accent-hover: #7f1d1d;
+    --accent-soft: #fbefee;
+    --accent-ink: #7f1d1d;
+    --on-accent: #ffffff;
+    --deoxy: #1d4ed8;
+    --deoxy-soft: #e8eefc;
+    --oxy: #b91c1c;
+    --oxy-soft: #fdecec;
+    --exchange: #7c3aed;
+    --exchange-soft: #f1ebfd;
+    --ok: #166534;
+    --ok-soft: #e7f5ec;
+    --warn: #92400e;
+    --warn-soft: #fdf3e1;
+    --bad: #9f1239;
+    --bad-soft: #fde8ee;
+    --hero-1: #3b0a0a;
+    --hero-2: #6b1414;
+
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 2px rgba(28, 25, 23, .05), 0 1px 1px rgba(28, 25, 23, .03);
+    --max: 72rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #141211; --surface: #1d1a19; --surface-2: #262220; --ink: #f2eeea; --muted: #c4bcb5; --faint: #9c948d;
+      --line: #36312e; --accent: #f08a8a; --accent-hover: #f6a5a5; --accent-soft: #3a1d1d; --accent-ink: #f8b4b4; --on-accent: #1d0a0a;
+      --deoxy: #93b4ff; --deoxy-soft: #1b2440; --oxy: #ff9a9a; --oxy-soft: #3d1c1c; --exchange: #c4a6ff; --exchange-soft: #2a2140;
+      --ok: #86efac; --ok-soft: #15301f; --warn: #fcd34d; --warn-soft: #33270f; --bad: #fda4af; --bad-soft: #3b1820;
+      --hero-1: #240707; --hero-2: #4a0f0f;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #141211; --surface: #1d1a19; --surface-2: #262220; --ink: #f2eeea; --muted: #c4bcb5; --faint: #9c948d;
+    --line: #36312e; --accent: #f08a8a; --accent-hover: #f6a5a5; --accent-soft: #3a1d1d; --accent-ink: #f8b4b4; --on-accent: #1d0a0a;
+    --deoxy: #93b4ff; --deoxy-soft: #1b2440; --oxy: #ff9a9a; --oxy-soft: #3d1c1c; --exchange: #c4a6ff; --exchange-soft: #2a2140;
+    --ok: #86efac; --ok-soft: #15301f; --warn: #fcd34d; --warn-soft: #33270f; --bad: #fda4af; --bad-soft: #3b1820;
+    --hero-1: #240707; --hero-2: #4a0f0f;
+    --shadow: none;
+  }
+
+  /* ---------- Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 400 1rem/1.6 var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+  h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; margin: 0; color: var(--ink); }
+  h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); }
+  h3 { font-size: 1.25rem; }
+  h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+  p { margin: 0; }
+  a { color: var(--accent); text-underline-offset: 2px; }
+  a:hover { color: var(--accent-hover); }
+  ::selection { background: var(--accent-soft); color: var(--accent-ink); }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: max(1rem, env(safe-area-inset-left, 0px)); }
+  .skip { position: absolute; left: -9999px; top: 0; background: var(--surface); padding: .5rem 1rem; z-index: 100; }
+  .skip:focus { left: 1rem; top: 1rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .icon { width: 1.1em; height: 1.1em; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.15em; }
+  .muted { color: var(--muted); }
+  .small { font-size: .875rem; }
+  .stack > * + * { margin-top: 1rem; }
+  .stack-lg > * + * { margin-top: 2rem; }
+
+  /* ---------- Header ---------- */
+  .site-header { background: linear-gradient(115deg, var(--hero-1), var(--hero-2)); color: #fff; }
+  .brand { display: flex; align-items: center; gap: 1rem; padding-block: 1.5rem; flex-wrap: wrap; }
+  .brand-mark { width: 3rem; height: 3rem; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: #fca5a5; }
+  .brand-mark .icon { width: 1.6rem; height: 1.6rem; animation: beat 2s infinite; transform-origin: center; }
+  @keyframes beat { 0%,28%,70%,100% { transform: scale(1); } 14% { transform: scale(1.1); } 42% { transform: scale(1.05); } }
+  .brand h1 { color: #fff; font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.25rem); }
+  .brand .eyebrow { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: #fcd9a8; font-weight: 600; }
+
+  .tabs-bar { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+  .tabs { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap;
+    padding: .9rem 1rem; color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem;
+    border-bottom: 3px solid transparent; margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--ink); }
+
+  main { flex: 1; width: 100%; padding-block: 2rem 3rem; }
+
+  /* ---------- Generic components ---------- */
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
+  .card-tight { padding: 1.25rem; }
+  .section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; }
+  .section-head p { max-width: 46rem; margin-top: .4rem; }
+  .grid { display: grid; gap: 1.25rem; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    font: 600 .9rem/1 var(--font-body); padding: .7rem 1.1rem; border-radius: var(--radius-sm);
+    border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { background: var(--accent-hover); color: var(--on-accent); }
+  .btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--line); }
+  .btn-secondary:hover { background: var(--surface-2); color: var(--ink); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-sm { padding: .5rem .8rem; font-size: .825rem; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chip-btn {
+    font: 500 .85rem/1 var(--font-body); padding: .55rem .85rem; border-radius: 999px; cursor: pointer;
+    background: var(--surface); color: var(--muted); border: 1px solid var(--line);
+  }
+  .chip-btn:hover { color: var(--ink); border-color: var(--faint); }
+  .chip-btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .tag { display: inline-block; font-size: .75rem; font-weight: 600; padding: .2rem .55rem; border-radius: 6px; background: var(--surface-2); color: var(--muted); }
+  .tag-peer { background: var(--ok-soft); color: var(--ok); }
+  .tag-bg { background: var(--warn-soft); color: var(--warn); }
+  .tag-data { background: var(--deoxy-soft); color: var(--deoxy); }
+  .tag-visual { background: var(--exchange-soft); color: var(--exchange); }
+
+  .callout { display: flex; gap: .85rem; align-items: flex-start; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--warn-soft); color: var(--ink); border: 1px solid color-mix(in srgb, var(--warn) 25%, transparent); }
+  .callout .icon { color: var(--warn); margin-top: .2rem; width: 1.25rem; height: 1.25rem; }
+  .callout strong { color: var(--ink); }
+
+  label, legend { font-weight: 600; font-size: .9rem; }
+  input[type="text"], input[type="search"], select, textarea {
+    width: 100%; font: 400 .95rem/1.4 var(--font-body); color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .6rem .75rem;
+  }
+  textarea { resize: vertical; min-height: 4.5rem; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
+  .field > label { display: block; margin-bottom: .3rem; }
+  .hint { font-size: .8rem; color: var(--faint); margin-top: .25rem; font-weight: 400; }
+
+  /* ---------- Overview ---------- */
+  .hero { position: relative; overflow: hidden; padding: clamp(1.5rem, 3vw, 2.5rem); }
+  .hero h2 { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); max-width: 30ch; }
+  .hero p { max-width: 60ch; margin-top: .9rem; color: var(--muted); font-size: 1.05rem; }
+    counter-increment: s; content: counter(s); position: absolute; top: 1.25rem; left: 1.5rem;
+    width: 1.75rem; height: 1.75rem; border-radius: 50%; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: .85rem;
+  }
+  .reqs { background: var(--surface-2); }
+  .reqs ol { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); counter-reset: r; }
+  .reqs li { counter-increment: r; }
+  .reqs li::before { content: "0" counter(r); display: block; font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 1.1rem; }
+  .reqs li strong { display: block; margin-bottom: .2rem; }
+  .reqs li span { color: var(--muted); font-size: .925rem; }
+
+  /* ---------- Pathways ---------- */
+  .questions { background: var(--pw-soft); border-radius: var(--radius-sm); padding: 1rem 1.1rem; }
+  .questions h4 { color: var(--pw); }
+  .questions ul { margin: .5rem 0 0; padding-left: 1.1rem; display: grid; gap: .5rem; font-size: .95rem; }
+  .search-links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+  .search-links a {
+    display: inline-flex; align-items: center; gap: .35rem; font-size: .85rem; text-decoration: none;
+    padding: .35rem .65rem; border-radius: 999px; border: 1px solid var(--line); color: var(--ink);
+  }
+  .search-links a:hover { border-color: var(--accent); color: var(--accent); }
+  .search-links .icon { width: .9em; height: .9em; color: var(--faint); }
+
+  /* ---------- Sources ---------- */
+  .db-search { margin-top: 1.25rem; padding: 1.1rem 1.25rem; border-radius: var(--radius); background: var(--surface-2); }
+  .db-search > label { display: block; margin-bottom: .5rem; font-size: 1rem; }
+  .db-search-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .db-search-input { position: relative; flex: 1 1 16rem; }
+  .db-search-input .icon { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); color: var(--faint); }
+  .db-search-input input { padding-left: 2.4rem; height: 100%; min-height: 2.75rem; }
+  .db-pick { border: 0; margin: .75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .db-pick label { display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .875rem; padding: .4rem .75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; }
+  .db-pick label span { color: var(--faint); font-size: .8rem; }
+  .db-pick label:has(input:checked) { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .db-pick input { accent-color: var(--accent); margin: 0; }
+  .db-search .hint { margin-top: .6rem; }
+  .source-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; }
+
+  /* ---------- Writing ---------- */
+  .compare { width: 100%; border-collapse: collapse; font-size: .925rem; }
+  .compare th, .compare td { text-align: left; padding: .75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .compare th { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); }
+  .compare td:first-child { font-weight: 600; white-space: nowrap; }
+  .compare .weak { color: var(--muted); }
+  .table-scroll { overflow-x: auto; }
+  .tool-head { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1.25rem; }
+  .tool-head h3 { display: flex; align-items: center; gap: .5rem; }
+  .tool-head h3 .icon { color: var(--accent); }
+
+  .craap-item + .craap-item { margin-top: 1.1rem; }
+  .craap-item .row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .craap-item label { font-size: .925rem; }
+  .craap-item label b { color: var(--accent); }
+  .craap-item output { font-weight: 700; color: var(--accent); min-width: 1.5ch; text-align: right; font-variant-numeric: tabular-nums; }
+  .craap-item .hint { margin-top: 0; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); margin: .5rem 0 0; }
+  .scale { display: flex; justify-content: space-between; font-size: .75rem; color: var(--faint); }
+  .result { margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--surface-2); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .result .score { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .verdict { padding: .4rem .8rem; border-radius: 999px; font-weight: 600; font-size: .875rem; }
+  .verdict.good { background: var(--ok-soft); color: var(--ok); }
+  .verdict.mid { background: var(--warn-soft); color: var(--warn); }
+  .verdict.low { background: var(--bad-soft); color: var(--bad); }
+  .result-note { flex-basis: 100%; font-size: .875rem; color: var(--muted); }
+
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; }
+  .seg button { font: 600 .825rem/1 var(--font-body); padding: .55rem .8rem; background: var(--surface); color: var(--muted); border: 0; cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+  .form-grid { display: grid; gap: .9rem; grid-template-columns: repeat(6, 1fr); }
+  .form-grid .span-6 { grid-column: span 6; }
+  .form-grid .span-3 { grid-column: span 3; }
+  .form-grid .span-2 { grid-column: span 2; }
+  @media (max-width: 520px) { .form-grid .span-3, .form-grid .span-2 { grid-column: span 6; } }
+  .cite-out { margin-top: 1.25rem; padding: 1rem 1.1rem; border-radius: var(--radius-sm); background: var(--surface-2); border-left: 4px solid var(--accent); }
+  .cite-out .label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
+  .cite-out p { margin-top: .4rem; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; font-family: var(--font-display); font-size: 1.02rem; }
+  .cite-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; align-items: center; }
+
+  /* ---------- Lab ---------- */
+  .embed { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: var(--radius); overflow: hidden; background: #0c0a09; border: 1px solid var(--line); margin-top: 1.25rem; }
+  .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .credit { font-size: .8rem; color: var(--faint); margin-top: .6rem; }
+
+  .flow { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 6.5rem), 1fr)); gap: .4rem; }
+  .flow button {
+    width: 100%; height: 100%; text-align: left; cursor: pointer; border-radius: var(--radius-sm);
+    font: 500 .8rem/1.25 var(--font-body); padding: .55rem .6rem; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c);
+  }
+  .flow button .n { display: block; font-size: .7rem; color: var(--faint); font-weight: 600; }
+  .flow button[aria-current="step"] { background: var(--c-soft); border-color: var(--c); box-shadow: inset 0 0 0 1px var(--c); font-weight: 700; }
+  .o2-deoxy { --c: var(--deoxy); --c-soft: var(--deoxy-soft); }
+  .o2-oxy { --c: var(--oxy); --c-soft: var(--oxy-soft); }
+  .o2-exchange { --c: var(--exchange); --c-soft: var(--exchange-soft); }
+  .step-panel { margin-top: 1.25rem; border-radius: var(--radius); padding: 1.25rem 1.5rem; background: var(--c-soft); border-left: 5px solid var(--c); }
+  .step-panel .meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; font-size: .85rem; }
+  .o2-pill { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; color: var(--c); }
+  .o2-pill::before { content: ""; width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); }
+  .step-panel h4 { font-family: var(--font-display); font-size: 1.4rem; text-transform: none; letter-spacing: 0; color: var(--ink); margin-top: .5rem; }
+  .step-panel p { margin-top: .5rem; max-width: 65ch; }
+  .step-panel .valve { margin-top: .6rem; font-size: .9rem; color: var(--muted); }
+  .step-nav { display: flex; justify-content: space-between; gap: .75rem; margin-top: 1rem; flex-wrap: wrap; }
+  .legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; font-size: .85rem; margin-top: 1rem; }
+
+  .quiz fieldset { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin: 0; }
+  .quiz fieldset + fieldset { margin-top: .9rem; }
+  .quiz legend { padding: 0 .35rem; font-size: .95rem; }
+  .quiz .opts { display: grid; gap: .35rem; margin-top: .4rem; }
+  .quiz .opt { display: flex; gap: .55rem; align-items: center; font-weight: 400; font-size: .925rem; padding: .35rem .5rem; border-radius: 6px; cursor: pointer; }
+  .quiz .opt:hover { background: var(--surface-2); }
+  .quiz input[type="radio"] { accent-color: var(--accent); width: 1rem; height: 1rem; margin: 0; }
+  .quiz fieldset.right { border-color: var(--ok); background: var(--ok-soft); }
+  .quiz fieldset.wrong { border-color: var(--bad); background: var(--bad-soft); }
+  .quiz .explain { margin-top: .6rem; font-size: .9rem; }
+  .quiz .explain b { font-weight: 700; }
+  .quiz-score { margin-top: 1rem; font-weight: 600; }
+
+  /* ---------- Footer & toast ---------- */
+  footer { border-top: 1px solid var(--line); background: var(--surface); font-size: .85rem; color: var(--muted); padding-block: 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); }
+  footer .wrap { display: grid; gap: .4rem; }
+  .toast {
+    position: fixed; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); max-width: min(22rem, calc(100% - 2rem));
+    background: #1c1917; color: #fafaf9; padding: .85rem 1.1rem; border-radius: var(--radius-sm); font-size: .9rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(150%); opacity: 0; transition: transform .25s, opacity .25s; z-index: 50;
+  }
+  .toast.show { transform: none; opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+
+  /* Print: show every panel, drop the interactive chrome */
+  @media print {
+    .tabs-bar, .toast, .no-print, .embed, .jump-links, .db-search, .step-nav, .flow, .quiz-actions { display: none !important; }
+    .site-header { background: none; color: #000; }
+    .brand h1 { color: #000; }
+    .card { box-shadow: none; break-inside: avoid; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #555; overflow-wrap: anywhere; }
+  }
+
+  /* ---------- Navigation ---------- */
+  .brand-link { color: inherit; text-decoration: none; }
+  .brand-link:hover { color: inherit; }
+  .tab[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+  .tabs .nav-cta { margin-left: auto; color: var(--accent); font-weight: 600; }
+  @media (max-width: 600px) {
+    .tabs { flex-wrap: wrap; overflow: visible; gap: 0; }
+    .tab { padding: .65rem .7rem; font-size: .9rem; }
+    .tabs .nav-cta { margin-left: 0; }
+  }
+  .crumbs { font-size: .875rem; color: var(--faint); display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+  .crumbs a { color: var(--muted); }
+  .crumbs span[aria-hidden] { color: var(--line); }
+  .section-title { font-size: 1.4rem; margin-bottom: 1rem; }
+
+  /* ---------- Home ---------- */
+  .home-hero h2 { max-width: none; }
+  .lib-search { margin-top: 1.25rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+  .lib-search .db-search-input { flex: 1 1 18rem; }
+  .lib-search input { font-size: 1.05rem; min-height: 3rem; }
+  .format-chips { margin-top: .9rem; }
+  .results-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1rem; margin-bottom: 1rem; }
+  .results-head h2 { font-size: 1.4rem; }
+  .fallback { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: var(--radius); border: 1px dashed var(--line); color: var(--muted); }
+  .fallback p + p { margin-top: .35rem; }
+  .fallback a { font-weight: 600; }
+
+  .topic-card { display: flex; flex-direction: column; gap: .5rem; text-decoration: none; color: var(--ink); transition: border-color .15s; }
+  .topic-card:hover { border-color: var(--accent); color: var(--ink); }
+  .topic-card h3 { font-size: 1.15rem; }
+  .topic-card p { color: var(--muted); font-size: .925rem; flex: 1; }
+  .topic-card .subs { font-size: .825rem; color: var(--faint); }
+  .topic-card .count { font-size: .825rem; font-weight: 600; color: var(--accent); }
+  .guide-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; background: var(--accent-soft); border-color: transparent; }
+  .guide-strip p { max-width: 52ch; }
+
+  /* ---------- Resource cards ---------- */
+  .res { position: relative; display: flex; flex-direction: column; gap: .45rem; transition: border-color .15s; }
+  .res:hover { border-color: var(--accent); }
+  .res-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .res h3 { font-size: 1.05rem; line-height: 1.3; }
+  .res h3 a { color: var(--ink); text-decoration: none; }
+  .res h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+  .res h3 a:hover { color: var(--accent); }
+  .res h3 .icon { width: .85em; height: .85em; color: var(--faint); margin-left: .25rem; }
+  .res .publisher { font-size: .8rem; color: var(--faint); }
+  .res .why { color: var(--muted); font-size: .9rem; }
+  .res .where { font-size: .8rem; color: var(--faint); margin-top: auto; position: relative; z-index: 1; }
+  .tag-star { background: var(--accent-soft); color: var(--accent-ink); }
+  .tag-site { background: var(--ink); color: var(--bg); }
+
+  /* ---------- Topic page ---------- */
+  .topic-head p { max-width: 62ch; margin-top: .5rem; color: var(--muted); font-size: 1.05rem; }
+  .topic-filters { display: grid; gap: .6rem; margin-top: 1.25rem; }
+  .topic-filters .label { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-right: .25rem; align-self: center; }
+  .sub-section h3 { font-size: 1.2rem; margin-bottom: .9rem; }
+  .leads { --pw: var(--accent); --pw-soft: var(--accent-soft); }
+  .leads .questions { margin-top: 1rem; }
+  .empty-note { color: var(--muted); }
+
+  /* ---------- Guide ---------- */
+  .stages { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .75rem; counter-reset: st; }
+  .stages li { counter-increment: st; display: grid; grid-template-columns: 2.25rem 1fr; gap: .25rem 1rem; padding: 1rem 1.1rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+  .stages li::before { content: counter(st); grid-row: span 3; width: 2.25rem; height: 2.25rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-weight: 700; }
+  .stages h3 { font-size: 1.1rem; }
+  .stages p { color: var(--muted); font-size: .95rem; }
+  .stages a { font-weight: 600; font-size: .9rem; justify-self: start; }
+
+  /* ---------- Databases page ---------- */
+  .db-card { display: flex; flex-direction: column; gap: .5rem; }
+  .db-card p { color: var(--muted); font-size: .925rem; }
+  .db-card .btn { margin-top: auto; align-self: flex-start; }
+  .sb-steps { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 1.5rem; counter-reset: sb; }
+  .sb-steps > li { counter-increment: sb; position: relative; padding-left: 2.6rem; }
+  .sb-steps > li::before { content: counter(sb); position: absolute; left: 0; top: 0; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: .85rem; }
+  .sb-label { display: block; font-weight: 600; font-size: .95rem; margin-bottom: .4rem; }
+  .sb-spotted { margin-top: .6rem; display: grid; gap: .4rem; }
+  .sb-concepts { display: grid; gap: .75rem; margin-top: .75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .sb-concept { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .85rem; background: var(--surface-2); display: grid; gap: .5rem; align-content: start; }
+  .sb-concept > label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
+  .sb-concept .sb-and { font-size: .75rem; font-weight: 700; color: var(--accent); }
+  .sb-sugg { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+  .sb-sugg .hint { margin: 0; }
+  .chip-btn.sm { padding: .35rem .6rem; font-size: .8rem; }
+  #sb-query { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  .tips { margin: .75rem 0 0; padding-left: 1.2rem; display: grid; gap: .4rem; color: var(--muted); }
+  .tips b { color: var(--ink); }
+
+  /* ---------- My sources ---------- */
+  .count-badge { display: inline-grid; place-items: center; min-width: 1.3rem; height: 1.3rem; padding: 0 .35rem; margin-left: .4rem; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .72rem; font-weight: 700; }
+  .res-actions { position: relative; z-index: 1; margin-top: auto; padding-top: .35rem; }
+  .add-src { font: 600 .8rem/1 var(--font-body); color: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .45rem .75rem; cursor: pointer; }
+  .add-src:hover { border-color: var(--accent); }
+  .add-src.added { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
+  .ms-check { display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .875rem; }
+  .ms-check input { accent-color: var(--accent); }
+  .ms-storage { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .ms-cite { font-family: var(--font-display); font-size: 1.02rem; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; }
+  .ms-entry .res-tags { margin-top: .6rem; }
+  .ms-annot { margin-top: .6rem; color: var(--muted); font-size: .925rem; padding-left: 2em; }
+  .ms-edit { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); display: grid; gap: 1rem; }
+  .ms-craap { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .85rem 1rem; margin: 0; }
+  .ms-craap .row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .35rem; }
+  .ms-craap .row label { display: grid; gap: .25rem; font-size: .8rem; }
+  .ms-craap select { width: auto; min-width: 4.5rem; }
+  .ms-confirm, .ms-remove { display: inline-flex; flex-wrap: wrap; gap: .4rem; align-items: center; font-size: .875rem; }
+  .btn-danger { background: var(--bad); color: var(--surface); }
+  .btn-danger:hover { filter: brightness(.92); color: var(--surface); }
+  .tag-warn { background: var(--warn-soft); color: var(--warn); }
+  .verdict.tag { padding: .2rem .55rem; border-radius: 6px; font-size: .75rem; }
+  .craap-save { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-top: 1rem; }
+  .craap-save label { font-size: .875rem; }
+  .craap-save select { width: auto; flex: 1 1 12rem; }
+  #craap-save-empty { margin-top: .75rem; }
+
+  /* ---------- Guided path ---------- */
+  .pj-progress { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
+  .pj-progress button { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; gap: .35rem; text-align: center; background: none; border: 0; cursor: pointer; padding: .4rem .2rem; border-radius: var(--radius-sm); color: var(--muted); font: 500 .8rem/1.25 var(--font-body); }
+  .pj-progress button:hover { background: var(--surface-2); }
+  .pj-progress button[aria-current] .nm { color: var(--ink); font-weight: 700; }
+  .dot { width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; flex: none; font-weight: 700; font-size: .9rem; background: var(--surface-2); color: var(--muted); border: 2px solid var(--line); }
+  .current .dot { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .done .dot { border-color: var(--ok); color: var(--ok); background: var(--ok-soft); }
+  @media (max-width: 600px) { .pj-progress .nm { display: none; } }
+  .pj-stage { padding: 0; overflow: hidden; }
+  .pj-head { width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.25rem; background: none; border: 0; cursor: pointer; text-align: left; color: var(--ink); font: inherit; }
+  .pj-head:hover { background: var(--surface-2); }
+  .pj-title { flex: 1; display: grid; gap: .15rem; font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+  .pj-sum { font-family: var(--font-body); font-size: .85rem; font-weight: 400; color: var(--muted); overflow-wrap: anywhere; }
+  .pj-chev { font-size: 1.4rem; color: var(--faint); width: 1.5rem; text-align: center; }
+  .pj-body { padding: 0 1.25rem 1.25rem; display: grid; gap: 1rem; }
+  .pj-body > p { max-width: 65ch; }
+  .pj-count { font-weight: 600; color: var(--accent); }
+  .pj-checks { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .85rem 1rem; margin: 0; display: grid; gap: .55rem; }
+  .pj-checks .ms-check { align-items: flex-start; }
+  .pj-checks input { margin-top: .3rem; }
+  .pj-banner { align-items: center; flex-wrap: wrap; justify-content: space-between; background: var(--accent-soft); border-color: transparent; }
+  #pbat-strip { background: var(--accent-soft); color: var(--ink); border-bottom: 1px solid var(--line); font-size: .875rem; }
+  #pbat-strip .wrap { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; justify-content: space-between; padding-block: .55rem; }
+  #pbat-strip a { font-weight: 600; }
+
+  @media print {
+    .view[hidden] { display: none !important; }
+    .lib-search, .format-chips, .topic-filters, .guide-strip { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19.5 13.6 12 21l-7.5-7.4A5 5 0 0 1 12 6.6a5 5 0 0 1 7.5 7Z"/><path d="M3.5 12h4l2-3 3 6 2-3h6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h10"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M7 7h4v4c0 3-1.5 5-4 6M15 7h4v4c0 3-1.5 5-4 6"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3 3 0 0 0 0-6H8a3 3 0 0 1 0-6h7.5"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap brand">
+    <div class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-heart"/></svg></div>
+    <div>
+      <div class="eyebrow">Science PBAT · Research Guide</div>
+      <h1><a class="brand-link" href="#/">Cardiovascular Research Hub</a></h1>
+    </div>
+  </div>
+  <nav class="tabs-bar" aria-label="Main">
+    <div class="wrap tabs">
+      <a class="tab" href="#/" data-nav="resources">Resources</a>
+      <a class="tab" href="#search" data-nav="search">Search databases</a>
+      <a class="tab" href="#evaluate" data-nav="evaluate">Evaluate &amp; cite</a>
+      <a class="tab" href="#my-sources" data-nav="my-sources">My sources<span class="count-badge" id="ms-count" hidden></span></a>
+      <a class="tab nav-cta" href="#guide" data-nav="guide">Start a PBAT →</a>
+    </div>
+  </nav>
+  <div id="pbat-strip" class="no-print" hidden>
+    <div class="wrap"><span id="pbat-strip-text"></span><a href="#guide">Continue →</a></div>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- ===================== RESOURCES (home) ===================== -->
+  <section class="view stack-lg" id="view-home" data-view="home" data-title="Resources">
+    <div class="card hero home-hero">
+      <h2>Explore the cardiovascular system</h2>
+      <p>Background reading, 3D models, and data, chosen by your librarian and teacher. Pick a topic to start, or search the collection.</p>
+      <form class="lib-search" id="lib-search" role="search">
+        <label for="lib-q" class="sr-only">Search the resource collection</label>
+        <div class="db-search-input">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input type="search" id="lib-q" placeholder="Search resources: valves, blood pressure, sleep…" autocomplete="off">
+        </div>
+      </form>
+      <div class="chips format-chips" id="format-chips" role="group" aria-label="Filter by format"></div>
+    </div>
+
+    <div id="home-results" hidden>
+      <div class="results-head">
+        <h2 id="results-title" aria-live="polite"></h2>
+        <button class="btn btn-secondary btn-sm" id="results-clear" type="button">Clear search</button>
+      </div>
+      <div class="grid grid-3" id="results-grid"></div>
+      <div class="fallback" id="results-fallback"></div>
+    </div>
+
+    <div id="home-browse" class="stack-lg">
+      <section aria-labelledby="topics-h">
+        <h2 class="section-title" id="topics-h">Topics</h2>
+        <div class="grid grid-3" id="topic-grid"></div>
+      </section>
+      <section aria-labelledby="tools-h">
+        <h2 class="section-title" id="tools-h">Interactive tools</h2>
+        <div class="grid grid-3" id="tool-grid"></div>
+      </section>
+      <div class="card guide-strip">
+        <p><strong>Starting your PBAT from scratch?</strong> The guide walks you from a broad topic to a research question, then on to research and your bibliography.</p>
+        <a class="btn btn-primary" href="#guide">Start a PBAT →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TOPIC (rendered from the resource list) ===================== -->
+  <section class="view stack-lg" id="view-topic" data-view="topic" hidden></section>
+
+  <!-- ===================== TOOL: 3D HEART ===================== -->
+  <section class="view stack-lg" id="view-tool-3d-heart" data-view="tool-3d-heart" data-title="3D heart model" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/the-heart-structure-and-function">The heart: structure &amp; function</a></nav>
+    <div class="card">
+      <div class="section-head">
+        <div>
+          <h2>3D heart model</h2>
+          <p class="muted">Rotate and zoom to study the heart's outer anatomy: chambers, great vessels, and coronary arteries. For cross-sections of valves and chambers, use <a href="https://anatomyvista.com/explore/heart" target="_blank" rel="noopener">AnatomyVista</a>.</p>
+        </div>
+        <span class="tag">Drag to rotate · scroll or pinch to zoom</span>
+      </div>
+      <div class="embed">
+        <iframe title="Interactive 3D anatomical heart" allow="autoplay; fullscreen; xr-spatial-tracking" loading="lazy"
+          data-src="https://sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4/embed?autostart=0&amp;ui_infos=0&amp;ui_controls=1"></iframe>
+      </div>
+      <p class="credit">“<a href="https://sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4" target="_blank" rel="noopener">Anatomical Heart</a>” by Mox3DModels, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. If you use a screenshot in your PBAT, cite it too.</p>
+    </div>
+  </section>
+
+  <!-- ===================== TOOL: BLOOD-FLOW TRACER ===================== -->
+  <section class="view stack-lg" id="view-tool-blood-flow" data-view="tool-blood-flow" data-title="Blood-flow tracer" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/blood-vessels-and-circulation">Blood vessels &amp; circulation</a></nav>
+    <div class="topic-head">
+      <h2>Blood-flow tracer &amp; quiz</h2>
+      <p>Trace one drop of blood through the pulmonary and systemic circuits, then check what you know.</p>
+    </div>
+    <div class="card" id="tracer">
+      <div class="tool-head">
+        <h3><svg class="icon" aria-hidden="true"><use href="#i-route"/></svg> Blood-flow tracer</h3>
+        <div class="seg no-print" role="group" aria-label="Tracer mode">
+          <button type="button" data-mode="explore" aria-pressed="true">Explore</button>
+          <button type="button" data-mode="quiz" aria-pressed="false">Quiz</button>
+        </div>
+      </div>
+
+      <div id="tracer-explore">
+        <p class="muted small">Follow one drop of blood through both circuits. Click any stage, or use the ← → arrow keys.</p>
+        <ol class="flow" id="flow-steps"></ol>
+        <div class="legend" aria-hidden="true">
+          <span class="o2-pill o2-deoxy">Oxygen-poor</span>
+          <span class="o2-pill o2-exchange">Gas exchange</span>
+          <span class="o2-pill o2-oxy">Oxygen-rich</span>
+        </div>
+        <div class="step-panel" id="step-panel" aria-live="polite">
+          <div class="meta"><span id="step-count" class="muted"></span><span class="o2-pill" id="step-o2"></span><span id="step-circuit" class="muted"></span></div>
+          <h4 id="step-title"></h4>
+          <p id="step-desc"></p>
+          <p class="valve" id="step-valve"></p>
+        </div>
+        <div class="step-nav">
+          <button class="btn btn-secondary" id="step-prev" type="button">← Previous</button>
+          <button class="btn btn-primary" id="step-next" type="button">Next →</button>
+        </div>
+      </div>
+
+      <div id="tracer-quiz" class="quiz" hidden>
+        <p class="muted small">Six questions on the path blood takes. Answer them all, then check.</p>
+        <form id="quiz-form" style="margin-top:1rem"></form>
+        <div class="cite-actions quiz-actions">
+          <button class="btn btn-primary" id="quiz-check" type="button">Check answers</button>
+          <button class="btn btn-secondary" id="quiz-reset" type="button">Start over</button>
+        </div>
+        <p class="quiz-score" id="quiz-score" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SEARCH DATABASES ===================== -->
+  <section class="view stack-lg" id="view-search" data-view="search" data-title="Search databases" hidden>
+    <div class="card">
+      <h2>Search databases</h2>
+      <p class="muted" style="margin-top:.4rem;max-width:62ch">When you have a research question, search these databases for studies to use as evidence. Results open on the database's own site.</p>
+      <form class="db-search" id="db-search" action="https://pubmed.ncbi.nlm.nih.gov/" method="get" target="_blank" role="search">
+        <label for="db-q">Search for articles</label>
+        <div class="db-search-row">
+          <div class="db-search-input">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="search" id="db-q" name="term" placeholder="e.g. foam cells atherosclerosis" autocomplete="off" aria-describedby="db-q-hint">
+          </div>
+          <input type="hidden" name="filter" value="simsearch2.ffrft">
+          <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+        </div>
+        <fieldset class="db-pick">
+          <legend class="sr-only">Database to search</legend>
+          <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
+          <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
+          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>background</span></label>
+        </fieldset>
+        <p class="hint" id="db-q-hint">Use 2–4 key terms, not your whole question. Results open in a new tab on the database's own site. Not sure what to type? <a href="#build">Build your search ↓</a></p>
+      </form>
+    </div>
+
+    <div class="card" id="build">
+      <div class="tool-head">
+        <h3><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Build your search</h3>
+        <button class="btn btn-secondary btn-sm no-print" id="sb-reset" type="button">Clear key ideas</button>
+      </div>
+      <p class="muted small" style="max-width:62ch">Databases don't understand questions. They match words. Turn your question into a search in three steps.</p>
+
+      <ol class="sb-steps">
+        <li>
+          <label for="sb-question" class="sb-label">Type your research question</label>
+          <textarea id="sb-question" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
+          <div class="sb-spotted" id="sb-spotted" hidden>
+            <span class="hint">Key ideas we spotted. Click one to use it:</span>
+            <div class="chips" id="sb-spotted-chips"></div>
+          </div>
+        </li>
+        <li>
+          <span class="sb-label" id="sb-concepts-label">Pick 2–3 key ideas, and add other words for each</span>
+          <p class="hint">Each idea is something every article must be about. Other words catch articles that use different vocabulary, like <i>hypertension</i> for “high blood pressure.”</p>
+          <div class="sb-concepts" id="sb-concepts" role="group" aria-labelledby="sb-concepts-label"></div>
+        </li>
+        <li>
+          <label for="sb-query" class="sb-label">Your search</label>
+          <textarea id="sb-query" rows="2" spellcheck="false" placeholder="Your search appears here once you add a key idea."></textarea>
+          <p class="hint"><b>AND</b> means every idea must appear, which narrows results. <b>OR</b> means any of the words can appear, which widens them. Quotation marks keep a phrase together. You can edit the search directly.</p>
+          <div class="cite-actions no-print">
+            <button class="btn btn-primary btn-sm" type="button" data-sb-go="pubmed">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+            <button class="btn btn-secondary btn-sm" type="button" data-sb-go="scholar">Search Google Scholar <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+            <button class="btn btn-secondary btn-sm" type="button" id="sb-copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy search</button>
+          </div>
+          <p class="hint" style="margin-top:.6rem">Too many results? Add another key idea. Too few? Remove an idea, or add more other words.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="grid grid-3" id="db-grid"></div>
+    <div class="card">
+      <h3>Search tips</h3>
+      <ul class="tips">
+        <li><b>Search key terms, not sentences.</b> For “How does sleep affect blood pressure in teens?”, search <i>sleep blood pressure adolescents</i>.</li>
+        <li><b>Too many results?</b> Add a term (<i>adolescents</i>, <i>exercise</i>) or choose a more specific word.</li>
+        <li><b>Too few?</b> Remove a term, or try a synonym: <i>hypertension</i> for “high blood pressure,” <i>myocardial infarction</i> for “heart attack.”</li>
+        <li><b>Can't get the full article?</b> Ask the library before you give up on it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== EVALUATE & CITE ===================== -->
+  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-title="Evaluate & cite" hidden>
+    <div class="card">
+      <h2>Evaluate &amp; cite</h2>
+      <p class="muted" style="margin-top:.4rem;max-width:62ch">Check each source before you rely on it, then cite it correctly.</p>
+    </div>
+    <div class="grid grid-2">
+      <!-- CRAAP -->
+      <div class="card" id="craap">
+        <div class="tool-head">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> CRAAP source evaluator</h3>
+          <button class="btn btn-secondary btn-sm no-print" id="craap-reset" type="button">Reset</button>
+        </div>
+        <p class="muted small">Rate one source at a time, from 1 (poor) to 5 (excellent).</p>
+        <div id="craap-items" style="margin-top:1.1rem"></div>
+        <div class="result" aria-live="polite">
+          <div>
+            <div class="small muted">Source score</div>
+            <div class="score" id="craap-total">15 / 25</div>
+          </div>
+          <div class="verdict mid" id="craap-verdict">Moderate: cross-check it</div>
+          <p class="result-note" id="craap-note"></p>
+        </div>
+        <div class="craap-save no-print" id="craap-save-row" hidden>
+          <label for="craap-target">Save this score to</label>
+          <select id="craap-target"></select>
+          <button class="btn btn-secondary btn-sm" id="craap-save" type="button">Save score</button>
+        </div>
+        <p class="hint no-print" id="craap-save-empty">To keep a score with a source, add the source to <a href="#my-sources">My sources</a> first.</p>
+      </div>
+
+      <!-- CITATIONS -->
+      <div class="card" id="cite">
+        <div class="tool-head">
+          <h3><svg class="icon" aria-hidden="true"><use href="#i-quote"/></svg> Citation builder</h3>
+          <div class="seg no-print" role="group" aria-label="Citation style">
+            <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
+            <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
+          </div>
+        </div>
+
+        <form class="form-grid" id="cite-form" autocomplete="off">
+          <div class="field span-6">
+            <label for="cite-type">Source type</label>
+            <select id="cite-type">
+              <option value="journal">Journal article</option>
+              <option value="web">Web page (CDC, AHA, WHO…)</option>
+            </select>
+          </div>
+          <div class="field span-6">
+            <label for="cite-authors">Authors</label>
+            <textarea id="cite-authors" rows="3" placeholder="Libby, Peter&#10;Ridker, Paul M."></textarea>
+            <p class="hint">One per line as <i>Last, First Middle</i>. For an organization, type its full name.</p>
+          </div>
+          <div class="field span-6">
+            <label for="cite-title">Title</label>
+            <input type="text" id="cite-title" placeholder="Inflammation and atherosclerosis">
+            <p class="hint" id="title-hint">APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.</p>
+          </div>
+          <div class="field span-3">
+            <label for="cite-container" id="container-label">Journal</label>
+            <input type="text" id="cite-container" placeholder="Circulation">
+          </div>
+          <div class="field span-3">
+            <label for="cite-year">Year</label>
+            <input type="text" id="cite-year" inputmode="numeric" placeholder="2002">
+          </div>
+          <div class="field span-2 journal-only">
+            <label for="cite-volume">Volume</label>
+            <input type="text" id="cite-volume" placeholder="105">
+          </div>
+          <div class="field span-2 journal-only">
+            <label for="cite-issue">Issue</label>
+            <input type="text" id="cite-issue" placeholder="9">
+          </div>
+          <div class="field span-2 journal-only">
+            <label for="cite-pages">Pages</label>
+            <input type="text" id="cite-pages" placeholder="1135-1143">
+          </div>
+          <div class="field span-3 web-only" hidden>
+            <label for="cite-date">Month &amp; day <span class="hint">(optional)</span></label>
+            <input type="text" id="cite-date" placeholder="October 24">
+          </div>
+          <div class="field span-6">
+            <label for="cite-link">DOI or URL</label>
+            <input type="text" id="cite-link" placeholder="10.1161/hc0902.104353">
+          </div>
+        </form>
+
+        <div class="cite-out">
+          <div class="label" id="cite-label">Example</div>
+          <p id="cite-output"></p>
+        </div>
+        <div class="cite-actions no-print">
+          <button class="btn btn-primary btn-sm" id="cite-copy" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy citation</button>
+          <button class="btn btn-secondary btn-sm" id="cite-save" type="button">Save to My sources</button>
+          <button class="btn btn-secondary btn-sm" id="cite-clear" type="button">Clear</button>
+          <span class="hint">Pastes with italics into Google Docs and Word. Always double-check against the style guide.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MY SOURCES ===================== -->
+  <section class="view stack-lg" id="view-my-sources" data-view="my-sources" data-title="My sources" hidden>
+    <div class="card">
+      <div class="section-head">
+        <div>
+          <h2>My sources</h2>
+          <p class="muted">Your working bibliography. For each source, note what it says and how it helps answer your question. When you're ready, copy it into your Google Doc.</p>
+        </div>
+        <div class="seg no-print" role="group" aria-label="Citation style" id="ms-style">
+          <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
+          <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1.25rem">
+        <label for="ms-question">My research question</label>
+        <textarea id="ms-question" rows="2" placeholder="Draft it here. It's fine to change it as you learn more."></textarea>
+      </div>
+      <div class="cite-actions no-print">
+        <button class="btn btn-primary btn-sm" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy annotated bibliography</button>
+        <button class="btn btn-secondary btn-sm" id="ms-add-blank" type="button">+ Add a source by hand</button>
+        <label class="ms-check"><input type="checkbox" id="ms-include-craap"> Include CRAAP scores</label>
+      </div>
+      <div class="ms-storage no-print">
+        <p class="hint">Saved in this browser, on this device only. Paste your bibliography into your Google Doc often. To switch computers, download a backup file here and load it on the other one.</p>
+        <div class="cite-actions" style="margin-top:.5rem">
+          <button class="btn btn-secondary btn-sm" id="ms-download" type="button">Download backup</button>
+          <button class="btn btn-secondary btn-sm" id="ms-upload-btn" type="button">Load backup</button>
+          <input type="file" id="ms-upload" accept=".json,application/json" class="sr-only" tabindex="-1" aria-hidden="true">
+        </div>
+      </div>
+    </div>
+    <div class="card" id="ms-empty">
+      <h3>No sources yet</h3>
+      <p class="muted" style="margin-top:.4rem">Add sources three ways: the <b>+ My sources</b> button on any <a href="#/">resource</a>, <b>Save to My sources</b> in the <a href="#cite">citation builder</a>, or <b>Add a source by hand</b> above.</p>
+    </div>
+    <div id="ms-list" class="stack"></div>
+    <div class="no-print" id="ms-danger" hidden>
+      <button class="btn btn-secondary btn-sm" id="ms-clear" type="button">Remove all sources</button>
+      <span id="ms-clear-confirm" class="ms-confirm" hidden>This can't be undone.
+        <button class="btn btn-danger btn-sm" id="ms-clear-yes" type="button">Yes, remove all</button>
+        <button class="btn btn-secondary btn-sm" id="ms-clear-no" type="button">Cancel</button></span>
+    </div>
+  </section>
+
+  <!-- ===================== START A PBAT (guide) ===================== -->
+  <section class="view stack-lg" id="view-guide" data-view="guide" data-title="Start a PBAT" hidden>
+    <div class="card">
+      <h2>Start a PBAT</h2>
+      <p class="muted" style="margin-top:.4rem;max-width:62ch">Good research questions come from reading first. Work through these five stages in order. Your progress saves in this browser, and the sources and question you record also appear in <a href="#my-sources">My sources</a>.</p>
+      <ol class="pj-progress" id="pj-progress" aria-label="Your progress"></ol>
+      <div class="no-print" id="pj-restart-row" style="margin-top:1rem" hidden>
+        <button class="btn btn-secondary btn-sm" id="pj-restart" type="button">Start over</button>
+        <span id="pj-restart-confirm" class="ms-confirm" hidden>Clear your guide progress? Your question and sources stay in My sources.
+          <button class="btn btn-danger btn-sm" id="pj-restart-yes" type="button">Clear progress</button>
+          <button class="btn btn-secondary btn-sm" id="pj-restart-no" type="button">Cancel</button></span>
+      </div>
+    </div>
+    <div id="pj-stages" class="stack"></div>
+    <div class="card" id="question">
+      <h3>Sharpen your question</h3>
+      <p class="muted small" style="margin-top:.35rem">A strong PBAT question can't be answered by one fact. It asks how or why, and you can actually find evidence for it.</p>
+      <div class="table-scroll" style="margin-top:1rem">
+        <table class="compare">
+          <thead><tr><th scope="col">Problem</th><th scope="col">Weak</th><th scope="col">Stronger</th></tr></thead>
+          <tbody>
+            <tr><td>Too broad</td><td class="weak">What is heart disease?</td><td>How does LDL oxidation contribute to plaque formation in coronary arteries?</td></tr>
+            <tr><td>Yes/no</td><td class="weak">Is exercise good for your heart?</td><td>How does aerobic training change stroke volume, and why?</td></tr>
+            <tr><td>Can't be researched</td><td class="weak">Will heart disease be cured by 2040?</td><td>What evidence suggests gene therapy could treat inherited cardiomyopathies?</td></tr>
+            <tr><td>Opinion only</td><td class="weak">Should fast food be banned?</td><td>How have menu-labeling or sodium policies affected blood pressure in U.S. adults?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card reqs">
+      <h3>What your PBAT must include</h3>
+      <ol>
+        <li><strong>An essential question</strong><span>An analytical question about a mechanism or an impact. Not a yes/no question, and not a topic.</span></li>
+        <li><strong>Source synthesis</strong><span>At least 3 peer-reviewed sources, combined in your argument and cited in APA 7 or MLA 9.</span></li>
+        <li><strong>Data analysis</strong><span>At least one dataset, graph, or clinical study result that you interpret yourself.</span></li>
+        <li><strong>Visual evidence</strong><span>A labeled diagram or model that shows the physiology behind your claim.</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color:var(--ink)">Cardiovascular Research Hub</strong> · A research guide for performance-based assessment tasks (PBATs)</div>
+    <div>Links checked October 22, 2026. Found a broken link? Let your teacher or librarian know.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  /* ---------------- Toast ---------------- */
+  let toastTimer;
+  function toast(msg) {
+    const el = $('#toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+  }
+
+  /* ---------------- Toggle-button groups ---------------- */
+  function pressGroup(group, onChange) {
+    group.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn || !group.contains(btn)) return;
+      $$('button', group).forEach(b => b.setAttribute('aria-pressed', b === btn));
+      onChange(btn);
+    });
+  }
+
+  /* ================================================================
+     SETTINGS
+     EDIT: paste the Resources tab's "Publish to web" CSV link here.
+     Until it's set (or if it can't be reached), the site uses the
+     built-in copy of the list below.
+     ================================================================ */
+  const SHEET_CSV_URL = '';
+
+  /* ---------------- Topics ----------------
+     Names must match the Topic column in the sheet exactly. */
+  const TOPICS = [
+    { name: 'The heart: structure & function',
+      blurb: 'How the heart is built and how it pumps: chambers, valves, the electrical system that sets the beat, and how much blood it moves.',
+      subs: ['Chambers and valves', 'The heartbeat and its electrical system', 'The cardiac cycle', 'Cardiac output'],
+      questions: ['How does regular endurance training change resting heart rate and stroke volume, and what mechanism explains the change?',
+        'How does the heart’s electrical system coordinate the contraction of the atria and ventricles?'],
+      searches: ['Frank-Starling mechanism', 'athlete heart stroke volume', 'cardiac conduction system'] },
+    { name: 'Blood vessels & circulation',
+      blurb: 'The network that carries blood: how arteries, veins, and capillaries differ, the two circuits through the lungs and body, and blood pressure.',
+      subs: ['Arteries, veins, and capillaries', 'Pulmonary vs. systemic circulation', 'Blood pressure', 'Coronary arteries'],
+      questions: ['How does the baroreceptor reflex keep blood pressure stable when a person stands up quickly, and what happens when it fails?',
+        'How does arterial stiffness change with age, and how does it affect blood pressure?'],
+      searches: ['baroreflex orthostatic hypotension', 'arterial stiffness blood pressure'] },
+    { name: 'Blood',
+      blurb: 'What blood is made of, and how it carries oxygen, defends the body, and clots.',
+      subs: ['What blood is made of', 'How oxygen is carried', 'Clotting'],
+      questions: ['How does the structure of hemoglobin let it pick up oxygen in the lungs and release it in active tissues?',
+        'How does sickle cell disease change the way blood flows through small vessels?'],
+      searches: ['hemoglobin oxygen dissociation', 'sickle cell vaso-occlusion'] },
+    { name: 'Lifestyle & the heart',
+      blurb: 'How everyday habits like exercise, sleep, diet, stress, vaping, and caffeine affect the heart and blood vessels.',
+      subs: ["Exercise and the athlete's heart", 'Sleep', 'Diet and sodium', 'Stress', 'Vaping and smoking', 'Caffeine and energy drinks'],
+      questions: ['How does short or poor-quality sleep affect blood pressure in teenagers?',
+        'What does current research show about how vaping affects heart rate, blood pressure, and blood vessel function?'],
+      searches: ['sleep duration blood pressure adolescents', 'e-cigarette cardiovascular effects', 'energy drinks cardiovascular'] },
+    { name: 'Cardiovascular disease',
+      blurb: 'What goes wrong: plaque in the arteries, heart attacks, high blood pressure, heart failure, irregular rhythms, and stroke.',
+      subs: ['Atherosclerosis and heart attacks', 'High blood pressure', 'Heart failure', 'Arrhythmias', 'Stroke', 'Congenital heart defects', 'Sudden cardiac arrest in young athletes'],
+      questions: ['How does chronic inflammation of the artery lining lead to foam cell formation and plaque buildup in coronary arteries?',
+        'What changes in heart structure distinguish heart failure with reduced ejection fraction (HFrEF) from heart failure with preserved ejection fraction (HFpEF)?'],
+      searches: ['foam cell formation atherosclerosis', 'HFpEF HFrEF pathophysiology', 'sudden cardiac arrest young athletes'] },
+    { name: 'Diagnosis, treatment & technology',
+      blurb: 'How doctors find and fix heart problems, from ECGs and stents to pacemakers, CPR, transplants, and lab-grown tissue.',
+      subs: ['ECGs and diagnosis', 'Stents and bypass surgery', 'Pacemakers and defibrillators', 'CPR and AEDs', 'Transplants and artificial hearts', 'The future of treatment'],
+      questions: ['How have drug-eluting stents changed restenosis rates compared with bare-metal stents, and what trade-offs remain?',
+        'How does bystander CPR with an AED change survival after cardiac arrest outside the hospital?'],
+      searches: ['drug-eluting stent restenosis', 'bystander CPR AED survival', 'tissue-engineered heart valve'] },
+    { name: 'Public health & equity',
+      blurb: 'Who gets heart disease and why: risk factors, neighborhoods, access to care, and what prevention programs can do.',
+      subs: ['Who gets heart disease and why', 'Neighborhoods and food access', 'Prevention programs', 'Global heart health'],
+      questions: ['How do neighborhood factors such as food access and income relate to rates of high blood pressure in U.S. cities?',
+        'How much have sodium-reduction or DASH-style diets lowered blood pressure in high-risk groups?'],
+      searches: ['social determinants cardiovascular disease', 'DASH diet blood pressure', 'neighborhood food environment hypertension'] },
+  ];
+  const slug = s => s.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  TOPICS.forEach(t => { t.slug = slug(t.name); });
+
+  /* ---------------- Built-in tools (pages on this site) ---------------- */
+  const TOOLS = [
+    { id: '3d-heart', title: '3D heart model', source: 'On this site · model by Mox3DModels', format: '3D model', level: 'Intro',
+      why: 'Rotate and zoom a detailed heart to see the chambers, great vessels, and coronary arteries.',
+      placements: { 'The heart: structure & function': 'Chambers and valves' },
+      replaces: 'sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4' },
+    { id: 'blood-flow', title: 'Blood-flow tracer & quiz', source: 'On this site', format: 'Interactive', level: 'Intro',
+      why: 'Follow one drop of blood through both circuits, stage by stage, then test yourself.',
+      placements: { 'Blood vessels & circulation': 'Pulmonary vs. systemic circulation', 'The heart: structure & function': 'Chambers and valves' } },
+  ];
+
+  /* ---------------- Built-in copy of the resource sheet ----------------
+     Used until SHEET_CSV_URL is set, and as a backup if the sheet can't load. */
+  const BUNDLED = [
+    { title: 'How the Heart Works', url: 'https://www.nhlbi.nih.gov/health/heart', source: 'National Heart, Lung, and Blood Institute', topic: 'The heart: structure & function', subtopic: '', format: 'Article', level: 'Intro', why: 'Plain-language NIH explainer on the heart’s anatomy, blood flow, and electrical system, with illustrations. A good first stop.', access: 'Free', featured: 'Yes' },
+    { title: 'OpenStax Anatomy & Physiology 2e, Ch. 19: The Cardiovascular System: The Heart', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/19-introduction', source: 'OpenStax (Rice University)', topic: 'The heart: structure & function', subtopic: '', format: 'Textbook chapter', level: 'Deeper', why: 'Free peer-reviewed college textbook. Clear labeled diagrams of chambers, valves, conduction, and the cardiac cycle.', access: 'Free', featured: '' },
+    { title: 'AnatomyVista Heart Explorer', url: 'https://anatomyvista.com/explore/heart', source: 'AnatomyVista', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: '3D model', level: 'Intro', why: 'Rotate the heart, slice cross-sections, and isolate structures to see chambers and valves from inside.', access: 'Free', featured: 'Yes' },
+    { title: 'Anatomical Heart (3D model)', url: 'https://sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4', source: 'Sketchfab: Mox3DModels (CC BY 4.0)', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: '3D model', level: 'Intro', why: 'Detailed outside view of the heart, great vessels, and coronary arteries. Embedded on the site.', access: 'Free', featured: '' },
+    { title: 'GetBodySmart: Circulatory System', url: 'https://www.getbodysmart.com/circulatory-system', source: 'GetBodySmart', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: 'Interactive', level: 'Intro', why: 'Illustrated tutorials and quizzes on heart anatomy, valves, and vessels.', access: 'Free', featured: '' },
+    { title: 'OpenStax Anatomy & Physiology 2e, Ch. 20: The Cardiovascular System: Blood Vessels and Circulation', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/20-introduction', source: 'OpenStax (Rice University)', topic: 'Blood vessels & circulation', subtopic: '', format: 'Textbook chapter', level: 'Deeper', why: 'How arteries, veins, and capillaries are built, how blood pressure works, and the major circulation routes.', access: 'Free', featured: 'Yes' },
+    { title: 'Innerbody: The Heart: Anatomy and 3D Illustrations', url: 'https://www.innerbody.com/image/card01.html', source: 'Innerbody Research', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: 'Diagram', level: 'Intro', why: 'Labeled interactive illustrations of the heart’s structures. Useful for labeling diagrams.', access: 'Free', featured: '' },
+    { title: 'MedlinePlus: Heart Diseases', url: 'https://medlineplus.gov/heartdiseases.html', source: 'National Library of Medicine', topic: 'Cardiovascular disease', subtopic: '', format: 'Article', level: 'Intro', why: 'Plain-language overviews of heart conditions, tests, and treatments, with links to trusted organizations.', access: 'Free', featured: 'Yes' },
+    { title: 'CDC: Heart Disease Facts', url: 'https://www.cdc.gov/heart-disease/data-research/facts-stats/index.html', source: 'Centers for Disease Control and Prevention', topic: 'Public health & equity', subtopic: 'Who gets heart disease and why', format: 'Data', level: 'Intro', why: 'National statistics on heart disease deaths and risk factors by age, race and ethnicity, and sex.', access: 'Free', featured: 'Yes' },
+    { title: 'CDC PLACES: Local Data for Better Health', url: 'https://www.cdc.gov/places/index.html', source: 'Centers for Disease Control and Prevention', topic: 'Public health & equity', subtopic: 'Neighborhoods and food access', format: 'Data', level: 'Deeper', why: 'Local estimates of high blood pressure, high cholesterol, and heart disease by county, city, and census tract.', access: 'Free', featured: '' },
+    { title: 'WHO: Cardiovascular Diseases (fact sheet)', url: 'https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)', source: 'World Health Organization', topic: 'Public health & equity', subtopic: 'Global heart health', format: 'Data', level: 'Intro', why: 'Global key facts on deaths, risk factors, and prevention.', access: 'Free', featured: '' },
+    { title: 'AHA Heart and Stroke Statistics', url: 'https://www.heart.org/en/about-us/heart-and-stroke-association-statistics', source: 'American Heart Association', topic: 'Public health & equity', subtopic: 'Who gets heart disease and why', format: 'Data', level: 'Deeper', why: 'Summaries of the AHA’s annual statistical update, the standard source for U.S. cardiovascular numbers.', access: 'Free', featured: '' },
+  ];
+
+  const FORMAT_ORDER = ['Article', 'Textbook chapter', 'Video', 'Interactive', '3D model', 'Diagram', 'Data'];
+  const FORMAT_PLURAL = { 'Article': 'Articles', 'Textbook chapter': 'Textbook chapters', 'Video': 'Videos', 'Interactive': 'Interactives', '3D model': '3D models', 'Diagram': 'Diagrams', 'Data': 'Data' };
+  const FORMAT_TAG = { 'Data': 'tag-data', 'Video': 'tag-visual', 'Interactive': 'tag-visual', '3D model': 'tag-visual', 'Diagram': 'tag-visual' };
+  const pubmed = q => 'https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(q).replace(/%20/g, '+') + '&filter=simsearch2.ffrft';
+
+  /* ---------------- Loading the sheet ---------------- */
+  // Sheet column headers -> field names. Headers are matched loosely, so "Why it's here" -> "whyitshere".
+  const HEADERS = { title: 'title', url: 'url', link: 'url', source: 'source', topic: 'topic', subtopic: 'subtopic',
+    format: 'format', level: 'level', whyitshere: 'why', why: 'why', note: 'why', access: 'access', featured: 'featured' };
+
+  function parseCSV(text) {
+    const rows = [];
+    let row = [], field = '', quoted = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (quoted) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else quoted = false; }
+        else field += c;
+      } else if (c === '"') quoted = true;
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+      else if (c !== '\r') field += c;
+    }
+    if (field || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+  function csvToObjects(text) {
+    const [head, ...body] = parseCSV(text);
+    if (!head) return [];
+    const keys = head.map(h => HEADERS[h.toLowerCase().replace(/[^a-z]/g, '')] || null);
+    return body.filter(r => r.some(v => v.trim())).map(r => {
+      const o = {};
+      keys.forEach((k, i) => { if (k) o[k] = r[i] || ''; });
+      return o;
+    });
+  }
+  const replacedByTool = url => TOOLS.some(t => t.replaces && url.includes(t.replaces));
+  function normalize(o) {
+    const g = k => String(o[k] || '').trim();
+    const r = { title: g('title'), url: g('url'), source: g('source'), topic: g('topic'), subtopic: g('subtopic'),
+      format: g('format'), level: g('level'), why: g('why'), access: g('access') || 'Free',
+      featured: /^(y|yes|true|x)$/i.test(g('featured')) };
+    if (!r.title || !r.topic || !r.format || !/^https?:\/\//i.test(r.url) || replacedByTool(r.url)) return null;
+    r.level = /^deep/i.test(r.level) ? 'Deeper' : 'Intro';
+    return r;
+  }
+
+  const CACHE_KEY = 'cvhub-resources-v1';
+  let RESOURCES = [];
+
+  function setResources(rows) {
+    RESOURCES = rows.map(normalize).filter(Boolean);
+    renderHome();
+    if (currentView === 'topic') renderTopic(currentTopicSlug);
+  }
+  function loadResources() {
+    let cached = null;
+    if (SHEET_CSV_URL) {
+      try {
+        const c = JSON.parse(localStorage.getItem(CACHE_KEY));
+        if (c && c.url === SHEET_CSV_URL && Array.isArray(c.rows)) cached = c.rows;
+      } catch { /* storage unavailable */ }
+    }
+    setResources(cached || BUNDLED);
+    if (!SHEET_CSV_URL) return;
+    fetch(SHEET_CSV_URL, { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(text => {
+        const rows = csvToObjects(text);
+        if (!rows.map(normalize).filter(Boolean).length) throw new Error('no usable rows');
+        setResources(rows);
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ url: SHEET_CSV_URL, rows })); } catch { /* ignore */ }
+      })
+      .catch(err => console.warn('Resource sheet could not load; using the saved copy.', err));
+  }
+
+  /* ---------------- Collection helpers ---------------- */
+  // All topics: the defined ones first, then any new topic names that appear in the sheet.
+  function allTopics() {
+    const extra = [...new Set(RESOURCES.map(r => r.topic))].filter(n => !TOPICS.some(t => t.name === n)).sort()
+      .map(n => ({ name: n, slug: slug(n), blurb: '', subs: [], questions: [], searches: [] }));
+    return [...TOPICS, ...extra];
+  }
+  function toolItems(topicName) {
+    return TOOLS.filter(t => !topicName || t.placements[topicName]).map(t => ({
+      title: t.title, url: '#tool/' + t.id, source: t.source, format: t.format, level: t.level, why: t.why,
+      topic: topicName || Object.keys(t.placements)[0],
+      subtopic: topicName ? t.placements[topicName] : t.placements[Object.keys(t.placements)[0]],
+      onSite: true, featured: false, access: 'Free' }));
+  }
+  const itemsFor = topicName => [...RESOURCES.filter(r => r.topic === topicName), ...toolItems(topicName)];
+  const byRank = (a, b) => (b.featured - a.featured) || (a.level === 'Deeper') - (b.level === 'Deeper') || a.title.localeCompare(b.title);
+
+  function card(r, { showTopic = false } = {}) {
+    const ext = !r.onSite;
+    const tags = [
+      r.featured ? '<span class="tag tag-star">Start here</span>' : '',
+      r.onSite ? '<span class="tag tag-site">On this site</span>' : '',
+      `<span class="tag ${FORMAT_TAG[r.format] || ''}">${esc(r.format)}</span>`,
+      `<span class="tag">${esc(r.level)}</span>`,
+      /login/i.test(r.access) ? '<span class="tag tag-bg">School login</span>' : '',
+    ].join('');
+    const where = showTopic
+      ? `<p class="where">In <a href="#topic/${slug(r.topic)}">${esc(r.topic)}</a>${r.subtopic ? ' › ' + esc(r.subtopic) : ''}</p>` : '';
+    return `<article class="card card-tight res">
+      <div class="res-tags">${tags}</div>
+      <h3><a href="${esc(r.url)}"${ext ? ' target="_blank" rel="noopener"' : ''}>${esc(r.title)}${ext
+        ? '<svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only"> (opens in new tab)</span>' : ''}</a></h3>
+      ${r.source ? `<p class="publisher">${esc(r.source)}</p>` : ''}
+      ${r.why ? `<p class="why">${esc(r.why)}</p>` : ''}
+      ${where}
+      ${ext ? `<div class="res-actions"><button type="button" class="add-src${msHas(r.url) ? ' added' : ''}" data-add-src="${esc(r.url)}">${msHas(r.url) ? '✓ In My sources' : '+ My sources'}</button></div>` : ''}
+    </article>`;
+  }
+
+  /* ---------------- Home: topics, tools, search ---------------- */
+  let libFormat = 'all';
+  function renderHome() {
+    $('#topic-grid').innerHTML = allTopics().map(t => {
+      const items = itemsFor(t.name);
+      if (!items.length) return '';
+      const subs = [...new Set(items.map(i => i.subtopic).filter(Boolean))];
+      return `<a class="card topic-card" href="#topic/${t.slug}">
+        <h3>${esc(t.name)}</h3>
+        ${t.blurb ? `<p>${esc(t.blurb)}</p>` : '<p></p>'}
+        ${subs.length ? `<span class="subs">Includes ${esc(subs.slice(0, 3).join(' · '))}${subs.length > 3 ? ' · more' : ''}</span>` : ''}
+        <span class="count">${items.length} resource${items.length === 1 ? '' : 's'} →</span>
+      </a>`;
+    }).join('');
+    $('#tool-grid').innerHTML = toolItems().map(r => card(r)).join('');
+
+    const formats = FORMAT_ORDER.filter(f => [...RESOURCES, ...toolItems()].some(r => r.format === f));
+    if (libFormat !== 'all' && !formats.includes(libFormat)) libFormat = 'all';
+    $('#format-chips').innerHTML = [['all', 'All formats'], ...formats.map(f => [f, FORMAT_PLURAL[f] || f])]
+      .map(([v, l]) => `<button type="button" class="chip-btn" data-format="${esc(v)}" aria-pressed="${v === libFormat}">${esc(l)}</button>`).join('');
+    updateResults();
+  }
+
+  function updateResults() {
+    const q = $('#lib-q').value.trim();
+    const searching = q || libFormat !== 'all';
+    $('#home-results').hidden = !searching;
+    $('#home-browse').hidden = !!searching;
+    if (!searching) return;
+
+    const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+    const scored = [...RESOURCES, ...toolItems()]
+      .filter(r => libFormat === 'all' || r.format === libFormat)
+      .map(r => {
+        const title = r.title.toLowerCase(), place = (r.topic + ' ' + r.subtopic).toLowerCase();
+        const rest = (r.source + ' ' + r.why + ' ' + r.format).toLowerCase();
+        let score = 0;
+        for (const w of words) {
+          if (title.includes(w)) score += 3; else if (place.includes(w)) score += 2; else if (rest.includes(w)) score += 1; else return null;
+        }
+        return { r, score };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score || byRank(a.r, b.r));
+
+    const fmtLabel = libFormat === 'all' ? 'resources' : (FORMAT_PLURAL[libFormat] || libFormat);
+    $('#results-title').textContent = q
+      ? `${scored.length} ${scored.length === 1 && libFormat === 'all' ? 'resource' : fmtLabel} matching “${q}”`
+      : `${scored.length} ${fmtLabel}`;
+    $('#results-grid').innerHTML = scored.map(s => card(s.r, { showTopic: true })).join('');
+    $('#results-fallback').innerHTML = q
+      ? `${scored.length ? '' : `<p>Nothing in our collection matches “${esc(q)}” yet. Try a broader word, or browse the topics.</p>`}
+         <p>Looking for research articles? <a href="${pubmed(q)}" target="_blank" rel="noopener">Search PubMed for “${esc(q)}” ↗</a> or <a href="#search">try another database</a>.</p>`
+      : '<p>Want research articles instead? <a href="#search">Search databases</a>.</p>';
+  }
+
+  let searchTimer;
+  $('#lib-q').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(updateResults, 120); });
+  $('#lib-search').addEventListener('submit', e => { e.preventDefault(); updateResults(); });
+  $('#format-chips').addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    libFormat = b.dataset.format;
+    $$('#format-chips button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    updateResults();
+  });
+  $('#results-clear').addEventListener('click', () => {
+    $('#lib-q').value = '';
+    libFormat = 'all';
+    $$('#format-chips button').forEach(x => x.setAttribute('aria-pressed', x.dataset.format === 'all'));
+    updateResults();
+    $('#lib-q').focus();
+  });
+
+  /* ---------------- Topic pages ---------------- */
+  let currentTopicSlug = null;
+  function renderTopic(s) {
+    currentTopicSlug = s;
+    const t = allTopics().find(x => x.slug === s);
+    const view = $('#view-topic');
+    if (!t) {
+      view.innerHTML = `<nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a></nav>
+        <div class="card"><h2>Topic not found</h2><p class="empty-note" style="margin-top:.5rem">That topic isn’t in the collection. <a href="#/">See all topics</a>.</p></div>`;
+      view.dataset.title = 'Topic not found';
+      return;
+    }
+    view.dataset.title = t.name;
+    const items = itemsFor(t.name).sort(byRank);
+    const present = [...new Set(items.map(i => i.subtopic).filter(Boolean))];
+    const subOrder = [...t.subs.filter(x => present.includes(x)), ...present.filter(x => !t.subs.includes(x)).sort()];
+    const groups = [['', items.filter(i => !i.subtopic)], ...subOrder.map(x => [x, items.filter(i => i.subtopic === x)])].filter(g => g[1].length);
+    const hasDeeper = items.some(i => i.level === 'Deeper'), hasIntro = items.some(i => i.level === 'Intro');
+
+    view.innerHTML = `
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><span>${esc(t.name)}</span></nav>
+      <div class="topic-head">
+        <h2>${esc(t.name)}</h2>
+        ${t.blurb ? `<p>${esc(t.blurb)}</p>` : ''}
+        ${items.length ? `<div class="topic-filters">
+          ${subOrder.length > 1 ? `<div class="chips" role="group" aria-label="Show subtopic" id="sub-chips"><span class="label">Subtopic</span>
+            <button type="button" class="chip-btn" data-sub="" aria-pressed="true">All</button>
+            ${subOrder.map(x => `<button type="button" class="chip-btn" data-sub="${esc(x)}" aria-pressed="false">${esc(x)}</button>`).join('')}</div>` : ''}
+          ${hasDeeper && hasIntro ? `<div class="chips" role="group" aria-label="Show level" id="level-chips"><span class="label">Level</span>
+            <button type="button" class="chip-btn" data-level="" aria-pressed="true">All</button>
+            <button type="button" class="chip-btn" data-level="Intro" aria-pressed="false">Intro</button>
+            <button type="button" class="chip-btn" data-level="Deeper" aria-pressed="false">Deeper</button></div>` : ''}
+        </div>` : ''}
+      </div>
+      ${topicBanner(t)}
+      ${items.length ? groups.map(([name, list]) => `
+        <section class="sub-section" data-sub="${esc(name)}">
+          <h3>${name ? esc(name) : 'Overview'}</h3>
+          <div class="grid grid-3">${list.map(r => `<div data-level="${r.level}">${card(r)}</div>`).join('')}</div>
+        </section>`).join('')
+        : '<div class="card"><p class="empty-note">No resources here yet. Check back soon, or <a href="#/">browse other topics</a>.</p></div>'}
+      ${t.questions.length || t.searches.length ? `
+      <div class="card leads">
+        <h3>Where this topic could lead</h3>
+        <p class="muted small" style="margin-top:.35rem">Once you’ve done some background reading, these are the kinds of focused questions you could research. Adapt one, or use them as models for your own.</p>
+        ${t.questions.length ? `<div class="questions"><h4>Example research questions</h4><ul>${t.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul></div>` : ''}
+        ${t.searches.length ? `<div style="margin-top:1rem"><h4>Search PubMed (free full text)</h4><div class="search-links">${t.searches.map(q =>
+          `<a href="${pubmed(q)}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>${esc(q)}</a>`).join('')}</div></div>` : ''}
+        <p class="small" style="margin-top:1rem"><a href="#question">Sharpen your own question →</a></p>
+      </div>` : ''}`;
+
+    // Filters: hide cards and empty sections rather than re-rendering.
+    const filt = { sub: '', level: '' };
+    const apply = () => {
+      $$('.sub-section', view).forEach(sec => {
+        let shown = 0;
+        $$('[data-level]', sec).forEach(c => { c.hidden = !!filt.level && c.dataset.level !== filt.level; if (!c.hidden) shown++; });
+        sec.hidden = (filt.sub && sec.dataset.sub !== filt.sub) || !shown;
+      });
+    };
+    [['#sub-chips', 'sub'], ['#level-chips', 'level']].forEach(([sel, key]) => {
+      const g = $(sel, view);
+      if (g) pressGroup(g, b => { filt[key] = b.dataset[key]; apply(); });
+    });
+  }
+
+  /* ---------------- Databases page ---------------- */
+  const DATABASES = [
+    { name: 'PubMed', pub: 'National Library of Medicine', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://pubmed.ncbi.nlm.nih.gov/',
+      desc: 'The main search engine for biomedical research. Click <b>Free full text</b> in the left sidebar to see only articles you can read.' },
+    { name: 'PubMed Central (PMC)', pub: 'National Library of Medicine', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://pmc.ncbi.nlm.nih.gov/',
+      desc: 'A free archive of complete journal articles. Every result can be read in full, including its methods, data, and figures.' },
+    { name: 'AHA Journals', pub: 'American Heart Association', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://www.ahajournals.org/',
+      desc: 'Leading cardiology journals such as <i>Circulation</i> and <i>Hypertension</i>, plus scientific statements. Many articles are free.' },
+    { name: 'Google Scholar', pub: 'Google', tag: ['Mixed', ''], url: 'https://scholar.google.com/',
+      desc: 'The broadest search. Results mix peer-reviewed studies with other material, and some are paywalled, so check each one.' },
+    { name: 'MedlinePlus', pub: 'National Library of Medicine', tag: ['Background', 'tag-bg'], url: 'https://medlineplus.gov/',
+      desc: 'Plain-language health information. Use it to understand a condition or treatment before reading studies about it.' },
+  ];
+  $('#db-grid').innerHTML = DATABASES.map(d => `
+    <article class="card card-tight db-card">
+      <div class="source-top"><span class="tag ${d.tag[1]}">${d.tag[0]}</span><span class="publisher">${esc(d.pub)}</span></div>
+      <h3>${esc(d.name)}</h3>
+      <p>${d.desc}</p>
+      <a class="btn btn-secondary btn-sm" href="${d.url}" target="_blank" rel="noopener">Open ${esc(d.name)} <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a>
+    </article>`).join('');
+
+  /* ---------------- Pages (hash-routed, so links and Back work) ---------------- */
+  // Old addresses from earlier versions of the site keep working.
+  const ALIASES = { overview: 'guide', pathways: '', sources: 'search', writing: 'evaluate', lab: 'tool/blood-flow' };
+  const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'resources' : v;
+  let currentView = null;
+
+  function showView(name, { focus = true } = {}) {
+    const firstLoad = currentView === null;
+    currentView = name;
+    $$('.view').forEach(v => { v.hidden = v.dataset.view !== name; });
+    $$('[data-nav]').forEach(a => {
+      if (a.dataset.nav === NAV_FOR(name)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    const view = $(`.view[data-view="${name}"]`);
+    document.title = (name === 'home' ? '' : view.dataset.title + ' · ') + 'Cardiovascular Research Hub';
+    if (name === 'tool-3d-heart') loadEmbed();
+    if (name === 'my-sources') renderMySources();
+    if (name === 'evaluate') syncCraapTarget();
+    if (name === 'search') renderBuilder();
+    if (name === 'guide') renderGuide();
+    updateStrip();
+    // Move focus to the new page's heading so keyboard and screen-reader users land in the right place.
+    if (focus && !firstLoad) {
+      const h = $('h2', view);
+      if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
+    }
+  }
+
+  function route() {
+    let h = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+    if (h in ALIASES) h = ALIASES[h];
+    if (h.startsWith('topic/')) { renderTopic(h.slice(6)); showView('topic'); window.scrollTo(0, 0); return; }
+    if (h.startsWith('tool/') && $(`#view-tool-${CSS.escape(h.slice(5))}`)) { showView('tool-' + h.slice(5)); window.scrollTo(0, 0); return; }
+    if (['search', 'evaluate', 'guide', 'my-sources'].includes(h)) { showView(h); window.scrollTo(0, 0); return; }
+    // A hash that names something inside a page (e.g. #craap) opens that page and scrolls to it.
+    const target = h && document.getElementById(h);
+    const view = target && target.closest('.view');
+    if (view) { showView(view.dataset.view, { focus: false }); target.scrollIntoView({ block: 'start' }); return; }
+    showView('home');
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+
+  // Only load the heavy 3D embed when someone opens it.
+  function loadEmbed() {
+    const f = $('.embed iframe');
+    if (f && !f.src) f.src = f.dataset.src;
+  }
+
+  // Article search: builds the chosen database's results URL and opens it in a new tab.
+  // Without JavaScript the form still submits to PubMed (free full text) on its own.
+  const DBS = {
+    pubmed: { name: 'PubMed', url: q => pubmed(q) },
+    scholar: { name: 'Google Scholar', url: q => 'https://scholar.google.com/scholar?q=' + encodeURIComponent(q) },
+    medline: { name: 'MedlinePlus', url: q => 'https://vsearch.nlm.nih.gov/vivisimo/cgi-bin/query-meta?v%3Aproject=medlineplus&v%3Asources=medlineplus-bundle&query=' + encodeURIComponent(q) },
+  };
+  const dbForm = $('#db-search');
+  const dbChoice = () => DBS[$('input[name="db"]:checked', dbForm).value];
+  dbForm.addEventListener('change', e => {
+    if (e.target.name !== 'db') return;
+    $('#db-go').firstChild.textContent = `Search ${dbChoice().name} `;
+  });
+  dbForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const q = $('#db-q').value.trim();
+    if (!q) { $('#db-q').focus(); toast('Type a few key terms first.'); return; }
+    window.open(dbChoice().url(q), '_blank', 'noopener');
+  });
+
+
+  /* ---------------- Search builder ---------------- */
+  // Words that rarely help a database search.
+  const STOP = new Set(('a an the of in on to for and or is are was were be been being do does did how what why which who whom when where '
+    + 'that this these those their its it can could would should may might will with by at from as into than more less much many '
+    + 'affect affects affected effect effects impact impacts influence relate related relationship role change changes changed '
+    + 'compare compared comparison between among extent level levels way ways people person use used using have has had there '
+    + 'about after before during over under some any each other such most very also not no if so keep help helps lead leads make makes '
+    + 'play plays high low rate rates part parts factor factors whether').split(' '));
+  // Other words for common ideas. Keys are lowercase; plurals are matched too.
+  const SYNONYMS = {
+    'heart attack': ['myocardial infarction'], 'myocardial infarction': ['heart attack'],
+    'high blood pressure': ['hypertension'], 'hypertension': ['high blood pressure'], 'blood pressure': ['hypertension'],
+    'heart disease': ['cardiovascular disease', 'coronary artery disease'], 'cardiovascular disease': ['heart disease'],
+    'heart failure': ['cardiac failure'], 'stroke': ['cerebrovascular accident'],
+    'arrhythmia': ['atrial fibrillation', 'irregular heartbeat'], 'irregular heartbeat': ['arrhythmia'],
+    'atherosclerosis': ['arterial plaque', 'coronary artery disease'], 'plaque': ['atherosclerosis'],
+    'cholesterol': ['LDL cholesterol', 'lipids'], 'blood clot': ['thrombosis'],
+    'heart rate': ['resting heart rate'], 'valve': ['heart valve disease'],
+    'teenager': ['adolescents', 'youth'], 'teen': ['adolescents', 'youth'], 'adolescent': ['teenagers', 'youth'],
+    'kid': ['children', 'pediatric'], 'child': ['pediatric', 'youth'], 'student': ['adolescents', 'young adults'],
+    'athlete': ['sports', 'athletic training'], 'women': ['sex differences'], 'woman': ['sex differences'],
+    'vaping': ['e-cigarettes', 'electronic cigarettes'], 'vape': ['e-cigarettes', 'vaping'], 'e-cigarette': ['vaping', 'electronic cigarettes'],
+    'smoking': ['tobacco use', 'cigarette smoking'], 'exercise': ['physical activity', 'aerobic training'],
+    'physical activity': ['exercise'], 'sleep': ['sleep duration', 'sleep deprivation'],
+    'stress': ['psychological stress', 'chronic stress'], 'diet': ['nutrition', 'dietary pattern'],
+    'salt': ['sodium', 'dietary sodium'], 'sodium': ['salt', 'dietary sodium'],
+    'caffeine': ['energy drinks', 'coffee'], 'energy drink': ['caffeine'], 'obesity': ['body mass index', 'overweight'],
+    'diabetes': ['type 2 diabetes'], 'income': ['socioeconomic status', 'poverty'], 'poverty': ['socioeconomic status', 'income'],
+    'food desert': ['food environment', 'food access'], 'food access': ['food environment', 'food insecurity'],
+    'race': ['racial disparities', 'health disparities'], 'disparity': ['health disparities', 'health equity'],
+    'neighborhood': ['social determinants of health', 'built environment'],
+    'stent': ['percutaneous coronary intervention', 'drug-eluting stent'], 'pacemaker': ['cardiac pacing'],
+    'cpr': ['cardiopulmonary resuscitation'], 'aed': ['automated external defibrillator'],
+    'cardiac arrest': ['sudden cardiac death'], 'sudden cardiac arrest': ['sudden cardiac death'],
+    'heart transplant': ['cardiac transplantation'], 'artificial heart': ['ventricular assist device'],
+  };
+  const synKey = t => {
+    const w = t.toLowerCase().trim();
+    if (SYNONYMS[w]) return w;
+    const singular = w.replace(/ies$/, 'y').replace(/(ches|shes|xes)$/, m => m.slice(0, -2)).replace(/s$/, '');
+    return SYNONYMS[singular] ? singular : null;
+  };
+  const suggestionsFor = t => { const k = synKey(t); return k ? SYNONYMS[k] : []; };
+
+  // Pull likely search terms out of a question: known phrases first, then remaining content words.
+  function spotTerms(question) {
+    let text = ' ' + question.toLowerCase().replace(/[^a-z0-9\-\s']/g, ' ').replace(/\s+/g, ' ') + ' ';
+    const found = [];
+    Object.keys(SYNONYMS).filter(k => k.includes(' ')).sort((a, b) => b.length - a.length).forEach(k => {
+      for (const form of [k, k + 's']) {
+        if (text.includes(' ' + form + ' ')) { found.push(form); text = text.replace(' ' + form + ' ', ' | '); }
+      }
+    });
+    text.split(/[\s|]+/).forEach(w => {
+      w = w.replace(/^'+|'+$/g, '').replace(/'s$/, '');
+      if (w.length > 2 && !STOP.has(w) && !found.includes(w)) found.push(w);
+    });
+    return found.slice(0, 8);
+  }
+
+  const SB_KEY = 'cvhub-search-builder-v1';
+  let sb = { question: '', concepts: [{ term: '', syns: '' }, { term: '', syns: '' }, { term: '', syns: '' }], edited: false };
+  try { const saved = JSON.parse(localStorage.getItem(SB_KEY)); if (saved && Array.isArray(saved.concepts)) sb = saved; } catch { /* storage unavailable */ }
+  const saveSb = () => { try { localStorage.setItem(SB_KEY, JSON.stringify(sb)); } catch { /* ignore */ } };
+
+  const quote = t => /\s/.test(t) && !/^".*"$/.test(t) ? `"${t}"` : t;
+  const splitSyns = s => s.split(',').map(x => x.trim()).filter(Boolean);
+  function buildQuery() {
+    return sb.concepts.map(c => {
+      const terms = [...new Set([c.term.trim(), ...splitSyns(c.syns)].filter(Boolean).map(t => t.toLowerCase()))];
+      const original = [c.term.trim(), ...splitSyns(c.syns)].filter(Boolean);
+      const uniq = terms.map(t => original.find(o => o.toLowerCase() === t));
+      if (!uniq.length) return '';
+      return uniq.length === 1 ? quote(uniq[0]) : '(' + uniq.map(quote).join(' OR ') + ')';
+    }).filter(Boolean).join(' AND ');
+  }
+
+  function renderConcepts() {
+    $('#sb-concepts').innerHTML = sb.concepts.map((c, i) => {
+      const used = splitSyns(c.syns).map(x => x.toLowerCase());
+      const sugg = suggestionsFor(c.term).filter(x => !used.includes(x.toLowerCase()));
+      return `<div class="sb-concept" data-i="${i}">
+        ${i ? '<span class="sb-and" aria-hidden="true">AND</span>' : ''}
+        <label for="sb-term-${i}">Key idea ${i + 1}${i === 2 ? ' (optional)' : ''}</label>
+        <input type="text" id="sb-term-${i}" data-field="term" value="${esc(c.term)}" placeholder="${['sleep', 'blood pressure', 'teenagers'][i]}">
+        <label for="sb-syns-${i}" class="sr-only">Other words for key idea ${i + 1}</label>
+        <input type="text" id="sb-syns-${i}" data-field="syns" value="${esc(c.syns)}" placeholder="Other words, separated by commas">
+        ${sugg.length ? `<div class="sb-sugg"><span class="hint">Also try:</span>${sugg.map(x =>
+          `<button type="button" class="chip-btn sm" data-add="${esc(x)}">+ ${esc(x)}</button>`).join('')}</div>` : ''}
+      </div>`;
+    }).join('');
+  }
+  function renderSpotted() {
+    const used = sb.concepts.map(c => c.term.toLowerCase().trim());
+    const terms = spotTerms(sb.question).filter(t => !used.includes(t));
+    $('#sb-spotted').hidden = !terms.length;
+    $('#sb-spotted-chips').innerHTML = terms.map(t => `<button type="button" class="chip-btn sm" data-spot="${esc(t)}">${esc(t)}</button>`).join('');
+  }
+  function refreshQuery() {
+    if (!sb.edited) $('#sb-query').value = buildQuery();
+    saveSb();
+  }
+  function renderBuilder() {
+    $('#sb-question').value = sb.question;
+    renderSpotted();
+    renderConcepts();
+    $('#sb-query').value = sb.edited ? (sb.query || '') : buildQuery();
+  }
+
+  $('#sb-question').addEventListener('input', e => { sb.question = e.target.value; renderSpotted(); saveSb(); });
+  $('#sb-spotted-chips').addEventListener('click', e => {
+    const b = e.target.closest('[data-spot]');
+    if (!b) return;
+    let slot = sb.concepts.findIndex(c => !c.term.trim());
+    if (slot < 0) { toast('All three key ideas are filled. Clear one to swap it out.'); return; }
+    sb.concepts[slot].term = b.dataset.spot;
+    sb.edited = false;
+    renderConcepts(); renderSpotted(); refreshQuery();
+  });
+  $('#sb-concepts').addEventListener('input', e => {
+    const box = e.target.closest('.sb-concept');
+    if (!box || !e.target.dataset.field) return;
+    sb.concepts[+box.dataset.i][e.target.dataset.field] = e.target.value;
+    sb.edited = false;
+    refreshQuery();
+  });
+  // Re-render suggestions when a key idea is finished, not on every keystroke (keeps the cursor in place).
+  $('#sb-concepts').addEventListener('change', e => { if (e.target.dataset.field === 'term') { renderConcepts(); renderSpotted(); } });
+  $('#sb-concepts').addEventListener('click', e => {
+    const b = e.target.closest('[data-add]');
+    if (!b) return;
+    const c = sb.concepts[+b.closest('.sb-concept').dataset.i];
+    c.syns = [...splitSyns(c.syns), b.dataset.add].join(', ');
+    sb.edited = false;
+    renderConcepts(); refreshQuery();
+  });
+  $('#sb-query').addEventListener('input', e => { sb.edited = true; sb.query = e.target.value; saveSb(); });
+  $$('[data-sb-go]').forEach(btn => btn.addEventListener('click', () => {
+    const q = $('#sb-query').value.trim();
+    if (!q) { toast('Add at least one key idea first.'); $('#sb-term-0').focus(); return; }
+    window.open(DBS[btn.dataset.sbGo].url(q), '_blank', 'noopener');
+  }));
+  $('#sb-copy').addEventListener('click', async () => {
+    const q = $('#sb-query').value.trim();
+    if (!q) { toast('Nothing to copy yet.'); return; }
+    try { await navigator.clipboard.writeText(q); toast('Search copied. Paste it into any database.'); }
+    catch { $('#sb-query').select(); toast('Press Ctrl/⌘ + C to copy.'); }
+  });
+  $('#sb-reset').addEventListener('click', () => {
+    sb = { question: sb.question, concepts: [{ term: '', syns: '' }, { term: '', syns: '' }, { term: '', syns: '' }], edited: false };
+    saveSb(); renderBuilder(); $('#sb-term-0').focus();
+  });
+  renderBuilder();
+
+  /* ---------------- CRAAP evaluator ---------------- */
+  const CRAAP = [
+    { id: 'c', name: 'Currency', q: 'Is it recent enough for your topic?', hint: 'For statistics and treatments, aim for the last 5–10 years. Older landmark studies are fine for basic mechanisms.' },
+    { id: 'r', name: 'Relevance', q: 'Does it directly help answer your research question?', hint: 'Is it written for an informed reader, not a general audience?' },
+    { id: 'a1', name: 'Authority', q: 'Are the authors experts?', hint: 'Look for researchers, clinicians, or a health agency, with credentials and affiliations listed.' },
+    { id: 'a2', name: 'Accuracy', q: 'Is it peer-reviewed or backed by cited evidence?', hint: 'Can you find the data or the references behind its claims?' },
+    { id: 'p', name: 'Purpose', q: 'Is it written to inform, not to sell?', hint: 'Watch for product promotion, sponsorship, or one-sided framing.' },
+  ];
+  $('#craap-items').innerHTML = CRAAP.map(k => `
+    <div class="craap-item">
+      <div class="row">
+        <label for="craap-${k.id}"><b>${k.name}:</b> ${k.q}</label>
+        <output for="craap-${k.id}" id="out-${k.id}">3</output>
+      </div>
+      <p class="hint" id="hint-${k.id}">${k.hint}</p>
+      <input type="range" min="1" max="5" step="1" value="3" id="craap-${k.id}" aria-describedby="hint-${k.id}">
+      <div class="scale" aria-hidden="true"><span>1 Poor</span><span>5 Excellent</span></div>
+    </div>`).join('');
+
+  function updateCRAAP() {
+    const vals = {};
+    CRAAP.forEach(k => { vals[k.id] = +$('#craap-' + k.id).value; $('#out-' + k.id).textContent = vals[k.id]; });
+    const v = craapVerdict(vals);
+    $('#craap-total').textContent = `${v.total} / 25`;
+    $('#craap-verdict').className = 'verdict ' + v.cls;
+    $('#craap-verdict').textContent = v.label;
+    $('#craap-note').textContent = v.note;
+  }
+  $('#craap-items').addEventListener('input', updateCRAAP);
+  $('#craap-reset').addEventListener('click', () => { $$('#craap-items input').forEach(i => { i.value = 3; }); updateCRAAP(); });
+  updateCRAAP();
+
+  /* ---------------- Citation builder ---------------- */
+  let citeStyle = 'APA';
+  const F = id => $('#cite-' + id).value.trim();
+  const EXAMPLE = {
+    type: 'journal', authors: 'Libby, Peter\nRidker, Paul M.\nMaseri, Attilio', title: 'Inflammation and atherosclerosis',
+    container: 'Circulation', year: '2002', volume: '105', issue: '9', pages: '1135-1143', date: '', link: '10.1161/hc0902.104353',
+  };
+
+  // Organization names can contain commas ("National Heart, Lung, and Blood Institute"), so don't
+  // read those as "Last, First".
+  const ORG_WORDS = /\b(institutes?|association|cent(er|re)s?|university|organi[sz]ation|department|society|foundation|college|agency|library|administration|council|committee|clinic|hospital|program|services?|inc|llc|research|press|openstax|anatomyvista|innerbody|getbodysmart|sketchfab)\b/i;
+  function parseAuthors(text) {
+    return text.split(/\n|;/).map(s => s.trim()).filter(Boolean).map(s => {
+      const i = s.indexOf(',');
+      if (i < 0) return { org: s };
+      const given = s.slice(i + 1).trim();
+      if (ORG_WORDS.test(s) || /\b(and|of|for|the)\b/.test(given) || given.split(/\s+/).length > 3) return { org: s };
+      return { last: s.slice(0, i).trim(), given };
+    });
+  }
+  const initials = given => given.split(/\s+/).filter(Boolean)
+    .map(p => p.split('-').map(h => h.replace(/\./g, '').charAt(0).toUpperCase() + '.').join('-')).join(' ');
+  const apaName = a => a.org ? esc(a.org) : esc(a.last + (a.given ? ', ' + initials(a.given) : ''));
+
+  function apaAuthors(list) {
+    const n = list.map(apaName);
+    if (n.length === 1) return n[0];
+    if (n.length === 2) return `${n[0]}, &amp; ${n[1]}`;
+    if (n.length <= 20) return `${n.slice(0, -1).join(', ')}, &amp; ${n[n.length - 1]}`;
+    return `${n.slice(0, 19).join(', ')}, . . . ${n[n.length - 1]}`;
+  }
+  function mlaAuthors(list) {
+    const first = a => a.org ? esc(a.org) : esc(a.last + (a.given ? ', ' + a.given : ''));
+    const later = a => a.org ? esc(a.org) : esc((a.given ? a.given + ' ' : '') + a.last);
+    if (list.length === 1) return first(list[0]);
+    if (list.length === 2) return `${first(list[0])}, and ${later(list[1])}`;
+    return `${first(list[0])}, et al`;
+  }
+  const endWith = (s, p = '.') => /[.?!]$/.test(s) ? s : s + p;
+  const pages = p => p.replace(/\s*[-–—]\s*/g, '–');
+  function normLink(l) {
+    if (!l) return '';
+    l = l.replace(/^doi:\s*/i, '');
+    return /^10\.\d{4,}\//.test(l) ? 'https://doi.org/' + l : l;
+  }
+  const MLA_MONTHS = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+  function mlaDate(md, year) {
+    const m = md.match(/^([A-Za-z]+)\.?\s+(\d{1,2})$/);
+    if (!m) return [md, year].filter(Boolean).join(' ');
+    const idx = MLA_MONTHS.findIndex(x => x.toLowerCase().startsWith(m[1].slice(0, 3).toLowerCase()));
+    return `${m[2]} ${idx >= 0 ? MLA_MONTHS[idx] : m[1]} ${year}`.trim();
+  }
+
+  function buildCitation(d, style = citeStyle) {
+    const authors = parseAuthors(d.authors);
+    const link = esc(normLink(d.link));
+    const title = esc(d.title);
+    const cont = esc(d.container);
+    const year = esc(d.year);
+
+    if (style === 'APA') {
+      const date = d.type === 'web' && d.date ? `${year || 'n.d.'}, ${esc(d.date)}` : (year || 'n.d.');
+      if (d.type === 'journal') {
+        let src = cont ? `<i>${cont}</i>` : '';
+        if (d.volume) src += `, <i>${esc(d.volume)}</i>`;
+        if (d.issue) src += `(${esc(d.issue)})`;
+        if (d.pages) src += `, ${esc(pages(d.pages))}`;
+        const parts = authors.length
+          ? [`${endWith(apaAuthors(authors))} (${date}).`, title && endWith(title)]
+          : [title && endWith(title), `(${date}).`];
+        return [...parts, src && src + '.', link].filter(Boolean).join(' ');
+      }
+      // Web page: skip the site name if it's the same as the organization author.
+      const sameAsAuthor = authors.length === 1 && authors[0].org && authors[0].org.toLowerCase() === d.container.toLowerCase();
+      const parts = authors.length
+        ? [`${endWith(apaAuthors(authors))} (${date}).`, title && `<i>${endWith(title)}</i>`]
+        : [title && `<i>${endWith(title)}</i>`, `(${date}).`];
+      return [...parts, cont && !sameAsAuthor && endWith(cont), link].filter(Boolean).join(' ');
+    }
+
+    // MLA 9: when an organization is both author and website, start with the title instead.
+    const orgIsSite = d.type === 'web' && authors.length === 1 && authors[0].org && authors[0].org.toLowerCase() === d.container.toLowerCase();
+    const head = authors.length && !orgIsSite ? endWith(mlaAuthors(authors)) : '';
+    const t = title ? `“${endWith(title)}”` : '';
+    const bits = [];
+    if (d.type === 'journal') {
+      if (cont) bits.push(`<i>${cont}</i>`);
+      if (d.volume) bits.push(`vol. ${esc(d.volume)}`);
+      if (d.issue) bits.push(`no. ${esc(d.issue)}`);
+      if (year) bits.push(year);
+      if (d.pages) bits.push(`${/[-–—,]/.test(d.pages) ? 'pp.' : 'p.'} ${esc(pages(d.pages))}`);
+    } else {
+      if (cont) bits.push(`<i>${cont}</i>`);
+      const dt = esc(mlaDate(d.date, d.year));
+      if (dt) bits.push(dt);
+    }
+    if (link) bits.push(link);
+    return [head, t, bits.length && endWith(bits.join(', '))].filter(Boolean).join(' ');
+  }
+
+  function readForm() {
+    return { type: $('#cite-type').value, authors: F('authors'), title: F('title'), container: F('container'), year: F('year'),
+      volume: F('volume'), issue: F('issue'), pages: F('pages'), date: F('date'), link: F('link') };
+  }
+  function renderCitation() {
+    const d = readForm();
+    const empty = !['authors', 'title', 'container', 'year', 'volume', 'issue', 'pages', 'date', 'link'].some(k => d[k]);
+    const isWeb = d.type === 'web';
+    $$('.journal-only').forEach(el => { el.hidden = isWeb; });
+    $$('.web-only').forEach(el => { el.hidden = !isWeb; });
+    $('#container-label').textContent = isWeb ? 'Website name' : 'Journal';
+    $('#cite-container').placeholder = isWeb ? 'Centers for Disease Control and Prevention' : 'Circulation';
+    $('#title-hint').textContent = citeStyle === 'APA'
+      ? 'APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.'
+      : 'MLA uses title case: capitalize the major words.';
+    $('#cite-label').textContent = empty ? `Example · ${citeStyle}` : `Your citation · ${citeStyle}`;
+    $('#cite-output').innerHTML = buildCitation(empty ? (citeStyle === 'MLA' ? { ...EXAMPLE, title: 'Inflammation and Atherosclerosis' } : EXAMPLE) : d);
+  }
+  $('#cite-form').addEventListener('input', renderCitation);
+  $('#cite-form').addEventListener('submit', e => e.preventDefault());
+  pressGroup($('#cite .seg'), btn => { citeStyle = btn.dataset.style; renderCitation(); });
+  $('#cite-clear').addEventListener('click', () => { $('#cite-form').reset(); renderCitation(); });
+
+  // Copies formatted text (keeps italics in Google Docs and Word), with fallbacks for locked-down browsers.
+  async function copyRich(html, text, okMsg) {
+    try {
+      if (window.ClipboardItem && navigator.clipboard.write) {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/html': new Blob([html], { type: 'text/html' }),
+          'text/plain': new Blob([text], { type: 'text/plain' }),
+        })]);
+      } else {
+        await navigator.clipboard.writeText(text);
+      }
+      toast(okMsg);
+    } catch {
+      const holder = document.createElement('div');
+      holder.innerHTML = html;
+      holder.style.cssText = 'position:fixed;left:-9999px;top:0';
+      document.body.appendChild(holder);
+      const range = document.createRange();
+      range.selectNodeContents(holder);
+      const sel = getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+      const ok = document.execCommand && document.execCommand('copy');
+      sel.removeAllRanges(); holder.remove();
+      toast(ok ? okMsg : 'Copy blocked. Select the text and press Ctrl/⌘ + C.');
+    }
+  }
+  $('#cite-copy').addEventListener('click', () => {
+    const out = $('#cite-output');
+    copyRich(out.innerHTML, out.textContent, 'Citation copied. Paste it into your reference list.');
+  });
+  renderCitation();
+
+  /* ---------------- My sources (annotated bibliography) ----------------
+     Saved in this browser only (localStorage). Students copy it into their Google Doc,
+     or move it between computers with a backup file. */
+  const MS_KEY = 'cvhub-my-sources-v1';
+  let MS = { style: 'APA', includeCraap: false, sources: [] };
+  try {
+    const saved = JSON.parse(localStorage.getItem(MS_KEY));
+    if (saved && Array.isArray(saved.sources)) MS = { ...MS, ...saved };
+  } catch { /* storage unavailable */ }
+  const saveMS = () => { try { localStorage.setItem(MS_KEY, JSON.stringify(MS)); } catch { /* ignore */ } updateMsCount(); };
+  const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const CITE_FIELDS = ['type', 'authors', 'title', 'container', 'year', 'volume', 'issue', 'pages', 'date', 'link'];
+  const CRAAP_IDS = ['c', 'r', 'a1', 'a2', 'p'];
+  const STAGES = { Background: 'Background reading', Research: 'Research evidence' };
+  const msFind = id => MS.sources.find(s => s.id === id);
+  const normUrl = u => String(u || '').trim().replace(/^https?:\/\//i, '').replace(/\/$/, '').toLowerCase();
+  function msHas(url) { return MS.sources.some(s => normUrl(s.link) === normUrl(url)); }
+
+  function addSource(fields, { open = true } = {}) {
+    const s = { id: newId(), type: 'web', authors: '', title: '', container: '', year: '', volume: '', issue: '', pages: '', date: '', link: '',
+      stage: 'Background', craap: null, summary: '', helps: '', open, ...fields };
+    MS.sources.push(s);
+    saveMS();
+    syncAddButtons();
+    return s;
+  }
+
+  function updateMsCount() {
+    const n = MS.sources.length, b = $('#ms-count');
+    b.hidden = !n;
+    b.textContent = n;
+    b.setAttribute('aria-label', `${n} saved`);
+  }
+
+  // "+ My sources" buttons on resource cards.
+  function syncAddButtons() {
+    $$('[data-add-src]').forEach(b => {
+      const has = msHas(b.dataset.addSrc);
+      b.classList.toggle('added', has);
+      b.textContent = has ? '✓ In My sources' : '+ My sources';
+    });
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-add-src]');
+    if (!b) return;
+    if (msHas(b.dataset.addSrc)) { location.hash = 'my-sources'; return; }
+    const r = RESOURCES.find(x => x.url === b.dataset.addSrc);
+    if (!r) return;
+    // We know the title, site, and link. Students check the page for the author and date.
+    addSource({ type: 'web', authors: r.source, title: r.title, container: r.source, link: r.url, stage: 'Background' });
+    toast('Added to My sources. Open it from the menu to add the date and your notes.');
+  });
+
+  /* CRAAP helpers shared with the evaluator */
+  function craapVerdict(vals) {
+    const total = CRAAP.reduce((sum, k) => sum + vals[k.id], 0);
+    const weak = CRAAP.filter(k => vals[k.id] === 1).map(k => k.name);
+    if (weak.length) return { total, cls: 'low', label: 'Red flag: don’t cite', note: `A 1 on ${weak.join(' and ')} outweighs a high total. Find a stronger source.` };
+    if (total >= 20) return { total, cls: 'good', label: 'Strong: OK to cite', note: 'This source should hold up in your argument.' };
+    if (total >= 14) return { total, cls: 'mid', label: 'Moderate: cross-check it', note: 'Back up its key claims with a second, stronger source.' };
+    return { total, cls: 'low', label: 'Weak: don’t cite', note: 'Use it for background ideas at most, and find a better source to cite.' };
+  }
+  const craapComplete = c => c && CRAAP_IDS.every(k => c[k] >= 1 && c[k] <= 5);
+
+  function missingFor(s) {
+    const need = s.type === 'journal' ? { authors: 'author', title: 'title', container: 'journal', year: 'year' } : { title: 'title', year: 'date', link: 'link' };
+    return Object.entries(need).filter(([k]) => !String(s[k] || '').trim()).map(([, label]) => label);
+  }
+  const annotation = s => [s.summary, s.helps].map(x => (x || '').trim()).filter(Boolean).join(' ');
+
+  function entryHead(s) {
+    const missing = missingFor(s);
+    const v = craapComplete(s.craap) ? craapVerdict(s.craap) : null;
+    return `<p class="ms-cite">${buildCitation(s, MS.style) || '<span class="muted">Untitled source</span>'}</p>
+      <div class="res-tags">
+        <span class="tag">${esc(STAGES[s.stage] || s.stage)}</span>
+        ${v ? `<span class="verdict ${v.cls} tag">CRAAP ${v.total}/25 · ${esc(v.label)}</span>` : '<span class="tag">Not evaluated yet</span>'}
+        ${missing.length ? `<span class="tag tag-warn">Missing: ${esc(missing.join(', '))}</span>` : ''}
+        ${annotation(s) ? '' : '<span class="tag tag-warn">No notes yet</span>'}
+      </div>
+      ${annotation(s) ? `<p class="ms-annot">${esc(annotation(s))}</p>` : ''}`;
+  }
+
+  function entryEditor(s) {
+    const id = s.id, isWeb = s.type === 'web';
+    const f = (key, label, { span = 3, ph = '', area = false, hideFor = '' } = {}) => `
+      <div class="field span-${span}" ${hideFor ? `data-hide-for="${hideFor}"` : ''} ${hideFor === s.type ? 'hidden' : ''}>
+        <label for="ms-${key}-${id}">${label}</label>
+        ${area ? `<textarea id="ms-${key}-${id}" data-field="${key}" rows="2" placeholder="${esc(ph)}">${esc(s[key])}</textarea>`
+               : `<input type="text" id="ms-${key}-${id}" data-field="${key}" value="${esc(s[key])}" placeholder="${esc(ph)}">`}
+      </div>`;
+    const c = s.craap || {};
+    return `<div class="ms-edit" hidden>
+      <p class="hint">Check the source itself for anything missing, especially the author and date.</p>
+      <div class="form-grid">
+        <div class="field span-3"><label for="ms-type-${id}">Source type</label>
+          <select id="ms-type-${id}" data-field="type"><option value="journal" ${!isWeb ? 'selected' : ''}>Journal article</option><option value="web" ${isWeb ? 'selected' : ''}>Web page</option></select></div>
+        <div class="field span-3"><label for="ms-stage-${id}">Used for</label>
+          <select id="ms-stage-${id}" data-field="stage">${Object.entries(STAGES).map(([k, l]) => `<option value="${k}" ${s.stage === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+        ${f('authors', 'Authors <span class="hint">(one per line: Last, First)</span>', { span: 6, area: true, ph: 'Libby, Peter' })}
+        ${f('title', 'Title', { span: 6 })}
+        <div class="field span-3"><label for="ms-container-${id}">${isWeb ? 'Website name' : 'Journal'}</label>
+          <input type="text" id="ms-container-${id}" data-field="container" value="${esc(s.container)}"></div>
+        ${f('year', 'Year')}
+        ${f('volume', 'Volume', { span: 2, hideFor: 'web' })}
+        ${f('issue', 'Issue', { span: 2, hideFor: 'web' })}
+        ${f('pages', 'Pages', { span: 2, hideFor: 'web' })}
+        ${f('date', 'Month &amp; day <span class="hint">(optional)</span>', { hideFor: 'journal' })}
+        ${f('link', 'DOI or URL', { span: 6 })}
+      </div>
+      <fieldset class="ms-craap">
+        <legend>CRAAP score <span class="hint">(1 poor – 5 excellent)</span></legend>
+        <div class="row">${CRAAP.map(k => `<label>${k.name}
+          <select data-craap="${k.id}"><option value="">–</option>${[1, 2, 3, 4, 5].map(n => `<option ${c[k.id] === n ? 'selected' : ''}>${n}</option>`).join('')}</select></label>`).join('')}</div>
+        <p class="hint ms-craap-note"></p>
+      </fieldset>
+      <div class="form-grid">
+        ${f('summary', 'Main point: what does this source say?', { span: 6, area: true, ph: 'In 1–2 sentences, in your own words.' })}
+        ${f('helps', 'How does it help answer my research question?', { span: 6, area: true, ph: 'Background? Evidence for a claim? Data I can analyze?' })}
+      </div>
+      <div><button class="btn btn-secondary btn-sm" type="button" data-act="edit">Done</button></div>
+    </div>`;
+  }
+
+  function renderMySources() {
+    $('#ms-question').value = sb.question || '';
+    $$('#ms-style button').forEach(b => b.setAttribute('aria-pressed', b.dataset.style === MS.style));
+    $('#ms-include-craap').checked = !!MS.includeCraap;
+    $('#ms-empty').hidden = !!MS.sources.length;
+    $('#ms-danger').hidden = !MS.sources.length;
+    $('#ms-list').innerHTML = MS.sources.map(s => `
+      <article class="card ms-entry" data-id="${s.id}">
+        <div class="ms-head">${entryHead(s)}</div>
+        <div class="cite-actions no-print">
+          <button class="btn btn-secondary btn-sm" type="button" data-act="edit" aria-expanded="false">Edit details &amp; notes</button>
+          <button class="btn btn-secondary btn-sm" type="button" data-act="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy entry</button>
+          ${/^https?:\/\//i.test(s.link) || /^10\./.test(s.link) ? `<a class="btn btn-secondary btn-sm" href="${esc(normLink(s.link))}" target="_blank" rel="noopener">Open source <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></a>` : ''}
+          <span class="ms-remove"><button class="btn btn-secondary btn-sm" type="button" data-act="remove">Remove</button></span>
+        </div>
+        ${entryEditor(s)}
+      </article>`).join('');
+    // Newly added sources open ready to edit.
+    MS.sources.filter(s => s.open).forEach(s => { toggleEditor($(`.ms-entry[data-id="${s.id}"]`), true); s.open = false; });
+    $$('.ms-entry').forEach(el => updateCraapNote(el));
+    saveMS();
+  }
+
+  function toggleEditor(el, force) {
+    const ed = $('.ms-edit', el);
+    const open = force ?? ed.hidden;
+    ed.hidden = !open;
+    $('[data-act="edit"][aria-expanded]', el).setAttribute('aria-expanded', open);
+  }
+  function updateCraapNote(el) {
+    const s = msFind(el.dataset.id);
+    const note = $('.ms-craap-note', el);
+    note.textContent = craapComplete(s.craap) ? (v => `${v.total}/25 · ${v.label}. ${v.note}`)(craapVerdict(s.craap)) : 'Rate all five to see the score.';
+  }
+
+  $('#ms-list').addEventListener('input', e => {
+    const el = e.target.closest('.ms-entry');
+    if (!el) return;
+    const s = msFind(el.dataset.id);
+    if (e.target.dataset.field) s[e.target.dataset.field] = e.target.value;
+    if (e.target.dataset.craap) {
+      s.craap = { ...(s.craap || {}), [e.target.dataset.craap]: e.target.value ? +e.target.value : undefined };
+      updateCraapNote(el);
+    }
+    if (e.target.dataset.field === 'type') {
+      $$('[data-hide-for]', el).forEach(x => { x.hidden = x.dataset.hideFor === s.type; });
+      $(`label[for="ms-container-${s.id}"]`, el).textContent = s.type === 'web' ? 'Website name' : 'Journal';
+    }
+    $('.ms-head', el).innerHTML = entryHead(s);
+    saveMS();
+    syncAddButtons();
+  });
+  $('#ms-list').addEventListener('click', async e => {
+    const b = e.target.closest('[data-act]');
+    if (!b) return;
+    const el = b.closest('.ms-entry'), s = msFind(el.dataset.id);
+    if (b.dataset.act === 'edit') toggleEditor(el);
+    if (b.dataset.act === 'copy') {
+      const { html, text } = bibHTML([s], { heading: false });
+      copyRich(html, text, 'Entry copied. Paste it into your bibliography doc.');
+    }
+    if (b.dataset.act === 'remove') {
+      b.parentElement.innerHTML = 'Remove this source? <button class="btn btn-danger btn-sm" type="button" data-act="remove-yes">Remove</button> <button class="btn btn-secondary btn-sm" type="button" data-act="remove-no">Keep</button>';
+    }
+    if (b.dataset.act === 'remove-no') b.parentElement.innerHTML = '<button class="btn btn-secondary btn-sm" type="button" data-act="remove">Remove</button>';
+    if (b.dataset.act === 'remove-yes') {
+      MS.sources = MS.sources.filter(x => x.id !== s.id);
+      saveMS(); renderMySources(); syncAddButtons();
+      toast('Source removed.');
+    }
+  });
+
+  // The research question is shared with the search builder.
+  $('#ms-question').addEventListener('input', e => { sb.question = e.target.value; saveSb(); });
+  pressGroup($('#ms-style'), b => { MS.style = b.dataset.style; saveMS(); $$('.ms-entry').forEach(el => { $('.ms-head', el).innerHTML = entryHead(msFind(el.dataset.id)); }); });
+  $('#ms-include-craap').addEventListener('change', e => { MS.includeCraap = e.target.checked; saveMS(); });
+  $('#ms-add-blank').addEventListener('click', () => {
+    addSource({ type: 'journal', stage: 'Research' });
+    renderMySources();
+    const last = $$('.ms-entry').pop();
+    if (last) { last.scrollIntoView({ block: 'center' }); $('textarea, input', $('.ms-edit', last)).focus(); }
+  });
+
+  /* Export: annotated bibliography for pasting into Google Docs or Word */
+  const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+  function bibHTML(list, { heading = true } = {}) {
+    const style = MS.style;
+    const items = list.map(s => ({ s, cite: buildCitation(s, style) })).filter(x => x.cite)
+      .sort((a, b) => plain(a.cite).localeCompare(plain(b.cite)));
+    const font = 'font-family:Times New Roman,serif;font-size:12pt;line-height:2;';
+    let html = '', text = '';
+    if (heading) {
+      const title = style === 'APA' ? 'Annotated Bibliography' : 'Annotated Works Cited';
+      html += `<p style="${font}text-align:center;font-weight:bold;">${title}</p>`;
+      text += title + '\n\n';
+      if ((sb.question || '').trim()) {
+        html += `<p style="${font}"><b>Research question:</b> ${esc(sb.question.trim())}</p>`;
+        text += 'Research question: ' + sb.question.trim() + '\n\n';
+      }
+    }
+    items.forEach(({ s, cite }) => {
+      let note = annotation(s);
+      if (MS.includeCraap && craapComplete(s.craap)) {
+        const v = craapVerdict(s.craap);
+        note += (note ? ' ' : '') + `CRAAP score: ${v.total}/25 (${v.label.split(':')[0]}).`;
+      }
+      html += `<p style="${font}margin:0;padding-left:0.5in;text-indent:-0.5in;">${cite}</p>`;
+      text += plain(cite) + '\n';
+      if (note) {
+        html += `<p style="${font}margin:0 0 0 0.5in;">${esc(note)}</p>`;
+        text += '    ' + note + '\n';
+      }
+      text += '\n';
+    });
+    return { html, text: text.trim() };
+  }
+  $('#ms-copy-all').addEventListener('click', () => {
+    if (!MS.sources.length) { toast('Add a source first.'); return; }
+    const missing = MS.sources.filter(s => missingFor(s).length || !annotation(s)).length;
+    const { html, text } = bibHTML(MS.sources);
+    copyRich(html, text, missing
+      ? `Copied. ${missing} source${missing === 1 ? ' is' : 's are'} missing details or notes, so check those before you hand it in.`
+      : 'Annotated bibliography copied. Paste it into your Google Doc.');
+  });
+
+  /* Backup file, for moving to another computer */
+  $('#ms-download').addEventListener('click', () => {
+    const data = JSON.stringify({ app: 'cardiovascular-research-hub', version: 1, saved: new Date().toISOString(), question: sb.question || '', sources: MS.sources }, null, 2);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
+    a.download = 'my-sources-backup.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+  $('#ms-upload-btn').addEventListener('click', () => $('#ms-upload').click());
+  $('#ms-upload').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    e.target.value = '';
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (!data || !Array.isArray(data.sources)) throw new Error('not a backup');
+      let added = 0;
+      data.sources.forEach(raw => {
+        if (!raw || typeof raw !== 'object' || MS.sources.some(x => x.id === raw.id)) return;
+        const s = { id: typeof raw.id === 'string' ? raw.id : newId(), stage: 'Background', craap: null, summary: '', helps: '' };
+        [...CITE_FIELDS, 'stage', 'summary', 'helps'].forEach(k => { if (typeof raw[k] === 'string') s[k] = raw[k]; });
+        if (raw.craap && typeof raw.craap === 'object') s.craap = Object.fromEntries(CRAAP_IDS.map(k => [k, Number.isInteger(raw.craap[k]) ? raw.craap[k] : undefined]));
+        if (!['web', 'journal'].includes(s.type)) s.type = 'web';
+        MS.sources.push(s); added++;
+      });
+      if (!(sb.question || '').trim() && typeof data.question === 'string') { sb.question = data.question; saveSb(); }
+      saveMS(); renderMySources(); syncAddButtons();
+      toast(added ? `Loaded ${added} source${added === 1 ? '' : 's'} from the backup.` : 'Those sources are already here.');
+    } catch {
+      toast('That file isn’t a My sources backup.');
+    }
+  });
+
+  /* Remove everything (two-step) */
+  $('#ms-clear').addEventListener('click', () => { $('#ms-clear-confirm').hidden = false; $('#ms-clear').hidden = true; });
+  $('#ms-clear-no').addEventListener('click', () => { $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false; });
+  $('#ms-clear-yes').addEventListener('click', () => {
+    MS.sources = []; saveMS(); renderMySources(); syncAddButtons();
+    $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false;
+    toast('All sources removed.');
+  });
+
+  /* Save from the citation builder and the CRAAP evaluator */
+  $('#cite-save').addEventListener('click', () => {
+    const d = readForm();
+    if (!['authors', 'title', 'container', 'link'].some(k => d[k])) { toast('Fill in the form first.'); return; }
+    addSource({ ...d, stage: d.type === 'journal' ? 'Research' : 'Background' });
+    toast('Saved to My sources. Add your notes there.');
+  });
+  function syncCraapTarget() {
+    const row = $('#craap-save-row'), sel = $('#craap-target');
+    row.hidden = !MS.sources.length;
+    $('#craap-save-empty').hidden = !!MS.sources.length;
+    const prev = sel.value;
+    sel.innerHTML = MS.sources.map(s => `<option value="${s.id}">${esc((s.title || 'Untitled source').slice(0, 70))}</option>`).join('');
+    if (MS.sources.some(s => s.id === prev)) sel.value = prev;
+  }
+  $('#craap-save').addEventListener('click', () => {
+    const s = msFind($('#craap-target').value);
+    if (!s) return;
+    s.craap = Object.fromEntries(CRAAP_IDS.map(k => [k, +$('#craap-' + k).value]));
+    saveMS();
+    toast(`Score saved to “${(s.title || 'Untitled source').slice(0, 40)}”.`);
+  });
+
+  updateMsCount();
+  syncAddButtons();
+
+  /* ---------------- Start a PBAT: the guided path ----------------
+     Progress is saved in this browser. The research question is shared with the search
+     builder and My sources; sources come from My sources. */
+  const PJ_KEY = 'cvhub-project-v1';
+  const blankProject = () => ({ started: false, topic: '', wonders: '', focus: '', checks: [false, false, false, false], open: null });
+  let PROJECT = blankProject();
+  try { const saved = JSON.parse(localStorage.getItem(PJ_KEY)); if (saved && typeof saved === 'object') PROJECT = { ...PROJECT, ...saved }; } catch { /* storage unavailable */ }
+  const saveProject = () => { try { localStorage.setItem(PJ_KEY, JSON.stringify(PROJECT)); } catch { /* ignore */ } };
+  const startProject = () => { if (!PROJECT.started) { PROJECT.started = true; saveProject(); } };
+
+  const QUESTION_CHECKS = [
+    'It asks <b>how</b> or <b>why</b>, not just what.',
+    'It can’t be answered with yes or no, or with a single fact.',
+    'It’s about my narrower focus, not the whole broad topic.',
+    'I can answer it with scientific evidence. It isn’t only opinion or prediction.',
+  ];
+  const RESEARCH_GOAL = 3;
+  const STAGE_NAMES = ['Explore a broad topic', 'Narrow it with background reading', 'Develop a research question', 'Do the research', 'Evaluate and cite'];
+
+  const sourceReady = s => craapComplete(s.craap) && annotation(s) && !missingFor(s).length;
+  function stageStatus() {
+    const bg = MS.sources.filter(s => s.stage === 'Background').length;
+    const rs = MS.sources.filter(s => s.stage === 'Research').length;
+    const ready = MS.sources.filter(sourceReady).length;
+    const q = (sb.question || '').trim();
+    return [
+      { done: !!PROJECT.topic, summary: PROJECT.topic || 'No topic chosen yet' },
+      { done: !!PROJECT.focus.trim() && bg >= 1, summary: PROJECT.focus.trim() ? `Focus: ${PROJECT.focus.trim()}` : `${bg} background source${bg === 1 ? '' : 's'} saved`, bg },
+      { done: !!q && PROJECT.checks.every(Boolean), summary: q ? (q.length > 70 ? q.slice(0, 70) + '…' : q) : 'No question yet' },
+      { done: rs >= RESEARCH_GOAL, summary: `${rs} of ${RESEARCH_GOAL} research sources saved`, rs },
+      { done: MS.sources.length > 0 && ready === MS.sources.length && rs >= RESEARCH_GOAL, summary: `${ready} of ${MS.sources.length} sources ready`, ready },
+    ];
+  }
+  const currentStage = st => { const i = st.findIndex(s => !s.done); return i < 0 ? 4 : i; };
+
+  /* Progress strip shown on other pages once a student has started */
+  function updateStrip() {
+    $('.nav-cta').textContent = PROJECT.started ? 'My PBAT →' : 'Start a PBAT →';
+    const strip = $('#pbat-strip');
+    const show = PROJECT.started && currentView !== 'guide';
+    strip.hidden = !show;
+    if (!show) return;
+    const st = stageStatus(), i = currentStage(st);
+    const allDone = st.every(s => s.done);
+    $('#pbat-strip-text').innerHTML = allDone
+      ? '<b>Your PBAT:</b> all five stages done. Your bibliography is ready to copy.'
+      : `<b>Your PBAT:</b> stage ${i + 1} of 5, ${esc(STAGE_NAMES[i].toLowerCase())}`;
+  }
+
+  /* Banner on topic pages, only for students working through the guide */
+  function topicBanner(t) {
+    if (!PROJECT.started || currentStage(stageStatus()) > 1) return '';
+    if (PROJECT.topic === t.name) {
+      return `<div class="callout pj-banner" role="note"><p><strong>This is your PBAT topic.</strong> Read 2–3 Intro resources and add them to My sources. Then <a href="#guide">name your narrower focus →</a></p></div>`;
+    }
+    return `<div class="callout pj-banner" role="note"><p><strong>Exploring for your PBAT?</strong> If this topic interests you, make it your broad topic.</p>
+      <button class="btn btn-secondary btn-sm" type="button" data-choose-topic="${esc(t.name)}">Choose this topic</button></div>`;
+  }
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-choose-topic]');
+    if (!b) return;
+    startProject();
+    PROJECT.topic = b.dataset.chooseTopic;
+    saveProject();
+    renderTopic(currentTopicSlug);
+    toast('Saved as your PBAT topic. Next: read a few Intro resources.');
+  });
+
+  /* The guide page */
+  function stageBody(n) {
+    const t = allTopics().find(x => x.name === PROJECT.topic);
+    const st = stageStatus();
+    const next = n < 4 ? `<button class="btn btn-primary btn-sm" type="button" data-open-stage="${n + 1}">Next: ${STAGE_NAMES[n + 1]} →</button>` : '';
+    if (n === 0) {
+      const topics = allTopics().filter(x => itemsFor(x.name).length);
+      return `<p>Browse the topics and skim a few resources. Notice what surprises you, or what you want to know more about. Then pick one broad topic to explore further.</p>
+        <p><a href="#/" data-start>Browse all topics →</a></p>
+        <div class="field"><label for="pj-topic">My broad topic</label>
+          <select id="pj-topic" data-pj="topic"><option value="">Choose a topic…</option>
+          ${topics.map(x => `<option ${x.name === PROJECT.topic ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></div>
+        <div class="field"><label for="pj-wonders">I wonder… <span class="hint">(questions and surprises from your browsing)</span></label>
+          <textarea id="pj-wonders" data-pj="wonders" rows="3" placeholder="I wonder why athletes have lower resting heart rates…">${esc(PROJECT.wonders)}</textarea></div>
+        <div>${next}</div>`;
+    }
+    if (n === 1) {
+      if (!t) return `<p>Choose a broad topic in stage 1 first.</p><div><button class="btn btn-secondary btn-sm" type="button" data-open-stage="0">← Back to stage 1</button></div>`;
+      const intro = itemsFor(t.name).filter(r => r.level === 'Intro').sort(byRank).slice(0, 6);
+      const subs = [...new Set(itemsFor(t.name).map(r => r.subtopic).filter(Boolean)), ...t.subs].filter((x, i, a) => a.indexOf(x) === i).slice(0, 8);
+      return `<p>Read 2–3 Intro resources about <b>${esc(t.name)}</b>. Add each one to My sources as you read, and jot down its main point. Look for a smaller piece of the topic that you could explain to a classmate.</p>
+        <p class="pj-count" data-count="bg">${st[1].bg} background source${st[1].bg === 1 ? '' : 's'} saved</p>
+        ${intro.length ? `<div class="grid grid-3">${intro.map(r => card(r)).join('')}</div>` : ''}
+        <p><a href="#topic/${t.slug}">See everything in ${esc(t.name)} →</a></p>
+        <div class="field"><label for="pj-focus">My narrower focus</label>
+          <input type="text" id="pj-focus" data-pj="focus" value="${esc(PROJECT.focus)}" placeholder="e.g. how sleep affects blood pressure in teens">
+          ${subs.length ? `<div class="sb-sugg" style="margin-top:.5rem"><span class="hint">Ideas from this topic:</span>${subs.map(x =>
+            `<button type="button" class="chip-btn sm" data-focus="${esc(x)}">${esc(x)}</button>`).join('')}</div>` : ''}
+        </div>
+        <div>${next}</div>`;
+    }
+    if (n === 2) {
+      const models = t ? t.questions : [];
+      return `<p>Turn your narrower focus into a question you can answer with evidence.${PROJECT.focus.trim() ? ` Your focus: <b>${esc(PROJECT.focus.trim())}</b>.` : ''}</p>
+        <div class="field"><label for="pj-question">My research question</label>
+          <textarea id="pj-question" data-pj="question" rows="2" placeholder="How does…? Why does…? To what extent…?">${esc(sb.question || '')}</textarea></div>
+        <fieldset class="pj-checks"><legend>Check your question</legend>
+          ${QUESTION_CHECKS.map((c, i) => `<label class="ms-check"><input type="checkbox" data-check="${i}" ${PROJECT.checks[i] ? 'checked' : ''}> <span>${c}</span></label>`).join('')}
+        </fieldset>
+        <p><a href="#question">See weak vs. strong examples ↓</a></p>
+        ${models.length ? `<div class="questions leads"><h4>Example questions from ${esc(t.name)}</h4><ul>${models.map(q => `<li>${esc(q)}</li>`).join('')}</ul></div>` : ''}
+        <div>${next}</div>`;
+    }
+    if (n === 3) {
+      return `<p>Search a database for peer-reviewed studies that help answer your question. Aim for at least ${RESEARCH_GOAL}. When you find one, cite it with the citation builder and click <b>Save to My sources</b>.</p>
+        <p class="pj-count" data-count="rs">${st[3].rs} of ${RESEARCH_GOAL} research sources saved</p>
+        <div class="cite-actions"><a class="btn btn-primary btn-sm" href="#build">Build your search →</a><a class="btn btn-secondary btn-sm" href="#cite">Citation builder →</a></div>
+        <div>${next}</div>`;
+    }
+    // Stage 5: what's left to finish
+    const todo = MS.sources.filter(s => !sourceReady(s)).map(s => {
+      const needs = [!craapComplete(s.craap) && 'CRAAP score', !annotation(s) && 'notes', ...missingFor(s).map(m => m)].filter(Boolean);
+      return `<li><b>${esc(s.title || 'Untitled source')}</b>: needs ${esc(needs.join(', '))}</li>`;
+    });
+    return `<p>For every source, rate it with the CRAAP test, finish its citation, and write your notes on how it helps answer your question. Then copy your annotated bibliography into your Google Doc.</p>
+      ${!MS.sources.length ? '<p class="pj-count">No sources saved yet.</p>'
+        : todo.length ? `<p class="pj-count">${st[4].ready} of ${MS.sources.length} sources ready. Still to do:</p><ul class="tips">${todo.join('')}</ul>`
+        : '<p class="pj-count">All your sources are ready.</p>'}
+      ${st[3].rs < RESEARCH_GOAL ? `<p class="hint">You also need at least ${RESEARCH_GOAL} research sources (stage 4).</p>` : ''}
+      <div class="cite-actions"><a class="btn btn-primary btn-sm" href="#my-sources">Open My sources →</a></div>`;
+  }
+
+  function renderGuide() {
+    const st = stageStatus();
+    const cur = currentStage(st);
+    const open = PROJECT.open ?? cur;
+    $('#pj-progress').innerHTML = STAGE_NAMES.map((name, i) => `
+      <li><button type="button" data-open-stage="${i}" class="${st[i].done ? 'done' : ''} ${i === cur ? 'current' : ''}" ${i === open ? 'aria-current="step"' : ''}>
+        <span class="dot" aria-hidden="true">${st[i].done ? '✓' : i + 1}</span><span class="nm">${name}</span>
+        <span class="sr-only">${st[i].done ? '(done)' : i === cur ? '(you are here)' : ''}</span></button></li>`).join('');
+    $('#pj-stages').innerHTML = STAGE_NAMES.map((name, i) => `
+      <section class="card pj-stage ${st[i].done ? 'done' : ''}" data-stage="${i}">
+        <h3><button type="button" class="pj-head" aria-expanded="${i === open}" aria-controls="pj-body-${i}" data-toggle-stage="${i}">
+          <span class="dot" aria-hidden="true">${st[i].done ? '✓' : i + 1}</span>
+          <span class="pj-title">${name}<span class="pj-sum">${esc(st[i].summary)}</span></span>
+          <span class="pj-chev" aria-hidden="true">${i === open ? '−' : '+'}</span></button></h3>
+        <div class="pj-body" id="pj-body-${i}" ${i === open ? '' : 'hidden'}>${i === open ? stageBody(i) : ''}</div>
+      </section>`).join('');
+    $('#pj-restart-row').hidden = !PROJECT.started;
+  }
+  // Refresh headers and progress without rebuilding the open stage (keeps typing focus).
+  function refreshGuideStatus() {
+    const st = stageStatus(), cur = currentStage(st);
+    $$('#pj-progress button').forEach((b, i) => {
+      b.classList.toggle('done', st[i].done); b.classList.toggle('current', i === cur);
+      $('.dot', b).textContent = st[i].done ? '✓' : i + 1;
+    });
+    $$('.pj-stage').forEach((sec, i) => {
+      sec.classList.toggle('done', st[i].done);
+      $('.pj-head .dot', sec).textContent = st[i].done ? '✓' : i + 1;
+      $('.pj-sum', sec).textContent = st[i].summary;
+    });
+    const bg = $('[data-count="bg"]'); if (bg) bg.textContent = `${st[1].bg} background source${st[1].bg === 1 ? '' : 's'} saved`;
+    const rs = $('[data-count="rs"]'); if (rs) rs.textContent = `${st[3].rs} of ${RESEARCH_GOAL} research sources saved`;
+    $('#pj-restart-row').hidden = !PROJECT.started;
+  }
+  function openStage(i) {
+    PROJECT.open = i; saveProject(); renderGuide();
+    const sec = $(`.pj-stage[data-stage="${i}"]`);
+    if (sec) { sec.scrollIntoView({ block: 'start' }); $('.pj-head', sec).focus({ preventScroll: true }); }
+  }
+
+  $('#view-guide').addEventListener('click', e => {
+    const tog = e.target.closest('[data-toggle-stage]');
+    if (tog) {
+      const i = +tog.dataset.toggleStage;
+      PROJECT.open = tog.getAttribute('aria-expanded') === 'true' ? -1 : i;
+      saveProject(); renderGuide();
+      $(`.pj-stage[data-stage="${i}"] .pj-head`).focus();
+      return;
+    }
+    if (e.target.closest('[data-start]')) { startProject(); return; }
+    const op = e.target.closest('[data-open-stage]');
+    if (op) { openStage(+op.dataset.openStage); return; }
+    const fc = e.target.closest('[data-focus]');
+    if (fc) { startProject(); PROJECT.focus = fc.dataset.focus; saveProject(); $('#pj-focus').value = PROJECT.focus; refreshGuideStatus(); return; }
+    // A resource added from stage 2 updates the count.
+    if (e.target.closest('[data-add-src]')) setTimeout(refreshGuideStatus, 0);
+  });
+  $('#view-guide').addEventListener('input', e => {
+    const k = e.target.dataset.pj, c = e.target.dataset.check;
+    if (!k && c === undefined) return;
+    startProject();
+    if (k === 'question') { sb.question = e.target.value; saveSb(); }
+    else if (k) PROJECT[k] = e.target.value;
+    if (c !== undefined) PROJECT.checks[+c] = e.target.checked;
+    saveProject();
+    refreshGuideStatus();
+  });
+  $('#pj-restart').addEventListener('click', () => { $('#pj-restart-confirm').hidden = false; $('#pj-restart').hidden = true; });
+  $('#pj-restart-no').addEventListener('click', () => { $('#pj-restart-confirm').hidden = true; $('#pj-restart').hidden = false; });
+  $('#pj-restart-yes').addEventListener('click', () => {
+    PROJECT = { ...blankProject(), started: true }; saveProject();
+    $('#pj-restart-confirm').hidden = true; $('#pj-restart').hidden = false;
+    renderGuide();
+    toast('Guide progress cleared. Your question and sources are still in My sources.');
+  });
+
+  // Keep the progress strip current when sources or a topic are added from other pages.
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-add-src], [data-choose-topic]')) setTimeout(updateStrip, 0);
+  });
+
+  /* ---------------- Blood-flow tracer ---------------- */
+  const STEPS = [
+    { name: 'Venae cavae', o2: 'deoxy', circuit: 'Systemic return', valve: '',
+      desc: 'Oxygen-poor blood from the body returns to the heart. The superior vena cava drains the head and arms, and the inferior vena cava drains the trunk and legs. Both empty into the right atrium.' },
+    { name: 'Right atrium', o2: 'deoxy', circuit: 'Heart: right side', valve: 'Leaves through the tricuspid valve.',
+      desc: 'The right atrium collects returning blood. Most of it flows passively into the right ventricle, and atrial contraction tops off the ventricle at the end of diastole.' },
+    { name: 'Right ventricle', o2: 'deoxy', circuit: 'Heart: right side', valve: 'Leaves through the pulmonary (semilunar) valve.',
+      desc: 'The right ventricle contracts and pumps blood into the pulmonary trunk. The lungs are close by and low-resistance, so its wall is much thinner than the left ventricle’s.' },
+    { name: 'Pulmonary arteries', o2: 'deoxy', circuit: 'Pulmonary circuit', valve: '',
+      desc: 'The pulmonary trunk splits into the right and left pulmonary arteries. They are the only arteries in an adult that carry oxygen-poor blood. Arteries are defined by carrying blood away from the heart, not by oxygen level.' },
+    { name: 'Lung capillaries', o2: 'exchange', circuit: 'Pulmonary circuit', valve: '',
+      desc: 'In the capillaries around the alveoli, CO₂ diffuses out of the blood to be exhaled and O₂ diffuses in to bind hemoglobin. Each gas moves down its own concentration gradient.' },
+    { name: 'Pulmonary veins', o2: 'oxy', circuit: 'Pulmonary circuit', valve: '',
+      desc: 'Usually four pulmonary veins carry freshly oxygenated blood from the lungs back to the left atrium. They are the only veins in an adult that carry oxygen-rich blood.' },
+    { name: 'Left atrium', o2: 'oxy', circuit: 'Heart: left side', valve: 'Leaves through the mitral (bicuspid) valve.',
+      desc: 'The left atrium receives oxygen-rich blood and passes it to the left ventricle.' },
+    { name: 'Left ventricle', o2: 'oxy', circuit: 'Heart: left side', valve: 'Leaves through the aortic (semilunar) valve.',
+      desc: 'The thickest chamber. Its muscular wall produces the high pressure needed to push blood through the entire systemic circulation, about 120 mmHg at peak in a healthy adult.' },
+    { name: 'Aorta → body', o2: 'oxy', circuit: 'Systemic circuit', valve: '',
+      desc: 'The aorta branches into arteries, then arterioles, then capillaries, where tissues take up O₂ and release CO₂. The blood, now oxygen-poor, returns through veins to the venae cavae, and the loop begins again.' },
+  ];
+  const O2_LABEL = { deoxy: 'Oxygen-poor', oxy: 'Oxygen-rich', exchange: 'Gas exchange' };
+  let stepIdx = 0;
+
+  $('#flow-steps').innerHTML = STEPS.map((s, i) =>
+    `<li><button type="button" class="o2-${s.o2}" data-i="${i}"><span class="n">${i + 1}</span>${esc(s.name)}</button></li>`).join('');
+
+  function renderStep() {
+    const s = STEPS[stepIdx];
+    $$('#flow-steps button').forEach((b, i) => {
+      if (i === stepIdx) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    const panel = $('#step-panel');
+    panel.className = 'step-panel o2-' + s.o2;
+    $('#step-count').textContent = `Stage ${stepIdx + 1} of ${STEPS.length}`;
+    $('#step-o2').textContent = O2_LABEL[s.o2];
+    $('#step-circuit').textContent = s.circuit;
+    $('#step-title').textContent = s.name;
+    $('#step-desc').textContent = s.desc;
+    $('#step-valve').textContent = s.valve;
+    $('#step-valve').hidden = !s.valve;
+    $('#step-prev').disabled = stepIdx === 0;
+    $('#step-next').textContent = stepIdx === STEPS.length - 1 ? 'Back to the start ↺' : 'Next →';
+  }
+  const go = i => { stepIdx = (i + STEPS.length) % STEPS.length; renderStep(); };
+  $('#flow-steps').addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(+b.dataset.i); });
+  $('#step-prev').addEventListener('click', () => go(stepIdx - 1));
+  $('#step-next').addEventListener('click', () => go(stepIdx + 1));
+  $('#tracer-explore').addEventListener('keydown', e => {
+    if (e.target.matches('input, select, textarea')) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); if (stepIdx < STEPS.length - 1) go(stepIdx + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); if (stepIdx > 0) go(stepIdx - 1); }
+  });
+  renderStep();
+
+  pressGroup($('#tracer .seg'), btn => {
+    const quiz = btn.dataset.mode === 'quiz';
+    $('#tracer-explore').hidden = quiz;
+    $('#tracer-quiz').hidden = !quiz;
+  });
+
+  /* ---------------- Quiz ---------------- */
+  const QUIZ = [
+    { q: 'Blood returning from the body enters which chamber first?', opts: ['Left atrium', 'Right atrium', 'Right ventricle'], a: 1,
+      why: 'The venae cavae empty into the right atrium.' },
+    { q: 'Which valve does blood pass through from the right atrium to the right ventricle?', opts: ['Mitral (bicuspid) valve', 'Tricuspid valve', 'Aortic valve'], a: 1,
+      why: 'The tricuspid valve guards the right side; the mitral valve guards the left.' },
+    { q: 'Which vessels carry oxygen-poor blood away from the heart?', opts: ['Pulmonary veins', 'Aorta', 'Pulmonary arteries'], a: 2,
+      why: 'Arteries carry blood away from the heart, whatever its oxygen level. The pulmonary arteries take oxygen-poor blood to the lungs.' },
+    { q: 'Oxygen-rich blood from the lungs enters the heart through the…', opts: ['Pulmonary arteries', 'Pulmonary veins', 'Venae cavae'], a: 1,
+      why: 'The pulmonary veins return oxygenated blood to the left atrium.' },
+    { q: 'Why does the left ventricle have the thickest wall?', opts: ['It holds the most blood', 'It pumps blood through the whole systemic circuit', 'It receives blood from the lungs'], a: 1,
+      why: 'Pushing blood to the entire body takes far more pressure than pushing it to the nearby, low-resistance lungs.' },
+    { q: 'What is the last valve blood passes through before it leaves for the body?', opts: ['Pulmonary valve', 'Mitral valve', 'Aortic valve'], a: 2,
+      why: 'The aortic valve opens as the left ventricle contracts, sending blood into the aorta.' },
+  ];
+  $('#quiz-form').innerHTML = QUIZ.map((item, i) => `
+    <fieldset data-i="${i}">
+      <legend>${i + 1}. ${esc(item.q)}</legend>
+      <div class="opts">${item.opts.map((o, j) =>
+        `<label class="opt"><input type="radio" name="q${i}" value="${j}"> ${esc(o)}</label>`).join('')}</div>
+      <p class="explain" hidden></p>
+    </fieldset>`).join('');
+
+  $('#quiz-check').addEventListener('click', () => {
+    let right = 0, answered = 0;
+    $$('#quiz-form fieldset').forEach(fs => {
+      const item = QUIZ[+fs.dataset.i];
+      const picked = $('input:checked', fs);
+      const ex = $('.explain', fs);
+      fs.classList.remove('right', 'wrong');
+      if (!picked) { ex.hidden = true; return; }
+      answered++;
+      const ok = +picked.value === item.a;
+      if (ok) right++;
+      fs.classList.add(ok ? 'right' : 'wrong');
+      ex.hidden = false;
+      ex.innerHTML = ok ? `<b>Correct.</b> ${esc(item.why)}`
+                        : `<b>Not quite. The answer is ${esc(item.opts[item.a])}.</b> ${esc(item.why)}`;
+    });
+    $('#quiz-score').textContent = answered < QUIZ.length
+      ? `${right} of ${answered} answered correctly. ${QUIZ.length - answered} still unanswered.`
+      : right === QUIZ.length ? `${right} / ${QUIZ.length}. You can trace the full circuit.`
+      : `${right} / ${QUIZ.length}. Review the explanations, then try the tracer again.`;
+  });
+  $('#quiz-reset').addEventListener('click', () => {
+    $('#quiz-form').reset();
+    $$('#quiz-form fieldset').forEach(fs => { fs.classList.remove('right', 'wrong'); $('.explain', fs).hidden = true; });
+    $('#quiz-score').textContent = '';
+  });
+
+  loadResources();
+  route();
+})();
+</script>
+</body>
+</html>
