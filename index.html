@@ -120,6 +120,7 @@
   a:hover { text-decoration-thickness: 2px; }
   ::selection { background: var(--accent-soft); color: var(--ink); }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  h2[tabindex="-1"]:focus { outline: none; }
   .wrap { max-width: var(--max); margin: 0 auto; padding-inline: max(1rem, env(safe-area-inset-left, 0px)); }
   .skip { position: absolute; left: -9999px; top: 0; background: var(--surface); padding: .5rem 1rem; z-index: 100; }
   .skip:focus { left: 1rem; top: 1rem; }
@@ -142,45 +143,32 @@
   .brand-link { color: inherit; text-decoration: none; }
   .brand-link:hover { color: inherit; }
 
-  /* ---------- Step bar (the research process, always visible) ---------- */
-  .steps-bar { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
-  .steps { list-style: none; margin: 0 auto; padding-block: .5rem; display: grid; grid-template-columns: repeat(6, 1fr); gap: .35rem; }
-  .step {
-    display: flex; align-items: center; gap: .55rem; height: 100%; text-decoration: none; color: var(--ink);
-    padding: .5rem .6rem; border-radius: var(--radius-sm); border: 1px solid transparent; position: relative;
+  /* ---------- Tabs: one color per section, always with a label ---------- */
+  .tabs-bar { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+  .tabs { display: flex; gap: .15rem; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap;
+    padding: .85rem 1rem; color: var(--ink); text-decoration: none; font-weight: 500; font-size: 1rem;
+    border-bottom: 3px solid transparent; margin-bottom: -1px;
   }
-  .step:hover { background: var(--surface-2); }
-  .step-n {
-    flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center;
-    font-weight: 700; font-size: .95rem; color: var(--c); background: var(--surface); border: 2px solid var(--c);
-  }
-  .step-t { display: grid; line-height: 1.2; font-weight: 600; font-size: .98rem; }
-  .step-t small { font-weight: 400; font-size: .8rem; color: var(--muted); }
-  .step[aria-current="page"] { background: var(--c-soft); border-color: var(--c); }
-  .step[aria-current="page"] .step-n { background: var(--c); color: var(--surface); }
-  .step[data-done] .step-n::after {
-    content: "✓"; position: absolute; top: .15rem; left: 1.9rem; width: 1.05rem; height: 1.05rem; border-radius: 50%;
-    display: grid; place-items: center; font-size: .65rem; background: var(--ok); color: var(--surface); border: 2px solid var(--surface);
-  }
-  .st1 { --c: var(--s1); --c-soft: var(--s1-soft); }
-  .st2 { --c: var(--s2); --c-soft: var(--s2-soft); }
-  .st3 { --c: var(--s3); --c-soft: var(--s3-soft); }
-  .st4 { --c: var(--s4); --c-soft: var(--s4-soft); }
-  .st5 { --c: var(--s5); --c-soft: var(--s5-soft); }
-  .st6 { --c: var(--s6); --c-soft: var(--s6-soft); }
-  @media (max-width: 900px) { .step-t small { display: none; } }
-  .step-t .count-badge { justify-self: start; margin-left: 0; margin-top: .1rem; }
+  .tab::before { content: ""; flex: none; width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); }
+  .tab:hover { background: var(--surface-2); }
+  .tab[aria-current="page"] { border-bottom-color: var(--c); background: var(--c-soft); font-weight: 700; }
+  .tab-optional { margin-left: auto; color: var(--muted); }
+  .sec-res { --c: var(--s1); --c-soft: var(--s1-soft); }
+  .sec-eval { --c: var(--s4); --c-soft: var(--s4-soft); }
+  .sec-cite { --c: var(--s6); --c-soft: var(--s6-soft); }
+  .sec-ms { --c: var(--s5); --c-soft: var(--s5-soft); }
+  .sec-find { --c: var(--s3); --c-soft: var(--s3-soft); }
+  .sec-proj { --c: var(--s2); --c-soft: var(--s2-soft); }
   @media (max-width: 640px) {
+    .tabs { flex-wrap: wrap; overflow: visible; gap: 0; }
+    .tab { padding: .6rem .7rem; font-size: .95rem; }
+    .tab-optional { margin-left: 0; }
     .card { padding: 1.1rem; }
     .stage-head { padding-left: .9rem; border-left-width: 5px; }
     .box { padding: 1rem; }
-  }
-  @media (max-width: 640px) {
-    .steps { grid-template-columns: repeat(3, 1fr); }
-    .step { padding: .4rem; gap: .4rem; }
-    .step-t { font-size: .88rem; }
-    .step-n { width: 1.6rem; height: 1.6rem; font-size: .85rem; }
-    .step[data-done] .step-n::after { left: 1.55rem; }
   }
 
   main { flex: 1; width: 100%; padding-block: 2rem 3rem; }
@@ -265,27 +253,7 @@
   .box-tip .box-label { color: var(--warn); }
   /* "This is normal" */
   .box-feel { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line-strong); }
-  /* Ready to move on? */
-  .box-check { background: var(--surface); border: 2px solid var(--accent); }
-  .box-check .box-label { color: var(--accent); font-size: 1.05rem; }
-  .checklist { list-style: none; padding: 0 !important; margin: .6rem 0 0 !important; gap: .5rem !important; }
-  .checklist label { display: flex; gap: .65rem; align-items: flex-start; font-weight: 400; cursor: pointer; }
-  .checklist input { accent-color: var(--accent); width: 1.2rem; height: 1.2rem; margin: .2rem 0 0; flex: none; }
-  .check-done { margin-top: .75rem; font-weight: 600; color: var(--ok); }
-
-  /* ---------- Home: start here ---------- */
-  .start-map { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(3, 1fr); }
-  @media (min-width: 1080px) { .start-map { grid-template-columns: repeat(6, 1fr); } }
-  @media (max-width: 640px) { .start-map { grid-template-columns: repeat(2, 1fr); } }
-  .start-map a { display: grid; gap: .25rem; height: 100%; text-decoration: none; color: var(--ink); padding: .8rem .9rem; border-radius: var(--radius-sm); border: 1px solid var(--line); border-top: 5px solid var(--c); background: var(--surface); }
-  .start-map a:hover { background: var(--c-soft); }
-  .start-map .sm-n { font-weight: 700; color: var(--c); font-size: .9rem; }
-  .start-map .sm-t { font-weight: 700; font-family: var(--font-display); font-size: 1.1rem; }
-  .start-map .sm-make { font-size: .9rem; color: var(--muted); }
-  .start-map .sm-due { font-size: .85rem; font-weight: 600; color: var(--c); }
-  .deliverables { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
-
-  /* ---------- Explore / resources ---------- */
+  /* ---------- Resources ---------- */
   .hero { position: relative; overflow: hidden; padding: clamp(1.5rem, 3vw, 2.25rem); }
   .hero h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); }
   .hero p { max-width: 60ch; margin-top: .6rem; }
@@ -417,28 +385,37 @@
   #sb-query { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .95rem; }
   .tips { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .45rem; }
 
-  /* ---------- Evaluate ---------- */
+  /* ---------- Evaluate: SIFT ---------- */
+  .sift { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 1.25rem; }
+  .sift-move { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  .sift-letter { width: 3rem; height: 3rem; border-radius: var(--radius-sm); background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font: 800 1.5rem/1 var(--font-display); }
+  .sift-body h3 { margin-bottom: .3rem; }
+  .trace-qs { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
+  .opt-row { border: 0; padding: 0; margin: .75rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; min-width: 0; }
+  .opt-row legend { padding: 0; margin-bottom: .45rem; }
+  .opt-row label { position: relative; font-weight: 500; }
+  .opt-row input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .opt-row label > span { display: inline-flex; align-items: center; padding: .5rem .85rem; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); font-size: .95rem; }
+  .opt-row input:checked + span { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
+  .opt-row input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .verdicts label > span { font-weight: 600; padding: .6rem 1rem; }
+  .verdicts input:checked + span.v-good { background: var(--ok-soft); color: var(--ok); border: 2px solid var(--ok); }
+  .verdicts input:checked + span.v-mid { background: var(--warn-soft); color: var(--warn); border: 2px solid var(--warn); }
+  .verdicts input:checked + span.v-low { background: var(--bad-soft); color: var(--bad); border: 2px solid var(--bad); }
+  @media (max-width: 520px) {
+    .sift-move { grid-template-columns: 2.4rem 1fr; gap: .7rem; }
+    .sift-letter { width: 2.4rem; height: 2.4rem; font-size: 1.2rem; }
+  }
+
+  /* ---------- Evaluate (shared) ---------- */
   .eval-pick { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
   .eval-pick select { width: auto; flex: 1 1 18rem; }
-  fieldset.craap-item { border: 0; border-top: 1px solid var(--line); margin: 0; padding: 1rem 0 0; min-width: 0; }
-  .craap-item + .craap-item { margin-top: 1rem; }
-  .craap-item legend { font-size: 1.02rem; padding: 0; }
-  .craap-item legend b { color: var(--accent); }
-  .craap-item fieldset { border: 0; padding: 0; margin: 0; }
-  .rate { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; align-items: center; }
-  .rate label { position: relative; }
-  .rate input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-  .rate span { display: grid; place-items: center; min-width: 2.6rem; height: 2.4rem; padding: 0 .6rem; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); font-weight: 600; background: var(--surface); }
-  .rate input:checked + span { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-  .rate input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .rate .ends { font-size: .85rem; color: var(--muted); font-weight: 400; }
   .result { margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--surface-2); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
   .result .score { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
   .verdict { padding: .4rem .8rem; border-radius: 999px; font-weight: 600; font-size: .95rem; }
   .verdict.good { background: var(--ok-soft); color: var(--ok); }
   .verdict.mid { background: var(--warn-soft); color: var(--warn); }
   .verdict.low { background: var(--bad-soft); color: var(--bad); }
-  .verdict.none { background: var(--surface); color: var(--muted); border: 1px solid var(--line-strong); }
   .result-note { flex-basis: 100%; font-size: .98rem; }
   .saved-note { font-size: .92rem; color: var(--ok); font-weight: 600; }
 
@@ -466,8 +443,8 @@
   .progress-row .pill { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .8rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); font-weight: 600; font-size: .95rem; }
   .progress-row .pill b { font-size: 1.05rem; color: var(--accent); }
   .q-display { font-family: var(--font-display); font-size: 1.15rem; margin-top: .3rem; }
-  .count-badge { display: inline-grid; place-items: center; min-width: 1.3rem; height: 1.3rem; padding: 0 .35rem; margin-left: .3rem; border-radius: 999px; background: var(--s5); color: var(--surface); font-size: .75rem; font-weight: 700; }
-  .res-actions { position: relative; z-index: 1; margin-top: auto; padding-top: .35rem; }
+  .count-badge { display: inline-grid; place-items: center; min-width: 1.3rem; height: 1.3rem; padding: 0 .35rem; margin-left: .1rem; border-radius: 999px; background: var(--s5); color: var(--surface); font-size: .75rem; font-weight: 700; }
+  .res-actions { position: relative; z-index: 1; margin-top: auto; padding-top: .35rem; display: flex; flex-wrap: wrap; gap: .4rem; }
   .add-src { font: 600 .88rem/1 var(--font-body); color: var(--accent); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .5rem .8rem; cursor: pointer; }
   .add-src:hover { border-color: var(--accent); }
   .add-src.added { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
@@ -563,7 +540,7 @@
   /* Print: the current step page only, as a paper organizer */
   @media print {
     body { font-size: 11pt; }
-    .steps-bar, .toast, .no-print, .embed, .lib-search, .format-chips, .topic-filters, .step-nav, .flow, .quiz-actions, .step-nav-bottom, .crumbs { display: none !important; }
+    .tabs-bar, .toast, .no-print, .embed, .lib-search, .format-chips, .topic-filters, .step-nav, .flow, .quiz-actions, .step-nav-bottom, .crumbs { display: none !important; }
     .view[hidden] { display: none !important; }
     .site-header { background: none; color: #000; }
     .brand h1, .brand .eyebrow { color: #000; }
@@ -604,52 +581,25 @@
       <h1><a class="brand-link" href="#/">Cardiovascular Research Hub</a></h1>
     </div>
   </div>
-  <nav class="steps-bar" aria-label="Research steps">
-    <ol class="wrap steps">
-      <li><a class="step st1" href="#/" data-nav="explore"><span class="step-n">1</span><span class="step-t">Explore<small>Background reading</small></span></a></li>
-      <li><a class="step st2" href="#ask" data-nav="ask"><span class="step-n">2</span><span class="step-t">Ask<small>Your question</small></span></a></li>
-      <li><a class="step st3" href="#search" data-nav="search"><span class="step-n">3</span><span class="step-t">Search<small>Find studies</small></span></a></li>
-      <li><a class="step st4" href="#evaluate" data-nav="evaluate"><span class="step-n">4</span><span class="step-t">Evaluate<small>Check sources</small></span></a></li>
-      <li><a class="step st5" href="#organize" data-nav="organize"><span class="step-n">5</span><span class="step-t">Organize<span class="count-badge" id="ms-count" hidden></span><small>Notes &amp; claims</small></span></a></li>
-      <li><a class="step st6" href="#cite" data-nav="cite"><span class="step-n">6</span><span class="step-t">Cite &amp; share<small>Bibliography</small></span></a></li>
-    </ol>
+  <nav class="tabs-bar" aria-label="Main">
+    <div class="wrap tabs">
+      <a class="tab sec-res" href="#/" data-nav="resources">Resources</a>
+      <a class="tab sec-eval" href="#evaluate" data-nav="evaluate">Evaluate a source</a>
+      <a class="tab sec-cite" href="#cite" data-nav="cite">Cite a source</a>
+      <a class="tab sec-ms" href="#my-sources" data-nav="my-sources">My sources<span class="count-badge" id="ms-count" hidden></span></a>
+      <a class="tab sec-find" href="#find" data-nav="find">Find more sources</a>
+      <a class="tab tab-optional sec-proj" href="#project" data-nav="project" id="nav-project" hidden>Project tools</a>
+    </div>
   </nav>
 </header>
 
 <main id="main" class="wrap">
 
-  <!-- ===================== 1 EXPLORE (home) ===================== -->
-  <section class="view stack-lg" id="view-home" data-view="home" data-stage="1" data-title="Explore">
-    <div class="card stack" id="start-here">
-      <div class="stage-head">
-        <p class="stage-eyebrow">Start here</p>
-        <h2>Your PBAT research, in six steps</h2>
-        <!-- EDIT: describe what students hand in. -->
-        <p class="lede">You'll investigate a focused question about the cardiovascular system and defend your answer with evidence. By the end you'll have:</p>
-        <ul class="deliverables">
-          <li>A research question that asks <b>how</b> or <b>why</b>, broken into 2–4 sub-questions</li>
-          <li>An evidence matrix and a claim, evidence, and reasoning for each sub-question</li>
-          <li>An annotated bibliography of the sources you evaluated</li>
-        </ul>
-      </div>
-      <ol class="start-map" id="start-map" aria-label="The six research steps"></ol>
-      <p class="hint">Your work saves in this browser as you go. The bar at the top always shows which step you're on, and a ✓ appears when you finish a step's checklist.</p>
-    </div>
-
-    <div class="stage-head">
-      <p class="stage-eyebrow">Step 1 of 6 · Explore</p>
-      <h2>Read up on the cardiovascular system</h2>
-      <p class="lede">Before you pick a question, learn the basics. Browse a topic that interests you and read 2–3 background sources. Save any you might use.</p>
-    </div>
-
-    <div class="box box-feel">
-      <p class="box-label">Feeling unsure right now? That's normal.</p>
-      <p>Most researchers feel confused while they explore, before they settle on a focus. Keep reading. If you're stuck for more than a class period, talk to your teacher or the librarian.</p>
-    </div>
-
+  <!-- ===================== RESOURCES (home) ===================== -->
+  <section class="view stack-lg" id="view-home" data-view="home" data-stage="1" data-title="Resources">
     <div class="card hero home-hero">
-      <h2>Explore the collection</h2>
-      <p>Background reading, 3D models, and data, chosen by your librarian and teacher. Pick a topic to start, or search.</p>
+      <h2>Explore the cardiovascular system</h2>
+      <p>Background reading, 3D models, and data, chosen by your librarian and teacher. Pick a topic to start, or search the collection.</p>
       <form class="lib-search" id="lib-search" role="search">
         <label for="lib-q" class="sr-only">Search the resource collection</label>
         <div class="db-search-input">
@@ -658,6 +608,11 @@
         </div>
       </form>
       <div class="chips format-chips" id="format-chips" role="group" aria-label="Filter by format"></div>
+    </div>
+
+    <div class="box box-tip">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Already checked for you</p>
+      <p>Your teacher and librarian chose and checked every resource here, so you don't need to evaluate them. You <b>do</b> need to cite them: click <b>Cite this</b> on any resource, or <b>+ My sources</b> to save it to your bibliography.</p>
     </div>
 
     <div id="home-results" hidden>
@@ -679,9 +634,6 @@
         <div class="grid grid-3" id="tool-grid"></div>
       </section>
     </div>
-
-    <div data-checklist="explore"></div>
-    <div class="step-nav-bottom"><span></span><a class="btn btn-primary" href="#ask">Next: 2 · Ask a question →</a></div>
   </section>
 
   <!-- ===================== TOPIC (rendered from the resource list) ===================== -->
@@ -689,7 +641,7 @@
 
   <!-- ===================== TOOL: 3D HEART ===================== -->
   <section class="view stack-lg" id="view-tool-3d-heart" data-view="tool-3d-heart" data-stage="1" data-title="3D heart model" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">1 · Explore</a><span aria-hidden="true">›</span><a href="#topic/the-heart-structure-and-function">The heart: structure &amp; function</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/the-heart-structure-and-function">The heart: structure &amp; function</a></nav>
     <div class="card">
       <div class="section-head">
         <div>
@@ -708,7 +660,7 @@
 
   <!-- ===================== TOOL: BLOOD-FLOW TRACER ===================== -->
   <section class="view stack-lg" id="view-tool-blood-flow" data-view="tool-blood-flow" data-stage="1" data-title="Blood-flow tracer" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">1 · Explore</a><span aria-hidden="true">›</span><a href="#topic/blood-vessels-and-circulation">Blood vessels &amp; circulation</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/blood-vessels-and-circulation">Blood vessels &amp; circulation</a></nav>
     <div class="topic-head">
       <h2>Blood-flow tracer &amp; quiz</h2>
       <p>Trace one drop of blood through the pulmonary and systemic circuits, then check what you know.</p>
@@ -754,243 +706,93 @@
     </div>
   </section>
 
-  <!-- ===================== 2 ASK ===================== -->
-  <section class="view stack-lg" id="view-ask" data-view="ask" data-stage="2" data-title="Ask" hidden>
+  <!-- ===================== EVALUATE (SIFT) ===================== -->
+  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-stage="4" data-title="Evaluate a source" hidden>
     <div class="stage-head">
-      <p class="stage-eyebrow">Step 2 of 6 · Ask</p>
-      <h2>Ask a research question</h2>
-      <p class="lede">Turn what you read into one focused question you can answer with evidence, then break it into smaller sub-questions. Those sub-questions organize everything you do next.</p>
+      <h2>Evaluate a source</h2>
+      <p class="lede">Found something on your own? Before you trust it, check it the way fact-checkers do, with the four <b>SIFT</b> moves. It takes a few minutes per source.</p>
     </div>
 
-    <div class="box box-task">
-      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
-      <ol>
-        <li>Map your topic and write down what you wonder about.</li>
-        <li>Write one research question that asks how or why.</li>
-        <li>Break it into 2–4 sub-questions.</li>
-      </ol>
-    </div>
-
-    <!-- Question web -->
-    <div class="card" id="web">
-      <div class="tool-head">
-        <h3 class="numbered-h"><span class="n">1</span> Map your topic</h3>
-        <button class="btn btn-secondary btn-sm no-print" type="button" onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Print this page</button>
-      </div>
-      <p class="lede-sm">Pick a topic. Each branch is one part of it. In each branch, write questions you <b>wonder</b> about. Start them with <i>How</i> or <i>Why</i>. Write as many as you can; you'll choose one later.</p>
-      <div class="web-tools no-print" style="margin-top:1rem">
-        <label for="web-topic">Topic</label>
-        <select id="web-topic"></select>
-        <button class="btn btn-secondary btn-sm" type="button" id="web-add">+ Add my own branch</button>
-      </div>
-      <div class="web" id="web-map" aria-live="polite"></div>
-      <details class="box box-example" style="margin-top:1.25rem">
-        <summary>Show me an example branch <span class="tag">Model</span></summary>
-        <div class="ex-body">
-          <p><b>Branch: Sleep</b> (topic: Lifestyle &amp; the heart)</p>
-          <p class="model">Why does blood pressure usually drop at night?<br>How does staying up late on phones change teens' heart rate?<br>Why would short sleep raise blood pressure over time?</p>
-          <p class="hint">Notice: none of these can be answered with one fact or a yes/no.</p>
-        </div>
-      </details>
-    </div>
-
-    <!-- Sharpen -->
-    <div class="card" id="question">
-      <h3 class="numbered-h"><span class="n">2</span> Write and sharpen your question</h3>
-      <p class="lede-sm">Choose the question from your map you most want to answer. A strong research question can't be answered by one fact. It asks how or why, and you can find evidence for it.</p>
-      <div class="table-scroll" style="margin-top:1rem">
-        <table class="compare">
-          <thead><tr><th scope="col">Problem</th><th scope="col">Weak</th><th scope="col">Stronger</th></tr></thead>
-          <tbody>
-            <tr><td>Too broad</td><td class="weak">What is heart disease?</td><td>How does LDL oxidation contribute to plaque formation in coronary arteries?</td></tr>
-            <tr><td>Yes/no</td><td class="weak">Is exercise good for your heart?</td><td>How does aerobic training change stroke volume, and why?</td></tr>
-            <tr><td>Can't be researched</td><td class="weak">Will heart disease be cured by 2040?</td><td>What evidence suggests gene therapy could treat inherited cardiomyopathies?</td></tr>
-            <tr><td>Opinion only</td><td class="weak">Should fast food be banned?</td><td>How have menu-labeling or sodium policies affected blood pressure in U.S. adults?</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="field" style="margin-top:1.25rem">
-        <label for="rq">My research question</label>
-        <textarea id="rq" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
-        <p class="hint">It's fine to change it as you learn more.</p>
-      </div>
-      <div class="box box-tip" style="margin-top:1rem" aria-live="polite">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Quick check</p>
-        <ul class="q-checks" id="q-checks"></ul>
-        <p class="hint">This is a computer's guess. Your teacher has the final say.</p>
-      </div>
-    </div>
-
-    <!-- Sub-questions -->
-    <div class="card" id="subqs">
-      <h3 class="numbered-h"><span class="n">3</span> Break it into sub-questions</h3>
-      <p class="lede-sm">What smaller questions do you need to answer first? Aim for 2–4. Usually one explains the <b>normal biology</b>, one explains <b>what changes</b>, and one looks at the <b>evidence or who is affected</b>. These become the rows of your evidence matrix in Step 5.</p>
-      <ol class="subq-list" id="subq-list"></ol>
-      <div class="cite-actions no-print"><button class="btn btn-secondary btn-sm" type="button" id="subq-add">+ Add a sub-question</button></div>
-      <details class="box box-example" style="margin-top:1.25rem">
-        <summary>Show me an example <span class="tag">Model</span></summary>
-        <div class="ex-body">
-          <p><b>Research question:</b> How does short sleep affect blood pressure in teenagers?</p>
-          <ol class="model" style="padding-left:2.2rem">
-            <li>How does the body normally regulate blood pressure during sleep?</li>
-            <li>What changes in the body when teens get less sleep?</li>
-            <li>What do studies of teens show about sleep length and blood pressure?</li>
-          </ol>
-        </div>
-      </details>
-    </div>
-
-    <div data-checklist="ask"></div>
-    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#/">← 1 · Explore</a><a class="btn btn-primary" href="#search">Next: 3 · Search →</a></div>
-  </section>
-
-  <!-- ===================== 3 SEARCH ===================== -->
-  <section class="view stack-lg" id="view-search" data-view="search" data-stage="3" data-title="Search" hidden>
-    <div class="stage-head">
-      <p class="stage-eyebrow">Step 3 of 6 · Search</p>
-      <h2>Find research evidence</h2>
-      <p class="lede">Databases don't understand questions. They match words. Build a search from your question, run it in a database, and save the studies you might use.</p>
-    </div>
-
-    <div class="card" id="build">
-      <div class="tool-head">
-        <h3 class="numbered-h"><span class="n">1</span> Build your search</h3>
-        <button class="btn btn-secondary btn-sm no-print" id="sb-reset" type="button">Clear key ideas</button>
-      </div>
-
-      <ol class="sb-steps">
-        <li>
-          <label for="sb-question" class="sb-label">Your research question</label>
-          <textarea id="sb-question" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
-          <p class="hint">This is the same question as in Step 2. Changing it here changes it there.</p>
-          <div class="sb-spotted" id="sb-spotted" hidden>
-            <span class="hint">Key ideas we spotted. Click one to use it:</span>
-            <div class="chips" id="sb-spotted-chips"></div>
-          </div>
-        </li>
-        <li>
-          <span class="sb-label" id="sb-concepts-label">Pick 2–3 key ideas, and add other words for each</span>
-          <p class="hint">Every article must be about <b>each</b> key idea. Other words catch articles that use different vocabulary, like <i>hypertension</i> for “high blood pressure.”</p>
-          <div class="sb-concepts" id="sb-concepts" role="group" aria-labelledby="sb-concepts-label"></div>
-        </li>
-        <li>
-          <span class="sb-label">Your search</span>
-          <div class="sb-visual" id="sb-visual" aria-hidden="true"></div>
-          <div class="box box-tip" style="margin-top:.75rem">
-            <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> How the search works</p>
-            <ul>
-              <li><b>AND</b> joins key ideas. Every idea must appear, so it <b>narrows</b> results.</li>
-              <li><b>OR</b> joins words for the same idea. Any of them can appear, so it <b>widens</b> results.</li>
-              <li>Quotation marks keep a phrase together.</li>
-            </ul>
-          </div>
-          <label for="sb-query" class="hint" style="display:block;margin-top:.75rem">Search text (you can edit it)</label>
-          <textarea id="sb-query" rows="2" spellcheck="false" placeholder="Your search appears here once you add a key idea."></textarea>
-          <div class="cite-actions no-print">
-            <button class="btn btn-primary btn-sm" type="button" data-sb-go="pubmed">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
-            <button class="btn btn-secondary btn-sm" type="button" data-sb-go="scholar">Search Google Scholar <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
-            <button class="btn btn-secondary btn-sm" type="button" id="sb-copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy search</button>
-          </div>
-          <p class="hint" style="margin-top:.6rem"><b>Too many results?</b> Add another key idea. <b>Too few?</b> Remove an idea, or add more other words.</p>
-        </li>
-      </ol>
-    </div>
-
-    <div class="card">
-      <h3 class="numbered-h"><span class="n">2</span> Or search quickly</h3>
-      <form class="db-search" id="db-search" action="https://pubmed.ncbi.nlm.nih.gov/" method="get" target="_blank" role="search">
-        <label for="db-q">Type 2–4 key terms, not your whole question</label>
-        <div class="db-search-row">
-          <div class="db-search-input">
-            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-            <input type="search" id="db-q" name="term" placeholder="e.g. foam cells atherosclerosis" autocomplete="off">
-          </div>
-          <input type="hidden" name="filter" value="simsearch2.ffrft">
-          <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
-        </div>
-        <fieldset class="db-pick">
-          <legend class="sr-only">Database to search</legend>
-          <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
-          <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
-          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>background</span></label>
-        </fieldset>
-        <p class="hint">Results open in a new tab on the database's own site.</p>
-      </form>
-    </div>
-
-    <div class="box box-task">
-      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Found a study you might use?</p>
-      <p>Save it right away in <a href="#organize">Step 5 · My sources</a> with <b>Add a source by hand</b>, or build its citation in <a href="#cite">Step 6</a> and click <b>Save to My sources</b>. Copy the DOI or link while the article is open.</p>
-    </div>
-
-    <div>
-      <h3 class="section-title">Databases to try</h3>
-      <div class="grid grid-3" id="db-grid"></div>
-    </div>
-
-    <div class="box box-tip">
-      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Search tips</p>
-      <ul class="tips">
-        <li><b>Search key terms, not sentences.</b> For “How does sleep affect blood pressure in teens?”, search <i>sleep blood pressure adolescents</i>.</li>
-        <li><b>Too many results?</b> Add a term (<i>adolescents</i>, <i>exercise</i>) or choose a more specific word.</li>
-        <li><b>Too few?</b> Remove a term, or try a synonym: <i>hypertension</i> for “high blood pressure,” <i>myocardial infarction</i> for “heart attack.”</li>
-        <li><b>Can't get the full article?</b> Ask the library before you give up on it.</li>
-      </ul>
-    </div>
-
-    <div data-checklist="search"></div>
-    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#ask">← 2 · Ask</a><a class="btn btn-primary" href="#evaluate">Next: 4 · Evaluate →</a></div>
-  </section>
-
-  <!-- ===================== 4 EVALUATE ===================== -->
-  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-stage="4" data-title="Evaluate" hidden>
-    <div class="stage-head">
-      <p class="stage-eyebrow">Step 4 of 6 · Evaluate</p>
-      <h2>Check each source before you rely on it</h2>
-      <p class="lede">Fact-checkers don't judge a site by how it looks. They leave it and find out what others say about it. Do that first, then rate the source.</p>
-    </div>
-
-    <div class="card" id="craap">
+    <div class="card" id="sift">
       <div class="eval-pick no-print">
-        <label for="craap-target">Which source are you checking?</label>
-        <select id="craap-target"></select>
+        <label for="eval-target">Which source are you checking?</label>
+        <select id="eval-target"></select>
       </div>
-      <p class="hint" id="craap-target-hint"></p>
+      <p class="hint" id="eval-target-hint"></p>
 
-      <div style="margin-top:1.5rem">
-        <h3 class="numbered-h"><span class="n">A</span> Read laterally</h3>
-        <p class="lede-sm" style="margin-top:.4rem">Open a new tab and search for the <b>publisher or author</b>, not the article. Who are they? Who pays for them? What do other trusted sites say about them?</p>
-        <div class="form-grid" style="margin-top:.9rem">
-          <div class="field span-6">
-            <label for="lat-name">Publisher, organization, or author</label>
-            <div class="db-search-row">
-              <div style="flex:1 1 14rem"><input type="text" id="lat-name" placeholder="e.g. American Heart Association"></div>
-              <button class="btn btn-secondary" type="button" id="lat-go">Search what others say <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+      <ol class="sift">
+        <li class="sift-move">
+          <div class="sift-letter" aria-hidden="true">S</div>
+          <div class="sift-body">
+            <h3>Stop</h3>
+            <p>Before you read it closely, ask: do I know what this is? Pick the closest match.</p>
+            <fieldset class="opt-row" id="sift-kind">
+              <legend class="sr-only">What kind of source is it?</legend>
+            </fieldset>
+            <p class="hint" id="sift-kind-hint" aria-live="polite"></p>
+          </div>
+        </li>
+        <li class="sift-move">
+          <div class="sift-letter" aria-hidden="true">I</div>
+          <div class="sift-body">
+            <h3>Investigate the source</h3>
+            <p>Leave the page. Open a new tab and search for the <b>publisher or author</b>. Who are they? Are they experts in this? Who pays for them, and would they gain from you believing this?</p>
+            <div class="db-search-row" style="margin-top:.75rem">
+              <div style="flex:1 1 14rem">
+                <label for="sift-who" class="sr-only">Publisher, organization, or author</label>
+                <input type="text" id="sift-who" placeholder="Publisher, organization, or author">
+              </div>
+              <button class="btn btn-secondary" type="button" id="sift-who-go">Search what others say <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             </div>
+            <label for="sift-investigate" style="display:block;margin-top:.75rem">What did you find?</label>
+            <textarea id="sift-investigate" rows="2" placeholder="e.g. A nonprofit of heart doctors and researchers; cited by the CDC; some funding from drug companies."></textarea>
           </div>
-          <div class="field span-6">
-            <label for="lat-note">What did you find?</label>
-            <textarea id="lat-note" rows="2" placeholder="e.g. Nonprofit founded in 1924; funded by donations and some drug companies; widely cited by the CDC."></textarea>
+        </li>
+        <li class="sift-move">
+          <div class="sift-letter" aria-hidden="true">F</div>
+          <div class="sift-body">
+            <h3>Find better coverage</h3>
+            <p>Search the <b>main claim</b>, not the source. Do trusted sources (NIH, CDC, the American Heart Association, research reviews) say the same thing?</p>
+            <div class="db-search-row" style="margin-top:.75rem">
+              <div style="flex:1 1 14rem">
+                <label for="sift-claim" class="sr-only">The main claim</label>
+                <input type="text" id="sift-claim" placeholder="The main claim, e.g. energy drinks raise blood pressure">
+              </div>
+              <button class="btn btn-secondary" type="button" id="sift-claim-go">Check the claim <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+            </div>
+            <fieldset class="opt-row" id="sift-coverage" style="margin-top:.75rem">
+              <legend>Do trusted sources agree?</legend>
+            </fieldset>
           </div>
+        </li>
+        <li class="sift-move">
+          <div class="sift-letter" aria-hidden="true">T</div>
+          <div class="sift-body">
+            <h3>Trace claims to the original</h3>
+            <p>News stories and websites often describe a study. Follow the link to the <b>original research</b> and check that the claim matches what the study actually found.</p>
+            <ul class="trace-qs">
+              <li>Was the study <b>peer-reviewed</b> (published in a journal)?</li>
+              <li>Who or what was studied: people, animals, or cells? How many?</li>
+              <li>Did it show that one thing <b>causes</b> another, or only that they happen together?</li>
+            </ul>
+            <label for="sift-trace" style="display:block;margin-top:.75rem">What did you find?</label>
+            <textarea id="sift-trace" rows="2" placeholder="e.g. The article was based on a 2023 study of 1,200 adults in the journal Hypertension. It found a link, not proof of cause."></textarea>
+          </div>
+        </li>
+      </ol>
+
+      <div class="result" aria-live="polite">
+        <fieldset class="opt-row verdicts" id="sift-verdict">
+          <legend>Your decision</legend>
+        </fieldset>
+        <div class="field" style="flex-basis:100%">
+          <label for="sift-why">Why? <span class="hint">(one sentence)</span></label>
+          <input type="text" id="sift-why" placeholder="e.g. Peer-reviewed study of teens, matches what the NIH says.">
         </div>
       </div>
-
-      <div style="margin-top:1.75rem">
-        <div class="tool-head" style="margin-bottom:.5rem">
-          <h3 class="numbered-h"><span class="n">B</span> Rate it</h3>
-          <button class="btn btn-secondary btn-sm no-print" id="craap-reset" type="button">Clear ratings</button>
-        </div>
-        <p class="lede-sm">Rate each from 1 (poor) to 5 (excellent). Use what you found in step A for Authority and Purpose.</p>
-        <div id="craap-items" style="margin-top:1rem"></div>
-        <div class="result" aria-live="polite">
-          <div>
-            <div class="small muted">Source score</div>
-            <div class="score" id="craap-total">– / 25</div>
-          </div>
-          <div class="verdict none" id="craap-verdict">Rate all five</div>
-          <p class="result-note" id="craap-note"></p>
-        </div>
-        <p class="saved-note" id="craap-saved" aria-live="polite"></p>
+      <div class="cite-actions no-print">
+        <button class="btn btn-secondary btn-sm" id="sift-reset" type="button">Clear this check</button>
+        <span class="saved-note" id="sift-saved" aria-live="polite"></span>
       </div>
     </div>
 
@@ -1003,154 +805,18 @@
         <li>Claims that sound too strong (“cures,” “proves”) for what one study can show.</li>
       </ul>
     </div>
-
-    <div data-checklist="evaluate"></div>
-    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#search">← 3 · Search</a><a class="btn btn-primary" href="#organize">Next: 5 · Organize →</a></div>
   </section>
 
-  <!-- ===================== 5 ORGANIZE ===================== -->
-  <section class="view stack-lg" id="view-organize" data-view="organize" data-stage="5" data-title="Organize" hidden>
+  <!-- ===================== CITE ===================== -->
+  <section class="view stack-lg" id="view-cite" data-view="cite" data-stage="6" data-title="Cite a source" hidden>
     <div class="stage-head">
-      <p class="stage-eyebrow">Step 5 of 6 · Organize</p>
-      <h2>Organize your evidence</h2>
-      <p class="lede">Take notes from each source under the sub-question it answers, then turn each row of notes into a claim backed by evidence.</p>
-    </div>
-
-    <div class="card stack">
-      <div>
-        <h4>My research question</h4>
-        <p class="q-display" id="org-question"></p>
-      </div>
-      <div class="progress-row" id="org-progress" aria-live="polite"></div>
-      <div class="seg seg-lg no-print" role="group" aria-label="Organize view" id="org-tabs">
-        <button type="button" data-tab="sources" aria-pressed="true">a · My sources</button>
-        <button type="button" data-tab="matrix" aria-pressed="false">b · Evidence matrix</button>
-        <button type="button" data-tab="cer" aria-pressed="false">c · Claims (CER)</button>
-      </div>
-    </div>
-
-    <!-- a. Sources -->
-    <div class="stack-lg" id="org-sources" data-panel="sources">
-      <div class="box box-task">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
-        <p>For each source, fill in what it is (so it can be cited) and write a two-part annotation: what it says, and how it helps your question.</p>
-        <div class="cite-actions no-print"><button class="btn btn-primary btn-sm" id="ms-add-blank" type="button">+ Add a source by hand</button></div>
-      </div>
-      <details class="box box-example">
-        <summary>Show me an example annotation <span class="tag">Model</span></summary>
-        <div class="ex-body">
-          <p class="model">Javaheri, S., et al. (2008). Sleep quality and elevated blood pressure in adolescents. <i>Circulation, 118</i>(10), 1034–1040.</p>
-          <p><b>Main point:</b> In a study of 238 teens, those who slept poorly or less than 6.5 hours were about 3.5 times more likely to have high blood pressure, even after accounting for weight.</p>
-          <p><b>How it helps:</b> This is direct evidence for sub-question 3. It's a real study of teenagers, not adults, and it gives a number I can use in my claim.</p>
-        </div>
-      </details>
-      <div class="card" id="ms-empty">
-        <h3>No sources yet</h3>
-        <p style="margin-top:.4rem">Add sources three ways: the <b>+ My sources</b> button on any <a href="#/">resource in Step 1</a>, <b>Save to My sources</b> in the <a href="#cite">citation builder</a>, or <b>Add a source by hand</b> above.</p>
-      </div>
-      <div id="ms-list" class="stack"></div>
-      <div class="no-print" id="ms-danger" hidden>
-        <button class="btn btn-secondary btn-sm" id="ms-clear" type="button">Remove all sources</button>
-        <span id="ms-clear-confirm" class="ms-confirm" hidden>This can't be undone.
-          <button class="btn btn-danger btn-sm" id="ms-clear-yes" type="button">Yes, remove all</button>
-          <button class="btn btn-secondary btn-sm" id="ms-clear-no" type="button">Cancel</button></span>
-      </div>
-    </div>
-
-    <!-- b. Evidence matrix -->
-    <div class="stack-lg" id="org-matrix" data-panel="matrix" hidden>
-      <div class="box box-task">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
-        <p>Each row is a sub-question. Each column is a source. In each box, note what that source says about that sub-question. Leave a box empty if it says nothing. A row with fewer than 2 sources needs more research.</p>
-      </div>
-      <div class="card" style="padding:1rem">
-        <div class="section-head no-print">
-          <p class="hint" style="margin:0">Scroll sideways to see all your sources.</p>
-          <button class="btn btn-secondary btn-sm" type="button" onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Print matrix</button>
-        </div>
-        <div id="matrix-body"></div>
-      </div>
-      <div class="box box-tip">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Taking good notes</p>
-        <ul>
-          <li><b>Use your own words.</b> Write the idea, not the sentence.</li>
-          <li><b>Exact words?</b> Put them in “quotation marks” and add the page or paragraph, like (p. 4) or (para. 7).</li>
-          <li><b>Write down numbers</b> with their units and who was studied, like “238 teens, 3.5× higher odds.”</li>
-        </ul>
-      </div>
-      <details class="box box-example">
-        <summary>Show me an example row <span class="tag">Model</span></summary>
-        <div class="ex-body table-scroll">
-          <table class="compare">
-            <thead><tr><th>Sub-question</th><th>Javaheri 2008</th><th>NHLBI sleep page</th></tr></thead>
-            <tbody><tr>
-              <td>Q3. What do studies of teens show about sleep length and blood pressure?</td>
-              <td>238 teens: poor or short sleep (&lt; 6.5 h) linked to ~3.5× higher odds of high BP, even controlling for weight.</td>
-              <td>Background: BP normally drops during sleep, so short sleep means more hours at higher BP. Explains the biology, but not a study of teens.</td>
-            </tr></tbody>
-          </table>
-        </div>
-      </details>
-    </div>
-
-    <!-- c. CER -->
-    <div class="stack-lg" id="org-cer" data-panel="cer" hidden>
-      <div class="box box-task">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
-        <p>For each sub-question, answer it in one sentence (<b>claim</b>), choose the notes that prove it (<b>evidence</b>), and explain the biology that connects them (<b>reasoning</b>). This becomes the body of your PBAT.</p>
-      </div>
-      <details class="box box-example">
-        <summary>Show me an example <span class="tag">Model</span></summary>
-        <div class="ex-body">
-          <p><b>Claim:</b> Teens who sleep less than about 6.5 hours a night are more likely to have high blood pressure.</p>
-          <p><b>Evidence:</b> In a study of 238 adolescents, short or poor sleep was linked to about 3.5 times higher odds of elevated blood pressure, even after accounting for weight (Javaheri et al., 2008).</p>
-          <p><b>Reasoning:</b> Blood pressure normally dips during sleep because sympathetic nervous system activity falls. With less sleep, the body spends more hours in that higher-pressure state, and over time this strains artery walls.</p>
-        </div>
-      </details>
-      <div id="cer-body" class="stack-lg"></div>
-    </div>
-
-    <div data-checklist="organize"></div>
-    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#evaluate">← 4 · Evaluate</a><a class="btn btn-primary" href="#cite">Next: 6 · Cite &amp; share →</a></div>
-  </section>
-
-  <!-- ===================== 6 CITE & SHARE ===================== -->
-  <section class="view stack-lg" id="view-cite" data-view="cite" data-stage="6" data-title="Cite & share" hidden>
-    <div class="stage-head">
-      <p class="stage-eyebrow">Step 6 of 6 · Cite &amp; share</p>
-      <h2>Cite your sources and hand it in</h2>
-      <p class="lede">Make sure every source has a complete citation, then copy your work into your Google Doc.</p>
-    </div>
-
-    <div class="card" id="packet">
-      <div class="section-head">
-        <div>
-          <h3 class="numbered-h"><span class="n">1</span> Copy your work</h3>
-          <p>Pastes with formatting (italics, hanging indents) into Google Docs and Word.</p>
-        </div>
-        <div class="seg no-print" role="group" aria-label="Citation style" id="ms-style">
-          <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
-          <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
-        </div>
-      </div>
-      <div class="cite-actions no-print">
-        <button class="btn btn-primary" id="ms-copy-packet" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy research packet</button>
-        <button class="btn btn-secondary" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy annotated bibliography only</button>
-        <label class="ms-check"><input type="checkbox" id="ms-include-craap"> Include source scores</label>
-      </div>
-      <p class="hint">The research packet has your question, sub-questions, claims with evidence and reasoning, and annotated bibliography.</p>
-      <p class="hint" id="packet-status" aria-live="polite"></p>
+      <h2>Cite a source</h2>
+      <p class="lede">Build an APA 7 citation. Look up an article by its DOI or PubMed ID, or fill in the form. Then copy it, or save it to My sources.</p>
     </div>
 
     <div class="card" id="cite">
-      <div class="tool-head">
-        <h3 class="numbered-h"><span class="n">2</span> Citation builder</h3>
-        <div class="seg no-print" role="group" aria-label="Citation style">
-          <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
-          <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
-        </div>
-      </div>
-      <p class="lede-sm" style="margin-bottom:1rem">Look it up, or fill in what you know from the source. The citation updates as you type.</p>
+      <div class="box box-task" id="cite-prefill-note" hidden style="margin-bottom:1.25rem"></div>
+
       <form class="db-search cite-lookup" id="cite-lookup" autocomplete="off">
         <label for="cite-lookup-q">Have a DOI or PubMed ID? Fill in the form automatically</label>
         <div class="db-search-row">
@@ -1216,16 +882,59 @@
         <p id="cite-output"></p>
       </div>
       <div class="cite-actions no-print">
-        <button class="btn btn-primary btn-sm" id="cite-save" type="button">Save to My sources</button>
-        <button class="btn btn-secondary btn-sm" id="cite-copy" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy citation</button>
-        <button class="btn btn-secondary btn-sm" id="cite-clear" type="button">Clear</button>
+        <button class="btn btn-primary" id="cite-copy" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy citation</button>
+        <button class="btn btn-secondary" id="cite-save" type="button">Save to My sources</button>
+        <button class="btn btn-secondary" id="cite-clear" type="button">Clear</button>
       </div>
-      <p class="hint">Always double-check against the style guide.</p>
+      <p class="hint">Pastes with italics into Google Docs and Word. Always double-check against the APA style guide.</p>
     </div>
 
+    <details class="box box-example">
+      <summary>What an APA citation looks like <span class="tag">Model</span></summary>
+      <div class="ex-body">
+        <p><b>Journal article</b></p>
+        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">Libby, P., Ridker, P. M., &amp; Maseri, A. (2002). Inflammation and atherosclerosis. <i>Circulation, 105</i>(9), 1135–1143. https://doi.org/10.1161/hc0902.104353</p>
+        <p><b>Web page from an organization</b></p>
+        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">National Heart, Lung, and Blood Institute. (n.d.). <i>How the heart works.</i> https://www.nhlbi.nih.gov/health/heart</p>
+        <p class="hint">No date on the page? Use (n.d.). When the organization is the author, don't repeat its name as the website.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===================== MY SOURCES ===================== -->
+  <section class="view stack-lg" id="view-my-sources" data-view="my-sources" data-stage="5" data-title="My sources" hidden>
+    <div class="stage-head">
+      <h2>My sources</h2>
+      <p class="lede">Your working bibliography. For each source, complete the citation and write a two-part annotation: what it says, and how it helps your research. Then copy it into your Google Doc.</p>
+    </div>
+
+    <div class="card">
+      <div class="cite-actions" style="margin-top:0">
+        <button class="btn btn-primary" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy annotated bibliography</button>
+        <button class="btn btn-secondary" id="ms-add-blank" type="button">+ Add a source by hand</button>
+        <label class="ms-check"><input type="checkbox" id="ms-include-eval"> Include my evaluation notes</label>
+      </div>
+      <p class="hint" id="ms-status" aria-live="polite"></p>
+    </div>
+
+    <details class="box box-example">
+      <summary>Show me an example annotation <span class="tag">Model</span></summary>
+      <div class="ex-body">
+        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">Javaheri, S., Storfer-Isser, A., Rosen, C. L., &amp; Redline, S. (2008). Sleep quality and elevated blood pressure in adolescents. <i>Circulation, 118</i>(10), 1034–1040.</p>
+        <p><b>What it says:</b> In a study of 238 teens, those who slept poorly or less than 6.5 hours were about 3.5 times more likely to have high blood pressure, even after accounting for weight.</p>
+        <p><b>How it helps:</b> This is direct evidence that sleep affects teens' blood pressure. It's a real study of teenagers, not adults, and it gives a number I can use.</p>
+      </div>
+    </details>
+
+    <div class="card" id="ms-empty">
+      <h3>No sources yet</h3>
+      <p style="margin-top:.4rem">Add sources three ways: <b>+ My sources</b> on any <a href="#/">resource</a>, <b>Save to My sources</b> in <a href="#cite">Cite a source</a>, or <b>Add a source by hand</b> above.</p>
+    </div>
+    <div id="ms-list" class="stack"></div>
+
     <div class="card no-print" id="backup">
-      <h3 class="numbered-h"><span class="n">3</span> Switching computers?</h3>
-      <p class="lede-sm" style="margin-top:.4rem">Everything is saved in this browser, on this device only. Paste your packet into your Google Doc often. To move your work, download a backup file here and load it on the other computer.</p>
+      <h3>Switching computers?</h3>
+      <p class="lede-sm" style="margin-top:.4rem">Your sources are saved in this browser, on this device only. Paste your bibliography into your Google Doc often. To move your work, download a backup file and load it on the other computer.</p>
       <div class="cite-actions">
         <button class="btn btn-secondary btn-sm" id="ms-download" type="button">Download backup</button>
         <button class="btn btn-secondary btn-sm" id="ms-upload-btn" type="button">Load backup</button>
@@ -1233,8 +942,237 @@
       </div>
     </div>
 
-    <div data-checklist="cite"></div>
-    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#organize">← 5 · Organize</a><span></span></div>
+    <div class="no-print" id="ms-danger" hidden>
+      <button class="btn btn-secondary btn-sm" id="ms-clear" type="button">Remove all sources</button>
+      <span id="ms-clear-confirm" class="ms-confirm" hidden>This can't be undone.
+        <button class="btn btn-danger btn-sm" id="ms-clear-yes" type="button">Yes, remove all</button>
+        <button class="btn btn-secondary btn-sm" id="ms-clear-no" type="button">Cancel</button></span>
+    </div>
+  </section>
+
+  <!-- ===================== FIND MORE SOURCES ===================== -->
+  <section class="view stack-lg" id="view-find" data-view="find" data-stage="3" data-title="Find more sources" hidden>
+    <div class="stage-head">
+      <h2>Find more sources</h2>
+      <p class="lede">Need research studies beyond the collection? Databases don't understand questions. They match words. Build a search, run it, and save what you find.</p>
+    </div>
+
+    <div class="card" id="build">
+      <div class="tool-head">
+        <h3><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Build your search</h3>
+        <button class="btn btn-secondary btn-sm no-print" id="sb-reset" type="button">Clear key ideas</button>
+      </div>
+
+      <ol class="sb-steps">
+        <li>
+          <label for="sb-question" class="sb-label">What are you trying to find out?</label>
+          <textarea id="sb-question" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
+          <div class="sb-spotted" id="sb-spotted" hidden>
+            <span class="hint">Key ideas we spotted. Click one to use it:</span>
+            <div class="chips" id="sb-spotted-chips"></div>
+          </div>
+        </li>
+        <li>
+          <span class="sb-label" id="sb-concepts-label">Pick 2–3 key ideas, and add other words for each</span>
+          <p class="hint">Every article must be about <b>each</b> key idea. Other words catch articles that use different vocabulary, like <i>hypertension</i> for “high blood pressure.”</p>
+          <div class="sb-concepts" id="sb-concepts" role="group" aria-labelledby="sb-concepts-label"></div>
+        </li>
+        <li>
+          <span class="sb-label">Your search</span>
+          <div class="sb-visual" id="sb-visual" aria-hidden="true"></div>
+          <div class="box box-tip" style="margin-top:.75rem">
+            <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> How the search works</p>
+            <ul>
+              <li><b>AND</b> joins key ideas. Every idea must appear, so it <b>narrows</b> results.</li>
+              <li><b>OR</b> joins words for the same idea. Any of them can appear, so it <b>widens</b> results.</li>
+              <li>Quotation marks keep a phrase together.</li>
+            </ul>
+          </div>
+          <label for="sb-query" class="hint" style="display:block;margin-top:.75rem">Search text (you can edit it)</label>
+          <textarea id="sb-query" rows="2" spellcheck="false" placeholder="Your search appears here once you add a key idea."></textarea>
+          <div class="cite-actions no-print">
+            <button class="btn btn-primary btn-sm" type="button" data-sb-go="pubmed">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+            <button class="btn btn-secondary btn-sm" type="button" data-sb-go="scholar">Search Google Scholar <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+            <button class="btn btn-secondary btn-sm" type="button" id="sb-copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy search</button>
+          </div>
+          <p class="hint" style="margin-top:.6rem"><b>Too many results?</b> Add another key idea. <b>Too few?</b> Remove an idea, or add more other words.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>Or search quickly</h3>
+      <form class="db-search" id="db-search" action="https://pubmed.ncbi.nlm.nih.gov/" method="get" target="_blank" role="search">
+        <label for="db-q">Type 2–4 key terms, not a whole question</label>
+        <div class="db-search-row">
+          <div class="db-search-input">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="search" id="db-q" name="term" placeholder="e.g. foam cells atherosclerosis" autocomplete="off">
+          </div>
+          <input type="hidden" name="filter" value="simsearch2.ffrft">
+          <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+        </div>
+        <fieldset class="db-pick">
+          <legend class="sr-only">Database to search</legend>
+          <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
+          <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
+          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>background</span></label>
+        </fieldset>
+        <p class="hint">Results open in a new tab on the database's own site.</p>
+      </form>
+    </div>
+
+    <div class="box box-task">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Found something you might use?</p>
+      <ol>
+        <li><a href="#evaluate">Evaluate it</a> before you rely on it.</li>
+        <li><a href="#cite">Cite it</a>: copy the DOI or PubMed ID while the article is open, then look it up.</li>
+        <li>Click <b>Save to My sources</b> and write your annotation.</li>
+      </ol>
+    </div>
+
+    <div>
+      <h3 class="section-title">Databases to try</h3>
+      <div class="grid grid-3" id="db-grid"></div>
+    </div>
+
+    <div class="box box-tip">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Search tips</p>
+      <ul class="tips">
+        <li><b>Search key terms, not sentences.</b> For “How does sleep affect blood pressure in teens?”, search <i>sleep blood pressure adolescents</i>.</li>
+        <li><b>Too many results?</b> Add a term (<i>adolescents</i>, <i>exercise</i>) or choose a more specific word.</li>
+        <li><b>Too few?</b> Remove a term, or try a synonym: <i>hypertension</i> for “high blood pressure,” <i>myocardial infarction</i> for “heart attack.”</li>
+        <li><b>Can't get the full article?</b> Ask the library before you give up on it.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECT TOOLS (optional; turn on with SHOW_PROJECT_TOOLS) ===================== -->
+  <section class="view stack-lg" id="view-project" data-view="project" data-stage="2" data-title="Project tools" hidden>
+    <div class="stage-head">
+      <h2>Project tools</h2>
+      <p class="lede">Organizers for planning your research and building your argument. Use the ones your teacher assigns. They work with the sources in My sources.</p>
+      <nav class="chips no-print" aria-label="Jump to a tool" style="margin-top:1rem">
+        <a class="chip-btn" href="#web">Topic map</a>
+        <a class="chip-btn" href="#question">Research question</a>
+        <a class="chip-btn" href="#subqs">Sub-questions</a>
+        <a class="chip-btn" href="#matrix">Evidence matrix</a>
+        <a class="chip-btn" href="#cer">Claims (CER)</a>
+        <a class="chip-btn" href="#packet">Copy your work</a>
+      </nav>
+    </div>
+
+    <!-- Topic map -->
+    <div class="card" id="web">
+      <div class="tool-head">
+        <h3>Topic map</h3>
+        <button class="btn btn-secondary btn-sm no-print" type="button" onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Print</button>
+      </div>
+      <p class="lede-sm">Pick a topic. Each branch is one part of it. In each branch, write questions you <b>wonder</b> about. Start them with <i>How</i> or <i>Why</i>.</p>
+      <div class="web-tools no-print" style="margin-top:1rem">
+        <label for="web-topic">Topic</label>
+        <select id="web-topic"></select>
+        <button class="btn btn-secondary btn-sm" type="button" id="web-add">+ Add my own branch</button>
+      </div>
+      <div class="web" id="web-map" aria-live="polite"></div>
+      <details class="box box-example" style="margin-top:1.25rem">
+        <summary>Show me an example branch <span class="tag">Model</span></summary>
+        <div class="ex-body">
+          <p><b>Branch: Sleep</b> (topic: Lifestyle &amp; the heart)</p>
+          <p class="model">Why does blood pressure usually drop at night?<br>How does staying up late on phones change teens' heart rate?<br>Why would short sleep raise blood pressure over time?</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Research question -->
+    <div class="card" id="question">
+      <h3>Research question</h3>
+      <p class="lede-sm">A strong research question can't be answered by one fact. It asks how or why, and you can find evidence for it.</p>
+      <div class="table-scroll" style="margin-top:1rem">
+        <table class="compare">
+          <thead><tr><th scope="col">Problem</th><th scope="col">Weak</th><th scope="col">Stronger</th></tr></thead>
+          <tbody>
+            <tr><td>Too broad</td><td class="weak">What is heart disease?</td><td>How does LDL oxidation contribute to plaque formation in coronary arteries?</td></tr>
+            <tr><td>Yes/no</td><td class="weak">Is exercise good for your heart?</td><td>How does aerobic training change stroke volume, and why?</td></tr>
+            <tr><td>Can't be researched</td><td class="weak">Will heart disease be cured by 2040?</td><td>What evidence suggests gene therapy could treat inherited cardiomyopathies?</td></tr>
+            <tr><td>Opinion only</td><td class="weak">Should fast food be banned?</td><td>How have menu-labeling or sodium policies affected blood pressure in U.S. adults?</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="field" style="margin-top:1.25rem">
+        <label for="rq">My research question</label>
+        <textarea id="rq" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
+      </div>
+      <div class="box box-tip" style="margin-top:1rem" aria-live="polite">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Quick check</p>
+        <ul class="q-checks" id="q-checks"></ul>
+        <p class="hint">This is a computer's guess. Your teacher has the final say.</p>
+      </div>
+    </div>
+
+    <!-- Sub-questions -->
+    <div class="card" id="subqs">
+      <h3>Sub-questions</h3>
+      <p class="lede-sm">What smaller questions do you need to answer first? Aim for 2–4. These become the rows of your evidence matrix.</p>
+      <ol class="subq-list" id="subq-list"></ol>
+      <div class="cite-actions no-print"><button class="btn btn-secondary btn-sm" type="button" id="subq-add">+ Add a sub-question</button></div>
+      <details class="box box-example" style="margin-top:1.25rem">
+        <summary>Show me an example <span class="tag">Model</span></summary>
+        <div class="ex-body">
+          <p><b>Research question:</b> How does short sleep affect blood pressure in teenagers?</p>
+          <ol class="model" style="padding-left:2.2rem">
+            <li>How does the body normally regulate blood pressure during sleep?</li>
+            <li>What changes in the body when teens get less sleep?</li>
+            <li>What do studies of teens show about sleep length and blood pressure?</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+
+    <!-- Evidence matrix -->
+    <div class="card" id="matrix">
+      <div class="tool-head">
+        <h3>Evidence matrix</h3>
+        <button class="btn btn-secondary btn-sm no-print" type="button" onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Print</button>
+      </div>
+      <p class="lede-sm">Rows are your sub-questions; columns are your sources from My sources. In each box, note what that source says about that sub-question. A row with fewer than 2 sources needs more research. Scroll sideways to see all your sources.</p>
+      <div id="matrix-body"></div>
+      <div class="box box-tip" style="margin-top:1rem">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Taking good notes</p>
+        <ul>
+          <li><b>Use your own words.</b> Write the idea, not the sentence.</li>
+          <li><b>Exact words?</b> Put them in “quotation marks” and add the page or paragraph, like (p. 4) or (para. 7).</li>
+          <li><b>Write down numbers</b> with their units and who was studied, like “238 teens, 3.5× higher odds.”</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CER -->
+    <div class="stack-lg" id="cer">
+      <div class="card">
+        <h3>Claims, evidence, and reasoning</h3>
+        <p class="lede-sm" style="margin-top:.4rem">For each sub-question, answer it in one sentence (<b>claim</b>), choose the notes that prove it (<b>evidence</b>), and explain the biology that connects them (<b>reasoning</b>).</p>
+        <details class="box box-example" style="margin-top:1rem">
+          <summary>Show me an example <span class="tag">Model</span></summary>
+          <div class="ex-body">
+            <p><b>Claim:</b> Teens who sleep less than about 6.5 hours a night are more likely to have high blood pressure.</p>
+            <p><b>Evidence:</b> In a study of 238 adolescents, short or poor sleep was linked to about 3.5 times higher odds of elevated blood pressure, even after accounting for weight (Javaheri et al., 2008).</p>
+            <p><b>Reasoning:</b> Blood pressure normally dips during sleep because sympathetic nervous system activity falls. With less sleep, the body spends more hours in that higher-pressure state, and over time this strains artery walls.</p>
+          </div>
+        </details>
+      </div>
+      <div id="cer-body" class="stack-lg"></div>
+    </div>
+
+    <!-- Packet -->
+    <div class="card" id="packet">
+      <h3>Copy your work</h3>
+      <p class="lede-sm" style="margin-top:.4rem">Copies your research question, sub-questions, claims with evidence and reasoning, and annotated bibliography, ready to paste into your Google Doc.</p>
+      <div class="cite-actions no-print">
+        <button class="btn btn-primary" id="ms-copy-packet" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy research packet</button>
+      </div>
+      <p class="hint" id="packet-status" aria-live="polite"></p>
+    </div>
   </section>
 
 </main>
@@ -1283,16 +1221,9 @@
      ================================================================ */
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv';
 
-  /* EDIT: the six steps as shown on the home page. Add due dates as plain text, e.g. 'Fri., Nov. 7'. */
-  const STEP_INFO = [
-    { key: 'explore', name: 'Explore', href: '#/', make: '2–3 background sources saved' },
-    { key: 'ask', name: 'Ask', href: '#ask', make: 'A research question and 2–4 sub-questions' },
-    { key: 'search', name: 'Search', href: '#search', make: 'Research studies found and saved' },
-    { key: 'evaluate', name: 'Evaluate', href: '#evaluate', make: 'Every source checked and rated' },
-    { key: 'organize', name: 'Organize', href: '#organize', make: 'An evidence matrix and a claim for each sub-question' },
-    { key: 'cite', name: 'Cite & share', href: '#cite', make: 'Your research packet in your Google Doc' },
-  ];
-  const DUE = { explore: '', ask: '', search: '', evaluate: '', organize: '', cite: '' };
+  /* EDIT: true shows the "Project tools" tab (topic map, research question, sub-questions,
+     evidence matrix, claims). false hides it, and the rest of the site works without it. */
+  const SHOW_PROJECT_TOOLS = false;
 
   /* ---------------- Topics ----------------
      Names must match the Topic column in the sheet exactly. */
@@ -1379,7 +1310,8 @@
   /* ---------------- Loading the sheet ---------------- */
   // Sheet column headers -> field names. Headers are matched loosely, so "Why it's here" -> "whyitshere".
   const HEADERS = { title: 'title', url: 'url', link: 'url', source: 'source', topic: 'topic', subtopic: 'subtopic',
-    format: 'format', level: 'level', whyitshere: 'why', why: 'why', note: 'why', access: 'access', featured: 'featured' };
+    format: 'format', level: 'level', whyitshere: 'why', why: 'why', note: 'why', access: 'access', featured: 'featured',
+    author: 'author', authors: 'author', date: 'date', datepublished: 'date', published: 'date', publicationdate: 'date' };
 
   function parseCSV(text) {
     const rows = [];
@@ -1412,6 +1344,7 @@
     const g = k => String(o[k] || '').trim();
     const r = { title: g('title'), url: g('url'), source: g('source'), topic: g('topic'), subtopic: g('subtopic'),
       format: g('format'), level: g('level'), why: g('why'), access: g('access') || 'Free',
+      author: g('author'), date: g('date'),
       featured: /^(y|yes|true|x)$/i.test(g('featured')) };
     if (!r.title || !r.topic || !r.format || !/^https?:\/\//i.test(r.url) || replacedByTool(r.url)) return null;
     r.level = /^deep/i.test(r.level) ? 'Deeper' : 'Intro';
@@ -1482,7 +1415,8 @@
       ${r.source ? `<p class="publisher">${esc(r.source)}</p>` : ''}
       ${r.why ? `<p class="why">${esc(r.why)}</p>` : ''}
       ${where}
-      ${ext ? `<div class="res-actions"><button type="button" class="add-src${msHas(r.url) ? ' added' : ''}" data-add-src="${esc(r.url)}">${msHas(r.url) ? '✓ In My sources' : '+ My sources'}</button></div>` : ''}
+      ${ext ? `<div class="res-actions"><button type="button" class="add-src" data-cite-src="${esc(r.url)}">Cite this</button>
+        <button type="button" class="add-src${msHas(r.url) ? ' added' : ''}" data-add-src="${esc(r.url)}">${msHas(r.url) ? '✓ In My sources' : '+ My sources'}</button></div>` : ''}
     </article>`;
   }
 
@@ -1580,9 +1514,8 @@
     const hasDeeper = items.some(i => i.level === 'Deeper'), hasIntro = items.some(i => i.level === 'Intro');
 
     view.innerHTML = `
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">1 · Explore</a><span aria-hidden="true">›</span><span>${esc(t.name)}</span></nav>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><span>${esc(t.name)}</span></nav>
       <div class="topic-head">
-        <p class="stage-eyebrow">Step 1 of 6 · Explore</p>
         <h2>${esc(t.name)}</h2>
         ${t.blurb ? `<p>${esc(t.blurb)}</p>` : ''}
         ${items.length ? `<div class="topic-filters">
@@ -1595,27 +1528,25 @@
             <button type="button" class="chip-btn" data-level="Deeper" aria-pressed="false">Deeper</button></div>` : ''}
         </div>` : ''}
       </div>
-      ${t.questions.length ? `
-      <div class="box box-task">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Read with a purpose</p>
-        <p>Skim the overview sources first. As you read, notice what makes you wonder <b>how</b> or <b>why</b>. Questions like these could become your research question:</p>
-        <ul>${t.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>
-        <p style="margin-top:.6rem"><a href="#ask/${t.slug}"><b>Map this topic in Step 2 →</b></a></p>
-      </div>` : ''}
       ${items.length ? groups.map(([name, list]) => `
         <section class="sub-section" data-sub="${esc(name)}">
           <h3>${name ? esc(name) : 'Overview'}</h3>
           <div class="grid grid-3">${list.map(r => `<div data-level="${r.level}">${card(r)}</div>`).join('')}</div>
         </section>`).join('')
         : '<div class="card"><p class="empty-note">No resources here yet. Check back soon, or <a href="#/">browse other topics</a>.</p></div>'}
+      ${t.questions.length ? `
+      <div class="box box-tip">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Questions this topic could lead to</p>
+        <ul>${t.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>
+        ${SHOW_PROJECT_TOOLS ? `<p style="margin-top:.6rem"><a href="#ask/${t.slug}">Map this topic in Project tools →</a></p>` : ''}
+      </div>` : ''}
       ${t.searches.length ? `
       <div class="card">
-        <h3>Ready for research studies?</h3>
-        <p style="margin-top:.35rem">These PubMed searches (free full text) show the kind of research this topic leads to. Use them after you've written your question in <a href="#ask/${t.slug}">Step 2</a>.</p>
+        <h3>Looking for research studies?</h3>
+        <p style="margin-top:.35rem">These PubMed searches (free full text) show the kind of research this topic leads to. For your own searches, use <a href="#find">Find more sources</a>.</p>
         <div class="search-links" style="margin-top:.75rem">${t.searches.map(q =>
           `<a href="${pubmed(q)}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>${esc(q)}</a>`).join('')}</div>
-      </div>` : ''}
-      <div class="step-nav-bottom"><a class="btn btn-secondary" href="#/">← All topics</a><a class="btn btn-primary" href="#ask/${t.slug}">Next: 2 · Ask a question →</a></div>`;
+      </div>` : ''}`;
 
     // Filters: hide cards and empty sections rather than re-rendering.
     const filt = { sub: '', level: '' };
@@ -1655,9 +1586,9 @@
 
   /* ---------------- Pages (hash-routed, so links and Back work) ---------------- */
   // Old addresses from earlier versions of the site keep working.
-  const ALIASES = { overview: '', guide: '', pathways: '', sources: 'search', writing: 'evaluate', lab: 'tool/blood-flow', 'my-sources': 'organize' };
-  const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'explore' : v;
-  const PAGES = ['ask', 'search', 'evaluate', 'organize', 'cite'];
+  const ALIASES = { overview: '', guide: '', pathways: '', sources: 'find', search: 'find', writing: 'evaluate', craap: 'evaluate', lab: 'tool/blood-flow', organize: 'my-sources', ask: 'project' };
+  const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'resources' : v;
+  const PAGES = ['evaluate', 'cite', 'my-sources', 'find', 'project'];
   let currentView = null;
 
   function showView(name, { focus = true } = {}) {
@@ -1670,11 +1601,11 @@
     const view = $(`.view[data-view="${name}"]`);
     document.title = (name === 'home' ? '' : view.dataset.title + ' · ') + 'Cardiovascular Research Hub';
     if (name === 'tool-3d-heart') loadEmbed();
-    if (name === 'ask') renderAsk();
-    if (name === 'organize') renderOrganize();
+    if (name === 'project') renderProject();
+    if (name === 'my-sources') renderMySources();
     if (name === 'evaluate') renderEvaluate();
-    if (name === 'search') renderBuilder();
-    if (name === 'cite') renderPacketStatus();
+    if (name === 'find') renderBuilder();
+    if (name !== 'cite') $('#cite-prefill-note').hidden = true;
     // Move focus to the new page's heading so keyboard and screen-reader users land in the right place.
     if (focus && !firstLoad) {
       const h = $('h2', view);
@@ -1687,13 +1618,17 @@
     if (h in ALIASES) h = ALIASES[h];
     if (h.startsWith('topic/')) { renderTopic(h.slice(6)); showView('topic'); window.scrollTo(0, 0); return; }
     if (h.startsWith('tool/') && $(`#view-tool-${CSS.escape(h.slice(5))}`)) { showView('tool-' + h.slice(5)); window.scrollTo(0, 0); return; }
-    if (h.startsWith('ask/')) { webTopicFromLink(h.slice(4)); h = 'ask'; }
+    if (h.startsWith('ask/')) {
+      if (SHOW_PROJECT_TOOLS) { webTopicFromLink(h.slice(4)); h = 'project'; } else h = 'topic/' + h.slice(4);
+    }
+    if (h.startsWith('topic/')) { renderTopic(h.slice(6)); showView('topic'); window.scrollTo(0, 0); return; }
     if (h.startsWith('evaluate/')) { evalTarget = h.slice(9); h = 'evaluate'; }
+    if (h === 'project' && !SHOW_PROJECT_TOOLS) h = '';
     if (PAGES.includes(h)) { showView(h); window.scrollTo(0, 0); return; }
     // A hash that names something inside a page (e.g. #craap) opens that page and scrolls to it.
     const target = h && document.getElementById(h);
     const view = target && target.closest('.view');
-    if (view) { showView(view.dataset.view, { focus: false }); target.scrollIntoView({ block: 'start' }); return; }
+    if (view && !(view.dataset.view === 'project' && !SHOW_PROJECT_TOOLS)) { showView(view.dataset.view, { focus: false }); target.scrollIntoView({ block: 'start' }); return; }
     showView('home');
     window.scrollTo(0, 0);
   }
@@ -1891,91 +1826,91 @@
   });
   renderBuilder();
 
-  /* ---------------- CRAAP evaluator ---------------- */
-  const CRAAP = [
-    { id: 'c', name: 'Currency', q: 'Is it recent enough for your topic?', hint: 'For statistics and treatments, aim for the last 5–10 years. Older landmark studies are fine for basic mechanisms.' },
-    { id: 'r', name: 'Relevance', q: 'Does it directly help answer your research question?', hint: 'Is it written for an informed reader, not a general audience?' },
-    { id: 'a1', name: 'Authority', q: 'Are the authors experts?', hint: 'Look for researchers, clinicians, or a health agency, with credentials and affiliations listed.' },
-    { id: 'a2', name: 'Accuracy', q: 'Is it peer-reviewed or backed by cited evidence?', hint: 'Can you find the data or the references behind its claims?' },
-    { id: 'p', name: 'Purpose', q: 'Is it written to inform, not to sell?', hint: 'Watch for product promotion, sponsorship, or one-sided framing.' },
+  /* ---------------- Source evaluation: SIFT ----------------
+     Stop, Investigate the source, Find better coverage, Trace claims to the original
+     (Mike Caulfield's method, built on lateral reading). Students reach their own decision. */
+  const KINDS = [
+    ['study', 'Research study', 'Original research in a journal. Strong evidence if it was peer-reviewed, but check who was studied (T).'],
+    ['review', 'Review article', 'Sums up many studies. Good for the big picture and for finding the original studies.'],
+    ['agency', 'Health agency or medical group', 'Like NIH, CDC, the American Heart Association, or WHO. Usually reliable for facts and statistics.'],
+    ['news', 'News or magazine article', 'Describes research for the public. Trace the claim back to the original study (T).'],
+    ['edu', 'Textbook or educational site', 'Good for background. Check who wrote it (I).'],
+    ['commercial', 'Company or product site', 'It may want to sell you something. Investigate carefully (I) and find better coverage (F).'],
+    ['personal', 'Blog, social media, or video', 'Anyone can post. Only use it if you can confirm the claim elsewhere (F).'],
+    ['unsure', 'Not sure', 'That’s a signal to investigate the source carefully (I).'],
   ];
-  // Ratings start blank: a score only appears once the student has judged all five.
-  $('#craap-items').innerHTML = CRAAP.map(k => `
-    <fieldset class="craap-item">
-      <legend><b>${k.name}:</b> ${k.q}</legend>
-      <p class="hint" id="hint-${k.id}">${k.hint}</p>
-      <div class="rate">
-        <span class="ends" aria-hidden="true">Poor</span>
-        ${[1, 2, 3, 4, 5].map(n => `<label><input type="radio" name="craap-${k.id}" value="${n}" aria-describedby="hint-${k.id}"><span>${n}</span></label>`).join('')}
-        <span class="ends" aria-hidden="true">Excellent</span>
-      </div>
-    </fieldset>`).join('');
+  const COVERAGE = [['agree', 'Yes, they agree'], ['mixed', 'Partly, or it’s debated'], ['disagree', 'No, they disagree'], ['none', 'Couldn’t find any']];
+  const VERDICTS = [['use', 'Use it', 'v-good'], ['caution', 'Use with caution', 'v-mid'], ['skip', 'Don’t use it', 'v-low']];
+  const VERDICT_LABEL = { use: 'Use it', caution: 'Use with caution', skip: 'Don’t use it' };
+  const VERDICT_CLS = { use: 'good', caution: 'mid', skip: 'low' };
+  const radios = (name, list) => list.map(([v, l, cls]) =>
+    `<label><input type="radio" name="${name}" value="${v}"><span${cls ? ` class="${cls}"` : ''}>${esc(l)}</span></label>`).join('');
+  $('#sift-kind').insertAdjacentHTML('beforeend', radios('sift-kind', KINDS));
+  $('#sift-coverage').insertAdjacentHTML('beforeend', radios('sift-coverage', COVERAGE));
+  $('#sift-verdict').insertAdjacentHTML('beforeend', radios('sift-verdict', VERDICTS));
 
   let evalTarget = ''; // id of the source being checked; '' means practice
-  const readCraap = () => Object.fromEntries(CRAAP.map(k => {
-    const c = $(`input[name="craap-${k.id}"]:checked`);
-    return [k.id, c ? +c.value : undefined];
-  }));
-  const setCraapInputs = (vals = {}) => CRAAP.forEach(k =>
-    $$(`input[name="craap-${k.id}"]`).forEach(r => { r.checked = +r.value === vals[k.id]; }));
-
-  function updateCRAAP() {
-    const vals = readCraap();
-    const rated = CRAAP.filter(k => vals[k.id]).length;
-    if (craapComplete(vals)) {
-      const v = craapVerdict(vals);
-      $('#craap-total').textContent = `${v.total} / 25`;
-      $('#craap-verdict').className = 'verdict ' + v.cls;
-      $('#craap-verdict').textContent = v.label;
-      $('#craap-note').textContent = v.note;
-    } else {
-      $('#craap-total').textContent = '– / 25';
-      $('#craap-verdict').className = 'verdict none';
-      $('#craap-verdict').textContent = 'Rate all five';
-      $('#craap-note').textContent = `${rated} of 5 rated.`;
-    }
+  const SIFT_TEXT = ['who', 'investigate', 'claim', 'trace', 'why'];
+  const radioVal = n => { const r = $(`input[name="${n}"]:checked`); return r ? r.value : ''; };
+  const setRadio = (n, v) => $$(`input[name="${n}"]`).forEach(r => { r.checked = r.value === v; });
+  const readSift = () => ({ kind: radioVal('sift-kind'), coverage: radioVal('sift-coverage'), verdict: radioVal('sift-verdict'),
+    ...Object.fromEntries(SIFT_TEXT.map(k => [k, $('#sift-' + k).value])) });
+  function fillSift(v = {}) {
+    ['kind', 'coverage', 'verdict'].forEach(k => setRadio('sift-' + k, v[k] || ''));
+    SIFT_TEXT.forEach(k => { $('#sift-' + k).value = v[k] || ''; });
+    showKindHint();
   }
-  function saveEval() {
+  function showKindHint() {
+    const k = KINDS.find(x => x[0] === radioVal('sift-kind'));
+    $('#sift-kind-hint').textContent = k ? k[2] : '';
+  }
+  function saveSift() {
     const s = evalTarget && msFind(evalTarget);
     if (!s) return;
-    const vals = readCraap();
-    s.craap = CRAAP_IDS.some(k => vals[k]) ? vals : null;
-    s.lateral = $('#lat-note').value;
+    s.sift = readSift();
     saveMS();
-    $('#craap-saved').textContent = `✓ Saved with “${(s.title || 'Untitled source').slice(0, 50)}”.`;
+    $('#sift-saved').textContent = `✓ Saved with “${(s.title || 'Untitled source').slice(0, 50)}”.`;
   }
-  // A good starting search target for lateral reading: the website, journal, or first author.
+  // A good first search for lateral reading: the website, journal, or first author.
   const publisherOf = s => (s.container || (s.authors || '').split('\n')[0] || '').trim();
   function loadEvalTarget() {
     const s = evalTarget && msFind(evalTarget);
-    setCraapInputs((s && s.craap) || {});
-    $('#lat-note').value = s ? (s.lateral || '') : '';
-    $('#lat-name').value = s ? publisherOf(s) : '';
-    $('#craap-saved').textContent = '';
-    $('#craap-target-hint').innerHTML = s
-      ? 'Your notes and ratings save to this source automatically.'
-      : MS.sources.length
-        ? 'Practice mode: nothing is saved. Pick one of your sources to save your ratings with it.'
-        : 'Practice mode: nothing is saved. Add sources in <a href="#organize">Step 5</a> to save ratings with them.';
-    updateCRAAP();
+    fillSift(s ? { who: publisherOf(s), ...(s.sift || {}) } : {});
+    if (s && !$('#sift-who').value) $('#sift-who').value = publisherOf(s);
+    $('#sift-saved').textContent = '';
+    $('#eval-target-hint').innerHTML = !s
+      ? (MS.sources.length
+        ? 'Practice mode: nothing is saved. Pick one of your sources to keep your check with it.'
+        : 'Practice mode: nothing is saved. Save a source to <a href="#my-sources">My sources</a> to keep your check with it.')
+      : isVetted(s)
+        ? 'This one is from your teacher and librarian’s collection, so it has already been checked. You can still practice on it.'
+        : 'Your answers save to this source automatically.';
   }
   function renderEvaluate() {
     if (evalTarget && !msFind(evalTarget)) evalTarget = '';
-    if (!evalTarget && MS.sources.length) evalTarget = (MS.sources.find(s => !craapComplete(s.craap)) || MS.sources[0]).id;
-    $('#craap-target').innerHTML = '<option value="">Practice (not saved)</option>' + MS.sources.map(s =>
-      `<option value="${s.id}">${craapComplete(s.craap) ? '✓ ' : ''}${esc((s.title || 'Untitled source').slice(0, 70))}</option>`).join('');
-    $('#craap-target').value = evalTarget;
+    if (!evalTarget) {
+      const next = MS.sources.find(s => !isVetted(s) && !(s.sift && s.sift.verdict));
+      if (next) evalTarget = next.id;
+    }
+    $('#eval-target').innerHTML = '<option value="">Practice (not saved)</option>' + MS.sources.map(s =>
+      `<option value="${s.id}">${s.sift && s.sift.verdict ? '✓ ' : ''}${esc((s.title || 'Untitled source').slice(0, 70))}${isVetted(s) ? ' (from the collection)' : ''}</option>`).join('');
+    $('#eval-target').value = evalTarget;
     loadEvalTarget();
   }
-  $('#craap-target').addEventListener('change', e => { evalTarget = e.target.value; loadEvalTarget(); });
-  $('#craap-items').addEventListener('change', () => { updateCRAAP(); saveEval(); });
-  $('#lat-note').addEventListener('input', saveEval);
-  $('#craap-reset').addEventListener('click', () => { setCraapInputs({}); updateCRAAP(); saveEval(); });
-  $('#lat-go').addEventListener('click', () => {
-    const q = $('#lat-name').value.trim();
-    if (!q) { $('#lat-name').focus(); toast('Type the publisher or author first.'); return; }
-    window.open('https://www.google.com/search?q=' + encodeURIComponent(`"${q}"`), '_blank', 'noopener');
+  $('#eval-target').addEventListener('change', e => { evalTarget = e.target.value; loadEvalTarget(); });
+  $('#sift').addEventListener('input', e => {
+    if (e.target.id === 'eval-target') return;
+    if (e.target.name === 'sift-kind') showKindHint();
+    saveSift();
   });
+  $('#sift-reset').addEventListener('click', () => { fillSift({}); saveSift(); });
+  const searchFor = (sel, empty, q) => () => {
+    const v = $(sel).value.trim();
+    if (!v) { $(sel).focus(); toast(empty); return; }
+    window.open('https://www.google.com/search?q=' + encodeURIComponent(q(v)), '_blank', 'noopener');
+  };
+  $('#sift-who-go').addEventListener('click', searchFor('#sift-who', 'Type the publisher or author first.', v => `"${v}"`));
+  $('#sift-claim-go').addEventListener('click', searchFor('#sift-claim', 'Type the main claim first.', v => v));
 
   /* ---------------- Citation builder ---------------- */
   let citeStyle = 'APA';
@@ -2092,12 +2027,11 @@
     $('#title-hint').textContent = citeStyle === 'APA'
       ? 'APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.'
       : 'MLA uses title case: capitalize the major words.';
-    $('#cite-label').textContent = empty ? `Example · ${citeStyle}` : `Your citation · ${citeStyle}`;
+    $('#cite-label').textContent = empty ? 'Example · APA 7' : 'Your citation · APA 7';
     $('#cite-output').innerHTML = buildCitation(empty ? (citeStyle === 'MLA' ? { ...EXAMPLE, title: 'Inflammation and Atherosclerosis' } : EXAMPLE) : d);
   }
   $('#cite-form').addEventListener('input', renderCitation);
   $('#cite-form').addEventListener('submit', e => e.preventDefault());
-  pressGroup($('#cite .seg'), btn => { citeStyle = btn.dataset.style; swapLookupTitle(); renderCitation(); });
   $('#cite-clear').addEventListener('click', () => { $('#cite-form').reset(); clearLookup(); renderCitation(); });
 
   /* ---------------- Citation lookup (DOI / PubMed ID / PMC ID) ---------------- */
@@ -2298,6 +2232,50 @@
       toast(ok ? okMsg : 'Copy blocked. Select the text and press Ctrl/⌘ + C.');
     }
   }
+  /* "Cite this" from a resource card: fill the form from the resource sheet.
+     The sheet's Author and Date published columns are optional; whatever is missing,
+     students are told to check on the page. */
+  const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  // "2024-03-05", "3/5/2024" (how Google Sheets exports dates), "March 5, 2024", or "2024" -> { year, md: "March 5" }
+  function splitDate(raw) {
+    const t = String(raw || '').trim();
+    if (!t) return { year: '', md: '' };
+    let m = t.match(/^(\d{4})-(\d{1,2})(?:-(\d{1,2}))?/);
+    if (m) return { year: m[1], md: (MONTH_NAMES[+m[2] - 1] || '') + (m[3] ? ' ' + +m[3] : '') };
+    m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (m) return { year: m[3], md: `${MONTH_NAMES[+m[1] - 1] || ''} ${+m[2]}`.trim() };
+    const year = (t.match(/\b(19|20)\d{2}\b/) || [''])[0];
+    const md = t.replace(year, '').replace(/^[\s,]+|[\s,]+$/g, '');
+    return { year, md: /[a-z]/i.test(md) ? md : '' };
+  }
+  // The sheet separates several authors with semicolons: "Smith, Jane; Lee, Ana". The form wants one per line.
+  const authorLines = a => String(a || '').split(/\s*;\s*/).filter(Boolean).join('\n');
+  function citeFromResource(r) {
+    $('#cite-form').reset();
+    clearLookup();
+    const d = splitDate(r.date);
+    $('#cite-type').value = 'web';
+    $('#cite-authors').value = authorLines(r.author || r.source);
+    $('#cite-title').value = r.title;
+    $('#cite-container').value = r.source;
+    $('#cite-year').value = d.year;
+    $('#cite-date').value = d.md;
+    $('#cite-link').value = r.url;
+    renderCitation();
+    const check = [
+      !r.author && 'who wrote it (a person, or the organization)',
+      !d.year && 'when it was published or last updated',
+    ].filter(Boolean);
+    const note = $('#cite-prefill-note');
+    note.innerHTML = `<p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Filled in from “${esc(r.title)}”</p>
+      <p>${check.length ? `Open <a href="${esc(r.url)}" target="_blank" rel="noopener">the page</a> and check ${check.join(', and ')}. No date anywhere? Leave Year blank and the citation will use (n.d.).`
+        : `Check each part against <a href="${esc(r.url)}" target="_blank" rel="noopener">the page</a> before you copy it.`}
+      APA titles use sentence case, so you may need to change some capital letters.</p>`;
+    note.hidden = false;
+    location.hash = 'cite';
+  }
+  $('#cite-clear').addEventListener('click', () => { $('#cite-prefill-note').hidden = true; });
+
   $('#cite-copy').addEventListener('click', () => {
     const out = $('#cite-output');
     copyRich(out.innerHTML, out.textContent, 'Citation copied. Paste it into your reference list.');
@@ -2308,15 +2286,15 @@
      Saved in this browser only (localStorage). Students copy it into their Google Doc,
      or move it between computers with a backup file. */
   const MS_KEY = 'cvhub-my-sources-v1';
-  let MS = { style: 'APA', includeCraap: false, sources: [] };
+  let MS = { style: 'APA', includeEval: false, sources: [] };
   try {
     const saved = JSON.parse(localStorage.getItem(MS_KEY));
     if (saved && Array.isArray(saved.sources)) MS = { ...MS, ...saved };
   } catch { /* storage unavailable */ }
+  MS.style = 'APA'; // The class uses APA 7.
   const saveMS = () => { try { localStorage.setItem(MS_KEY, JSON.stringify(MS)); } catch { /* ignore */ } updateMsCount(); };
   const newId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const CITE_FIELDS = ['type', 'authors', 'title', 'container', 'year', 'volume', 'issue', 'pages', 'date', 'link'];
-  const CRAAP_IDS = ['c', 'r', 'a1', 'a2', 'p'];
   const STAGES = { Background: 'Background reading', Research: 'Research evidence' };
   const msFind = id => MS.sources.find(s => s.id === id);
   const normUrl = u => String(u || '').trim().replace(/^https?:\/\//i, '').replace(/\/$/, '').toLowerCase();
@@ -2324,7 +2302,7 @@
 
   function addSource(fields, { open = true } = {}) {
     const s = { id: newId(), type: 'web', authors: '', title: '', container: '', year: '', volume: '', issue: '', pages: '', date: '', link: '',
-      stage: 'Background', craap: null, lateral: '', summary: '', helps: '', open, ...fields };
+      stage: 'Background', craap: null, sift: null, summary: '', helps: '', open, ...fields };
     MS.sources.push(s);
     saveMS();
     syncAddButtons();
@@ -2353,20 +2331,37 @@
     const r = RESOURCES.find(x => x.url === b.dataset.addSrc);
     if (!r) return;
     // We know the title, site, and link. Students check the page for the author and date.
-    addSource({ type: 'web', authors: r.source, title: r.title, container: r.source, link: r.url, stage: 'Background' });
-    toast('Added to My sources (Step 5). Add the date and your notes there.');
+    const d = splitDate(r.date);
+    addSource({ type: 'web', authors: authorLines(r.author || r.source), title: r.title, container: r.source, year: d.year, date: d.md, link: r.url, stage: 'Background' });
+    toast(r.author && d.year ? 'Added to My sources. Write your annotation there.' : 'Added to My sources. Check the page for the author and date, and write your annotation.');
   });
+  // "Cite this" buttons on resource cards.
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-cite-src]');
+    if (!b) return;
+    const r = RESOURCES.find(x => x.url === b.dataset.citeSrc);
+    if (r) citeFromResource(r);
+  });
+  // Sources from the teacher and librarian's collection are already vetted.
+  const isVetted = s => RESOURCES.some(r => normUrl(r.url) === normUrl(s.link));
 
-  /* CRAAP helpers shared with the evaluator */
-  function craapVerdict(vals) {
-    const total = CRAAP.reduce((sum, k) => sum + vals[k.id], 0);
-    const weak = CRAAP.filter(k => vals[k.id] === 1).map(k => k.name);
-    if (weak.length) return { total, cls: 'low', label: 'Red flag: don’t cite', note: `A 1 on ${weak.join(' and ')} outweighs a high total. Find a stronger source.` };
-    if (total >= 20) return { total, cls: 'good', label: 'Strong: OK to cite', note: 'This source should hold up in your argument.' };
-    if (total >= 14) return { total, cls: 'mid', label: 'Moderate: cross-check it', note: 'Back up its key claims with a second, stronger source.' };
-    return { total, cls: 'low', label: 'Weak: don’t cite', note: 'Use it for background ideas at most, and find a better source to cite.' };
-  }
+  /* Evaluation status. Older versions of the site used CRAAP scores; show those if there's no SIFT check. */
+  const CRAAP_IDS = ['c', 'r', 'a1', 'a2', 'p'];
   const craapComplete = c => c && CRAAP_IDS.every(k => c[k] >= 1 && c[k] <= 5);
+  const craapTotal = c => CRAAP_IDS.reduce((t, k) => t + c[k], 0);
+  function evalTag(s) {
+    if (isVetted(s)) return '<span class="tag tag-peer">From the collection · already checked</span>';
+    const v = s.sift && s.sift.verdict;
+    if (v) return `<span class="verdict ${VERDICT_CLS[v]} tag">Evaluated: ${esc(VERDICT_LABEL[v])}</span>`;
+    if (craapComplete(s.craap)) return `<span class="tag">CRAAP score ${craapTotal(s.craap)}/25</span>`;
+    return '<span class="tag tag-warn">Not evaluated yet</span>';
+  }
+  const needsEval = s => !isVetted(s) && !(s.sift && s.sift.verdict) && !craapComplete(s.craap);
+  function evalNote(s) {
+    if (s.sift && s.sift.verdict) return `Evaluation: ${VERDICT_LABEL[s.sift.verdict]}.${(s.sift.why || '').trim() ? ' ' + s.sift.why.trim().replace(/([^.!?])$/, '$1.') : ''}`;
+    if (craapComplete(s.craap)) return `CRAAP score: ${craapTotal(s.craap)}/25.`;
+    return '';
+  }
 
   function missingFor(s) {
     const need = s.type === 'journal' ? { authors: 'author', title: 'title', container: 'journal', year: 'year' } : { title: 'title', year: 'date', link: 'link' };
@@ -2387,11 +2382,10 @@
 
   function entryHead(s) {
     const missing = missingFor(s);
-    const v = craapComplete(s.craap) ? craapVerdict(s.craap) : null;
     return `<p class="ms-cite">${buildCitation(s, MS.style) || '<span class="muted">Untitled source</span>'}</p>
       <div class="res-tags">
         <span class="tag">${esc(STAGES[s.stage] || s.stage)}</span>
-        ${v ? `<span class="verdict ${v.cls} tag">Checked ${v.total}/25 · ${esc(v.label)}</span>` : '<span class="tag tag-warn">Not checked yet</span>'}
+        ${evalTag(s)}
         ${missing.length ? `<span class="tag tag-warn">Missing: ${esc(missing.join(', '))}</span>` : ''}
         ${annotation(s) ? '' : '<span class="tag tag-warn">No annotation yet</span>'}
       </div>
@@ -2408,7 +2402,7 @@
       </div>`;
     return `<div class="ms-edit" hidden>
       <h4>What is it?</h4>
-      <p class="hint" style="margin-top:-.6rem">Check the source itself for anything missing, especially the author and date. Have a DOI? The <a href="#cite">citation builder</a> can look it up.</p>
+      <p class="hint" style="margin-top:-.6rem">Check the source itself for anything missing, especially the author and date. Have a DOI? <a href="#cite">Cite a source</a> can look it up.</p>
       <div class="form-grid">
         <div class="field span-3"><label for="ms-type-${id}">Source type</label>
           <select id="ms-type-${id}" data-field="type"><option value="journal" ${!isWeb ? 'selected' : ''}>Journal article</option><option value="web" ${isWeb ? 'selected' : ''}>Web page</option></select></div>
@@ -2428,13 +2422,15 @@
       <h4>Annotation</h4>
       <div class="form-grid">
         ${f('summary', 'Main point: what does this source say?', { span: 6, area: true, ph: 'In 1–2 sentences, in your own words.' })}
-        ${f('helps', 'How does it help answer my research question?', { span: 6, area: true, ph: 'Background? Evidence for a sub-question? Data I can use?' })}
+        ${f('helps', 'How does it help my research?', { span: 6, area: true, ph: 'Background? Evidence for a claim? Data I can use?' })}
       </div>
       <div><button class="btn btn-secondary btn-sm" type="button" data-act="edit">Done</button></div>
     </div>`;
   }
 
   function renderMySources() {
+    $('#ms-include-eval').checked = !!MS.includeEval;
+    renderMsStatus();
     $('#ms-empty').hidden = !!MS.sources.length;
     $('#ms-danger').hidden = !MS.sources.length;
     $('#ms-list').innerHTML = MS.sources.map(s => `
@@ -2442,7 +2438,7 @@
         <div class="ms-head">${entryHead(s)}</div>
         <div class="cite-actions no-print">
           <button class="btn btn-secondary btn-sm" type="button" data-act="edit" aria-expanded="false">Edit details &amp; annotation</button>
-          <a class="btn btn-secondary btn-sm" href="#evaluate/${s.id}">${craapComplete(s.craap) ? 'Re-check' : 'Check'} this source (Step 4)</a>
+          ${isVetted(s) ? '' : `<a class="btn btn-secondary btn-sm" href="#evaluate/${s.id}">${needsEval(s) ? 'Evaluate this source' : 'Review evaluation'}</a>`}
           ${/^https?:\/\//i.test(s.link) || /^10\./.test(s.link) ? `<a class="btn btn-secondary btn-sm" href="${esc(normLink(s.link))}" target="_blank" rel="noopener">Open source <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></a>` : ''}
           <span class="ms-remove"><button class="btn btn-secondary btn-sm" type="button" data-act="remove">Remove</button></span>
         </div>
@@ -2472,7 +2468,7 @@
     $('.ms-head', el).innerHTML = entryHead(s);
     saveMS();
     syncAddButtons();
-    renderProgress();
+    renderMsStatus();
   });
   $('#ms-list').addEventListener('click', async e => {
     const b = e.target.closest('[data-act]');
@@ -2487,7 +2483,7 @@
       MS.sources = MS.sources.filter(x => x.id !== s.id);
       Object.values(PJ.matrix).forEach(row => { delete row[s.id]; });
       Object.values(PJ.cer).forEach(c => { if (Array.isArray(c.ev)) c.ev = c.ev.filter(id => id !== s.id); });
-      saveMS(); savePJ(); renderOrganize(); syncAddButtons();
+      saveMS(); savePJ(); renderMySources(); syncAddButtons();
       toast('Source removed.');
     }
   });
@@ -2495,7 +2491,6 @@
   $('#ms-add-blank').addEventListener('click', () => {
     addSource({ type: 'journal', stage: 'Research' });
     renderMySources();
-    renderProgress();
     const last = $$('.ms-entry').pop();
     if (last) { last.scrollIntoView({ block: 'center' }); $('textarea, input', $('.ms-edit', last)).focus(); }
   });
@@ -2504,14 +2499,14 @@
   $('#ms-clear').addEventListener('click', () => { $('#ms-clear-confirm').hidden = false; $('#ms-clear').hidden = true; });
   $('#ms-clear-no').addEventListener('click', () => { $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false; });
   $('#ms-clear-yes').addEventListener('click', () => {
-    MS.sources = []; saveMS(); renderOrganize(); syncAddButtons();
+    MS.sources = []; saveMS(); renderMySources(); syncAddButtons();
     $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false;
     toast('All sources removed.');
   });
 
   /* ================================================================
-     PROJECT: question web, sub-questions, evidence matrix, claims,
-     and the step checklists. Saved in this browser with My sources.
+     PROJECT TOOLS (optional; see SHOW_PROJECT_TOOLS): topic map, research
+     question, sub-questions, evidence matrix, claims. Saved in this browser.
      ================================================================ */
   const PJ_KEY = 'cvhub-project-v2';
   const emptyProject = () => ({ webTopic: '', web: {}, own: {}, subqs: [], matrix: {}, cer: {}, checks: {} });
@@ -2525,12 +2520,12 @@
     return p;
   }
   try { PJ = cleanProject(JSON.parse(localStorage.getItem(PJ_KEY))); } catch { /* storage unavailable */ }
-  const savePJ = () => { try { localStorage.setItem(PJ_KEY, JSON.stringify(PJ)); } catch { /* ignore */ } updateStepMarks(); };
+  const savePJ = () => { try { localStorage.setItem(PJ_KEY, JSON.stringify(PJ)); } catch { /* ignore */ } };
   const liveSubqs = () => PJ.subqs.filter(q => q.text.trim());
   const noteFor = (qid, sid) => ((PJ.matrix[qid] || {})[sid] || '').trim();
   const notesFor = qid => MS.sources.filter(s => noteFor(qid, s.id));
 
-  /* ---------- Step 2: question web ---------- */
+  /* ---------- Topic map ---------- */
   function webTopicFromLink(s) { if (allTopics().some(t => t.slug === s)) { PJ.webTopic = s; savePJ(); } }
   const currentWebTopic = () => {
     const topics = allTopics();
@@ -2580,7 +2575,7 @@
     savePJ(); renderWeb();
   });
 
-  /* ---------- Step 2: question check ---------- */
+  /* ---------- Research question check ---------- */
   function questionChecks(q) {
     const t = q.trim().toLowerCase().replace(/\s+/g, ' ');
     if (!t) return [];
@@ -2609,9 +2604,9 @@
       ? checks.map(([ok, msg]) => `<li class="${ok ? 'ok' : 'no'}"><span class="mark" aria-hidden="true">${ok ? '✓' : '!'}</span><span><span class="sr-only">${ok ? 'Good: ' : 'Check: '}</span>${msg}</span></li>`).join('')
       : '<li>Type your question above to check it.</li>';
   }
-  $('#rq').addEventListener('input', e => { sb.question = e.target.value; saveSb(); renderQChecks(); });
+  $('#rq').addEventListener('input', e => { sb.question = e.target.value; saveSb(); renderQChecks(); renderPacketStatus(); });
 
-  /* ---------- Step 2: sub-questions ---------- */
+  /* ---------- Sub-questions ---------- */
   const SUBQ_PH = ['How does the body normally…?', 'What changes when…?', 'What do studies show about…?', 'Who is most affected by…, and why?'];
   function renderSubqs() {
     while (PJ.subqs.length < 2) PJ.subqs.push({ id: newId(), text: '' });
@@ -2625,14 +2620,15 @@
     const q = PJ.subqs.find(x => x.id === e.target.closest('li').dataset.id);
     if (q) { q.text = e.target.value; savePJ(); }
   });
+  $('#subq-list').addEventListener('change', () => { renderMatrix(); renderCER(); renderPacketStatus(); });
   $('#subq-list').addEventListener('click', e => {
     if (!e.target.closest('[data-sq-remove]')) return;
     const id = e.target.closest('li').dataset.id;
     const hasWork = Object.values(PJ.matrix[id] || {}).some(v => v.trim()) || Object.values(PJ.cer[id] || {}).some(v => typeof v === 'string' && v.trim());
-    if (hasWork && !confirm('This sub-question has notes or a claim in Step 5. Remove it and that work?')) return;
+    if (hasWork && !confirm('This sub-question has notes or a claim. Remove it and that work?')) return;
     PJ.subqs = PJ.subqs.filter(q => q.id !== id);
     delete PJ.matrix[id]; delete PJ.cer[id];
-    savePJ(); renderSubqs();
+    savePJ(); renderSubqs(); renderMatrix(); renderCER();
   });
   $('#subq-add').addEventListener('click', () => {
     PJ.subqs.push({ id: newId(), text: '' });
@@ -2651,27 +2647,11 @@
     renderSubqs();
   }
 
-  /* ---------- Step 5: organize ---------- */
-  let orgTab = 'sources';
-  function renderProgress() {
-    const qs = liveSubqs(), n = MS.sources.length;
-    const checked = MS.sources.filter(s => craapComplete(s.craap)).length;
-    const annotated = MS.sources.filter(s => annotation(s)).length;
-    const covered = qs.filter(q => notesFor(q.id).length >= 2).length;
-    const claims = qs.filter(q => ((PJ.cer[q.id] || {}).claim || '').trim()).length;
-    const pill = (num, rest) => `<span class="pill"><b>${num}</b> ${rest}</span>`;
-    $('#org-progress').innerHTML = [
-      pill(n, `source${n === 1 ? '' : 's'}`),
-      pill(checked, `of ${n} checked`),
-      pill(annotated, `of ${n} annotated`),
-      pill(covered, `of ${qs.length} sub-questions with 2+ sources`),
-      pill(claims, `of ${qs.length} claims written`),
-    ].join('');
-  }
+  /* ---------- Evidence matrix ---------- */
   function renderMatrix() {
     const qs = liveSubqs(), el = $('#matrix-body');
-    if (!qs.length) { el.innerHTML = '<p class="empty-note" style="margin-top:1rem">Your sub-questions become the rows. <a href="#subqs">Write them in Step 2 →</a></p>'; return; }
-    if (!MS.sources.length) { el.innerHTML = '<p class="empty-note" style="margin-top:1rem">Your sources become the columns. Add one in <b>a · My sources</b> first.</p>'; return; }
+    if (!qs.length) { el.innerHTML = '<p class="empty-note" style="margin-top:1rem">Your sub-questions become the rows. <a href="#subqs">Write them above ↑</a></p>'; return; }
+    if (!MS.sources.length) { el.innerHTML = '<p class="empty-note" style="margin-top:1rem">Your sources become the columns. Save some to <a href="#my-sources">My sources</a> first.</p>'; return; }
     el.innerHTML = `<div class="matrix-wrap"><table class="matrix">
       <thead><tr><th scope="col">Sub-question</th>${MS.sources.map(s =>
         `<th scope="col">${esc(srcLabel(s))}<span class="src-title">${esc((s.title || '').slice(0, 70))}${(s.title || '').length > 70 ? '…' : ''}</span></th>`).join('')}</tr></thead>
@@ -2692,12 +2672,13 @@
     savePJ();
     const row = e.target.closest('tr');
     $('.q-status', row).outerHTML = qStatus(q);
-    renderProgress();
   });
+  // Notes can be picked as evidence, so refresh the claims when a note is finished.
+  $('#matrix-body').addEventListener('change', () => renderCER());
 
   function renderCER() {
     const qs = liveSubqs(), el = $('#cer-body');
-    if (!qs.length) { el.innerHTML = '<div class="card"><p class="empty-note">Each sub-question gets its own claim. <a href="#subqs">Write your sub-questions in Step 2 →</a></p></div>'; return; }
+    if (!qs.length) { el.innerHTML = '<div class="card"><p class="empty-note">Each sub-question gets its own claim. <a href="#subqs">Write your sub-questions above ↑</a></p></div>'; return; }
     el.innerHTML = qs.map((q, i) => {
       const c = PJ.cer[q.id] || {}, notes = notesFor(q.id), ev = Array.isArray(c.ev) ? c.ev : [];
       return `<article class="card cer-card" data-q="${q.id}">
@@ -2712,7 +2693,7 @@
             <p class="cer-h"><span class="cer-letter" aria-hidden="true">E</span> Evidence: which of your notes prove it?</p>
             ${notes.length ? `<div class="ev-list">${notes.map(s => `<label><input type="checkbox" data-ev="${s.id}" ${ev.includes(s.id) ? 'checked' : ''}>
               <span><span class="ev-src">${esc(srcLabel(s))}:</span> ${esc(noteFor(q.id, s.id))}</span></label>`).join('')}</div>`
-              : '<p class="hint">No notes for this sub-question yet. Add them in <button type="button" class="chip-btn sm" data-goto-tab="matrix">b · Evidence matrix</button></p>'}
+              : '<p class="hint">No notes for this sub-question yet. Add them in the <a href="#matrix">evidence matrix ↑</a>.</p>'}
             <label for="cer-e-${q.id}" style="display:block;margin-top:.75rem;font-weight:600">Write the evidence in your own sentence, with the source in parentheses</label>
             <textarea id="cer-e-${q.id}" data-cer="evidence" rows="2" placeholder="In a study of…, researchers found… (Author, Year).">${esc(c.evidence || '')}</textarea>
           </div>
@@ -2731,70 +2712,17 @@
     if (e.target.dataset.cer) c[e.target.dataset.cer] = e.target.value;
     if (e.target.dataset.ev) c.ev = $$('[data-ev]:checked', card).map(x => x.dataset.ev);
     savePJ();
-    renderProgress();
-  });
-  $('#cer-body').addEventListener('click', e => {
-    const b = e.target.closest('[data-goto-tab]');
-    if (b) { orgTab = b.dataset.gotoTab; renderOrganize(); }
+    renderPacketStatus();
   });
 
-  function renderOrganize() {
-    const q = (sb.question || '').trim();
-    $('#org-question').innerHTML = q
-      ? `${esc(q)} <a class="small" href="#question" style="font-family:var(--font-body)">Edit in Step 2</a>`
-      : '<span class="muted">Not written yet.</span> <a class="small" href="#question" style="font-family:var(--font-body)">Write it in Step 2 →</a>';
-    $$('#org-tabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === orgTab));
-    $$('#view-organize [data-panel]').forEach(p => { p.hidden = p.dataset.panel !== orgTab; });
-    renderProgress();
-    renderMySources();
+  function renderProject() {
+    renderAsk();
     renderMatrix();
     renderCER();
-  }
-  pressGroup($('#org-tabs'), b => { orgTab = b.dataset.tab; renderOrganize(); });
-
-  /* ---------- "Ready to move on?" checklists ---------- */
-  const CHECKS = {
-    explore: ['I read at least 2 background sources on my topic.', 'I can explain the basic biology of my topic in my own words.', 'I saved the sources I might use to My sources.'],
-    ask: ['My question asks how or why. It isn’t yes/no or answerable with one fact.', 'I wrote 2–4 sub-questions.', 'I checked my question with my teacher or librarian.'],
-    search: ['I turned my question into 2–3 key ideas, with other words for each.', 'I searched at least two databases.', 'I saved at least 3 research studies or articles.'],
-    evaluate: ['I read laterally: I checked what other sites say about each publisher.', 'I rated every source I plan to cite.', 'I replaced any source marked “Red flag” or “Weak.”'],
-    organize: ['Every source has an annotation.', 'Every sub-question has notes from at least 2 sources.', 'My notes are in my own words. Quotes are in quotation marks with a page or paragraph.', 'I wrote a claim, evidence, and reasoning for each sub-question.'],
-    cite: ['Every source has a complete citation (no “Missing” tags in Step 5).', 'I double-checked my citations against the style guide.', 'I pasted my research packet into my Google Doc.'],
-  };
-  const stepDone = key => CHECKS[key].every((_, i) => (PJ.checks[key] || [])[i]);
-  function renderChecklists() {
-    $$('[data-checklist]').forEach(el => {
-      const key = el.dataset.checklist, done = PJ.checks[key] || [];
-      el.className = 'box box-check';
-      el.innerHTML = `<p class="box-label"><span aria-hidden="true">✓</span> Ready to move on?</p>
-        <p class="hint" style="margin-top:0">Check off each one before you go to the next step.</p>
-        <ul class="checklist">${CHECKS[key].map((t, i) => `<li><label><input type="checkbox" data-ck="${key}" data-i="${i}" ${done[i] ? 'checked' : ''}><span>${t}</span></label></li>`).join('')}</ul>
-        <p class="check-done" ${stepDone(key) ? '' : 'hidden'}>✓ Step complete. Nice work.</p>`;
-    });
-  }
-  document.addEventListener('change', e => {
-    const key = e.target.dataset && e.target.dataset.ck;
-    if (!key) return;
-    (PJ.checks[key] = PJ.checks[key] || [])[+e.target.dataset.i] = e.target.checked;
-    savePJ();
-    $('.check-done', e.target.closest('[data-checklist]')).hidden = !stepDone(key);
-  });
-  function updateStepMarks() {
-    Object.keys(CHECKS).forEach(key => {
-      const link = $(`.step[data-nav="${key}"]`);
-      if (link) link.toggleAttribute('data-done', stepDone(key));
-    });
-    renderStartMap();
-  }
-  function renderStartMap() {
-    $('#start-map').innerHTML = STEP_INFO.map((s, i) => `<li><a class="st${i + 1}" href="${s.href}">
-      <span class="sm-n">Step ${i + 1}${stepDone(s.key) ? ' · ✓ done' : ''}</span>
-      <span class="sm-t">${esc(s.name)}</span>
-      <span class="sm-make">You'll make: ${esc(s.make)}</span>
-      ${DUE[s.key] ? `<span class="sm-due">Due ${esc(DUE[s.key])}</span>` : ''}</a></li>`).join('');
+    renderPacketStatus();
   }
 
-  /* ---------- Step 6: export ---------- */
+  /* ---------- Export: annotated bibliography and research packet ---------- */
   const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
   const FONT = 'font-family:Times New Roman,serif;font-size:12pt;line-height:2;';
   function bibHTML(list, { heading = true } = {}) {
@@ -2813,10 +2741,7 @@
     }
     items.forEach(({ s, cite }) => {
       let note = annotation(s);
-      if (MS.includeCraap && craapComplete(s.craap)) {
-        const v = craapVerdict(s.craap);
-        note += (note ? ' ' : '') + `Source check: ${v.total}/25 (${v.label.split(':')[0]}).`;
-      }
+      if (MS.includeEval && evalNote(s)) note += (note ? ' ' : '') + evalNote(s);
       html += `<p style="${FONT}margin:0;padding-left:0.5in;text-indent:-0.5in;">${cite}</p>`;
       text += plain(cite) + '\n';
       if (note) {
@@ -2854,7 +2779,7 @@
       text += '\n';
     });
     const bib = bibHTML(MS.sources, { heading: false });
-    const title = MS.style === 'APA' ? 'Annotated Bibliography' : 'Annotated Works Cited';
+    const title = 'Annotated Bibliography';
     html += P(`<b>${title}</b>`, 'text-align:center;margin-top:24pt;') + bib.html;
     text += `\n${title}\n\n${bib.text}`;
     return { html, text: text.trim() };
@@ -2873,21 +2798,32 @@
     return gaps;
   }
   function renderPacketStatus() {
-    $$('#ms-style button').forEach(b => b.setAttribute('aria-pressed', b.dataset.style === MS.style));
-    $('#ms-include-craap').checked = !!MS.includeCraap;
     const gaps = packetGaps();
     $('#packet-status').innerHTML = gaps.length
       ? `<b>Still to do:</b> ${esc(gaps.join('; '))}. You can copy it now and finish later.`
       : '✓ Everything is filled in.';
   }
-  pressGroup($('#ms-style'), b => { MS.style = b.dataset.style; saveMS(); });
-  $('#ms-include-craap').addEventListener('change', e => { MS.includeCraap = e.target.checked; saveMS(); });
+  function bibGaps() {
+    const n = f => MS.sources.filter(f).length;
+    const missing = n(s => missingFor(s).length), noNotes = n(s => !annotation(s)), unchecked = n(needsEval);
+    return [
+      missing && `${missing} source${missing === 1 ? '' : 's'} missing citation details`,
+      noNotes && `${noNotes} source${noNotes === 1 ? '' : 's'} without an annotation`,
+      unchecked && `${unchecked} source${unchecked === 1 ? '' : 's'} not evaluated yet`,
+    ].filter(Boolean);
+  }
+  function renderMsStatus() {
+    const gaps = bibGaps();
+    $('#ms-status').innerHTML = !MS.sources.length ? ''
+      : gaps.length ? `<b>Still to do:</b> ${esc(gaps.join('; '))}.` : '✓ Every source has a complete citation, an annotation, and an evaluation.';
+  }
+  $('#ms-include-eval').addEventListener('change', e => { MS.includeEval = e.target.checked; saveMS(); });
   $('#ms-copy-all').addEventListener('click', () => {
     if (!MS.sources.length) { toast('Add a source first.'); return; }
-    const missing = MS.sources.filter(s => missingFor(s).length || !annotation(s)).length;
+    const gaps = bibGaps();
     const { html, text } = bibHTML(MS.sources);
-    copyRich(html, text, missing
-      ? `Copied. ${missing} source${missing === 1 ? ' is' : 's are'} missing details or notes, so check those before you hand it in.`
+    copyRich(html, text, gaps.length
+      ? `Copied. Before you hand it in: ${gaps.join('; ')}.`
       : 'Annotated bibliography copied. Paste it into your Google Doc.');
   });
   $('#ms-copy-packet').addEventListener('click', () => {
@@ -2917,17 +2853,18 @@
       let added = 0;
       data.sources.forEach(raw => {
         if (!raw || typeof raw !== 'object' || MS.sources.some(x => x.id === raw.id)) return;
-        const s = { id: typeof raw.id === 'string' ? raw.id : newId(), stage: 'Background', craap: null, lateral: '', summary: '', helps: '' };
-        [...CITE_FIELDS, 'stage', 'summary', 'helps', 'lateral'].forEach(k => { if (typeof raw[k] === 'string') s[k] = raw[k]; });
+        const s = { id: typeof raw.id === 'string' ? raw.id : newId(), stage: 'Background', craap: null, sift: null, summary: '', helps: '' };
+        [...CITE_FIELDS, 'stage', 'summary', 'helps'].forEach(k => { if (typeof raw[k] === 'string') s[k] = raw[k]; });
         if (raw.craap && typeof raw.craap === 'object') s.craap = Object.fromEntries(CRAAP_IDS.map(k => [k, Number.isInteger(raw.craap[k]) ? raw.craap[k] : undefined]));
+        if (raw.sift && typeof raw.sift === 'object') s.sift = Object.fromEntries(['kind', 'coverage', 'verdict', ...SIFT_TEXT].map(k => [k, typeof raw.sift[k] === 'string' ? raw.sift[k] : '']));
         if (!['web', 'journal'].includes(s.type)) s.type = 'web';
         MS.sources.push(s); added++;
       });
       if (!(sb.question || '').trim() && typeof data.question === 'string') { sb.question = data.question; saveSb(); }
       // Take the backup's project work only if this browser doesn't have any yet, so nothing gets overwritten.
       let tookProject = false;
-      if (data.project && !liveSubqs().length && !Object.keys(PJ.matrix).length) { PJ = cleanProject(data.project); savePJ(); renderChecklists(); tookProject = true; }
-      saveMS(); syncAddButtons(); renderPacketStatus();
+      if (data.project && !liveSubqs().length && !Object.keys(PJ.matrix).length) { PJ = cleanProject(data.project); savePJ(); tookProject = true; }
+      saveMS(); syncAddButtons(); renderMySources();
       toast(added || tookProject ? `Loaded ${added} source${added === 1 ? '' : 's'}${tookProject ? ' and your project notes' : ''} from the backup.` : 'Those sources are already here.');
     } catch {
       toast('That file isn’t a backup from this site.');
@@ -2939,14 +2876,12 @@
     const d = readForm();
     if (!['authors', 'title', 'container', 'link'].some(k => d[k])) { toast('Fill in the form first.'); return; }
     addSource({ ...d, stage: d.type === 'journal' ? 'Research' : 'Background' });
-    toast('Saved to My sources (Step 5). Add your annotation there.');
-    renderPacketStatus();
+    toast('Saved to My sources. Write your annotation there.');
   });
 
   updateMsCount();
   syncAddButtons();
-  renderChecklists();
-  updateStepMarks();
+  $('#nav-project').hidden = !SHOW_PROJECT_TOOLS;
 
   // Clear progress saved by the guided path in an earlier version of the site.
   try { localStorage.removeItem('cvhub-project-v1'); } catch { /* storage unavailable */ }
