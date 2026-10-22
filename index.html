@@ -18,14 +18,10 @@
     --surface: #ffffff;
     --surface-2: #f4f1ec;
     --ink: #1c1917;
-    --muted: #57534e;
-    --faint: #78716c;
-    --line: #e7e2dc;
-    --accent: #9b1c1c;
-    --accent-hover: #7f1d1d;
-    --accent-soft: #fbefee;
-    --accent-ink: #7f1d1d;
-    --on-accent: #ffffff;
+    --muted: #4a4541;
+    --faint: #69625c;
+    --line: #e2dcd5;
+    --line-strong: #8a837d;
     --deoxy: #1d4ed8;
     --deoxy-soft: #e8eefc;
     --oxy: #b91c1c;
@@ -41,6 +37,23 @@
     --hero-1: #3b0a0a;
     --hero-2: #6b1414;
 
+    /* One color per research step. Color always comes with a number and a label. */
+    --s1: #0f766e; --s1-soft: #e3f3f1;   /* 1 Explore */
+    --s2: #6d28d9; --s2-soft: #f1ebfd;   /* 2 Ask */
+    --s3: #1d4ed8; --s3-soft: #e8eefc;   /* 3 Search */
+    --s4: #a14a07; --s4-soft: #fcf0e1;   /* 4 Evaluate */
+    --s5: #166534; --s5-soft: #e7f5ec;   /* 5 Organize */
+    --s6: #475569; --s6-soft: #eef1f5;   /* 6 Cite & share */
+    /* Key-idea colors in the search builder */
+    --k1: #be185d; --k1-soft: #fce7f1;
+    --k2: #0e7490; --k2-soft: #e0f4f8;
+    --k3: #a14a07; --k3-soft: #fcf0e1;
+
+    /* Neutral accent outside a step; each step page swaps in its own color. */
+    --accent: #44403c;
+    --accent-soft: #f0ece7;
+    --on-accent: #ffffff;
+
     --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
     --radius: 12px;
@@ -51,43 +64,61 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --bg: #141211; --surface: #1d1a19; --surface-2: #262220; --ink: #f2eeea; --muted: #c4bcb5; --faint: #9c948d;
-      --line: #36312e; --accent: #f08a8a; --accent-hover: #f6a5a5; --accent-soft: #3a1d1d; --accent-ink: #f8b4b4; --on-accent: #1d0a0a;
+      --bg: #141211; --surface: #1d1a19; --surface-2: #262220; --ink: #f2eeea; --muted: #d0c9c2; --faint: #aaa29b;
+      --line: #3a3532; --line-strong: #7a736d;
       --deoxy: #93b4ff; --deoxy-soft: #1b2440; --oxy: #ff9a9a; --oxy-soft: #3d1c1c; --exchange: #c4a6ff; --exchange-soft: #2a2140;
       --ok: #86efac; --ok-soft: #15301f; --warn: #fcd34d; --warn-soft: #33270f; --bad: #fda4af; --bad-soft: #3b1820;
       --hero-1: #240707; --hero-2: #4a0f0f;
+      --s1: #5eead4; --s1-soft: #12302d; --s2: #c4a6ff; --s2-soft: #2a2140; --s3: #93b4ff; --s3-soft: #1b2440;
+      --s4: #fcd34d; --s4-soft: #33270f; --s5: #86efac; --s5-soft: #15301f; --s6: #cbd5e1; --s6-soft: #262c35;
+      --k1: #f9a8d4; --k1-soft: #3a1a2b; --k2: #67e8f9; --k2-soft: #12303a; --k3: #fcd34d; --k3-soft: #33270f;
+      --accent: #e7e2dc; --accent-soft: #2c2826; --on-accent: #111111;
       --shadow: none;
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg: #141211; --surface: #1d1a19; --surface-2: #262220; --ink: #f2eeea; --muted: #c4bcb5; --faint: #9c948d;
-    --line: #36312e; --accent: #f08a8a; --accent-hover: #f6a5a5; --accent-soft: #3a1d1d; --accent-ink: #f8b4b4; --on-accent: #1d0a0a;
+    --bg: #141211; --surface: #1d1a19; --surface-2: #262220; --ink: #f2eeea; --muted: #d0c9c2; --faint: #aaa29b;
+    --line: #3a3532; --line-strong: #7a736d;
     --deoxy: #93b4ff; --deoxy-soft: #1b2440; --oxy: #ff9a9a; --oxy-soft: #3d1c1c; --exchange: #c4a6ff; --exchange-soft: #2a2140;
     --ok: #86efac; --ok-soft: #15301f; --warn: #fcd34d; --warn-soft: #33270f; --bad: #fda4af; --bad-soft: #3b1820;
     --hero-1: #240707; --hero-2: #4a0f0f;
+    --s1: #5eead4; --s1-soft: #12302d; --s2: #c4a6ff; --s2-soft: #2a2140; --s3: #93b4ff; --s3-soft: #1b2440;
+    --s4: #fcd34d; --s4-soft: #33270f; --s5: #86efac; --s5-soft: #15301f; --s6: #cbd5e1; --s6-soft: #262c35;
+    --k1: #f9a8d4; --k1-soft: #3a1a2b; --k2: #67e8f9; --k2-soft: #12303a; --k3: #fcd34d; --k3-soft: #33270f;
+    --accent: #e7e2dc; --accent-soft: #2c2826; --on-accent: #111111;
     --shadow: none;
   }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) [data-stage] { --on-accent: #111111; } }
+  :root[data-theme="dark"] [data-stage] { --on-accent: #111111; }
+
+  /* Each step page takes its step's color for buttons, links, and highlights. */
+  [data-stage="1"] { --accent: var(--s1); --accent-soft: var(--s1-soft); }
+  [data-stage="2"] { --accent: var(--s2); --accent-soft: var(--s2-soft); }
+  [data-stage="3"] { --accent: var(--s3); --accent-soft: var(--s3-soft); }
+  [data-stage="4"] { --accent: var(--s4); --accent-soft: var(--s4-soft); }
+  [data-stage="5"] { --accent: var(--s5); --accent-soft: var(--s5-soft); }
+  [data-stage="6"] { --accent: var(--s6); --accent-soft: var(--s6-soft); }
 
   /* ---------- Base ---------- */
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
-    font: 400 1rem/1.6 var(--font-body);
+    font: 400 1.0625rem/1.6 var(--font-body);
     -webkit-font-smoothing: antialiased;
     min-height: 100vh; display: flex; flex-direction: column;
   }
   img { max-width: 100%; }
   [hidden] { display: none !important; }
   h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; margin: 0; color: var(--ink); }
-  h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); }
-  h3 { font-size: 1.25rem; }
-  h4 { font-family: var(--font-body); font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); }
+  h2 { font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem); }
+  h3 { font-size: 1.3rem; }
+  h4 { font-family: var(--font-body); font-size: 1rem; font-weight: 700; color: var(--ink); }
   p { margin: 0; }
   a { color: var(--accent); text-underline-offset: 2px; }
-  a:hover { color: var(--accent-hover); }
-  ::selection { background: var(--accent-soft); color: var(--accent-ink); }
+  a:hover { text-decoration-thickness: 2px; }
+  ::selection { background: var(--accent-soft); color: var(--ink); }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
   .wrap { max-width: var(--max); margin: 0 auto; padding-inline: max(1rem, env(safe-area-inset-left, 0px)); }
   .skip { position: absolute; left: -9999px; top: 0; background: var(--surface); padding: .5rem 1rem; z-index: 100; }
@@ -95,199 +126,432 @@
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .icon { width: 1.1em; height: 1.1em; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.15em; }
   .muted { color: var(--muted); }
-  .small { font-size: .875rem; }
+  .small { font-size: .95rem; }
   .stack > * + * { margin-top: 1rem; }
   .stack-lg > * + * { margin-top: 2rem; }
+  b, strong { font-weight: 700; }
 
   /* ---------- Header ---------- */
   .site-header { background: linear-gradient(115deg, var(--hero-1), var(--hero-2)); color: #fff; }
-  .brand { display: flex; align-items: center; gap: 1rem; padding-block: 1.5rem; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 1rem; padding-block: 1.25rem; flex-wrap: wrap; }
   .brand-mark { width: 3rem; height: 3rem; border-radius: 12px; display: grid; place-items: center; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: #fca5a5; }
   .brand-mark .icon { width: 1.6rem; height: 1.6rem; animation: beat 2s infinite; transform-origin: center; }
   @keyframes beat { 0%,28%,70%,100% { transform: scale(1); } 14% { transform: scale(1.1); } 42% { transform: scale(1.05); } }
   .brand h1 { color: #fff; font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.25rem); }
-  .brand .eyebrow { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: #fcd9a8; font-weight: 600; }
+  .brand .eyebrow { font-size: .9rem; color: #fcd9a8; font-weight: 600; }
+  .brand-link { color: inherit; text-decoration: none; }
+  .brand-link:hover { color: inherit; }
 
-  .tabs-bar { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
-  .tabs { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab {
-    display: inline-flex; align-items: center; gap: .5rem; white-space: nowrap;
-    padding: .9rem 1rem; color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem;
-    border-bottom: 3px solid transparent; margin-bottom: -1px;
+  /* ---------- Step bar (the research process, always visible) ---------- */
+  .steps-bar { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; }
+  .steps { list-style: none; margin: 0 auto; padding-block: .5rem; display: grid; grid-template-columns: repeat(6, 1fr); gap: .35rem; }
+  .step {
+    display: flex; align-items: center; gap: .55rem; height: 100%; text-decoration: none; color: var(--ink);
+    padding: .5rem .6rem; border-radius: var(--radius-sm); border: 1px solid transparent; position: relative;
   }
-  .tab:hover { color: var(--ink); }
+  .step:hover { background: var(--surface-2); }
+  .step-n {
+    flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center;
+    font-weight: 700; font-size: .95rem; color: var(--c); background: var(--surface); border: 2px solid var(--c);
+  }
+  .step-t { display: grid; line-height: 1.2; font-weight: 600; font-size: .98rem; }
+  .step-t small { font-weight: 400; font-size: .8rem; color: var(--muted); }
+  .step[aria-current="page"] { background: var(--c-soft); border-color: var(--c); }
+  .step[aria-current="page"] .step-n { background: var(--c); color: var(--surface); }
+  .step[data-done] .step-n::after {
+    content: "✓"; position: absolute; top: .15rem; left: 1.9rem; width: 1.05rem; height: 1.05rem; border-radius: 50%;
+    display: grid; place-items: center; font-size: .65rem; background: var(--ok); color: var(--surface); border: 2px solid var(--surface);
+  }
+  .st1 { --c: var(--s1); --c-soft: var(--s1-soft); }
+  .st2 { --c: var(--s2); --c-soft: var(--s2-soft); }
+  .st3 { --c: var(--s3); --c-soft: var(--s3-soft); }
+  .st4 { --c: var(--s4); --c-soft: var(--s4-soft); }
+  .st5 { --c: var(--s5); --c-soft: var(--s5-soft); }
+  .st6 { --c: var(--s6); --c-soft: var(--s6-soft); }
+  @media (max-width: 900px) { .step-t small { display: none; } }
+  .step-t .count-badge { justify-self: start; margin-left: 0; margin-top: .1rem; }
+  @media (max-width: 640px) {
+    .card { padding: 1.1rem; }
+    .stage-head { padding-left: .9rem; border-left-width: 5px; }
+    .box { padding: 1rem; }
+  }
+  @media (max-width: 640px) {
+    .steps { grid-template-columns: repeat(3, 1fr); }
+    .step { padding: .4rem; gap: .4rem; }
+    .step-t { font-size: .88rem; }
+    .step-n { width: 1.6rem; height: 1.6rem; font-size: .85rem; }
+    .step[data-done] .step-n::after { left: 1.55rem; }
+  }
 
   main { flex: 1; width: 100%; padding-block: 2rem 3rem; }
+
+  /* ---------- Step page header ---------- */
+  .stage-head { border-left: 6px solid var(--accent); padding: .25rem 0 .25rem 1.25rem; }
+  .stage-eyebrow { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; color: var(--accent); font-size: .95rem; }
+  .stage-head h2 { margin-top: .3rem; }
+  .lede { max-width: 62ch; margin-top: .6rem; font-size: 1.1rem; }
+  .step-nav-bottom { display: flex; justify-content: space-between; gap: .75rem; flex-wrap: wrap; align-items: center; }
 
   /* ---------- Generic components ---------- */
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }
   .card-tight { padding: 1.25rem; }
+  .card > h3 + p, .card > h3 + .lede-sm { margin-top: .4rem; }
+  .lede-sm { max-width: 64ch; }
   .section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; }
   .section-head p { max-width: 46rem; margin-top: .4rem; }
   .grid { display: grid; gap: 1.25rem; }
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
   .grid-3 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
   .grid-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+  .numbered-h { display: flex; align-items: center; gap: .6rem; }
+  .numbered-h .n { flex: none; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font: 700 .95rem/1 var(--font-body); }
 
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-    font: 600 .9rem/1 var(--font-body); padding: .7rem 1.1rem; border-radius: var(--radius-sm);
-    border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: background .15s, color .15s, border-color .15s;
+    font: 600 .95rem/1.1 var(--font-body); padding: .7rem 1.1rem; border-radius: var(--radius-sm);
+    border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: background .15s, color .15s, border-color .15s, filter .15s;
   }
   .btn-primary { background: var(--accent); color: var(--on-accent); }
-  .btn-primary:hover { background: var(--accent-hover); color: var(--on-accent); }
-  .btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--line); }
+  .btn-primary:hover { filter: brightness(.9); color: var(--on-accent); }
+  .btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
   .btn-secondary:hover { background: var(--surface-2); color: var(--ink); }
-  .btn:disabled { opacity: .4; cursor: not-allowed; }
-  .btn-sm { padding: .5rem .8rem; font-size: .825rem; }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn-sm { padding: .55rem .85rem; font-size: .9rem; }
 
   .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
   .chip-btn {
-    font: 500 .85rem/1 var(--font-body); padding: .55rem .85rem; border-radius: 999px; cursor: pointer;
-    background: var(--surface); color: var(--muted); border: 1px solid var(--line);
+    font: 500 .92rem/1 var(--font-body); padding: .55rem .85rem; border-radius: 999px; cursor: pointer;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--line-strong);
   }
-  .chip-btn:hover { color: var(--ink); border-color: var(--faint); }
+  .chip-btn:hover { border-color: var(--accent); }
   .chip-btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-  .tag { display: inline-block; font-size: .75rem; font-weight: 600; padding: .2rem .55rem; border-radius: 6px; background: var(--surface-2); color: var(--muted); }
+  .tag { display: inline-block; font-size: .8rem; font-weight: 600; padding: .2rem .55rem; border-radius: 6px; background: var(--surface-2); color: var(--muted); }
   .tag-peer { background: var(--ok-soft); color: var(--ok); }
   .tag-bg { background: var(--warn-soft); color: var(--warn); }
   .tag-data { background: var(--deoxy-soft); color: var(--deoxy); }
   .tag-visual { background: var(--exchange-soft); color: var(--exchange); }
 
-
-  label, legend { font-weight: 600; font-size: .9rem; }
+  label, legend { font-weight: 600; font-size: 1rem; }
   input[type="text"], input[type="search"], select, textarea {
-    width: 100%; font: 400 .95rem/1.4 var(--font-body); color: var(--ink);
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .6rem .75rem;
+    width: 100%; font: 400 1rem/1.45 var(--font-body); color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: .6rem .75rem;
   }
   textarea { resize: vertical; min-height: 4.5rem; }
-  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: transparent; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+  ::placeholder { color: var(--faint); opacity: 1; }
   .field > label { display: block; margin-bottom: .3rem; }
-  .hint { font-size: .8rem; color: var(--faint); margin-top: .25rem; font-weight: 400; }
+  .hint { font-size: .92rem; color: var(--muted); margin-top: .3rem; font-weight: 400; }
 
-  /* ---------- Overview ---------- */
-  .hero { position: relative; overflow: hidden; padding: clamp(1.5rem, 3vw, 2.5rem); }
-  .hero h2 { font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem); max-width: 30ch; }
-  .hero p { max-width: 60ch; margin-top: .9rem; color: var(--muted); font-size: 1.05rem; }
-    counter-increment: s; content: counter(s); position: absolute; top: 1.25rem; left: 1.5rem;
-    width: 1.75rem; height: 1.75rem; border-radius: 50%; display: grid; place-items: center;
-    background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: .85rem;
-  }
+  /* ---------- Box types: each kind of box always means the same thing ---------- */
+  .box { border-radius: var(--radius); padding: 1.1rem 1.25rem; }
+  .box-label { display: flex; align-items: center; gap: .45rem; font-weight: 700; font-size: .95rem; margin-bottom: .35rem; }
+  .box-label .icon { width: 1.2em; height: 1.2em; }
+  .box ul, .box ol { margin: .4rem 0 0; padding-left: 1.2rem; display: grid; gap: .35rem; }
+  /* Your task: what to do or make in this step */
+  .box-task { background: var(--accent-soft); border-left: 6px solid var(--accent); }
+  .box-task .box-label { color: var(--accent); }
+  /* Example: a model of finished work. Collapsible so students who don't need it can skip it. */
+  .box-example { border: 2px dashed var(--line-strong); background: var(--surface); padding: 0; }
+  .box-example > summary { list-style: none; cursor: pointer; padding: .85rem 1.25rem; font-weight: 700; display: flex; align-items: center; gap: .5rem; }
+  .box-example > summary::-webkit-details-marker { display: none; }
+  .box-example > summary::before { content: "▸"; color: var(--accent); transition: transform .15s; }
+  .box-example[open] > summary::before { transform: rotate(90deg); }
+  .box-example > summary .tag { margin-left: .25rem; }
+  .box-example .ex-body { padding: 0 1.25rem 1.1rem; }
+  .box-example .ex-body > * + * { margin-top: .6rem; }
+  .model { font-family: var(--font-display); font-size: 1.05rem; background: var(--surface-2); border-radius: var(--radius-sm); padding: .75rem 1rem; }
+  /* Tip / watch out */
+  .box-tip { background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); }
+  .box-tip .box-label { color: var(--warn); }
+  /* "This is normal" */
+  .box-feel { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line-strong); }
+  /* Ready to move on? */
+  .box-check { background: var(--surface); border: 2px solid var(--accent); }
+  .box-check .box-label { color: var(--accent); font-size: 1.05rem; }
+  .checklist { list-style: none; padding: 0 !important; margin: .6rem 0 0 !important; gap: .5rem !important; }
+  .checklist label { display: flex; gap: .65rem; align-items: flex-start; font-weight: 400; cursor: pointer; }
+  .checklist input { accent-color: var(--accent); width: 1.2rem; height: 1.2rem; margin: .2rem 0 0; flex: none; }
+  .check-done { margin-top: .75rem; font-weight: 600; color: var(--ok); }
 
-  /* ---------- Pathways ---------- */
-  .questions { background: var(--pw-soft); border-radius: var(--radius-sm); padding: 1rem 1.1rem; }
-  .questions h4 { color: var(--pw); }
-  .questions ul { margin: .5rem 0 0; padding-left: 1.1rem; display: grid; gap: .5rem; font-size: .95rem; }
+  /* ---------- Home: start here ---------- */
+  .start-map { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 1080px) { .start-map { grid-template-columns: repeat(6, 1fr); } }
+  @media (max-width: 640px) { .start-map { grid-template-columns: repeat(2, 1fr); } }
+  .start-map a { display: grid; gap: .25rem; height: 100%; text-decoration: none; color: var(--ink); padding: .8rem .9rem; border-radius: var(--radius-sm); border: 1px solid var(--line); border-top: 5px solid var(--c); background: var(--surface); }
+  .start-map a:hover { background: var(--c-soft); }
+  .start-map .sm-n { font-weight: 700; color: var(--c); font-size: .9rem; }
+  .start-map .sm-t { font-weight: 700; font-family: var(--font-display); font-size: 1.1rem; }
+  .start-map .sm-make { font-size: .9rem; color: var(--muted); }
+  .start-map .sm-due { font-size: .85rem; font-weight: 600; color: var(--c); }
+  .deliverables { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .3rem; }
+
+  /* ---------- Explore / resources ---------- */
+  .hero { position: relative; overflow: hidden; padding: clamp(1.5rem, 3vw, 2.25rem); }
+  .hero h2 { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); }
+  .hero p { max-width: 60ch; margin-top: .6rem; }
+  .lib-search { margin-top: 1.25rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+  .lib-search .db-search-input { flex: 1 1 18rem; }
+  .lib-search input { font-size: 1.05rem; min-height: 3rem; }
+  .format-chips { margin-top: .9rem; }
+  .results-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1rem; margin-bottom: 1rem; }
+  .results-head h2 { font-size: 1.4rem; }
+  .fallback { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: var(--radius); border: 1px dashed var(--line-strong); }
+  .fallback p + p { margin-top: .35rem; }
+  .fallback a { font-weight: 600; }
+  .section-title { font-size: 1.4rem; margin-bottom: 1rem; }
+  .crumbs { font-size: .95rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+  .crumbs a { color: var(--muted); }
+
+  .topic-card { display: flex; flex-direction: column; gap: .5rem; text-decoration: none; color: var(--ink); transition: border-color .15s; border-top: 4px solid var(--accent); }
+  .topic-card:hover { border-color: var(--accent); color: var(--ink); }
+  .topic-card h3 { font-size: 1.2rem; }
+  .topic-card p { color: var(--muted); font-size: .98rem; flex: 1; }
+  .topic-card .subs { font-size: .9rem; color: var(--muted); }
+  .topic-card .count { font-size: .92rem; font-weight: 600; color: var(--accent); }
+
+  .res { position: relative; display: flex; flex-direction: column; gap: .45rem; transition: border-color .15s; }
+  .res:hover { border-color: var(--accent); }
+  .res-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+  .res h3 { font-size: 1.1rem; line-height: 1.3; }
+  .res h3 a { color: var(--ink); text-decoration: none; }
+  .res h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+  .res h3 a:hover { color: var(--accent); }
+  .res h3 .icon { width: .85em; height: .85em; color: var(--faint); margin-left: .25rem; }
+  .res .publisher { font-size: .88rem; color: var(--muted); }
+  .res .why { font-size: .98rem; }
+  .res .where { font-size: .88rem; color: var(--muted); margin-top: auto; position: relative; z-index: 1; }
+  .tag-star { background: var(--accent-soft); color: var(--accent); }
+  .tag-site { background: var(--ink); color: var(--bg); }
+
+  .topic-head p { max-width: 62ch; margin-top: .5rem; font-size: 1.08rem; }
+  .topic-filters { display: grid; gap: .6rem; margin-top: 1.25rem; }
+  .topic-filters .label { font-size: .95rem; font-weight: 700; margin-right: .25rem; align-self: center; }
+  .sub-section h3 { font-size: 1.25rem; margin-bottom: .9rem; }
+  .empty-note { color: var(--muted); }
+  .questions ul { margin: .5rem 0 0; padding-left: 1.1rem; display: grid; gap: .5rem; }
   .search-links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
   .search-links a {
-    display: inline-flex; align-items: center; gap: .35rem; font-size: .85rem; text-decoration: none;
-    padding: .35rem .65rem; border-radius: 999px; border: 1px solid var(--line); color: var(--ink);
+    display: inline-flex; align-items: center; gap: .35rem; font-size: .92rem; text-decoration: none;
+    padding: .4rem .7rem; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink); background: var(--surface);
   }
   .search-links a:hover { border-color: var(--accent); color: var(--accent); }
   .search-links .icon { width: .9em; height: .9em; color: var(--faint); }
 
-  /* ---------- Sources ---------- */
-  .db-search { margin-top: 1.25rem; padding: 1.1rem 1.25rem; border-radius: var(--radius); background: var(--surface-2); }
-  .db-search > label { display: block; margin-bottom: .5rem; font-size: 1rem; }
+  /* ---------- Ask: question web ---------- */
+  .web { margin-top: 1.25rem; display: grid; gap: 1rem; }
+  .web-center { justify-self: center; text-align: center; max-width: 34rem; padding: .9rem 1.4rem; border-radius: 999px; background: var(--accent); color: var(--on-accent); font: 700 1.2rem/1.25 var(--font-display); position: relative; }
+  .web-branches { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); padding: 1rem; border: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: var(--radius); }
+  .web-branch { position: relative; border: 2px solid var(--accent); border-radius: var(--radius); background: var(--surface); padding: .8rem .9rem; display: grid; gap: .45rem; align-content: start; }
+  .web-center::after { content: ""; position: absolute; left: 50%; top: 100%; width: 2px; height: 1rem; background: var(--accent); opacity: .5; }
+  .web-branch > label, .web-branch > .wb-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
+  .web-branch textarea { min-height: 4.2rem; font-size: .95rem; }
+  .web-branch.own { border-style: dashed; }
+  .web-branch .wb-title-input { font-weight: 700; }
+  .web-tools { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .web-tools select { width: auto; flex: 1 1 16rem; max-width: 28rem; }
+
+  /* Question checker */
+  .q-checks { list-style: none; margin: .75rem 0 0; padding: 0; display: grid; gap: .4rem; }
+  .q-checks li { display: flex; gap: .55rem; align-items: flex-start; }
+  .q-checks .mark { flex: none; width: 1.4rem; height: 1.4rem; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: .8rem; }
+  .q-checks .ok .mark { background: var(--ok-soft); color: var(--ok); }
+  .q-checks .no .mark { background: var(--warn-soft); color: var(--warn); }
+  .compare { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  .compare th, .compare td { text-align: left; padding: .75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .compare th { font-size: .95rem; color: var(--muted); }
+  .compare td:first-child { font-weight: 600; white-space: nowrap; }
+  .compare .weak { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--bad) 60%, transparent); }
+  .table-scroll { overflow-x: auto; }
+
+  /* Sub-questions */
+  .subq-list { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: .6rem; counter-reset: sq; }
+  .subq-list li { display: flex; gap: .5rem; align-items: center; counter-increment: sq; }
+  .subq-list li::before { content: "Q" counter(sq); flex: none; width: 2.4rem; height: 2.4rem; border-radius: var(--radius-sm); display: grid; place-items: center; font-weight: 700; background: var(--accent-soft); color: var(--accent); }
+  .subq-list input { flex: 1; }
+  .icon-btn { flex: none; width: 2.4rem; height: 2.4rem; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); background: var(--surface); color: var(--muted); cursor: pointer; font-size: 1.2rem; line-height: 1; }
+  .icon-btn:hover { color: var(--bad); border-color: var(--bad); }
+
+  /* ---------- Search ---------- */
+  .db-search { margin-top: 1rem; }
+  .db-search > label { display: block; margin-bottom: .5rem; }
   .db-search-row { display: flex; flex-wrap: wrap; gap: .5rem; }
   .db-search-input { position: relative; flex: 1 1 16rem; }
   .db-search-input .icon { position: absolute; left: .8rem; top: 50%; transform: translateY(-50%); color: var(--faint); }
-  .db-search-input input { padding-left: 2.4rem; height: 100%; min-height: 2.75rem; }
+  .db-search-input input { padding-left: 2.4rem; height: 100%; min-height: 2.9rem; }
   .db-pick { border: 0; margin: .75rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
-  .db-pick label { display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .875rem; padding: .4rem .75rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; }
-  .db-pick label span { color: var(--faint); font-size: .8rem; }
+  .db-pick label { display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .95rem; padding: .45rem .8rem; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer; }
+  .db-pick label span { color: var(--muted); font-size: .85rem; }
   .db-pick label:has(input:checked) { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
   .db-pick input { accent-color: var(--accent); margin: 0; }
-  .db-search .hint { margin-top: .6rem; }
   .source-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; }
-
-  /* ---------- Writing ---------- */
-  .compare { width: 100%; border-collapse: collapse; font-size: .925rem; }
-  .compare th, .compare td { text-align: left; padding: .75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  .compare th { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); }
-  .compare td:first-child { font-weight: 600; white-space: nowrap; }
-  .compare .weak { color: var(--muted); }
-  .table-scroll { overflow-x: auto; }
+  .db-card { display: flex; flex-direction: column; gap: .5rem; }
+  .db-card .btn { margin-top: auto; align-self: flex-start; }
   .tool-head { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1.25rem; }
   .tool-head h3 { display: flex; align-items: center; gap: .5rem; }
   .tool-head h3 .icon { color: var(--accent); }
+  .cite-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; align-items: center; }
 
-  .craap-item + .craap-item { margin-top: 1.1rem; }
-  .craap-item .row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
-  .craap-item label { font-size: .925rem; }
-  .craap-item label b { color: var(--accent); }
-  .craap-item output { font-weight: 700; color: var(--accent); min-width: 1.5ch; text-align: right; font-variant-numeric: tabular-nums; }
-  .craap-item .hint { margin-top: 0; }
-  input[type="range"] { width: 100%; accent-color: var(--accent); margin: .5rem 0 0; }
-  .scale { display: flex; justify-content: space-between; font-size: .75rem; color: var(--faint); }
+  .sb-steps { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 1.75rem; counter-reset: sb; }
+  .sb-steps > li { counter-increment: sb; position: relative; padding-left: 2.8rem; }
+  .sb-steps > li::before { content: counter(sb); position: absolute; left: 0; top: 0; width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: .95rem; }
+  .sb-label { display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: .4rem; }
+  .sb-spotted { margin-top: .6rem; display: grid; gap: .4rem; }
+  .sb-concepts { display: grid; gap: .5rem; margin-top: .75rem; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .sb-concepts { grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; } }
+  .sb-and-col { display: grid; place-items: center; font-weight: 800; font-size: .9rem; color: var(--ink); padding: .25rem; }
+  .sb-concept { border: 2px solid var(--kc); border-radius: var(--radius-sm); padding: .85rem; background: var(--kc-soft); display: grid; gap: .5rem; align-content: start; }
+  .sb-concept > label { font-size: .95rem; color: var(--kc); }
+  .sb-or { font-size: .85rem; font-weight: 700; color: var(--kc); }
+  .k1 { --kc: var(--k1); --kc-soft: var(--k1-soft); }
+  .k2 { --kc: var(--k2); --kc-soft: var(--k2-soft); }
+  .k3 { --kc: var(--k3); --kc-soft: var(--k3-soft); }
+  .sb-sugg { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
+  .sb-sugg .hint { margin: 0; }
+  .chip-btn.sm { padding: .38rem .65rem; font-size: .85rem; }
+  .sb-visual { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; padding: .8rem 1rem; border-radius: var(--radius-sm); background: var(--surface-2); min-height: 3rem; }
+  .sb-visual .grp { display: inline-flex; flex-wrap: wrap; gap: .25rem; align-items: center; padding: .3rem .5rem; border-radius: var(--radius-sm); border: 2px solid var(--kc); background: var(--kc-soft); }
+  .sb-visual .term { font-weight: 600; }
+  .sb-visual .op { font-size: .78rem; font-weight: 800; color: var(--kc); }
+  .sb-visual .and { font-size: .85rem; font-weight: 800; padding: 0 .2rem; }
+  .sb-visual .empty { color: var(--muted); }
+  #sb-query { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .95rem; }
+  .tips { margin: .5rem 0 0; padding-left: 1.2rem; display: grid; gap: .45rem; }
+
+  /* ---------- Evaluate ---------- */
+  .eval-pick { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+  .eval-pick select { width: auto; flex: 1 1 18rem; }
+  fieldset.craap-item { border: 0; border-top: 1px solid var(--line); margin: 0; padding: 1rem 0 0; min-width: 0; }
+  .craap-item + .craap-item { margin-top: 1rem; }
+  .craap-item legend { font-size: 1.02rem; padding: 0; }
+  .craap-item legend b { color: var(--accent); }
+  .craap-item fieldset { border: 0; padding: 0; margin: 0; }
+  .rate { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; align-items: center; }
+  .rate label { position: relative; }
+  .rate input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .rate span { display: grid; place-items: center; min-width: 2.6rem; height: 2.4rem; padding: 0 .6rem; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); font-weight: 600; background: var(--surface); }
+  .rate input:checked + span { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .rate input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .rate .ends { font-size: .85rem; color: var(--muted); font-weight: 400; }
   .result { margin-top: 1.5rem; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--surface-2); display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
   .result .score { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .verdict { padding: .4rem .8rem; border-radius: 999px; font-weight: 600; font-size: .875rem; }
+  .verdict { padding: .4rem .8rem; border-radius: 999px; font-weight: 600; font-size: .95rem; }
   .verdict.good { background: var(--ok-soft); color: var(--ok); }
   .verdict.mid { background: var(--warn-soft); color: var(--warn); }
   .verdict.low { background: var(--bad-soft); color: var(--bad); }
-  .result-note { flex-basis: 100%; font-size: .875rem; color: var(--muted); }
+  .verdict.none { background: var(--surface); color: var(--muted); border: 1px solid var(--line-strong); }
+  .result-note { flex-basis: 100%; font-size: .98rem; }
+  .saved-note { font-size: .92rem; color: var(--ok); font-weight: 600; }
 
-  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; }
-  .seg button { font: 600 .825rem/1 var(--font-body); padding: .55rem .8rem; background: var(--surface); color: var(--muted); border: 0; cursor: pointer; }
-  .seg button + button { border-left: 1px solid var(--line); }
+  .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; flex-wrap: wrap; }
+  .seg button { font: 600 .92rem/1 var(--font-body); padding: .6rem .9rem; background: var(--surface); color: var(--ink); border: 0; cursor: pointer; }
+  .seg button + button { border-left: 1px solid var(--line-strong); }
   .seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+  .seg-lg button { padding: .75rem 1.1rem; font-size: 1rem; }
+
+  /* ---------- Citation builder ---------- */
   .form-grid { display: grid; gap: .9rem; grid-template-columns: repeat(6, 1fr); }
   .form-grid .span-6 { grid-column: span 6; }
   .form-grid .span-3 { grid-column: span 3; }
   .form-grid .span-2 { grid-column: span 2; }
   @media (max-width: 520px) { .form-grid .span-3, .form-grid .span-2 { grid-column: span 6; } }
+  .cite-lookup { margin: 0 0 1.25rem; padding: 1rem 1.1rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+  .cite-lookup .hint.is-ok { color: var(--ok); }
+  .cite-lookup .hint.is-bad { color: var(--bad); }
   .cite-out { margin-top: 1.25rem; padding: 1rem 1.1rem; border-radius: var(--radius-sm); background: var(--surface-2); border-left: 4px solid var(--accent); }
-  .cite-out .label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
-  .cite-out p { margin-top: .4rem; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; font-family: var(--font-display); font-size: 1.02rem; }
-  .cite-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; align-items: center; }
+  .cite-out .label { font-size: .9rem; font-weight: 700; color: var(--muted); }
+  .cite-out p { margin-top: .4rem; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; font-family: var(--font-display); font-size: 1.05rem; }
 
-  /* ---------- Lab ---------- */
+  /* ---------- Organize: sources, matrix, CER ---------- */
+  .progress-row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .25rem; }
+  .progress-row .pill { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .8rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line-strong); font-weight: 600; font-size: .95rem; }
+  .progress-row .pill b { font-size: 1.05rem; color: var(--accent); }
+  .q-display { font-family: var(--font-display); font-size: 1.15rem; margin-top: .3rem; }
+  .count-badge { display: inline-grid; place-items: center; min-width: 1.3rem; height: 1.3rem; padding: 0 .35rem; margin-left: .3rem; border-radius: 999px; background: var(--s5); color: var(--surface); font-size: .75rem; font-weight: 700; }
+  .res-actions { position: relative; z-index: 1; margin-top: auto; padding-top: .35rem; }
+  .add-src { font: 600 .88rem/1 var(--font-body); color: var(--accent); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; padding: .5rem .8rem; cursor: pointer; }
+  .add-src:hover { border-color: var(--accent); }
+  .add-src.added { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
+  .ms-check { display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .95rem; }
+  .ms-check input { accent-color: var(--accent); }
+  .ms-cite { font-family: var(--font-display); font-size: 1.05rem; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; }
+  .ms-entry .res-tags { margin-top: .6rem; }
+  .ms-annot { margin-top: .6rem; color: var(--muted); padding-left: 2em; }
+  .ms-edit { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); display: grid; gap: 1rem; }
+  .ms-confirm, .ms-remove { display: inline-flex; flex-wrap: wrap; gap: .4rem; align-items: center; font-size: .95rem; }
+  .btn-danger { background: var(--bad); color: var(--surface); }
+  .btn-danger:hover { filter: brightness(.92); color: var(--surface); }
+  .tag-warn { background: var(--warn-soft); color: var(--warn); }
+  .verdict.tag { padding: .2rem .55rem; border-radius: 6px; font-size: .8rem; }
+
+  .matrix-wrap { overflow-x: auto; margin-top: 1rem; border: 1px solid var(--line); border-radius: var(--radius); }
+  .matrix { border-collapse: separate; border-spacing: 0; min-width: 100%; }
+  .matrix th, .matrix td { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: .6rem; vertical-align: top; text-align: left; }
+  .matrix thead th { background: var(--surface-2); font-size: .9rem; min-width: 14rem; position: sticky; top: 0; }
+  .matrix thead th .src-title { display: block; font-weight: 400; color: var(--muted); font-size: .85rem; margin-top: .15rem; }
+  .matrix tbody th { position: sticky; left: 0; z-index: 1; background: var(--accent-soft); min-width: 13rem; max-width: 18rem; font-size: .98rem; }
+  .matrix thead th:first-child { position: sticky; left: 0; z-index: 2; background: var(--surface-2); }
+  .matrix tbody th .q-n { display: block; color: var(--accent); font-weight: 700; font-size: .85rem; }
+  .matrix tbody th .q-status { display: inline-block; margin-top: .4rem; font-size: .8rem; font-weight: 600; padding: .15rem .5rem; border-radius: 6px; }
+  .q-status.need { background: var(--warn-soft); color: var(--warn); }
+  .q-status.good { background: var(--ok-soft); color: var(--ok); }
+  .matrix td textarea { min-height: 5.5rem; font-size: .95rem; min-width: 13rem; }
+
+  .cer-card { border-top: 6px solid var(--accent); }
+  .cer-q { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+  .cer-grid { display: grid; gap: 1rem; margin-top: 1rem; }
+  .cer-part { border-radius: var(--radius-sm); padding: .9rem 1rem; border: 1px solid var(--line); }
+  .cer-part > label, .cer-part > .cer-h { display: flex; align-items: center; gap: .5rem; font-weight: 700; margin-bottom: .4rem; }
+  .cer-part .cer-letter { width: 1.7rem; height: 1.7rem; border-radius: 6px; display: grid; place-items: center; color: var(--surface); font-weight: 800; }
+  .cer-c .cer-letter { background: var(--s2); }
+  .cer-e .cer-letter { background: var(--s3); }
+  .cer-r .cer-letter { background: var(--s5); }
+  .ev-list { display: grid; gap: .4rem; }
+  .ev-list label { display: flex; gap: .55rem; align-items: flex-start; font-weight: 400; padding: .5rem .6rem; border-radius: 6px; background: var(--surface-2); cursor: pointer; }
+  .ev-list input { accent-color: var(--accent); margin-top: .3rem; flex: none; }
+  .ev-list .ev-src { font-weight: 700; }
+
+  /* ---------- Explore tools ---------- */
   .embed { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: var(--radius); overflow: hidden; background: #0c0a09; border: 1px solid var(--line); margin-top: 1.25rem; }
   .embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .credit { font-size: .8rem; color: var(--faint); margin-top: .6rem; }
-
+  .credit { font-size: .88rem; color: var(--muted); margin-top: .6rem; }
   .flow { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 6.5rem), 1fr)); gap: .4rem; }
   .flow button {
     width: 100%; height: 100%; text-align: left; cursor: pointer; border-radius: var(--radius-sm);
-    font: 500 .8rem/1.25 var(--font-body); padding: .55rem .6rem; color: var(--ink);
+    font: 500 .88rem/1.25 var(--font-body); padding: .55rem .6rem; color: var(--ink);
     background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c);
   }
-  .flow button .n { display: block; font-size: .7rem; color: var(--faint); font-weight: 600; }
+  .flow button .n { display: block; font-size: .78rem; color: var(--muted); font-weight: 600; }
   .flow button[aria-current="step"] { background: var(--c-soft); border-color: var(--c); box-shadow: inset 0 0 0 1px var(--c); font-weight: 700; }
   .o2-deoxy { --c: var(--deoxy); --c-soft: var(--deoxy-soft); }
   .o2-oxy { --c: var(--oxy); --c-soft: var(--oxy-soft); }
   .o2-exchange { --c: var(--exchange); --c-soft: var(--exchange-soft); }
   .step-panel { margin-top: 1.25rem; border-radius: var(--radius); padding: 1.25rem 1.5rem; background: var(--c-soft); border-left: 5px solid var(--c); }
-  .step-panel .meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; font-size: .85rem; }
+  .step-panel .meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; font-size: .92rem; }
   .o2-pill { display: inline-flex; align-items: center; gap: .4rem; font-weight: 700; color: var(--c); }
   .o2-pill::before { content: ""; width: .65rem; height: .65rem; border-radius: 50%; background: var(--c); }
-  .step-panel h4 { font-family: var(--font-display); font-size: 1.4rem; text-transform: none; letter-spacing: 0; color: var(--ink); margin-top: .5rem; }
+  .step-panel h4 { font-family: var(--font-display); font-size: 1.4rem; color: var(--ink); margin-top: .5rem; }
   .step-panel p { margin-top: .5rem; max-width: 65ch; }
-  .step-panel .valve { margin-top: .6rem; font-size: .9rem; color: var(--muted); }
+  .step-panel .valve { margin-top: .6rem; font-size: .98rem; color: var(--muted); }
   .step-nav { display: flex; justify-content: space-between; gap: .75rem; margin-top: 1rem; flex-wrap: wrap; }
-  .legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; font-size: .85rem; margin-top: 1rem; }
-
-  .quiz fieldset { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin: 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; font-size: .92rem; margin-top: 1rem; }
+  .quiz fieldset { border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin: 0; }
   .quiz fieldset + fieldset { margin-top: .9rem; }
-  .quiz legend { padding: 0 .35rem; font-size: .95rem; }
+  .quiz legend { padding: 0 .35rem; font-size: 1rem; }
   .quiz .opts { display: grid; gap: .35rem; margin-top: .4rem; }
-  .quiz .opt { display: flex; gap: .55rem; align-items: center; font-weight: 400; font-size: .925rem; padding: .35rem .5rem; border-radius: 6px; cursor: pointer; }
+  .quiz .opt { display: flex; gap: .55rem; align-items: center; font-weight: 400; font-size: 1rem; padding: .35rem .5rem; border-radius: 6px; cursor: pointer; }
   .quiz .opt:hover { background: var(--surface-2); }
   .quiz input[type="radio"] { accent-color: var(--accent); width: 1rem; height: 1rem; margin: 0; }
   .quiz fieldset.right { border-color: var(--ok); background: var(--ok-soft); }
   .quiz fieldset.wrong { border-color: var(--bad); background: var(--bad-soft); }
-  .quiz .explain { margin-top: .6rem; font-size: .9rem; }
-  .quiz .explain b { font-weight: 700; }
+  .quiz .explain { margin-top: .6rem; font-size: .98rem; }
   .quiz-score { margin-top: 1rem; font-weight: 600; }
 
   /* ---------- Footer & toast ---------- */
-  footer { border-top: 1px solid var(--line); background: var(--surface); font-size: .85rem; color: var(--muted); padding-block: 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); }
+  footer { border-top: 1px solid var(--line); background: var(--surface); font-size: .92rem; color: var(--muted); padding-block: 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)); }
   footer .wrap { display: grid; gap: .4rem; }
   .toast {
     position: fixed; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); max-width: min(22rem, calc(100% - 2rem));
-    background: #1c1917; color: #fafaf9; padding: .85rem 1.1rem; border-radius: var(--radius-sm); font-size: .9rem;
+    background: #1c1917; color: #fafaf9; padding: .85rem 1.1rem; border-radius: var(--radius-sm); font-size: .95rem;
     box-shadow: 0 10px 30px rgba(0,0,0,.25); transform: translateY(150%); opacity: 0; transition: transform .25s, opacity .25s; z-index: 50;
   }
   .toast.show { transform: none; opacity: 1; }
@@ -296,123 +560,19 @@
     *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 
-  /* Print: show every panel, drop the interactive chrome */
+  /* Print: the current step page only, as a paper organizer */
   @media print {
-    .tabs-bar, .toast, .no-print, .embed, .jump-links, .db-search, .step-nav, .flow, .quiz-actions { display: none !important; }
-    .site-header { background: none; color: #000; }
-    .brand h1 { color: #000; }
-    .card { box-shadow: none; break-inside: avoid; }
-    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #555; overflow-wrap: anywhere; }
-  }
-
-  /* ---------- Navigation ---------- */
-  .brand-link { color: inherit; text-decoration: none; }
-  .brand-link:hover { color: inherit; }
-  .tab[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
-  @media (max-width: 600px) {
-    .tabs { flex-wrap: wrap; overflow: visible; gap: 0; }
-    .tab { padding: .65rem .7rem; font-size: .9rem; }
-  }
-  .crumbs { font-size: .875rem; color: var(--faint); display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
-  .crumbs a { color: var(--muted); }
-  .crumbs span[aria-hidden] { color: var(--line); }
-  .section-title { font-size: 1.4rem; margin-bottom: 1rem; }
-
-  /* ---------- Home ---------- */
-  .home-hero h2 { max-width: none; }
-  .lib-search { margin-top: 1.25rem; display: flex; gap: .5rem; flex-wrap: wrap; }
-  .lib-search .db-search-input { flex: 1 1 18rem; }
-  .lib-search input { font-size: 1.05rem; min-height: 3rem; }
-  .format-chips { margin-top: .9rem; }
-  .results-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1rem; margin-bottom: 1rem; }
-  .results-head h2 { font-size: 1.4rem; }
-  .fallback { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: var(--radius); border: 1px dashed var(--line); color: var(--muted); }
-  .fallback p + p { margin-top: .35rem; }
-  .fallback a { font-weight: 600; }
-
-  .topic-card { display: flex; flex-direction: column; gap: .5rem; text-decoration: none; color: var(--ink); transition: border-color .15s; }
-  .topic-card:hover { border-color: var(--accent); color: var(--ink); }
-  .topic-card h3 { font-size: 1.15rem; }
-  .topic-card p { color: var(--muted); font-size: .925rem; flex: 1; }
-  .topic-card .subs { font-size: .825rem; color: var(--faint); }
-  .topic-card .count { font-size: .825rem; font-weight: 600; color: var(--accent); }
-
-  /* ---------- Resource cards ---------- */
-  .res { position: relative; display: flex; flex-direction: column; gap: .45rem; transition: border-color .15s; }
-  .res:hover { border-color: var(--accent); }
-  .res-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
-  .res h3 { font-size: 1.05rem; line-height: 1.3; }
-  .res h3 a { color: var(--ink); text-decoration: none; }
-  .res h3 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
-  .res h3 a:hover { color: var(--accent); }
-  .res h3 .icon { width: .85em; height: .85em; color: var(--faint); margin-left: .25rem; }
-  .res .publisher { font-size: .8rem; color: var(--faint); }
-  .res .why { color: var(--muted); font-size: .9rem; }
-  .res .where { font-size: .8rem; color: var(--faint); margin-top: auto; position: relative; z-index: 1; }
-  .tag-star { background: var(--accent-soft); color: var(--accent-ink); }
-  .tag-site { background: var(--ink); color: var(--bg); }
-
-  /* ---------- Topic page ---------- */
-  .topic-head p { max-width: 62ch; margin-top: .5rem; color: var(--muted); font-size: 1.05rem; }
-  .topic-filters { display: grid; gap: .6rem; margin-top: 1.25rem; }
-  .topic-filters .label { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--faint); margin-right: .25rem; align-self: center; }
-  .sub-section h3 { font-size: 1.2rem; margin-bottom: .9rem; }
-  .leads { --pw: var(--accent); --pw-soft: var(--accent-soft); }
-  .leads .questions { margin-top: 1rem; }
-  .empty-note { color: var(--muted); }
-
-
-  /* ---------- Databases page ---------- */
-  .db-card { display: flex; flex-direction: column; gap: .5rem; }
-  .db-card p { color: var(--muted); font-size: .925rem; }
-  .db-card .btn { margin-top: auto; align-self: flex-start; }
-  .sb-steps { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 1.5rem; counter-reset: sb; }
-  .sb-steps > li { counter-increment: sb; position: relative; padding-left: 2.6rem; }
-  .sb-steps > li::before { content: counter(sb); position: absolute; left: 0; top: 0; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: .85rem; }
-  .sb-label { display: block; font-weight: 600; font-size: .95rem; margin-bottom: .4rem; }
-  .sb-spotted { margin-top: .6rem; display: grid; gap: .4rem; }
-  .sb-concepts { display: grid; gap: .75rem; margin-top: .75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
-  .sb-concept { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .85rem; background: var(--surface-2); display: grid; gap: .5rem; align-content: start; }
-  .sb-concept > label { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
-  .sb-concept .sb-and { font-size: .75rem; font-weight: 700; color: var(--accent); }
-  .sb-sugg { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; }
-  .sb-sugg .hint { margin: 0; }
-  .chip-btn.sm { padding: .35rem .6rem; font-size: .8rem; }
-  #sb-query { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
-  .tips { margin: .75rem 0 0; padding-left: 1.2rem; display: grid; gap: .4rem; color: var(--muted); }
-  .tips b { color: var(--ink); }
-
-  /* ---------- My sources ---------- */
-  .count-badge { display: inline-grid; place-items: center; min-width: 1.3rem; height: 1.3rem; padding: 0 .35rem; margin-left: .4rem; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: .72rem; font-weight: 700; }
-  .res-actions { position: relative; z-index: 1; margin-top: auto; padding-top: .35rem; }
-  .add-src { font: 600 .8rem/1 var(--font-body); color: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .45rem .75rem; cursor: pointer; }
-  .add-src:hover { border-color: var(--accent); }
-  .add-src.added { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
-  .ms-check { display: inline-flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .875rem; }
-  .ms-check input { accent-color: var(--accent); }
-  .ms-storage { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
-  .ms-cite { font-family: var(--font-display); font-size: 1.02rem; padding-left: 2em; text-indent: -2em; overflow-wrap: anywhere; }
-  .ms-entry .res-tags { margin-top: .6rem; }
-  .ms-annot { margin-top: .6rem; color: var(--muted); font-size: .925rem; padding-left: 2em; }
-  .ms-edit { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); display: grid; gap: 1rem; }
-  .ms-craap { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .85rem 1rem; margin: 0; }
-  .ms-craap .row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .35rem; }
-  .ms-craap .row label { display: grid; gap: .25rem; font-size: .8rem; }
-  .ms-craap select { width: auto; min-width: 4.5rem; }
-  .ms-confirm, .ms-remove { display: inline-flex; flex-wrap: wrap; gap: .4rem; align-items: center; font-size: .875rem; }
-  .btn-danger { background: var(--bad); color: var(--surface); }
-  .btn-danger:hover { filter: brightness(.92); color: var(--surface); }
-  .tag-warn { background: var(--warn-soft); color: var(--warn); }
-  .verdict.tag { padding: .2rem .55rem; border-radius: 6px; font-size: .75rem; }
-  .craap-save { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-top: 1rem; }
-  .craap-save label { font-size: .875rem; }
-  .craap-save select { width: auto; flex: 1 1 12rem; }
-  #craap-save-empty { margin-top: .75rem; }
-
-
-  @media print {
+    body { font-size: 11pt; }
+    .steps-bar, .toast, .no-print, .embed, .lib-search, .format-chips, .topic-filters, .step-nav, .flow, .quiz-actions, .step-nav-bottom, .crumbs { display: none !important; }
     .view[hidden] { display: none !important; }
-    .lib-search, .format-chips, .topic-filters { display: none !important; }
+    .site-header { background: none; color: #000; }
+    .brand h1, .brand .eyebrow { color: #000; }
+    .brand-mark { display: none; }
+    .card, .box { box-shadow: none; break-inside: avoid; }
+    .box-example { display: none; }
+    textarea, input[type="text"] { border: 1px solid #888; min-height: 4rem; }
+    .matrix-wrap { overflow: visible; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #555; overflow-wrap: anywhere; }
   }
 </style>
 </head>
@@ -429,6 +589,9 @@
   <symbol id="i-quote" viewBox="0 0 24 24"><path d="M7 7h4v4c0 3-1.5 5-4 6M15 7h4v4c0 3-1.5 5-4 6"/></symbol>
   <symbol id="i-cube" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol>
   <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H16a3 3 0 0 0 0-6H8a3 3 0 0 1 0-6h7.5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="7" rx="1"/></symbol>
 </svg>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -441,23 +604,52 @@
       <h1><a class="brand-link" href="#/">Cardiovascular Research Hub</a></h1>
     </div>
   </div>
-  <nav class="tabs-bar" aria-label="Main">
-    <div class="wrap tabs">
-      <a class="tab" href="#/" data-nav="resources">Resources</a>
-      <a class="tab" href="#search" data-nav="search">Search databases</a>
-      <a class="tab" href="#evaluate" data-nav="evaluate">Evaluate &amp; cite</a>
-      <a class="tab" href="#my-sources" data-nav="my-sources">My sources<span class="count-badge" id="ms-count" hidden></span></a>
-    </div>
+  <nav class="steps-bar" aria-label="Research steps">
+    <ol class="wrap steps">
+      <li><a class="step st1" href="#/" data-nav="explore"><span class="step-n">1</span><span class="step-t">Explore<small>Background reading</small></span></a></li>
+      <li><a class="step st2" href="#ask" data-nav="ask"><span class="step-n">2</span><span class="step-t">Ask<small>Your question</small></span></a></li>
+      <li><a class="step st3" href="#search" data-nav="search"><span class="step-n">3</span><span class="step-t">Search<small>Find studies</small></span></a></li>
+      <li><a class="step st4" href="#evaluate" data-nav="evaluate"><span class="step-n">4</span><span class="step-t">Evaluate<small>Check sources</small></span></a></li>
+      <li><a class="step st5" href="#organize" data-nav="organize"><span class="step-n">5</span><span class="step-t">Organize<span class="count-badge" id="ms-count" hidden></span><small>Notes &amp; claims</small></span></a></li>
+      <li><a class="step st6" href="#cite" data-nav="cite"><span class="step-n">6</span><span class="step-t">Cite &amp; share<small>Bibliography</small></span></a></li>
+    </ol>
   </nav>
 </header>
 
 <main id="main" class="wrap">
 
-  <!-- ===================== RESOURCES (home) ===================== -->
-  <section class="view stack-lg" id="view-home" data-view="home" data-title="Resources">
+  <!-- ===================== 1 EXPLORE (home) ===================== -->
+  <section class="view stack-lg" id="view-home" data-view="home" data-stage="1" data-title="Explore">
+    <div class="card stack" id="start-here">
+      <div class="stage-head">
+        <p class="stage-eyebrow">Start here</p>
+        <h2>Your PBAT research, in six steps</h2>
+        <!-- EDIT: describe what students hand in. -->
+        <p class="lede">You'll investigate a focused question about the cardiovascular system and defend your answer with evidence. By the end you'll have:</p>
+        <ul class="deliverables">
+          <li>A research question that asks <b>how</b> or <b>why</b>, broken into 2–4 sub-questions</li>
+          <li>An evidence matrix and a claim, evidence, and reasoning for each sub-question</li>
+          <li>An annotated bibliography of the sources you evaluated</li>
+        </ul>
+      </div>
+      <ol class="start-map" id="start-map" aria-label="The six research steps"></ol>
+      <p class="hint">Your work saves in this browser as you go. The bar at the top always shows which step you're on, and a ✓ appears when you finish a step's checklist.</p>
+    </div>
+
+    <div class="stage-head">
+      <p class="stage-eyebrow">Step 1 of 6 · Explore</p>
+      <h2>Read up on the cardiovascular system</h2>
+      <p class="lede">Before you pick a question, learn the basics. Browse a topic that interests you and read 2–3 background sources. Save any you might use.</p>
+    </div>
+
+    <div class="box box-feel">
+      <p class="box-label">Feeling unsure right now? That's normal.</p>
+      <p>Most researchers feel confused while they explore, before they settle on a focus. Keep reading. If you're stuck for more than a class period, talk to your teacher or the librarian.</p>
+    </div>
+
     <div class="card hero home-hero">
-      <h2>Explore the cardiovascular system</h2>
-      <p>Background reading, 3D models, and data, chosen by your librarian and teacher. Pick a topic to start, or search the collection.</p>
+      <h2>Explore the collection</h2>
+      <p>Background reading, 3D models, and data, chosen by your librarian and teacher. Pick a topic to start, or search.</p>
       <form class="lib-search" id="lib-search" role="search">
         <label for="lib-q" class="sr-only">Search the resource collection</label>
         <div class="db-search-input">
@@ -487,19 +679,22 @@
         <div class="grid grid-3" id="tool-grid"></div>
       </section>
     </div>
+
+    <div data-checklist="explore"></div>
+    <div class="step-nav-bottom"><span></span><a class="btn btn-primary" href="#ask">Next: 2 · Ask a question →</a></div>
   </section>
 
   <!-- ===================== TOPIC (rendered from the resource list) ===================== -->
-  <section class="view stack-lg" id="view-topic" data-view="topic" hidden></section>
+  <section class="view stack-lg" id="view-topic" data-view="topic" data-stage="1" hidden></section>
 
   <!-- ===================== TOOL: 3D HEART ===================== -->
-  <section class="view stack-lg" id="view-tool-3d-heart" data-view="tool-3d-heart" data-title="3D heart model" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/the-heart-structure-and-function">The heart: structure &amp; function</a></nav>
+  <section class="view stack-lg" id="view-tool-3d-heart" data-view="tool-3d-heart" data-stage="1" data-title="3D heart model" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">1 · Explore</a><span aria-hidden="true">›</span><a href="#topic/the-heart-structure-and-function">The heart: structure &amp; function</a></nav>
     <div class="card">
       <div class="section-head">
         <div>
           <h2>3D heart model</h2>
-          <p class="muted">Rotate and zoom to study the heart's outer anatomy: chambers, great vessels, and coronary arteries. For cross-sections of valves and chambers, use <a href="https://anatomyvista.com/explore/heart" target="_blank" rel="noopener">AnatomyVista</a>.</p>
+          <p>Rotate and zoom to study the heart's outer anatomy: chambers, great vessels, and coronary arteries. For cross-sections of valves and chambers, use <a href="https://anatomyvista.com/explore/heart" target="_blank" rel="noopener">AnatomyVista</a>.</p>
         </div>
         <span class="tag">Drag to rotate · scroll or pinch to zoom</span>
       </div>
@@ -512,8 +707,8 @@
   </section>
 
   <!-- ===================== TOOL: BLOOD-FLOW TRACER ===================== -->
-  <section class="view stack-lg" id="view-tool-blood-flow" data-view="tool-blood-flow" data-title="Blood-flow tracer" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/blood-vessels-and-circulation">Blood vessels &amp; circulation</a></nav>
+  <section class="view stack-lg" id="view-tool-blood-flow" data-view="tool-blood-flow" data-stage="1" data-title="Blood-flow tracer" hidden>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">1 · Explore</a><span aria-hidden="true">›</span><a href="#topic/blood-vessels-and-circulation">Blood vessels &amp; circulation</a></nav>
     <div class="topic-head">
       <h2>Blood-flow tracer &amp; quiz</h2>
       <p>Trace one drop of blood through the pulmonary and systemic circuits, then check what you know.</p>
@@ -528,7 +723,7 @@
       </div>
 
       <div id="tracer-explore">
-        <p class="muted small">Follow one drop of blood through both circuits. Click any stage, or use the ← → arrow keys.</p>
+        <p class="small">Follow one drop of blood through both circuits. Click any stage, or use the ← → arrow keys.</p>
         <ol class="flow" id="flow-steps"></ol>
         <div class="legend" aria-hidden="true">
           <span class="o2-pill o2-deoxy">Oxygen-poor</span>
@@ -548,7 +743,7 @@
       </div>
 
       <div id="tracer-quiz" class="quiz" hidden>
-        <p class="muted small">Six questions on the path blood takes. Answer them all, then check.</p>
+        <p class="small">Six questions on the path blood takes. Answer them all, then check.</p>
         <form id="quiz-form" style="margin-top:1rem"></form>
         <div class="cite-actions quiz-actions">
           <button class="btn btn-primary" id="quiz-check" type="button">Check answers</button>
@@ -559,34 +754,50 @@
     </div>
   </section>
 
-  <!-- ===================== SEARCH DATABASES ===================== -->
-  <section class="view stack-lg" id="view-search" data-view="search" data-title="Search databases" hidden>
-    <div class="card">
-      <h2>Search databases</h2>
-      <p class="muted" style="margin-top:.4rem;max-width:62ch">When you have a research question, search these databases for studies to use as evidence. Results open on the database's own site.</p>
-      <form class="db-search" id="db-search" action="https://pubmed.ncbi.nlm.nih.gov/" method="get" target="_blank" role="search">
-        <label for="db-q">Search for articles</label>
-        <div class="db-search-row">
-          <div class="db-search-input">
-            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-            <input type="search" id="db-q" name="term" placeholder="e.g. foam cells atherosclerosis" autocomplete="off" aria-describedby="db-q-hint">
-          </div>
-          <input type="hidden" name="filter" value="simsearch2.ffrft">
-          <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
-        </div>
-        <fieldset class="db-pick">
-          <legend class="sr-only">Database to search</legend>
-          <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
-          <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
-          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>background</span></label>
-        </fieldset>
-        <p class="hint" id="db-q-hint">Use 2–4 key terms, not your whole question. Results open in a new tab on the database's own site. Not sure what to type? <a href="#build">Build your search ↓</a></p>
-      </form>
+  <!-- ===================== 2 ASK ===================== -->
+  <section class="view stack-lg" id="view-ask" data-view="ask" data-stage="2" data-title="Ask" hidden>
+    <div class="stage-head">
+      <p class="stage-eyebrow">Step 2 of 6 · Ask</p>
+      <h2>Ask a research question</h2>
+      <p class="lede">Turn what you read into one focused question you can answer with evidence, then break it into smaller sub-questions. Those sub-questions organize everything you do next.</p>
     </div>
 
+    <div class="box box-task">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
+      <ol>
+        <li>Map your topic and write down what you wonder about.</li>
+        <li>Write one research question that asks how or why.</li>
+        <li>Break it into 2–4 sub-questions.</li>
+      </ol>
+    </div>
+
+    <!-- Question web -->
+    <div class="card" id="web">
+      <div class="tool-head">
+        <h3 class="numbered-h"><span class="n">1</span> Map your topic</h3>
+        <button class="btn btn-secondary btn-sm no-print" type="button" onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Print this page</button>
+      </div>
+      <p class="lede-sm">Pick a topic. Each branch is one part of it. In each branch, write questions you <b>wonder</b> about. Start them with <i>How</i> or <i>Why</i>. Write as many as you can; you'll choose one later.</p>
+      <div class="web-tools no-print" style="margin-top:1rem">
+        <label for="web-topic">Topic</label>
+        <select id="web-topic"></select>
+        <button class="btn btn-secondary btn-sm" type="button" id="web-add">+ Add my own branch</button>
+      </div>
+      <div class="web" id="web-map" aria-live="polite"></div>
+      <details class="box box-example" style="margin-top:1.25rem">
+        <summary>Show me an example branch <span class="tag">Model</span></summary>
+        <div class="ex-body">
+          <p><b>Branch: Sleep</b> (topic: Lifestyle &amp; the heart)</p>
+          <p class="model">Why does blood pressure usually drop at night?<br>How does staying up late on phones change teens' heart rate?<br>Why would short sleep raise blood pressure over time?</p>
+          <p class="hint">Notice: none of these can be answered with one fact or a yes/no.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Sharpen -->
     <div class="card" id="question">
-      <h3>Sharpen your question</h3>
-      <p class="muted small" style="margin-top:.35rem">A strong research question can't be answered by one fact. It asks how or why, and you can actually find evidence for it.</p>
+      <h3 class="numbered-h"><span class="n">2</span> Write and sharpen your question</h3>
+      <p class="lede-sm">Choose the question from your map you most want to answer. A strong research question can't be answered by one fact. It asks how or why, and you can find evidence for it.</p>
       <div class="table-scroll" style="margin-top:1rem">
         <table class="compare">
           <thead><tr><th scope="col">Problem</th><th scope="col">Weak</th><th scope="col">Stronger</th></tr></thead>
@@ -598,18 +809,60 @@
           </tbody>
         </table>
       </div>
+      <div class="field" style="margin-top:1.25rem">
+        <label for="rq">My research question</label>
+        <textarea id="rq" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
+        <p class="hint">It's fine to change it as you learn more.</p>
+      </div>
+      <div class="box box-tip" style="margin-top:1rem" aria-live="polite">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Quick check</p>
+        <ul class="q-checks" id="q-checks"></ul>
+        <p class="hint">This is a computer's guess. Your teacher has the final say.</p>
+      </div>
     </div>
+
+    <!-- Sub-questions -->
+    <div class="card" id="subqs">
+      <h3 class="numbered-h"><span class="n">3</span> Break it into sub-questions</h3>
+      <p class="lede-sm">What smaller questions do you need to answer first? Aim for 2–4. Usually one explains the <b>normal biology</b>, one explains <b>what changes</b>, and one looks at the <b>evidence or who is affected</b>. These become the rows of your evidence matrix in Step 5.</p>
+      <ol class="subq-list" id="subq-list"></ol>
+      <div class="cite-actions no-print"><button class="btn btn-secondary btn-sm" type="button" id="subq-add">+ Add a sub-question</button></div>
+      <details class="box box-example" style="margin-top:1.25rem">
+        <summary>Show me an example <span class="tag">Model</span></summary>
+        <div class="ex-body">
+          <p><b>Research question:</b> How does short sleep affect blood pressure in teenagers?</p>
+          <ol class="model" style="padding-left:2.2rem">
+            <li>How does the body normally regulate blood pressure during sleep?</li>
+            <li>What changes in the body when teens get less sleep?</li>
+            <li>What do studies of teens show about sleep length and blood pressure?</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+
+    <div data-checklist="ask"></div>
+    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#/">← 1 · Explore</a><a class="btn btn-primary" href="#search">Next: 3 · Search →</a></div>
+  </section>
+
+  <!-- ===================== 3 SEARCH ===================== -->
+  <section class="view stack-lg" id="view-search" data-view="search" data-stage="3" data-title="Search" hidden>
+    <div class="stage-head">
+      <p class="stage-eyebrow">Step 3 of 6 · Search</p>
+      <h2>Find research evidence</h2>
+      <p class="lede">Databases don't understand questions. They match words. Build a search from your question, run it in a database, and save the studies you might use.</p>
+    </div>
+
     <div class="card" id="build">
       <div class="tool-head">
-        <h3><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Build your search</h3>
+        <h3 class="numbered-h"><span class="n">1</span> Build your search</h3>
         <button class="btn btn-secondary btn-sm no-print" id="sb-reset" type="button">Clear key ideas</button>
       </div>
-      <p class="muted small" style="max-width:62ch">Databases don't understand questions. They match words. Turn your question into a search in three steps.</p>
 
       <ol class="sb-steps">
         <li>
-          <label for="sb-question" class="sb-label">Type your research question</label>
+          <label for="sb-question" class="sb-label">Your research question</label>
           <textarea id="sb-question" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
+          <p class="hint">This is the same question as in Step 2. Changing it here changes it there.</p>
           <div class="sb-spotted" id="sb-spotted" hidden>
             <span class="hint">Key ideas we spotted. Click one to use it:</span>
             <div class="chips" id="sb-spotted-chips"></div>
@@ -617,26 +870,66 @@
         </li>
         <li>
           <span class="sb-label" id="sb-concepts-label">Pick 2–3 key ideas, and add other words for each</span>
-          <p class="hint">Each idea is something every article must be about. Other words catch articles that use different vocabulary, like <i>hypertension</i> for “high blood pressure.”</p>
+          <p class="hint">Every article must be about <b>each</b> key idea. Other words catch articles that use different vocabulary, like <i>hypertension</i> for “high blood pressure.”</p>
           <div class="sb-concepts" id="sb-concepts" role="group" aria-labelledby="sb-concepts-label"></div>
         </li>
         <li>
-          <label for="sb-query" class="sb-label">Your search</label>
+          <span class="sb-label">Your search</span>
+          <div class="sb-visual" id="sb-visual" aria-hidden="true"></div>
+          <div class="box box-tip" style="margin-top:.75rem">
+            <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> How the search works</p>
+            <ul>
+              <li><b>AND</b> joins key ideas. Every idea must appear, so it <b>narrows</b> results.</li>
+              <li><b>OR</b> joins words for the same idea. Any of them can appear, so it <b>widens</b> results.</li>
+              <li>Quotation marks keep a phrase together.</li>
+            </ul>
+          </div>
+          <label for="sb-query" class="hint" style="display:block;margin-top:.75rem">Search text (you can edit it)</label>
           <textarea id="sb-query" rows="2" spellcheck="false" placeholder="Your search appears here once you add a key idea."></textarea>
-          <p class="hint"><b>AND</b> means every idea must appear, which narrows results. <b>OR</b> means any of the words can appear, which widens them. Quotation marks keep a phrase together. You can edit the search directly.</p>
           <div class="cite-actions no-print">
             <button class="btn btn-primary btn-sm" type="button" data-sb-go="pubmed">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             <button class="btn btn-secondary btn-sm" type="button" data-sb-go="scholar">Search Google Scholar <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             <button class="btn btn-secondary btn-sm" type="button" id="sb-copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy search</button>
           </div>
-          <p class="hint" style="margin-top:.6rem">Too many results? Add another key idea. Too few? Remove an idea, or add more other words.</p>
+          <p class="hint" style="margin-top:.6rem"><b>Too many results?</b> Add another key idea. <b>Too few?</b> Remove an idea, or add more other words.</p>
         </li>
       </ol>
     </div>
 
-    <div class="grid grid-3" id="db-grid"></div>
     <div class="card">
-      <h3>Search tips</h3>
+      <h3 class="numbered-h"><span class="n">2</span> Or search quickly</h3>
+      <form class="db-search" id="db-search" action="https://pubmed.ncbi.nlm.nih.gov/" method="get" target="_blank" role="search">
+        <label for="db-q">Type 2–4 key terms, not your whole question</label>
+        <div class="db-search-row">
+          <div class="db-search-input">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="search" id="db-q" name="term" placeholder="e.g. foam cells atherosclerosis" autocomplete="off">
+          </div>
+          <input type="hidden" name="filter" value="simsearch2.ffrft">
+          <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+        </div>
+        <fieldset class="db-pick">
+          <legend class="sr-only">Database to search</legend>
+          <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
+          <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
+          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>background</span></label>
+        </fieldset>
+        <p class="hint">Results open in a new tab on the database's own site.</p>
+      </form>
+    </div>
+
+    <div class="box box-task">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Found a study you might use?</p>
+      <p>Save it right away in <a href="#organize">Step 5 · My sources</a> with <b>Add a source by hand</b>, or build its citation in <a href="#cite">Step 6</a> and click <b>Save to My sources</b>. Copy the DOI or link while the article is open.</p>
+    </div>
+
+    <div>
+      <h3 class="section-title">Databases to try</h3>
+      <div class="grid grid-3" id="db-grid"></div>
+    </div>
+
+    <div class="box box-tip">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Search tips</p>
       <ul class="tips">
         <li><b>Search key terms, not sentences.</b> For “How does sleep affect blood pressure in teens?”, search <i>sleep blood pressure adolescents</i>.</li>
         <li><b>Too many results?</b> Add a term (<i>adolescents</i>, <i>exercise</i>) or choose a more specific word.</li>
@@ -644,153 +937,304 @@
         <li><b>Can't get the full article?</b> Ask the library before you give up on it.</li>
       </ul>
     </div>
+
+    <div data-checklist="search"></div>
+    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#ask">← 2 · Ask</a><a class="btn btn-primary" href="#evaluate">Next: 4 · Evaluate →</a></div>
   </section>
 
-  <!-- ===================== EVALUATE & CITE ===================== -->
-  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-title="Evaluate & cite" hidden>
-    <div class="card">
-      <h2>Evaluate &amp; cite</h2>
-      <p class="muted" style="margin-top:.4rem;max-width:62ch">Check each source before you rely on it, then cite it correctly.</p>
+  <!-- ===================== 4 EVALUATE ===================== -->
+  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-stage="4" data-title="Evaluate" hidden>
+    <div class="stage-head">
+      <p class="stage-eyebrow">Step 4 of 6 · Evaluate</p>
+      <h2>Check each source before you rely on it</h2>
+      <p class="lede">Fact-checkers don't judge a site by how it looks. They leave it and find out what others say about it. Do that first, then rate the source.</p>
     </div>
-    <div class="grid grid-2">
-      <!-- CRAAP -->
-      <div class="card" id="craap">
-        <div class="tool-head">
-          <h3><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> CRAAP source evaluator</h3>
-          <button class="btn btn-secondary btn-sm no-print" id="craap-reset" type="button">Reset</button>
+
+    <div class="card" id="craap">
+      <div class="eval-pick no-print">
+        <label for="craap-target">Which source are you checking?</label>
+        <select id="craap-target"></select>
+      </div>
+      <p class="hint" id="craap-target-hint"></p>
+
+      <div style="margin-top:1.5rem">
+        <h3 class="numbered-h"><span class="n">A</span> Read laterally</h3>
+        <p class="lede-sm" style="margin-top:.4rem">Open a new tab and search for the <b>publisher or author</b>, not the article. Who are they? Who pays for them? What do other trusted sites say about them?</p>
+        <div class="form-grid" style="margin-top:.9rem">
+          <div class="field span-6">
+            <label for="lat-name">Publisher, organization, or author</label>
+            <div class="db-search-row">
+              <div style="flex:1 1 14rem"><input type="text" id="lat-name" placeholder="e.g. American Heart Association"></div>
+              <button class="btn btn-secondary" type="button" id="lat-go">Search what others say <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+            </div>
+          </div>
+          <div class="field span-6">
+            <label for="lat-note">What did you find?</label>
+            <textarea id="lat-note" rows="2" placeholder="e.g. Nonprofit founded in 1924; funded by donations and some drug companies; widely cited by the CDC."></textarea>
+          </div>
         </div>
-        <p class="muted small">Rate one source at a time, from 1 (poor) to 5 (excellent).</p>
-        <div id="craap-items" style="margin-top:1.1rem"></div>
+      </div>
+
+      <div style="margin-top:1.75rem">
+        <div class="tool-head" style="margin-bottom:.5rem">
+          <h3 class="numbered-h"><span class="n">B</span> Rate it</h3>
+          <button class="btn btn-secondary btn-sm no-print" id="craap-reset" type="button">Clear ratings</button>
+        </div>
+        <p class="lede-sm">Rate each from 1 (poor) to 5 (excellent). Use what you found in step A for Authority and Purpose.</p>
+        <div id="craap-items" style="margin-top:1rem"></div>
         <div class="result" aria-live="polite">
           <div>
             <div class="small muted">Source score</div>
-            <div class="score" id="craap-total">15 / 25</div>
+            <div class="score" id="craap-total">– / 25</div>
           </div>
-          <div class="verdict mid" id="craap-verdict">Moderate: cross-check it</div>
+          <div class="verdict none" id="craap-verdict">Rate all five</div>
           <p class="result-note" id="craap-note"></p>
         </div>
-        <div class="craap-save no-print" id="craap-save-row" hidden>
-          <label for="craap-target">Save this score to</label>
-          <select id="craap-target"></select>
-          <button class="btn btn-secondary btn-sm" id="craap-save" type="button">Save score</button>
-        </div>
-        <p class="hint no-print" id="craap-save-empty">To keep a score with a source, add the source to <a href="#my-sources">My sources</a> first.</p>
-      </div>
-
-      <!-- CITATIONS -->
-      <div class="card" id="cite">
-        <div class="tool-head">
-          <h3><svg class="icon" aria-hidden="true"><use href="#i-quote"/></svg> Citation builder</h3>
-          <div class="seg no-print" role="group" aria-label="Citation style">
-            <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
-            <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
-          </div>
-        </div>
-
-        <form class="form-grid" id="cite-form" autocomplete="off">
-          <div class="field span-6">
-            <label for="cite-type">Source type</label>
-            <select id="cite-type">
-              <option value="journal">Journal article</option>
-              <option value="web">Web page (CDC, AHA, WHO…)</option>
-            </select>
-          </div>
-          <div class="field span-6">
-            <label for="cite-authors">Authors</label>
-            <textarea id="cite-authors" rows="3" placeholder="Libby, Peter&#10;Ridker, Paul M."></textarea>
-            <p class="hint">One per line as <i>Last, First Middle</i>. For an organization, type its full name.</p>
-          </div>
-          <div class="field span-6">
-            <label for="cite-title">Title</label>
-            <input type="text" id="cite-title" placeholder="Inflammation and atherosclerosis">
-            <p class="hint" id="title-hint">APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.</p>
-          </div>
-          <div class="field span-3">
-            <label for="cite-container" id="container-label">Journal</label>
-            <input type="text" id="cite-container" placeholder="Circulation">
-          </div>
-          <div class="field span-3">
-            <label for="cite-year">Year</label>
-            <input type="text" id="cite-year" inputmode="numeric" placeholder="2002">
-          </div>
-          <div class="field span-2 journal-only">
-            <label for="cite-volume">Volume</label>
-            <input type="text" id="cite-volume" placeholder="105">
-          </div>
-          <div class="field span-2 journal-only">
-            <label for="cite-issue">Issue</label>
-            <input type="text" id="cite-issue" placeholder="9">
-          </div>
-          <div class="field span-2 journal-only">
-            <label for="cite-pages">Pages</label>
-            <input type="text" id="cite-pages" placeholder="1135-1143">
-          </div>
-          <div class="field span-3 web-only" hidden>
-            <label for="cite-date">Month &amp; day <span class="hint">(optional)</span></label>
-            <input type="text" id="cite-date" placeholder="October 24">
-          </div>
-          <div class="field span-6">
-            <label for="cite-link">DOI or URL</label>
-            <input type="text" id="cite-link" placeholder="10.1161/hc0902.104353">
-          </div>
-        </form>
-
-        <div class="cite-out">
-          <div class="label" id="cite-label">Example</div>
-          <p id="cite-output"></p>
-        </div>
-        <div class="cite-actions no-print">
-          <button class="btn btn-primary btn-sm" id="cite-copy" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy citation</button>
-          <button class="btn btn-secondary btn-sm" id="cite-save" type="button">Save to My sources</button>
-          <button class="btn btn-secondary btn-sm" id="cite-clear" type="button">Clear</button>
-          <span class="hint">Pastes with italics into Google Docs and Word. Always double-check against the style guide.</span>
-        </div>
+        <p class="saved-note" id="craap-saved" aria-live="polite"></p>
       </div>
     </div>
+
+    <div class="box box-tip">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Watch out for</p>
+      <ul>
+        <li>Sites that sell a product, supplement, or treatment they write about.</li>
+        <li>“.org” sites. Anyone can buy one; it doesn't mean nonprofit or trustworthy.</li>
+        <li>No author, no date, or no references.</li>
+        <li>Claims that sound too strong (“cures,” “proves”) for what one study can show.</li>
+      </ul>
+    </div>
+
+    <div data-checklist="evaluate"></div>
+    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#search">← 3 · Search</a><a class="btn btn-primary" href="#organize">Next: 5 · Organize →</a></div>
   </section>
 
-  <!-- ===================== MY SOURCES ===================== -->
-  <section class="view stack-lg" id="view-my-sources" data-view="my-sources" data-title="My sources" hidden>
-    <div class="card">
+  <!-- ===================== 5 ORGANIZE ===================== -->
+  <section class="view stack-lg" id="view-organize" data-view="organize" data-stage="5" data-title="Organize" hidden>
+    <div class="stage-head">
+      <p class="stage-eyebrow">Step 5 of 6 · Organize</p>
+      <h2>Organize your evidence</h2>
+      <p class="lede">Take notes from each source under the sub-question it answers, then turn each row of notes into a claim backed by evidence.</p>
+    </div>
+
+    <div class="card stack">
+      <div>
+        <h4>My research question</h4>
+        <p class="q-display" id="org-question"></p>
+      </div>
+      <div class="progress-row" id="org-progress" aria-live="polite"></div>
+      <div class="seg seg-lg no-print" role="group" aria-label="Organize view" id="org-tabs">
+        <button type="button" data-tab="sources" aria-pressed="true">a · My sources</button>
+        <button type="button" data-tab="matrix" aria-pressed="false">b · Evidence matrix</button>
+        <button type="button" data-tab="cer" aria-pressed="false">c · Claims (CER)</button>
+      </div>
+    </div>
+
+    <!-- a. Sources -->
+    <div class="stack-lg" id="org-sources" data-panel="sources">
+      <div class="box box-task">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
+        <p>For each source, fill in what it is (so it can be cited) and write a two-part annotation: what it says, and how it helps your question.</p>
+        <div class="cite-actions no-print"><button class="btn btn-primary btn-sm" id="ms-add-blank" type="button">+ Add a source by hand</button></div>
+      </div>
+      <details class="box box-example">
+        <summary>Show me an example annotation <span class="tag">Model</span></summary>
+        <div class="ex-body">
+          <p class="model">Javaheri, S., et al. (2008). Sleep quality and elevated blood pressure in adolescents. <i>Circulation, 118</i>(10), 1034–1040.</p>
+          <p><b>Main point:</b> In a study of 238 teens, those who slept poorly or less than 6.5 hours were about 3.5 times more likely to have high blood pressure, even after accounting for weight.</p>
+          <p><b>How it helps:</b> This is direct evidence for sub-question 3. It's a real study of teenagers, not adults, and it gives a number I can use in my claim.</p>
+        </div>
+      </details>
+      <div class="card" id="ms-empty">
+        <h3>No sources yet</h3>
+        <p style="margin-top:.4rem">Add sources three ways: the <b>+ My sources</b> button on any <a href="#/">resource in Step 1</a>, <b>Save to My sources</b> in the <a href="#cite">citation builder</a>, or <b>Add a source by hand</b> above.</p>
+      </div>
+      <div id="ms-list" class="stack"></div>
+      <div class="no-print" id="ms-danger" hidden>
+        <button class="btn btn-secondary btn-sm" id="ms-clear" type="button">Remove all sources</button>
+        <span id="ms-clear-confirm" class="ms-confirm" hidden>This can't be undone.
+          <button class="btn btn-danger btn-sm" id="ms-clear-yes" type="button">Yes, remove all</button>
+          <button class="btn btn-secondary btn-sm" id="ms-clear-no" type="button">Cancel</button></span>
+      </div>
+    </div>
+
+    <!-- b. Evidence matrix -->
+    <div class="stack-lg" id="org-matrix" data-panel="matrix" hidden>
+      <div class="box box-task">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
+        <p>Each row is a sub-question. Each column is a source. In each box, note what that source says about that sub-question. Leave a box empty if it says nothing. A row with fewer than 2 sources needs more research.</p>
+      </div>
+      <div class="card" style="padding:1rem">
+        <div class="section-head no-print">
+          <p class="hint" style="margin:0">Scroll sideways to see all your sources.</p>
+          <button class="btn btn-secondary btn-sm" type="button" onclick="window.print()"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg> Print matrix</button>
+        </div>
+        <div id="matrix-body"></div>
+      </div>
+      <div class="box box-tip">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Taking good notes</p>
+        <ul>
+          <li><b>Use your own words.</b> Write the idea, not the sentence.</li>
+          <li><b>Exact words?</b> Put them in “quotation marks” and add the page or paragraph, like (p. 4) or (para. 7).</li>
+          <li><b>Write down numbers</b> with their units and who was studied, like “238 teens, 3.5× higher odds.”</li>
+        </ul>
+      </div>
+      <details class="box box-example">
+        <summary>Show me an example row <span class="tag">Model</span></summary>
+        <div class="ex-body table-scroll">
+          <table class="compare">
+            <thead><tr><th>Sub-question</th><th>Javaheri 2008</th><th>NHLBI sleep page</th></tr></thead>
+            <tbody><tr>
+              <td>Q3. What do studies of teens show about sleep length and blood pressure?</td>
+              <td>238 teens: poor or short sleep (&lt; 6.5 h) linked to ~3.5× higher odds of high BP, even controlling for weight.</td>
+              <td>Background: BP normally drops during sleep, so short sleep means more hours at higher BP. Explains the biology, but not a study of teens.</td>
+            </tr></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <!-- c. CER -->
+    <div class="stack-lg" id="org-cer" data-panel="cer" hidden>
+      <div class="box box-task">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Your task</p>
+        <p>For each sub-question, answer it in one sentence (<b>claim</b>), choose the notes that prove it (<b>evidence</b>), and explain the biology that connects them (<b>reasoning</b>). This becomes the body of your PBAT.</p>
+      </div>
+      <details class="box box-example">
+        <summary>Show me an example <span class="tag">Model</span></summary>
+        <div class="ex-body">
+          <p><b>Claim:</b> Teens who sleep less than about 6.5 hours a night are more likely to have high blood pressure.</p>
+          <p><b>Evidence:</b> In a study of 238 adolescents, short or poor sleep was linked to about 3.5 times higher odds of elevated blood pressure, even after accounting for weight (Javaheri et al., 2008).</p>
+          <p><b>Reasoning:</b> Blood pressure normally dips during sleep because sympathetic nervous system activity falls. With less sleep, the body spends more hours in that higher-pressure state, and over time this strains artery walls.</p>
+        </div>
+      </details>
+      <div id="cer-body" class="stack-lg"></div>
+    </div>
+
+    <div data-checklist="organize"></div>
+    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#evaluate">← 4 · Evaluate</a><a class="btn btn-primary" href="#cite">Next: 6 · Cite &amp; share →</a></div>
+  </section>
+
+  <!-- ===================== 6 CITE & SHARE ===================== -->
+  <section class="view stack-lg" id="view-cite" data-view="cite" data-stage="6" data-title="Cite & share" hidden>
+    <div class="stage-head">
+      <p class="stage-eyebrow">Step 6 of 6 · Cite &amp; share</p>
+      <h2>Cite your sources and hand it in</h2>
+      <p class="lede">Make sure every source has a complete citation, then copy your work into your Google Doc.</p>
+    </div>
+
+    <div class="card" id="packet">
       <div class="section-head">
         <div>
-          <h2>My sources</h2>
-          <p class="muted">Your working bibliography. For each source, note what it says and how it helps answer your question. When you're ready, copy it into your Google Doc.</p>
+          <h3 class="numbered-h"><span class="n">1</span> Copy your work</h3>
+          <p>Pastes with formatting (italics, hanging indents) into Google Docs and Word.</p>
         </div>
         <div class="seg no-print" role="group" aria-label="Citation style" id="ms-style">
           <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
           <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
         </div>
       </div>
-      <div class="field" style="margin-top:1.25rem">
-        <label for="ms-question">My research question</label>
-        <textarea id="ms-question" rows="2" placeholder="Draft it here. It's fine to change it as you learn more."></textarea>
-      </div>
       <div class="cite-actions no-print">
-        <button class="btn btn-primary btn-sm" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy annotated bibliography</button>
-        <button class="btn btn-secondary btn-sm" id="ms-add-blank" type="button">+ Add a source by hand</button>
-        <label class="ms-check"><input type="checkbox" id="ms-include-craap"> Include CRAAP scores</label>
+        <button class="btn btn-primary" id="ms-copy-packet" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy research packet</button>
+        <button class="btn btn-secondary" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy annotated bibliography only</button>
+        <label class="ms-check"><input type="checkbox" id="ms-include-craap"> Include source scores</label>
       </div>
-      <div class="ms-storage no-print">
-        <p class="hint">Saved in this browser, on this device only. Paste your bibliography into your Google Doc often. To switch computers, download a backup file here and load it on the other one.</p>
-        <div class="cite-actions" style="margin-top:.5rem">
-          <button class="btn btn-secondary btn-sm" id="ms-download" type="button">Download backup</button>
-          <button class="btn btn-secondary btn-sm" id="ms-upload-btn" type="button">Load backup</button>
-          <input type="file" id="ms-upload" accept=".json,application/json" class="sr-only" tabindex="-1" aria-hidden="true">
+      <p class="hint">The research packet has your question, sub-questions, claims with evidence and reasoning, and annotated bibliography.</p>
+      <p class="hint" id="packet-status" aria-live="polite"></p>
+    </div>
+
+    <div class="card" id="cite">
+      <div class="tool-head">
+        <h3 class="numbered-h"><span class="n">2</span> Citation builder</h3>
+        <div class="seg no-print" role="group" aria-label="Citation style">
+          <button type="button" data-style="APA" aria-pressed="true">APA 7</button>
+          <button type="button" data-style="MLA" aria-pressed="false">MLA 9</button>
         </div>
       </div>
+      <p class="lede-sm" style="margin-bottom:1rem">Look it up, or fill in what you know from the source. The citation updates as you type.</p>
+      <form class="db-search cite-lookup" id="cite-lookup" autocomplete="off">
+        <label for="cite-lookup-q">Have a DOI or PubMed ID? Fill in the form automatically</label>
+        <div class="db-search-row">
+          <div class="db-search-input">
+            <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input type="text" id="cite-lookup-q" placeholder="10.1161/hc0902.104353 or 11877368" aria-describedby="cite-lookup-status" spellcheck="false">
+          </div>
+          <button class="btn btn-primary" type="submit" id="cite-lookup-go">Look up</button>
+        </div>
+        <p class="hint" id="cite-lookup-status" aria-live="polite">Paste a DOI, a PubMed ID (PMID), a PMC ID, or a link to the article on PubMed or a journal's site. For web pages, fill in the form below by hand or try <a href="https://www.mybib.com/" target="_blank" rel="noopener">MyBib ↗</a>.</p>
+      </form>
+
+      <form class="form-grid" id="cite-form" autocomplete="off">
+        <div class="field span-6">
+          <label for="cite-type">Source type</label>
+          <select id="cite-type">
+            <option value="journal">Journal article</option>
+            <option value="web">Web page (CDC, AHA, WHO…)</option>
+          </select>
+        </div>
+        <div class="field span-6">
+          <label for="cite-authors">Authors</label>
+          <textarea id="cite-authors" rows="3" placeholder="Libby, Peter&#10;Ridker, Paul M."></textarea>
+          <p class="hint">One per line as <i>Last, First Middle</i>. For an organization, type its full name.</p>
+        </div>
+        <div class="field span-6">
+          <label for="cite-title">Title</label>
+          <input type="text" id="cite-title" placeholder="Inflammation and atherosclerosis">
+          <p class="hint" id="title-hint">APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.</p>
+        </div>
+        <div class="field span-3">
+          <label for="cite-container" id="container-label">Journal</label>
+          <input type="text" id="cite-container" placeholder="Circulation">
+        </div>
+        <div class="field span-3">
+          <label for="cite-year">Year</label>
+          <input type="text" id="cite-year" inputmode="numeric" placeholder="2002">
+        </div>
+        <div class="field span-2 journal-only">
+          <label for="cite-volume">Volume</label>
+          <input type="text" id="cite-volume" placeholder="105">
+        </div>
+        <div class="field span-2 journal-only">
+          <label for="cite-issue">Issue</label>
+          <input type="text" id="cite-issue" placeholder="9">
+        </div>
+        <div class="field span-2 journal-only">
+          <label for="cite-pages">Pages</label>
+          <input type="text" id="cite-pages" placeholder="1135-1143">
+        </div>
+        <div class="field span-3 web-only" hidden>
+          <label for="cite-date">Month &amp; day <span class="hint">(optional)</span></label>
+          <input type="text" id="cite-date" placeholder="October 24">
+        </div>
+        <div class="field span-6">
+          <label for="cite-link">DOI or URL</label>
+          <input type="text" id="cite-link" placeholder="10.1161/hc0902.104353">
+        </div>
+      </form>
+
+      <div class="cite-out">
+        <div class="label" id="cite-label">Example</div>
+        <p id="cite-output"></p>
+      </div>
+      <div class="cite-actions no-print">
+        <button class="btn btn-primary btn-sm" id="cite-save" type="button">Save to My sources</button>
+        <button class="btn btn-secondary btn-sm" id="cite-copy" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy citation</button>
+        <button class="btn btn-secondary btn-sm" id="cite-clear" type="button">Clear</button>
+      </div>
+      <p class="hint">Always double-check against the style guide.</p>
     </div>
-    <div class="card" id="ms-empty">
-      <h3>No sources yet</h3>
-      <p class="muted" style="margin-top:.4rem">Add sources three ways: the <b>+ My sources</b> button on any <a href="#/">resource</a>, <b>Save to My sources</b> in the <a href="#cite">citation builder</a>, or <b>Add a source by hand</b> above.</p>
+
+    <div class="card no-print" id="backup">
+      <h3 class="numbered-h"><span class="n">3</span> Switching computers?</h3>
+      <p class="lede-sm" style="margin-top:.4rem">Everything is saved in this browser, on this device only. Paste your packet into your Google Doc often. To move your work, download a backup file here and load it on the other computer.</p>
+      <div class="cite-actions">
+        <button class="btn btn-secondary btn-sm" id="ms-download" type="button">Download backup</button>
+        <button class="btn btn-secondary btn-sm" id="ms-upload-btn" type="button">Load backup</button>
+        <input type="file" id="ms-upload" accept=".json,application/json" class="sr-only" tabindex="-1" aria-hidden="true">
+      </div>
     </div>
-    <div id="ms-list" class="stack"></div>
-    <div class="no-print" id="ms-danger" hidden>
-      <button class="btn btn-secondary btn-sm" id="ms-clear" type="button">Remove all sources</button>
-      <span id="ms-clear-confirm" class="ms-confirm" hidden>This can't be undone.
-        <button class="btn btn-danger btn-sm" id="ms-clear-yes" type="button">Yes, remove all</button>
-        <button class="btn btn-secondary btn-sm" id="ms-clear-no" type="button">Cancel</button></span>
-    </div>
+
+    <div data-checklist="cite"></div>
+    <div class="step-nav-bottom"><a class="btn btn-secondary" href="#organize">← 5 · Organize</a><span></span></div>
   </section>
 
 </main>
@@ -838,6 +1282,17 @@
      built-in copy of the list below.
      ================================================================ */
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv';
+
+  /* EDIT: the six steps as shown on the home page. Add due dates as plain text, e.g. 'Fri., Nov. 7'. */
+  const STEP_INFO = [
+    { key: 'explore', name: 'Explore', href: '#/', make: '2–3 background sources saved' },
+    { key: 'ask', name: 'Ask', href: '#ask', make: 'A research question and 2–4 sub-questions' },
+    { key: 'search', name: 'Search', href: '#search', make: 'Research studies found and saved' },
+    { key: 'evaluate', name: 'Evaluate', href: '#evaluate', make: 'Every source checked and rated' },
+    { key: 'organize', name: 'Organize', href: '#organize', make: 'An evidence matrix and a claim for each sub-question' },
+    { key: 'cite', name: 'Cite & share', href: '#cite', make: 'Your research packet in your Google Doc' },
+  ];
+  const DUE = { explore: '', ask: '', search: '', evaluate: '', organize: '', cite: '' };
 
   /* ---------------- Topics ----------------
      Names must match the Topic column in the sheet exactly. */
@@ -1125,8 +1580,9 @@
     const hasDeeper = items.some(i => i.level === 'Deeper'), hasIntro = items.some(i => i.level === 'Intro');
 
     view.innerHTML = `
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><span>${esc(t.name)}</span></nav>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">1 · Explore</a><span aria-hidden="true">›</span><span>${esc(t.name)}</span></nav>
       <div class="topic-head">
+        <p class="stage-eyebrow">Step 1 of 6 · Explore</p>
         <h2>${esc(t.name)}</h2>
         ${t.blurb ? `<p>${esc(t.blurb)}</p>` : ''}
         ${items.length ? `<div class="topic-filters">
@@ -1139,21 +1595,27 @@
             <button type="button" class="chip-btn" data-level="Deeper" aria-pressed="false">Deeper</button></div>` : ''}
         </div>` : ''}
       </div>
+      ${t.questions.length ? `
+      <div class="box box-task">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Read with a purpose</p>
+        <p>Skim the overview sources first. As you read, notice what makes you wonder <b>how</b> or <b>why</b>. Questions like these could become your research question:</p>
+        <ul>${t.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>
+        <p style="margin-top:.6rem"><a href="#ask/${t.slug}"><b>Map this topic in Step 2 →</b></a></p>
+      </div>` : ''}
       ${items.length ? groups.map(([name, list]) => `
         <section class="sub-section" data-sub="${esc(name)}">
           <h3>${name ? esc(name) : 'Overview'}</h3>
           <div class="grid grid-3">${list.map(r => `<div data-level="${r.level}">${card(r)}</div>`).join('')}</div>
         </section>`).join('')
         : '<div class="card"><p class="empty-note">No resources here yet. Check back soon, or <a href="#/">browse other topics</a>.</p></div>'}
-      ${t.questions.length || t.searches.length ? `
-      <div class="card leads">
-        <h3>Where this topic could lead</h3>
-        <p class="muted small" style="margin-top:.35rem">Once you’ve done some background reading, these are the kinds of focused questions you could research. Adapt one, or use them as models for your own.</p>
-        ${t.questions.length ? `<div class="questions"><h4>Example research questions</h4><ul>${t.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul></div>` : ''}
-        ${t.searches.length ? `<div style="margin-top:1rem"><h4>Search PubMed (free full text)</h4><div class="search-links">${t.searches.map(q =>
-          `<a href="${pubmed(q)}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>${esc(q)}</a>`).join('')}</div></div>` : ''}
-        <p class="small" style="margin-top:1rem"><a href="#question">Sharpen your own question →</a></p>
-      </div>` : ''}`;
+      ${t.searches.length ? `
+      <div class="card">
+        <h3>Ready for research studies?</h3>
+        <p style="margin-top:.35rem">These PubMed searches (free full text) show the kind of research this topic leads to. Use them after you've written your question in <a href="#ask/${t.slug}">Step 2</a>.</p>
+        <div class="search-links" style="margin-top:.75rem">${t.searches.map(q =>
+          `<a href="${pubmed(q)}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>${esc(q)}</a>`).join('')}</div>
+      </div>` : ''}
+      <div class="step-nav-bottom"><a class="btn btn-secondary" href="#/">← All topics</a><a class="btn btn-primary" href="#ask/${t.slug}">Next: 2 · Ask a question →</a></div>`;
 
     // Filters: hide cards and empty sections rather than re-rendering.
     const filt = { sub: '', level: '' };
@@ -1172,6 +1634,8 @@
 
   /* ---------------- Databases page ---------------- */
   const DATABASES = [
+    { name: 'MedlinePlus', pub: 'National Library of Medicine', tag: ['Background', 'tag-bg'], url: 'https://medlineplus.gov/',
+      desc: 'Plain-language health information. Use it to understand a condition or treatment before reading studies about it.' },
     { name: 'PubMed', pub: 'National Library of Medicine', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://pubmed.ncbi.nlm.nih.gov/',
       desc: 'The main search engine for biomedical research. Click <b>Free full text</b> in the left sidebar to see only articles you can read.' },
     { name: 'PubMed Central (PMC)', pub: 'National Library of Medicine', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://pmc.ncbi.nlm.nih.gov/',
@@ -1180,8 +1644,6 @@
       desc: 'Leading cardiology journals such as <i>Circulation</i> and <i>Hypertension</i>, plus scientific statements. Many articles are free.' },
     { name: 'Google Scholar', pub: 'Google', tag: ['Mixed', ''], url: 'https://scholar.google.com/',
       desc: 'The broadest search. Results mix peer-reviewed studies with other material, and some are paywalled, so check each one.' },
-    { name: 'MedlinePlus', pub: 'National Library of Medicine', tag: ['Background', 'tag-bg'], url: 'https://medlineplus.gov/',
-      desc: 'Plain-language health information. Use it to understand a condition or treatment before reading studies about it.' },
   ];
   $('#db-grid').innerHTML = DATABASES.map(d => `
     <article class="card card-tight db-card">
@@ -1193,8 +1655,9 @@
 
   /* ---------------- Pages (hash-routed, so links and Back work) ---------------- */
   // Old addresses from earlier versions of the site keep working.
-  const ALIASES = { overview: '', guide: '', pathways: '', sources: 'search', writing: 'evaluate', lab: 'tool/blood-flow' };
-  const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'resources' : v;
+  const ALIASES = { overview: '', guide: '', pathways: '', sources: 'search', writing: 'evaluate', lab: 'tool/blood-flow', 'my-sources': 'organize' };
+  const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'explore' : v;
+  const PAGES = ['ask', 'search', 'evaluate', 'organize', 'cite'];
   let currentView = null;
 
   function showView(name, { focus = true } = {}) {
@@ -1207,9 +1670,11 @@
     const view = $(`.view[data-view="${name}"]`);
     document.title = (name === 'home' ? '' : view.dataset.title + ' · ') + 'Cardiovascular Research Hub';
     if (name === 'tool-3d-heart') loadEmbed();
-    if (name === 'my-sources') renderMySources();
-    if (name === 'evaluate') syncCraapTarget();
+    if (name === 'ask') renderAsk();
+    if (name === 'organize') renderOrganize();
+    if (name === 'evaluate') renderEvaluate();
     if (name === 'search') renderBuilder();
+    if (name === 'cite') renderPacketStatus();
     // Move focus to the new page's heading so keyboard and screen-reader users land in the right place.
     if (focus && !firstLoad) {
       const h = $('h2', view);
@@ -1222,7 +1687,9 @@
     if (h in ALIASES) h = ALIASES[h];
     if (h.startsWith('topic/')) { renderTopic(h.slice(6)); showView('topic'); window.scrollTo(0, 0); return; }
     if (h.startsWith('tool/') && $(`#view-tool-${CSS.escape(h.slice(5))}`)) { showView('tool-' + h.slice(5)); window.scrollTo(0, 0); return; }
-    if (['search', 'evaluate', 'my-sources'].includes(h)) { showView(h); window.scrollTo(0, 0); return; }
+    if (h.startsWith('ask/')) { webTopicFromLink(h.slice(4)); h = 'ask'; }
+    if (h.startsWith('evaluate/')) { evalTarget = h.slice(9); h = 'evaluate'; }
+    if (PAGES.includes(h)) { showView(h); window.scrollTo(0, 0); return; }
     // A hash that names something inside a page (e.g. #craap) opens that page and scrolls to it.
     const target = h && document.getElementById(h);
     const view = target && target.closest('.view');
@@ -1239,7 +1706,7 @@
   }
 
   // Article search: builds the chosen database's results URL and opens it in a new tab.
-  // Without JavaScript the form still submits to PubMed (free full text) on its own.
+  // Without JavaScript the form still submits to MedlinePlus on its own.
   const DBS = {
     pubmed: { name: 'PubMed', url: q => pubmed(q) },
     scholar: { name: 'Google Scholar', url: q => 'https://scholar.google.com/scholar?q=' + encodeURIComponent(q) },
@@ -1340,16 +1807,26 @@
     $('#sb-concepts').innerHTML = sb.concepts.map((c, i) => {
       const used = splitSyns(c.syns).map(x => x.toLowerCase());
       const sugg = suggestionsFor(c.term).filter(x => !used.includes(x.toLowerCase()));
-      return `<div class="sb-concept" data-i="${i}">
-        ${i ? '<span class="sb-and" aria-hidden="true">AND</span>' : ''}
+      return `${i ? '<div class="sb-and-col" aria-hidden="true">AND</div>' : ''}<div class="sb-concept k${i + 1}" data-i="${i}">
         <label for="sb-term-${i}">Key idea ${i + 1}${i === 2 ? ' (optional)' : ''}</label>
         <input type="text" id="sb-term-${i}" data-field="term" value="${esc(c.term)}" placeholder="${['sleep', 'blood pressure', 'teenagers'][i]}">
-        <label for="sb-syns-${i}" class="sr-only">Other words for key idea ${i + 1}</label>
-        <input type="text" id="sb-syns-${i}" data-field="syns" value="${esc(c.syns)}" placeholder="Other words, separated by commas">
+        <label for="sb-syns-${i}" class="sb-or">OR other words for it</label>
+        <input type="text" id="sb-syns-${i}" data-field="syns" value="${esc(c.syns)}" placeholder="separated by commas">
         ${sugg.length ? `<div class="sb-sugg"><span class="hint">Also try:</span>${sugg.map(x =>
           `<button type="button" class="chip-btn sm" data-add="${esc(x)}">+ ${esc(x)}</button>`).join('')}</div>` : ''}
       </div>`;
     }).join('');
+    renderSbVisual();
+  }
+  // A picture of the search: each key idea in its own color, its words joined by OR, ideas joined by AND.
+  function renderSbVisual() {
+    const groups = sb.concepts.map((c, i) => ({ i, terms: [...new Set([c.term.trim(), ...splitSyns(c.syns)].filter(Boolean))] })).filter(g => g.terms.length);
+    $('#sb-visual').innerHTML = sb.edited
+      ? '<span class="empty">You edited the search text directly, so this picture is paused. Change a key idea to rebuild it.</span>'
+      : groups.length
+        ? groups.map((g, n) => `${n ? '<span class="and">AND</span>' : ''}<span class="grp k${g.i + 1}">${g.terms.map((t, j) =>
+            `${j ? '<span class="op">OR</span>' : ''}<span class="term">${esc(t)}</span>`).join('')}</span>`).join('')
+        : '<span class="empty">Add a key idea above to see your search.</span>';
   }
   function renderSpotted() {
     const used = sb.concepts.map(c => c.term.toLowerCase().trim());
@@ -1359,6 +1836,7 @@
   }
   function refreshQuery() {
     if (!sb.edited) $('#sb-query').value = buildQuery();
+    renderSbVisual();
     saveSb();
   }
   function renderBuilder() {
@@ -1395,7 +1873,7 @@
     sb.edited = false;
     renderConcepts(); refreshQuery();
   });
-  $('#sb-query').addEventListener('input', e => { sb.edited = true; sb.query = e.target.value; saveSb(); });
+  $('#sb-query').addEventListener('input', e => { sb.edited = true; sb.query = e.target.value; renderSbVisual(); saveSb(); });
   $$('[data-sb-go]').forEach(btn => btn.addEventListener('click', () => {
     const q = $('#sb-query').value.trim();
     if (!q) { toast('Add at least one key idea first.'); $('#sb-term-0').focus(); return; }
@@ -1421,29 +1899,83 @@
     { id: 'a2', name: 'Accuracy', q: 'Is it peer-reviewed or backed by cited evidence?', hint: 'Can you find the data or the references behind its claims?' },
     { id: 'p', name: 'Purpose', q: 'Is it written to inform, not to sell?', hint: 'Watch for product promotion, sponsorship, or one-sided framing.' },
   ];
+  // Ratings start blank: a score only appears once the student has judged all five.
   $('#craap-items').innerHTML = CRAAP.map(k => `
-    <div class="craap-item">
-      <div class="row">
-        <label for="craap-${k.id}"><b>${k.name}:</b> ${k.q}</label>
-        <output for="craap-${k.id}" id="out-${k.id}">3</output>
-      </div>
+    <fieldset class="craap-item">
+      <legend><b>${k.name}:</b> ${k.q}</legend>
       <p class="hint" id="hint-${k.id}">${k.hint}</p>
-      <input type="range" min="1" max="5" step="1" value="3" id="craap-${k.id}" aria-describedby="hint-${k.id}">
-      <div class="scale" aria-hidden="true"><span>1 Poor</span><span>5 Excellent</span></div>
-    </div>`).join('');
+      <div class="rate">
+        <span class="ends" aria-hidden="true">Poor</span>
+        ${[1, 2, 3, 4, 5].map(n => `<label><input type="radio" name="craap-${k.id}" value="${n}" aria-describedby="hint-${k.id}"><span>${n}</span></label>`).join('')}
+        <span class="ends" aria-hidden="true">Excellent</span>
+      </div>
+    </fieldset>`).join('');
+
+  let evalTarget = ''; // id of the source being checked; '' means practice
+  const readCraap = () => Object.fromEntries(CRAAP.map(k => {
+    const c = $(`input[name="craap-${k.id}"]:checked`);
+    return [k.id, c ? +c.value : undefined];
+  }));
+  const setCraapInputs = (vals = {}) => CRAAP.forEach(k =>
+    $$(`input[name="craap-${k.id}"]`).forEach(r => { r.checked = +r.value === vals[k.id]; }));
 
   function updateCRAAP() {
-    const vals = {};
-    CRAAP.forEach(k => { vals[k.id] = +$('#craap-' + k.id).value; $('#out-' + k.id).textContent = vals[k.id]; });
-    const v = craapVerdict(vals);
-    $('#craap-total').textContent = `${v.total} / 25`;
-    $('#craap-verdict').className = 'verdict ' + v.cls;
-    $('#craap-verdict').textContent = v.label;
-    $('#craap-note').textContent = v.note;
+    const vals = readCraap();
+    const rated = CRAAP.filter(k => vals[k.id]).length;
+    if (craapComplete(vals)) {
+      const v = craapVerdict(vals);
+      $('#craap-total').textContent = `${v.total} / 25`;
+      $('#craap-verdict').className = 'verdict ' + v.cls;
+      $('#craap-verdict').textContent = v.label;
+      $('#craap-note').textContent = v.note;
+    } else {
+      $('#craap-total').textContent = '– / 25';
+      $('#craap-verdict').className = 'verdict none';
+      $('#craap-verdict').textContent = 'Rate all five';
+      $('#craap-note').textContent = `${rated} of 5 rated.`;
+    }
   }
-  $('#craap-items').addEventListener('input', updateCRAAP);
-  $('#craap-reset').addEventListener('click', () => { $$('#craap-items input').forEach(i => { i.value = 3; }); updateCRAAP(); });
-  updateCRAAP();
+  function saveEval() {
+    const s = evalTarget && msFind(evalTarget);
+    if (!s) return;
+    const vals = readCraap();
+    s.craap = CRAAP_IDS.some(k => vals[k]) ? vals : null;
+    s.lateral = $('#lat-note').value;
+    saveMS();
+    $('#craap-saved').textContent = `✓ Saved with “${(s.title || 'Untitled source').slice(0, 50)}”.`;
+  }
+  // A good starting search target for lateral reading: the website, journal, or first author.
+  const publisherOf = s => (s.container || (s.authors || '').split('\n')[0] || '').trim();
+  function loadEvalTarget() {
+    const s = evalTarget && msFind(evalTarget);
+    setCraapInputs((s && s.craap) || {});
+    $('#lat-note').value = s ? (s.lateral || '') : '';
+    $('#lat-name').value = s ? publisherOf(s) : '';
+    $('#craap-saved').textContent = '';
+    $('#craap-target-hint').innerHTML = s
+      ? 'Your notes and ratings save to this source automatically.'
+      : MS.sources.length
+        ? 'Practice mode: nothing is saved. Pick one of your sources to save your ratings with it.'
+        : 'Practice mode: nothing is saved. Add sources in <a href="#organize">Step 5</a> to save ratings with them.';
+    updateCRAAP();
+  }
+  function renderEvaluate() {
+    if (evalTarget && !msFind(evalTarget)) evalTarget = '';
+    if (!evalTarget && MS.sources.length) evalTarget = (MS.sources.find(s => !craapComplete(s.craap)) || MS.sources[0]).id;
+    $('#craap-target').innerHTML = '<option value="">Practice (not saved)</option>' + MS.sources.map(s =>
+      `<option value="${s.id}">${craapComplete(s.craap) ? '✓ ' : ''}${esc((s.title || 'Untitled source').slice(0, 70))}</option>`).join('');
+    $('#craap-target').value = evalTarget;
+    loadEvalTarget();
+  }
+  $('#craap-target').addEventListener('change', e => { evalTarget = e.target.value; loadEvalTarget(); });
+  $('#craap-items').addEventListener('change', () => { updateCRAAP(); saveEval(); });
+  $('#lat-note').addEventListener('input', saveEval);
+  $('#craap-reset').addEventListener('click', () => { setCraapInputs({}); updateCRAAP(); saveEval(); });
+  $('#lat-go').addEventListener('click', () => {
+    const q = $('#lat-name').value.trim();
+    if (!q) { $('#lat-name').focus(); toast('Type the publisher or author first.'); return; }
+    window.open('https://www.google.com/search?q=' + encodeURIComponent(`"${q}"`), '_blank', 'noopener');
+  });
 
   /* ---------------- Citation builder ---------------- */
   let citeStyle = 'APA';
@@ -1565,8 +2097,180 @@
   }
   $('#cite-form').addEventListener('input', renderCitation);
   $('#cite-form').addEventListener('submit', e => e.preventDefault());
-  pressGroup($('#cite .seg'), btn => { citeStyle = btn.dataset.style; renderCitation(); });
-  $('#cite-clear').addEventListener('click', () => { $('#cite-form').reset(); renderCitation(); });
+  pressGroup($('#cite .seg'), btn => { citeStyle = btn.dataset.style; swapLookupTitle(); renderCitation(); });
+  $('#cite-clear').addEventListener('click', () => { $('#cite-form').reset(); clearLookup(); renderCitation(); });
+
+  /* ---------------- Citation lookup (DOI / PubMed ID / PMC ID) ---------------- */
+  // Crossref has clean journal names and full first names; PubMed has article titles in
+  // sentence case (what APA wants). We ask both and keep the best of each.
+  // Both services are free, need no key, and allow requests straight from the browser.
+  const NCBI = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
+  const NCBI_TOOL = '&tool=forsyth-cardio-hub';
+  let lookupTitles = null; // { APA, MLA } from the last lookup
+
+  function parseLookup(raw) {
+    const q = raw.trim();
+    const doi = q.match(/10\.\d{4,9}\/[^\s"<>]+/);
+    if (doi) return { doi: decodeURIComponent(doi[0]).replace(/[.,;)\]]+$/, '').replace(/\/(full|abstract|pdf|epdf)$/i, '') };
+    const pmc = q.match(/PMC\s*(\d+)/i);
+    if (pmc) return { pmcid: pmc[1] };
+    const pm = q.match(/pubmed\.ncbi\.nlm\.nih\.gov\/(\d+)/i) || q.match(/^(?:PMID:?\s*)?(\d{4,9})$/i);
+    if (pm) return { pmid: pm[1] };
+    if (/^(https?:\/\/|www\.)/i.test(q)) return { web: true };
+    return null;
+  }
+
+  // PubMed allows only a few requests per second from one network, so a class looking things up
+  // at once can get turned away. Wait a moment and try again before giving up.
+  async function getText(url, tries = 3) {
+    for (let i = 1; ; i++) {
+      let r;
+      try { r = await fetch(url, { signal: AbortSignal.timeout ? AbortSignal.timeout(12000) : undefined }); }
+      catch (e) { if (i >= tries) throw e; }
+      if (r && r.ok) return r.text();
+      if (r && r.status !== 429 && r.status < 500) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; }
+      if (i >= tries) throw new Error('HTTP ' + (r ? r.status : 'failed'));
+      await new Promise(res => setTimeout(res, 800 * i + Math.random() * 700));
+    }
+  }
+  const getJSON = async url => JSON.parse(await getText(url));
+  const getXML = async url => new DOMParser().parseFromString(await getText(url), 'text/xml');
+
+  const stripTags = h => (new DOMParser().parseFromString(h || '', 'text/html').body.textContent || '').replace(/\s+/g, ' ').trim();
+  const noEndPeriod = t => t.replace(/\.$/, '');
+  // "Robert D" -> "Robert D." so lone initials read correctly in MLA.
+  const dotInitials = g => (g || '').replace(/\b([A-Z])(?=\s|$)/g, '$1.');
+  // PubMed shortens page ranges ("1135-43"); citations need them in full ("1135-1143").
+  function fullPages(p) {
+    const m = (p || '').match(/^([A-Za-z]*)(\d+)\s*-\s*([A-Za-z]*)(\d+)$/);
+    if (!m) return p || '';
+    const end = m[4].length < m[2].length ? m[2].slice(0, m[2].length - m[4].length) + m[4] : m[4];
+    return `${m[1]}${m[2]}-${m[3] || m[1]}${end}`;
+  }
+  const SMALL = /^(a|an|and|as|at|but|by|for|in|of|on|or|the|to|&)$/i;
+  const titleCase = t => t.split(' ').map((w, i) => i && SMALL.test(w) ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+  async function fromCrossref(doi) {
+    const m = (await getJSON('https://api.crossref.org/works/' + encodeURIComponent(doi))).message;
+    const date = (m.issued && m.issued['date-parts'] && m.issued['date-parts'][0]) || [];
+    return {
+      authors: (m.author || []).map(a => a.family ? `${a.family}${a.given ? ', ' + dotInitials(a.given) : ''}` : (a.name || '')).filter(Boolean),
+      title: stripTags((m.title || [])[0]),
+      journal: stripTags((m['container-title'] || [])[0]),
+      volume: m.volume || '', issue: m.issue || '', pages: m.page || '',
+      year: date[0] ? String(date[0]) : '',
+      kind: m.type || '',
+    };
+  }
+  async function fromPubMed(pmid) {
+    const x = await getXML(`${NCBI}efetch.fcgi?db=pubmed&retmode=xml&id=${pmid}${NCBI_TOOL}`);
+    const art = x.querySelector('PubmedArticle');
+    if (!art) return null;
+    const t = sel => { const n = art.querySelector(sel); return n ? n.textContent.trim() : ''; };
+    const start = t('Pagination StartPage'), end = t('Pagination EndPage');
+    return {
+      authors: [...art.querySelectorAll('AuthorList > Author')].map(a => {
+        const last = a.querySelector('LastName'), fore = a.querySelector('ForeName'), group = a.querySelector('CollectiveName');
+        if (last) return last.textContent.trim() + (fore ? ', ' + dotInitials(fore.textContent.trim()) : '');
+        return group ? group.textContent.trim() : '';
+      }).filter(Boolean),
+      title: noEndPeriod(stripTags(t('ArticleTitle'))),
+      // PubMed lowercases journal names and adds place notes: "Hypertension (Dallas, Tex. : 1979)".
+      journal: titleCase(t('Journal > Title').replace(/\s*\([^)]*\)\s*$/, '')),
+      volume: t('JournalIssue Volume'), issue: t('JournalIssue Issue'),
+      pages: start && end ? `${start}-${end}` : fullPages(t('MedlinePgn')),
+      year: t('JournalIssue PubDate Year') || (t('JournalIssue PubDate MedlineDate').match(/\d{4}/) || [''])[0],
+      doi: t('ArticleIdList ArticleId[IdType="doi"]'),
+    };
+  }
+  async function pmidForDoi(doi) {
+    const r = await getJSON(`${NCBI}esearch.fcgi?db=pubmed&retmode=json&term=${encodeURIComponent(doi)}%5Bdoi%5D${NCBI_TOOL}`);
+    const ids = (r.esearchresult && r.esearchresult.idlist) || [];
+    return ids.length === 1 ? ids[0] : '';
+  }
+  async function idsForPmc(pmcid) {
+    const r = await getJSON(`${NCBI}esummary.fcgi?db=pmc&retmode=json&id=${pmcid}${NCBI_TOOL}`);
+    const rec = r.result && r.result[pmcid];
+    if (!rec || rec.error) return null;
+    const id = type => ((rec.articleids || []).find(a => a.idtype === type) || {}).value || '';
+    return { pmid: id('pmid'), doi: id('doi') };
+  }
+
+  function setLookupStatus(html, kind = '') {
+    const el = $('#cite-lookup-status');
+    el.innerHTML = html;
+    el.className = 'hint' + (kind ? ' is-' + kind : '');
+  }
+  const LOOKUP_HINT = $('#cite-lookup-status').innerHTML;
+  const MYBIB = '<a href="https://www.mybib.com/" target="_blank" rel="noopener">MyBib ↗</a>';
+  function clearLookup() { lookupTitles = null; $('#cite-lookup-q').value = ''; setLookupStatus(LOOKUP_HINT); }
+
+  // When the style changes, switch to that style's capitalization, unless the student edited the title.
+  function swapLookupTitle() {
+    if (!lookupTitles) return;
+    const field = $('#cite-title');
+    if ([lookupTitles.APA, lookupTitles.MLA].includes(field.value)) field.value = lookupTitles[citeStyle];
+  }
+
+  async function runLookup() {
+    const raw = $('#cite-lookup-q').value;
+    const id = parseLookup(raw);
+    if (!raw.trim()) { $('#cite-lookup-q').focus(); setLookupStatus('Paste a DOI or PubMed ID first.', 'bad'); return; }
+    if (!id) { setLookupStatus('That doesn\'t look like a DOI or PubMed ID. A DOI starts with <b>10.</b> and a PubMed ID is a number like <b>11877368</b>.', 'bad'); return; }
+    if (id.web) { setLookupStatus(`That link doesn't include a DOI, so it can't be looked up here. If it's a web page, set <b>Source type</b> to Web page and fill in the form, or try ${MYBIB}. If it's an article, look for its DOI on the page.`, 'bad'); return; }
+
+    const btn = $('#cite-lookup-go');
+    btn.disabled = true;
+    setLookupStatus('Looking it up…');
+    try {
+      let { doi = '', pmid = '' } = id;
+      if (id.pmcid) {
+        const ids = await idsForPmc(id.pmcid);
+        if (!ids) throw Object.assign(new Error('not found'), { status: 404 });
+        ({ doi, pmid } = ids);
+      }
+      const [cr, pmFirst] = await Promise.all([
+        doi ? fromCrossref(doi).catch(e => { if (e.status !== 404) throw e; return null; }) : null,
+        pmid ? fromPubMed(pmid) : null,
+      ]);
+      let pm = pmFirst;
+      if (!pm && doi) pm = await pmidForDoi(doi).then(p => (pmid = p) ? fromPubMed(p) : null).catch(() => null);
+      let crossref = cr;
+      if (pm && !doi && pm.doi) {
+        doi = pm.doi;
+        crossref = await fromCrossref(doi).catch(() => null);
+      }
+      if (!crossref && !pm) throw Object.assign(new Error('not found'), { status: 404 });
+
+      const pick = k => (crossref && crossref[k]) || (pm && pm[k]) || '';
+      const apaTitle = (pm && pm.title) || (crossref && crossref.title) || '';
+      const mlaTitle = (crossref && crossref.title) || titleCase(apaTitle);
+      lookupTitles = { APA: apaTitle, MLA: mlaTitle };
+      const authors = (crossref && crossref.authors.length ? crossref.authors : (pm ? pm.authors : []));
+
+      $('#cite-type').value = 'journal';
+      $('#cite-authors').value = authors.join('\n');
+      $('#cite-title').value = lookupTitles[citeStyle];
+      $('#cite-container').value = (crossref && crossref.journal) || (pm && pm.journal) || '';
+      $('#cite-year').value = pick('year');
+      $('#cite-volume').value = pick('volume');
+      $('#cite-issue').value = pick('issue');
+      $('#cite-pages').value = pick('pages');
+      $('#cite-date').value = '';
+      $('#cite-link').value = doi || (pmid ? `https://pubmed.ncbi.nlm.nih.gov/${pmid}/` : '');
+      renderCitation();
+
+      const from = [crossref && 'Crossref', pm && 'PubMed'].filter(Boolean).join(' and ');
+      const odd = crossref && crossref.kind && crossref.kind !== 'journal-article' ? ` This DOI is for a ${esc(crossref.kind.replace(/-/g, ' '))}, not a journal article, so check the format carefully.` : '';
+      setLookupStatus(`Filled in from ${from}. Check each field against the article before you copy the citation, especially names and capitalization.${odd}`, 'ok');
+    } catch (e) {
+      if (e.status === 404) setLookupStatus(`We couldn't find that one. Check for typos, or fill in the form by hand. ${MYBIB} may also find it.`, 'bad');
+      else setLookupStatus(`The lookup service didn't respond. Try again in a minute, or fill in the form by hand.`, 'bad');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+  $('#cite-lookup').addEventListener('submit', e => { e.preventDefault(); runLookup(); });
 
   // Copies formatted text (keeps italics in Google Docs and Word), with fallbacks for locked-down browsers.
   async function copyRich(html, text, okMsg) {
@@ -1620,7 +2324,7 @@
 
   function addSource(fields, { open = true } = {}) {
     const s = { id: newId(), type: 'web', authors: '', title: '', container: '', year: '', volume: '', issue: '', pages: '', date: '', link: '',
-      stage: 'Background', craap: null, summary: '', helps: '', open, ...fields };
+      stage: 'Background', craap: null, lateral: '', summary: '', helps: '', open, ...fields };
     MS.sources.push(s);
     saveMS();
     syncAddButtons();
@@ -1631,7 +2335,7 @@
     const n = MS.sources.length, b = $('#ms-count');
     b.hidden = !n;
     b.textContent = n;
-    b.setAttribute('aria-label', `${n} saved`);
+    b.setAttribute('aria-label', `${n} saved source${n === 1 ? '' : 's'}`);
   }
 
   // "+ My sources" buttons on resource cards.
@@ -1645,12 +2349,12 @@
   document.addEventListener('click', e => {
     const b = e.target.closest('[data-add-src]');
     if (!b) return;
-    if (msHas(b.dataset.addSrc)) { location.hash = 'my-sources'; return; }
+    if (msHas(b.dataset.addSrc)) { location.hash = 'organize'; return; }
     const r = RESOURCES.find(x => x.url === b.dataset.addSrc);
     if (!r) return;
     // We know the title, site, and link. Students check the page for the author and date.
     addSource({ type: 'web', authors: r.source, title: r.title, container: r.source, link: r.url, stage: 'Background' });
-    toast('Added to My sources. Open it from the menu to add the date and your notes.');
+    toast('Added to My sources (Step 5). Add the date and your notes there.');
   });
 
   /* CRAAP helpers shared with the evaluator */
@@ -1669,6 +2373,17 @@
     return Object.entries(need).filter(([k]) => !String(s[k] || '').trim()).map(([, label]) => label);
   }
   const annotation = s => [s.summary, s.helps].map(x => (x || '').trim()).filter(Boolean).join(' ');
+  // Short name for a source in the matrix and claims: "Javaheri, 2008" or "American Heart Association, n.d."
+  function srcLabel(s) {
+    // Same pattern as an in-text citation: one author, "A & B" for two, "A et al." for three or more.
+    const list = parseAuthors(s.authors || ''), name = a => a.last || a.org;
+    let who = !list.length ? (s.title || 'Untitled source')
+      : list.length === 1 ? name(list[0])
+      : list.length === 2 ? `${name(list[0])} & ${name(list[1])}`
+      : `${name(list[0])} et al.`;
+    if (who.length > 40) who = who.slice(0, 38) + '…';
+    return `${who}, ${s.year || 'n.d.'}`;
+  }
 
   function entryHead(s) {
     const missing = missingFor(s);
@@ -1676,9 +2391,9 @@
     return `<p class="ms-cite">${buildCitation(s, MS.style) || '<span class="muted">Untitled source</span>'}</p>
       <div class="res-tags">
         <span class="tag">${esc(STAGES[s.stage] || s.stage)}</span>
-        ${v ? `<span class="verdict ${v.cls} tag">CRAAP ${v.total}/25 · ${esc(v.label)}</span>` : '<span class="tag">Not evaluated yet</span>'}
+        ${v ? `<span class="verdict ${v.cls} tag">Checked ${v.total}/25 · ${esc(v.label)}</span>` : '<span class="tag tag-warn">Not checked yet</span>'}
         ${missing.length ? `<span class="tag tag-warn">Missing: ${esc(missing.join(', '))}</span>` : ''}
-        ${annotation(s) ? '' : '<span class="tag tag-warn">No notes yet</span>'}
+        ${annotation(s) ? '' : '<span class="tag tag-warn">No annotation yet</span>'}
       </div>
       ${annotation(s) ? `<p class="ms-annot">${esc(annotation(s))}</p>` : ''}`;
   }
@@ -1691,9 +2406,9 @@
         ${area ? `<textarea id="ms-${key}-${id}" data-field="${key}" rows="2" placeholder="${esc(ph)}">${esc(s[key])}</textarea>`
                : `<input type="text" id="ms-${key}-${id}" data-field="${key}" value="${esc(s[key])}" placeholder="${esc(ph)}">`}
       </div>`;
-    const c = s.craap || {};
     return `<div class="ms-edit" hidden>
-      <p class="hint">Check the source itself for anything missing, especially the author and date.</p>
+      <h4>What is it?</h4>
+      <p class="hint" style="margin-top:-.6rem">Check the source itself for anything missing, especially the author and date. Have a DOI? The <a href="#cite">citation builder</a> can look it up.</p>
       <div class="form-grid">
         <div class="field span-3"><label for="ms-type-${id}">Source type</label>
           <select id="ms-type-${id}" data-field="type"><option value="journal" ${!isWeb ? 'selected' : ''}>Journal article</option><option value="web" ${isWeb ? 'selected' : ''}>Web page</option></select></div>
@@ -1710,32 +2425,24 @@
         ${f('date', 'Month &amp; day <span class="hint">(optional)</span>', { hideFor: 'journal' })}
         ${f('link', 'DOI or URL', { span: 6 })}
       </div>
-      <fieldset class="ms-craap">
-        <legend>CRAAP score <span class="hint">(1 poor – 5 excellent)</span></legend>
-        <div class="row">${CRAAP.map(k => `<label>${k.name}
-          <select data-craap="${k.id}"><option value="">–</option>${[1, 2, 3, 4, 5].map(n => `<option ${c[k.id] === n ? 'selected' : ''}>${n}</option>`).join('')}</select></label>`).join('')}</div>
-        <p class="hint ms-craap-note"></p>
-      </fieldset>
+      <h4>Annotation</h4>
       <div class="form-grid">
         ${f('summary', 'Main point: what does this source say?', { span: 6, area: true, ph: 'In 1–2 sentences, in your own words.' })}
-        ${f('helps', 'How does it help answer my research question?', { span: 6, area: true, ph: 'Background? Evidence for a claim? Data I can analyze?' })}
+        ${f('helps', 'How does it help answer my research question?', { span: 6, area: true, ph: 'Background? Evidence for a sub-question? Data I can use?' })}
       </div>
       <div><button class="btn btn-secondary btn-sm" type="button" data-act="edit">Done</button></div>
     </div>`;
   }
 
   function renderMySources() {
-    $('#ms-question').value = sb.question || '';
-    $$('#ms-style button').forEach(b => b.setAttribute('aria-pressed', b.dataset.style === MS.style));
-    $('#ms-include-craap').checked = !!MS.includeCraap;
     $('#ms-empty').hidden = !!MS.sources.length;
     $('#ms-danger').hidden = !MS.sources.length;
     $('#ms-list').innerHTML = MS.sources.map(s => `
       <article class="card ms-entry" data-id="${s.id}">
         <div class="ms-head">${entryHead(s)}</div>
         <div class="cite-actions no-print">
-          <button class="btn btn-secondary btn-sm" type="button" data-act="edit" aria-expanded="false">Edit details &amp; notes</button>
-          <button class="btn btn-secondary btn-sm" type="button" data-act="copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy entry</button>
+          <button class="btn btn-secondary btn-sm" type="button" data-act="edit" aria-expanded="false">Edit details &amp; annotation</button>
+          <a class="btn btn-secondary btn-sm" href="#evaluate/${s.id}">${craapComplete(s.craap) ? 'Re-check' : 'Check'} this source (Step 4)</a>
           ${/^https?:\/\//i.test(s.link) || /^10\./.test(s.link) ? `<a class="btn btn-secondary btn-sm" href="${esc(normLink(s.link))}" target="_blank" rel="noopener">Open source <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></a>` : ''}
           <span class="ms-remove"><button class="btn btn-secondary btn-sm" type="button" data-act="remove">Remove</button></span>
         </div>
@@ -1743,7 +2450,6 @@
       </article>`).join('');
     // Newly added sources open ready to edit.
     MS.sources.filter(s => s.open).forEach(s => { toggleEditor($(`.ms-entry[data-id="${s.id}"]`), true); s.open = false; });
-    $$('.ms-entry').forEach(el => updateCraapNote(el));
     saveMS();
   }
 
@@ -1753,21 +2459,12 @@
     ed.hidden = !open;
     $('[data-act="edit"][aria-expanded]', el).setAttribute('aria-expanded', open);
   }
-  function updateCraapNote(el) {
-    const s = msFind(el.dataset.id);
-    const note = $('.ms-craap-note', el);
-    note.textContent = craapComplete(s.craap) ? (v => `${v.total}/25 · ${v.label}. ${v.note}`)(craapVerdict(s.craap)) : 'Rate all five to see the score.';
-  }
 
   $('#ms-list').addEventListener('input', e => {
     const el = e.target.closest('.ms-entry');
     if (!el) return;
     const s = msFind(el.dataset.id);
     if (e.target.dataset.field) s[e.target.dataset.field] = e.target.value;
-    if (e.target.dataset.craap) {
-      s.craap = { ...(s.craap || {}), [e.target.dataset.craap]: e.target.value ? +e.target.value : undefined };
-      updateCraapNote(el);
-    }
     if (e.target.dataset.field === 'type') {
       $$('[data-hide-for]', el).forEach(x => { x.hidden = x.dataset.hideFor === s.type; });
       $(`label[for="ms-container-${s.id}"]`, el).textContent = s.type === 'web' ? 'Website name' : 'Journal';
@@ -1775,52 +2472,342 @@
     $('.ms-head', el).innerHTML = entryHead(s);
     saveMS();
     syncAddButtons();
+    renderProgress();
   });
   $('#ms-list').addEventListener('click', async e => {
     const b = e.target.closest('[data-act]');
     if (!b) return;
     const el = b.closest('.ms-entry'), s = msFind(el.dataset.id);
     if (b.dataset.act === 'edit') toggleEditor(el);
-    if (b.dataset.act === 'copy') {
-      const { html, text } = bibHTML([s], { heading: false });
-      copyRich(html, text, 'Entry copied. Paste it into your bibliography doc.');
-    }
     if (b.dataset.act === 'remove') {
-      b.parentElement.innerHTML = 'Remove this source? <button class="btn btn-danger btn-sm" type="button" data-act="remove-yes">Remove</button> <button class="btn btn-secondary btn-sm" type="button" data-act="remove-no">Keep</button>';
+      b.parentElement.innerHTML = 'Remove this source and its notes? <button class="btn btn-danger btn-sm" type="button" data-act="remove-yes">Remove</button> <button class="btn btn-secondary btn-sm" type="button" data-act="remove-no">Keep</button>';
     }
     if (b.dataset.act === 'remove-no') b.parentElement.innerHTML = '<button class="btn btn-secondary btn-sm" type="button" data-act="remove">Remove</button>';
     if (b.dataset.act === 'remove-yes') {
       MS.sources = MS.sources.filter(x => x.id !== s.id);
-      saveMS(); renderMySources(); syncAddButtons();
+      Object.values(PJ.matrix).forEach(row => { delete row[s.id]; });
+      Object.values(PJ.cer).forEach(c => { if (Array.isArray(c.ev)) c.ev = c.ev.filter(id => id !== s.id); });
+      saveMS(); savePJ(); renderOrganize(); syncAddButtons();
       toast('Source removed.');
     }
   });
 
-  // The research question is shared with the search builder.
-  $('#ms-question').addEventListener('input', e => { sb.question = e.target.value; saveSb(); });
-  pressGroup($('#ms-style'), b => { MS.style = b.dataset.style; saveMS(); $$('.ms-entry').forEach(el => { $('.ms-head', el).innerHTML = entryHead(msFind(el.dataset.id)); }); });
-  $('#ms-include-craap').addEventListener('change', e => { MS.includeCraap = e.target.checked; saveMS(); });
   $('#ms-add-blank').addEventListener('click', () => {
     addSource({ type: 'journal', stage: 'Research' });
     renderMySources();
+    renderProgress();
     const last = $$('.ms-entry').pop();
     if (last) { last.scrollIntoView({ block: 'center' }); $('textarea, input', $('.ms-edit', last)).focus(); }
   });
 
-  /* Export: annotated bibliography for pasting into Google Docs or Word */
+  /* Remove everything (two-step) */
+  $('#ms-clear').addEventListener('click', () => { $('#ms-clear-confirm').hidden = false; $('#ms-clear').hidden = true; });
+  $('#ms-clear-no').addEventListener('click', () => { $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false; });
+  $('#ms-clear-yes').addEventListener('click', () => {
+    MS.sources = []; saveMS(); renderOrganize(); syncAddButtons();
+    $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false;
+    toast('All sources removed.');
+  });
+
+  /* ================================================================
+     PROJECT: question web, sub-questions, evidence matrix, claims,
+     and the step checklists. Saved in this browser with My sources.
+     ================================================================ */
+  const PJ_KEY = 'cvhub-project-v2';
+  const emptyProject = () => ({ webTopic: '', web: {}, own: {}, subqs: [], matrix: {}, cer: {}, checks: {} });
+  let PJ = emptyProject();
+  function cleanProject(raw) {
+    const p = emptyProject();
+    if (!raw || typeof raw !== 'object') return p;
+    if (typeof raw.webTopic === 'string') p.webTopic = raw.webTopic;
+    for (const k of ['web', 'own', 'matrix', 'cer', 'checks']) if (raw[k] && typeof raw[k] === 'object' && !Array.isArray(raw[k])) p[k] = raw[k];
+    if (Array.isArray(raw.subqs)) p.subqs = raw.subqs.filter(q => q && typeof q.id === 'string').map(q => ({ id: q.id, text: String(q.text || '') }));
+    return p;
+  }
+  try { PJ = cleanProject(JSON.parse(localStorage.getItem(PJ_KEY))); } catch { /* storage unavailable */ }
+  const savePJ = () => { try { localStorage.setItem(PJ_KEY, JSON.stringify(PJ)); } catch { /* ignore */ } updateStepMarks(); };
+  const liveSubqs = () => PJ.subqs.filter(q => q.text.trim());
+  const noteFor = (qid, sid) => ((PJ.matrix[qid] || {})[sid] || '').trim();
+  const notesFor = qid => MS.sources.filter(s => noteFor(qid, s.id));
+
+  /* ---------- Step 2: question web ---------- */
+  function webTopicFromLink(s) { if (allTopics().some(t => t.slug === s)) { PJ.webTopic = s; savePJ(); } }
+  const currentWebTopic = () => {
+    const topics = allTopics();
+    return topics.find(t => t.slug === PJ.webTopic) || topics[0];
+  };
+  function renderWeb() {
+    const t = currentWebTopic();
+    const own = PJ.own[t.slug] || [];
+    const branch = (sub, i) => {
+      const key = t.slug + '::' + sub;
+      return `<div class="web-branch"><label for="wb-${i}">${esc(sub)}</label>
+        <textarea id="wb-${i}" data-web="${esc(key)}" placeholder="How…? Why…?">${esc(PJ.web[key] || '')}</textarea></div>`;
+    };
+    const ownBranch = (o, i) => `<div class="web-branch own" data-own="${o.id}">
+        <div style="display:flex;gap:.4rem">
+          <label class="sr-only" for="wo-t-${o.id}">Your branch ${i + 1}: part of the topic</label>
+          <input type="text" id="wo-t-${o.id}" class="wb-title-input" data-own-field="title" value="${esc(o.title)}" placeholder="Another part of the topic">
+          <button type="button" class="icon-btn no-print" data-own-remove aria-label="Remove this branch">×</button>
+        </div>
+        <label class="sr-only" for="wo-x-${o.id}">Your questions for this branch</label>
+        <textarea id="wo-x-${o.id}" data-own-field="text" placeholder="How…? Why…?">${esc(o.text)}</textarea></div>`;
+    $('#web-map').innerHTML = `<div class="web-center">${esc(t.name)}</div>
+      <div class="web-branches">${t.subs.map(branch).join('')}${own.map(ownBranch).join('')}</div>
+      ${!t.subs.length && !own.length ? '<p class="empty-note">Add a branch for each part of this topic you want to explore.</p>' : ''}`;
+  }
+  $('#web-topic').addEventListener('change', e => { PJ.webTopic = e.target.value; savePJ(); renderWeb(); });
+  $('#web-add').addEventListener('click', () => {
+    const t = currentWebTopic();
+    (PJ.own[t.slug] = PJ.own[t.slug] || []).push({ id: newId(), title: '', text: '' });
+    savePJ(); renderWeb();
+    $$('#web-map .wb-title-input').pop().focus();
+  });
+  $('#web-map').addEventListener('input', e => {
+    const t = currentWebTopic();
+    if (e.target.dataset.web) PJ.web[e.target.dataset.web] = e.target.value;
+    const box = e.target.closest('[data-own]');
+    if (box && e.target.dataset.ownField) {
+      const o = (PJ.own[t.slug] || []).find(x => x.id === box.dataset.own);
+      if (o) o[e.target.dataset.ownField] = e.target.value;
+    }
+    savePJ();
+  });
+  $('#web-map').addEventListener('click', e => {
+    if (!e.target.closest('[data-own-remove]')) return;
+    const t = currentWebTopic(), id = e.target.closest('[data-own]').dataset.own;
+    PJ.own[t.slug] = (PJ.own[t.slug] || []).filter(o => o.id !== id);
+    savePJ(); renderWeb();
+  });
+
+  /* ---------- Step 2: question check ---------- */
+  function questionChecks(q) {
+    const t = q.trim().toLowerCase().replace(/\s+/g, ' ');
+    if (!t) return [];
+    const first = t.split(' ')[0].replace(/[^a-z]/g, '');
+    const words = t.split(' ').length;
+    const yesNo = /^(is|are|does|do|did|can|could|will|would|was|were|has|have|should|am)$/.test(first);
+    const opens = /^(how|why|what|to what extent|in what ways?|which)\b/.test(t);
+    return [
+      yesNo ? [false, `It starts with “${esc(first)},” so it may be a yes/no question. Try starting with <b>How</b> or <b>Why</b>.`]
+        : opens ? [true, 'It asks how, why, or what, so the answer needs an explanation.']
+        : [false, 'Try starting with <b>How</b>, <b>Why</b>, or <b>What evidence</b>.'],
+      /\b(should|best|better|worse|worst|good|bad)\b/.test(t)
+        ? [false, 'Words like “should,” “best,” or “good” ask for an opinion. Ask what the evidence shows instead.']
+        : [true, 'It asks about evidence, not opinion.'],
+      words < 8
+        ? [false, 'Short questions are usually too broad. Add <b>who</b> (teens? athletes?), <b>which part</b> of the body, or <b>which condition</b>.']
+        : [true, 'It looks specific enough to research.'],
+      /\b(20[3-9]\d|in the future|ever be|will (it|they|we|heart|.*) (be )?cured?)\b/.test(t)
+        ? [false, 'Predictions can’t be researched yet. Ask what current evidence suggests.'] : null,
+      /\?\s*$/.test(t) ? null : [false, 'End it with a question mark.'],
+    ].filter(Boolean);
+  }
+  function renderQChecks() {
+    const checks = questionChecks(sb.question || '');
+    $('#q-checks').innerHTML = checks.length
+      ? checks.map(([ok, msg]) => `<li class="${ok ? 'ok' : 'no'}"><span class="mark" aria-hidden="true">${ok ? '✓' : '!'}</span><span><span class="sr-only">${ok ? 'Good: ' : 'Check: '}</span>${msg}</span></li>`).join('')
+      : '<li>Type your question above to check it.</li>';
+  }
+  $('#rq').addEventListener('input', e => { sb.question = e.target.value; saveSb(); renderQChecks(); });
+
+  /* ---------- Step 2: sub-questions ---------- */
+  const SUBQ_PH = ['How does the body normally…?', 'What changes when…?', 'What do studies show about…?', 'Who is most affected by…, and why?'];
+  function renderSubqs() {
+    while (PJ.subqs.length < 2) PJ.subqs.push({ id: newId(), text: '' });
+    $('#subq-list').innerHTML = PJ.subqs.map((q, i) => `<li data-id="${q.id}">
+      <label class="sr-only" for="sq-${q.id}">Sub-question ${i + 1}</label>
+      <input type="text" id="sq-${q.id}" value="${esc(q.text)}" placeholder="${esc(SUBQ_PH[i] || 'Another sub-question')}">
+      <button type="button" class="icon-btn no-print" data-sq-remove aria-label="Remove sub-question ${i + 1}">×</button></li>`).join('');
+    $('#subq-add').disabled = PJ.subqs.length >= 5;
+  }
+  $('#subq-list').addEventListener('input', e => {
+    const q = PJ.subqs.find(x => x.id === e.target.closest('li').dataset.id);
+    if (q) { q.text = e.target.value; savePJ(); }
+  });
+  $('#subq-list').addEventListener('click', e => {
+    if (!e.target.closest('[data-sq-remove]')) return;
+    const id = e.target.closest('li').dataset.id;
+    const hasWork = Object.values(PJ.matrix[id] || {}).some(v => v.trim()) || Object.values(PJ.cer[id] || {}).some(v => typeof v === 'string' && v.trim());
+    if (hasWork && !confirm('This sub-question has notes or a claim in Step 5. Remove it and that work?')) return;
+    PJ.subqs = PJ.subqs.filter(q => q.id !== id);
+    delete PJ.matrix[id]; delete PJ.cer[id];
+    savePJ(); renderSubqs();
+  });
+  $('#subq-add').addEventListener('click', () => {
+    PJ.subqs.push({ id: newId(), text: '' });
+    savePJ(); renderSubqs();
+    $$('#subq-list input').pop().focus();
+  });
+
+  function renderAsk() {
+    const topics = allTopics();
+    if (!topics.some(t => t.slug === PJ.webTopic)) PJ.webTopic = topics[0].slug;
+    $('#web-topic').innerHTML = topics.map(t => `<option value="${t.slug}">${esc(t.name)}</option>`).join('');
+    $('#web-topic').value = PJ.webTopic;
+    renderWeb();
+    $('#rq').value = sb.question || '';
+    renderQChecks();
+    renderSubqs();
+  }
+
+  /* ---------- Step 5: organize ---------- */
+  let orgTab = 'sources';
+  function renderProgress() {
+    const qs = liveSubqs(), n = MS.sources.length;
+    const checked = MS.sources.filter(s => craapComplete(s.craap)).length;
+    const annotated = MS.sources.filter(s => annotation(s)).length;
+    const covered = qs.filter(q => notesFor(q.id).length >= 2).length;
+    const claims = qs.filter(q => ((PJ.cer[q.id] || {}).claim || '').trim()).length;
+    const pill = (num, rest) => `<span class="pill"><b>${num}</b> ${rest}</span>`;
+    $('#org-progress').innerHTML = [
+      pill(n, `source${n === 1 ? '' : 's'}`),
+      pill(checked, `of ${n} checked`),
+      pill(annotated, `of ${n} annotated`),
+      pill(covered, `of ${qs.length} sub-questions with 2+ sources`),
+      pill(claims, `of ${qs.length} claims written`),
+    ].join('');
+  }
+  function renderMatrix() {
+    const qs = liveSubqs(), el = $('#matrix-body');
+    if (!qs.length) { el.innerHTML = '<p class="empty-note" style="margin-top:1rem">Your sub-questions become the rows. <a href="#subqs">Write them in Step 2 →</a></p>'; return; }
+    if (!MS.sources.length) { el.innerHTML = '<p class="empty-note" style="margin-top:1rem">Your sources become the columns. Add one in <b>a · My sources</b> first.</p>'; return; }
+    el.innerHTML = `<div class="matrix-wrap"><table class="matrix">
+      <thead><tr><th scope="col">Sub-question</th>${MS.sources.map(s =>
+        `<th scope="col">${esc(srcLabel(s))}<span class="src-title">${esc((s.title || '').slice(0, 70))}${(s.title || '').length > 70 ? '…' : ''}</span></th>`).join('')}</tr></thead>
+      <tbody>${qs.map((q, i) => `<tr data-q="${q.id}">
+        <th scope="row"><span class="q-n">Q${i + 1}</span>${esc(q.text)}<br>${qStatus(q.id)}</th>
+        ${MS.sources.map(s => `<td><label class="sr-only" for="mx-${q.id}-${s.id}">Notes on Q${i + 1} from ${esc(srcLabel(s))}</label>
+          <textarea id="mx-${q.id}-${s.id}" data-q="${q.id}" data-s="${s.id}" placeholder="What does it say about Q${i + 1}? Leave empty if nothing.">${esc((PJ.matrix[q.id] || {})[s.id] || '')}</textarea></td>`).join('')}
+      </tr>`).join('')}</tbody></table></div>`;
+  }
+  function qStatus(qid) {
+    const n = notesFor(qid).length;
+    return `<span class="q-status ${n >= 2 ? 'good' : 'need'}">${n} source${n === 1 ? '' : 's'}${n >= 2 ? ' ✓' : ' · needs more'}</span>`;
+  }
+  $('#matrix-body').addEventListener('input', e => {
+    const { q, s } = e.target.dataset;
+    if (!q || !s) return;
+    (PJ.matrix[q] = PJ.matrix[q] || {})[s] = e.target.value;
+    savePJ();
+    const row = e.target.closest('tr');
+    $('.q-status', row).outerHTML = qStatus(q);
+    renderProgress();
+  });
+
+  function renderCER() {
+    const qs = liveSubqs(), el = $('#cer-body');
+    if (!qs.length) { el.innerHTML = '<div class="card"><p class="empty-note">Each sub-question gets its own claim. <a href="#subqs">Write your sub-questions in Step 2 →</a></p></div>'; return; }
+    el.innerHTML = qs.map((q, i) => {
+      const c = PJ.cer[q.id] || {}, notes = notesFor(q.id), ev = Array.isArray(c.ev) ? c.ev : [];
+      return `<article class="card cer-card" data-q="${q.id}">
+        <p class="q-n" style="color:var(--accent);font-weight:700">Sub-question ${i + 1}</p>
+        <p class="cer-q">${esc(q.text)}</p>
+        <div class="cer-grid">
+          <div class="cer-part cer-c">
+            <label for="cer-c-${q.id}"><span class="cer-letter" aria-hidden="true">C</span> Claim: answer the sub-question in one sentence</label>
+            <textarea id="cer-c-${q.id}" data-cer="claim" rows="2" placeholder="My answer is…">${esc(c.claim || '')}</textarea>
+          </div>
+          <div class="cer-part cer-e">
+            <p class="cer-h"><span class="cer-letter" aria-hidden="true">E</span> Evidence: which of your notes prove it?</p>
+            ${notes.length ? `<div class="ev-list">${notes.map(s => `<label><input type="checkbox" data-ev="${s.id}" ${ev.includes(s.id) ? 'checked' : ''}>
+              <span><span class="ev-src">${esc(srcLabel(s))}:</span> ${esc(noteFor(q.id, s.id))}</span></label>`).join('')}</div>`
+              : '<p class="hint">No notes for this sub-question yet. Add them in <button type="button" class="chip-btn sm" data-goto-tab="matrix">b · Evidence matrix</button></p>'}
+            <label for="cer-e-${q.id}" style="display:block;margin-top:.75rem;font-weight:600">Write the evidence in your own sentence, with the source in parentheses</label>
+            <textarea id="cer-e-${q.id}" data-cer="evidence" rows="2" placeholder="In a study of…, researchers found… (Author, Year).">${esc(c.evidence || '')}</textarea>
+          </div>
+          <div class="cer-part cer-r">
+            <label for="cer-r-${q.id}"><span class="cer-letter" aria-hidden="true">R</span> Reasoning: what biology connects the evidence to your claim?</label>
+            <textarea id="cer-r-${q.id}" data-cer="reasoning" rows="3" placeholder="This happens because…">${esc(c.reasoning || '')}</textarea>
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+  }
+  $('#cer-body').addEventListener('input', e => {
+    const card = e.target.closest('[data-q]');
+    if (!card) return;
+    const c = PJ.cer[card.dataset.q] = PJ.cer[card.dataset.q] || {};
+    if (e.target.dataset.cer) c[e.target.dataset.cer] = e.target.value;
+    if (e.target.dataset.ev) c.ev = $$('[data-ev]:checked', card).map(x => x.dataset.ev);
+    savePJ();
+    renderProgress();
+  });
+  $('#cer-body').addEventListener('click', e => {
+    const b = e.target.closest('[data-goto-tab]');
+    if (b) { orgTab = b.dataset.gotoTab; renderOrganize(); }
+  });
+
+  function renderOrganize() {
+    const q = (sb.question || '').trim();
+    $('#org-question').innerHTML = q
+      ? `${esc(q)} <a class="small" href="#question" style="font-family:var(--font-body)">Edit in Step 2</a>`
+      : '<span class="muted">Not written yet.</span> <a class="small" href="#question" style="font-family:var(--font-body)">Write it in Step 2 →</a>';
+    $$('#org-tabs button').forEach(b => b.setAttribute('aria-pressed', b.dataset.tab === orgTab));
+    $$('#view-organize [data-panel]').forEach(p => { p.hidden = p.dataset.panel !== orgTab; });
+    renderProgress();
+    renderMySources();
+    renderMatrix();
+    renderCER();
+  }
+  pressGroup($('#org-tabs'), b => { orgTab = b.dataset.tab; renderOrganize(); });
+
+  /* ---------- "Ready to move on?" checklists ---------- */
+  const CHECKS = {
+    explore: ['I read at least 2 background sources on my topic.', 'I can explain the basic biology of my topic in my own words.', 'I saved the sources I might use to My sources.'],
+    ask: ['My question asks how or why. It isn’t yes/no or answerable with one fact.', 'I wrote 2–4 sub-questions.', 'I checked my question with my teacher or librarian.'],
+    search: ['I turned my question into 2–3 key ideas, with other words for each.', 'I searched at least two databases.', 'I saved at least 3 research studies or articles.'],
+    evaluate: ['I read laterally: I checked what other sites say about each publisher.', 'I rated every source I plan to cite.', 'I replaced any source marked “Red flag” or “Weak.”'],
+    organize: ['Every source has an annotation.', 'Every sub-question has notes from at least 2 sources.', 'My notes are in my own words. Quotes are in quotation marks with a page or paragraph.', 'I wrote a claim, evidence, and reasoning for each sub-question.'],
+    cite: ['Every source has a complete citation (no “Missing” tags in Step 5).', 'I double-checked my citations against the style guide.', 'I pasted my research packet into my Google Doc.'],
+  };
+  const stepDone = key => CHECKS[key].every((_, i) => (PJ.checks[key] || [])[i]);
+  function renderChecklists() {
+    $$('[data-checklist]').forEach(el => {
+      const key = el.dataset.checklist, done = PJ.checks[key] || [];
+      el.className = 'box box-check';
+      el.innerHTML = `<p class="box-label"><span aria-hidden="true">✓</span> Ready to move on?</p>
+        <p class="hint" style="margin-top:0">Check off each one before you go to the next step.</p>
+        <ul class="checklist">${CHECKS[key].map((t, i) => `<li><label><input type="checkbox" data-ck="${key}" data-i="${i}" ${done[i] ? 'checked' : ''}><span>${t}</span></label></li>`).join('')}</ul>
+        <p class="check-done" ${stepDone(key) ? '' : 'hidden'}>✓ Step complete. Nice work.</p>`;
+    });
+  }
+  document.addEventListener('change', e => {
+    const key = e.target.dataset && e.target.dataset.ck;
+    if (!key) return;
+    (PJ.checks[key] = PJ.checks[key] || [])[+e.target.dataset.i] = e.target.checked;
+    savePJ();
+    $('.check-done', e.target.closest('[data-checklist]')).hidden = !stepDone(key);
+  });
+  function updateStepMarks() {
+    Object.keys(CHECKS).forEach(key => {
+      const link = $(`.step[data-nav="${key}"]`);
+      if (link) link.toggleAttribute('data-done', stepDone(key));
+    });
+    renderStartMap();
+  }
+  function renderStartMap() {
+    $('#start-map').innerHTML = STEP_INFO.map((s, i) => `<li><a class="st${i + 1}" href="${s.href}">
+      <span class="sm-n">Step ${i + 1}${stepDone(s.key) ? ' · ✓ done' : ''}</span>
+      <span class="sm-t">${esc(s.name)}</span>
+      <span class="sm-make">You'll make: ${esc(s.make)}</span>
+      ${DUE[s.key] ? `<span class="sm-due">Due ${esc(DUE[s.key])}</span>` : ''}</a></li>`).join('');
+  }
+
+  /* ---------- Step 6: export ---------- */
   const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+  const FONT = 'font-family:Times New Roman,serif;font-size:12pt;line-height:2;';
   function bibHTML(list, { heading = true } = {}) {
     const style = MS.style;
     const items = list.map(s => ({ s, cite: buildCitation(s, style) })).filter(x => x.cite)
       .sort((a, b) => plain(a.cite).localeCompare(plain(b.cite)));
-    const font = 'font-family:Times New Roman,serif;font-size:12pt;line-height:2;';
     let html = '', text = '';
     if (heading) {
       const title = style === 'APA' ? 'Annotated Bibliography' : 'Annotated Works Cited';
-      html += `<p style="${font}text-align:center;font-weight:bold;">${title}</p>`;
+      html += `<p style="${FONT}text-align:center;font-weight:bold;">${title}</p>`;
       text += title + '\n\n';
       if ((sb.question || '').trim()) {
-        html += `<p style="${font}"><b>Research question:</b> ${esc(sb.question.trim())}</p>`;
+        html += `<p style="${FONT}"><b>Research question:</b> ${esc(sb.question.trim())}</p>`;
         text += 'Research question: ' + sb.question.trim() + '\n\n';
       }
     }
@@ -1828,18 +2815,73 @@
       let note = annotation(s);
       if (MS.includeCraap && craapComplete(s.craap)) {
         const v = craapVerdict(s.craap);
-        note += (note ? ' ' : '') + `CRAAP score: ${v.total}/25 (${v.label.split(':')[0]}).`;
+        note += (note ? ' ' : '') + `Source check: ${v.total}/25 (${v.label.split(':')[0]}).`;
       }
-      html += `<p style="${font}margin:0;padding-left:0.5in;text-indent:-0.5in;">${cite}</p>`;
+      html += `<p style="${FONT}margin:0;padding-left:0.5in;text-indent:-0.5in;">${cite}</p>`;
       text += plain(cite) + '\n';
       if (note) {
-        html += `<p style="${font}margin:0 0 0 0.5in;">${esc(note)}</p>`;
+        html += `<p style="${FONT}margin:0 0 0 0.5in;">${esc(note)}</p>`;
         text += '    ' + note + '\n';
       }
       text += '\n';
     });
     return { html, text: text.trim() };
   }
+  // Question, sub-questions with claim / evidence / reasoning, then the annotated bibliography.
+  function packetHTML() {
+    const P = (inner, extra = '') => `<p style="${FONT}margin:0;${extra}">${inner}</p>`;
+    let html = P('<b>Research Packet</b>', 'text-align:center;'), text = 'Research Packet\n\n';
+    const q = (sb.question || '').trim();
+    html += P(`<b>Research question:</b> ${q ? esc(q) : '(not written yet)'}`, 'margin-bottom:12pt;');
+    text += `Research question: ${q || '(not written yet)'}\n\n`;
+    liveSubqs().forEach((sq, i) => {
+      const c = PJ.cer[sq.id] || {};
+      const field = (label, v) => {
+        const val = (v || '').trim();
+        html += P(`<b>${label}:</b> ${val ? esc(val) : '<i>(not written yet)</i>'}`);
+        text += `${label}: ${val || '(not written yet)'}\n`;
+      };
+      html += P(`<b>Sub-question ${i + 1}: ${esc(sq.text)}</b>`, 'margin-top:12pt;');
+      text += `Sub-question ${i + 1}: ${sq.text}\n`;
+      field('Claim', c.claim);
+      field('Evidence', c.evidence);
+      const used = (Array.isArray(c.ev) ? c.ev : []).map(msFind).filter(s => s && noteFor(sq.id, s.id));
+      used.forEach(s => {
+        html += P(`• ${esc(noteFor(sq.id, s.id))} (${esc(srcLabel(s))})`, 'margin-left:0.5in;');
+        text += `    • ${noteFor(sq.id, s.id)} (${srcLabel(s)})\n`;
+      });
+      field('Reasoning', c.reasoning);
+      text += '\n';
+    });
+    const bib = bibHTML(MS.sources, { heading: false });
+    const title = MS.style === 'APA' ? 'Annotated Bibliography' : 'Annotated Works Cited';
+    html += P(`<b>${title}</b>`, 'text-align:center;margin-top:24pt;') + bib.html;
+    text += `\n${title}\n\n${bib.text}`;
+    return { html, text: text.trim() };
+  }
+  function packetGaps() {
+    const gaps = [];
+    const qs = liveSubqs();
+    const missing = MS.sources.filter(s => missingFor(s).length).length;
+    const noNotes = MS.sources.filter(s => !annotation(s)).length;
+    const noClaim = qs.filter(q => !((PJ.cer[q.id] || {}).claim || '').trim()).length;
+    if (!(sb.question || '').trim()) gaps.push('no research question');
+    if (!qs.length) gaps.push('no sub-questions');
+    if (missing) gaps.push(`${missing} source${missing === 1 ? '' : 's'} missing citation details`);
+    if (noNotes) gaps.push(`${noNotes} source${noNotes === 1 ? '' : 's'} without an annotation`);
+    if (noClaim) gaps.push(`${noClaim} sub-question${noClaim === 1 ? '' : 's'} without a claim`);
+    return gaps;
+  }
+  function renderPacketStatus() {
+    $$('#ms-style button').forEach(b => b.setAttribute('aria-pressed', b.dataset.style === MS.style));
+    $('#ms-include-craap').checked = !!MS.includeCraap;
+    const gaps = packetGaps();
+    $('#packet-status').innerHTML = gaps.length
+      ? `<b>Still to do:</b> ${esc(gaps.join('; '))}. You can copy it now and finish later.`
+      : '✓ Everything is filled in.';
+  }
+  pressGroup($('#ms-style'), b => { MS.style = b.dataset.style; saveMS(); });
+  $('#ms-include-craap').addEventListener('change', e => { MS.includeCraap = e.target.checked; saveMS(); });
   $('#ms-copy-all').addEventListener('click', () => {
     if (!MS.sources.length) { toast('Add a source first.'); return; }
     const missing = MS.sources.filter(s => missingFor(s).length || !annotation(s)).length;
@@ -1848,13 +2890,19 @@
       ? `Copied. ${missing} source${missing === 1 ? ' is' : 's are'} missing details or notes, so check those before you hand it in.`
       : 'Annotated bibliography copied. Paste it into your Google Doc.');
   });
+  $('#ms-copy-packet').addEventListener('click', () => {
+    const gaps = packetGaps();
+    const { html, text } = packetHTML();
+    copyRich(html, text, gaps.length ? `Copied. Still to do: ${gaps.join('; ')}.` : 'Research packet copied. Paste it into your Google Doc.');
+    renderPacketStatus();
+  });
 
   /* Backup file, for moving to another computer */
   $('#ms-download').addEventListener('click', () => {
-    const data = JSON.stringify({ app: 'cardiovascular-research-hub', version: 1, saved: new Date().toISOString(), question: sb.question || '', sources: MS.sources }, null, 2);
+    const data = JSON.stringify({ app: 'cardiovascular-research-hub', version: 2, saved: new Date().toISOString(), question: sb.question || '', sources: MS.sources, project: PJ }, null, 2);
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
-    a.download = 'my-sources-backup.json';
+    a.download = 'my-research-backup.json';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
@@ -1869,54 +2917,36 @@
       let added = 0;
       data.sources.forEach(raw => {
         if (!raw || typeof raw !== 'object' || MS.sources.some(x => x.id === raw.id)) return;
-        const s = { id: typeof raw.id === 'string' ? raw.id : newId(), stage: 'Background', craap: null, summary: '', helps: '' };
-        [...CITE_FIELDS, 'stage', 'summary', 'helps'].forEach(k => { if (typeof raw[k] === 'string') s[k] = raw[k]; });
+        const s = { id: typeof raw.id === 'string' ? raw.id : newId(), stage: 'Background', craap: null, lateral: '', summary: '', helps: '' };
+        [...CITE_FIELDS, 'stage', 'summary', 'helps', 'lateral'].forEach(k => { if (typeof raw[k] === 'string') s[k] = raw[k]; });
         if (raw.craap && typeof raw.craap === 'object') s.craap = Object.fromEntries(CRAAP_IDS.map(k => [k, Number.isInteger(raw.craap[k]) ? raw.craap[k] : undefined]));
         if (!['web', 'journal'].includes(s.type)) s.type = 'web';
         MS.sources.push(s); added++;
       });
       if (!(sb.question || '').trim() && typeof data.question === 'string') { sb.question = data.question; saveSb(); }
-      saveMS(); renderMySources(); syncAddButtons();
-      toast(added ? `Loaded ${added} source${added === 1 ? '' : 's'} from the backup.` : 'Those sources are already here.');
+      // Take the backup's project work only if this browser doesn't have any yet, so nothing gets overwritten.
+      let tookProject = false;
+      if (data.project && !liveSubqs().length && !Object.keys(PJ.matrix).length) { PJ = cleanProject(data.project); savePJ(); renderChecklists(); tookProject = true; }
+      saveMS(); syncAddButtons(); renderPacketStatus();
+      toast(added || tookProject ? `Loaded ${added} source${added === 1 ? '' : 's'}${tookProject ? ' and your project notes' : ''} from the backup.` : 'Those sources are already here.');
     } catch {
-      toast('That file isn’t a My sources backup.');
+      toast('That file isn’t a backup from this site.');
     }
   });
 
-  /* Remove everything (two-step) */
-  $('#ms-clear').addEventListener('click', () => { $('#ms-clear-confirm').hidden = false; $('#ms-clear').hidden = true; });
-  $('#ms-clear-no').addEventListener('click', () => { $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false; });
-  $('#ms-clear-yes').addEventListener('click', () => {
-    MS.sources = []; saveMS(); renderMySources(); syncAddButtons();
-    $('#ms-clear-confirm').hidden = true; $('#ms-clear').hidden = false;
-    toast('All sources removed.');
-  });
-
-  /* Save from the citation builder and the CRAAP evaluator */
+  /* Save from the citation builder */
   $('#cite-save').addEventListener('click', () => {
     const d = readForm();
     if (!['authors', 'title', 'container', 'link'].some(k => d[k])) { toast('Fill in the form first.'); return; }
     addSource({ ...d, stage: d.type === 'journal' ? 'Research' : 'Background' });
-    toast('Saved to My sources. Add your notes there.');
-  });
-  function syncCraapTarget() {
-    const row = $('#craap-save-row'), sel = $('#craap-target');
-    row.hidden = !MS.sources.length;
-    $('#craap-save-empty').hidden = !!MS.sources.length;
-    const prev = sel.value;
-    sel.innerHTML = MS.sources.map(s => `<option value="${s.id}">${esc((s.title || 'Untitled source').slice(0, 70))}</option>`).join('');
-    if (MS.sources.some(s => s.id === prev)) sel.value = prev;
-  }
-  $('#craap-save').addEventListener('click', () => {
-    const s = msFind($('#craap-target').value);
-    if (!s) return;
-    s.craap = Object.fromEntries(CRAAP_IDS.map(k => [k, +$('#craap-' + k).value]));
-    saveMS();
-    toast(`Score saved to “${(s.title || 'Untitled source').slice(0, 40)}”.`);
+    toast('Saved to My sources (Step 5). Add your annotation there.');
+    renderPacketStatus();
   });
 
   updateMsCount();
   syncAddButtons();
+  renderChecklists();
+  updateStepMarks();
 
   // Clear progress saved by the guided path in an earlier version of the site.
   try { localStorage.removeItem('cvhub-project-v1'); } catch { /* storage unavailable */ }
