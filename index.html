@@ -155,9 +155,6 @@
   .tag-data { background: var(--deoxy-soft); color: var(--deoxy); }
   .tag-visual { background: var(--exchange-soft); color: var(--exchange); }
 
-  .callout { display: flex; gap: .85rem; align-items: flex-start; padding: 1rem 1.25rem; border-radius: var(--radius); background: var(--warn-soft); color: var(--ink); border: 1px solid color-mix(in srgb, var(--warn) 25%, transparent); }
-  .callout .icon { color: var(--warn); margin-top: .2rem; width: 1.25rem; height: 1.25rem; }
-  .callout strong { color: var(--ink); }
 
   label, legend { font-weight: 600; font-size: .9rem; }
   input[type="text"], input[type="search"], select, textarea {
@@ -177,12 +174,6 @@
     width: 1.75rem; height: 1.75rem; border-radius: 50%; display: grid; place-items: center;
     background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: .85rem;
   }
-  .reqs { background: var(--surface-2); }
-  .reqs ol { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); counter-reset: r; }
-  .reqs li { counter-increment: r; }
-  .reqs li::before { content: "0" counter(r); display: block; font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: 1.1rem; }
-  .reqs li strong { display: block; margin-bottom: .2rem; }
-  .reqs li span { color: var(--muted); font-size: .925rem; }
 
   /* ---------- Pathways ---------- */
   .questions { background: var(--pw-soft); border-radius: var(--radius-sm); padding: 1rem 1.1rem; }
@@ -318,11 +309,9 @@
   .brand-link { color: inherit; text-decoration: none; }
   .brand-link:hover { color: inherit; }
   .tab[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
-  .tabs .nav-cta { margin-left: auto; color: var(--accent); font-weight: 600; }
   @media (max-width: 600px) {
     .tabs { flex-wrap: wrap; overflow: visible; gap: 0; }
     .tab { padding: .65rem .7rem; font-size: .9rem; }
-    .tabs .nav-cta { margin-left: 0; }
   }
   .crumbs { font-size: .875rem; color: var(--faint); display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
   .crumbs a { color: var(--muted); }
@@ -347,8 +336,6 @@
   .topic-card p { color: var(--muted); font-size: .925rem; flex: 1; }
   .topic-card .subs { font-size: .825rem; color: var(--faint); }
   .topic-card .count { font-size: .825rem; font-weight: 600; color: var(--accent); }
-  .guide-strip { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; background: var(--accent-soft); border-color: transparent; }
-  .guide-strip p { max-width: 52ch; }
 
   /* ---------- Resource cards ---------- */
   .res { position: relative; display: flex; flex-direction: column; gap: .45rem; transition: border-color .15s; }
@@ -374,13 +361,6 @@
   .leads .questions { margin-top: 1rem; }
   .empty-note { color: var(--muted); }
 
-  /* ---------- Guide ---------- */
-  .stages { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .75rem; counter-reset: st; }
-  .stages li { counter-increment: st; display: grid; grid-template-columns: 2.25rem 1fr; gap: .25rem 1rem; padding: 1rem 1.1rem; border-radius: var(--radius-sm); background: var(--surface-2); }
-  .stages li::before { content: counter(st); grid-row: span 3; width: 2.25rem; height: 2.25rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font-weight: 700; }
-  .stages h3 { font-size: 1.1rem; }
-  .stages p { color: var(--muted); font-size: .95rem; }
-  .stages a { font-weight: 600; font-size: .9rem; justify-self: start; }
 
   /* ---------- Databases page ---------- */
   .db-card { display: flex; flex-direction: column; gap: .5rem; }
@@ -429,35 +409,10 @@
   .craap-save select { width: auto; flex: 1 1 12rem; }
   #craap-save-empty { margin-top: .75rem; }
 
-  /* ---------- Guided path ---------- */
-  .pj-progress { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
-  .pj-progress button { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; gap: .35rem; text-align: center; background: none; border: 0; cursor: pointer; padding: .4rem .2rem; border-radius: var(--radius-sm); color: var(--muted); font: 500 .8rem/1.25 var(--font-body); }
-  .pj-progress button:hover { background: var(--surface-2); }
-  .pj-progress button[aria-current] .nm { color: var(--ink); font-weight: 700; }
-  .dot { width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; flex: none; font-weight: 700; font-size: .9rem; background: var(--surface-2); color: var(--muted); border: 2px solid var(--line); }
-  .current .dot { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-  .done .dot { border-color: var(--ok); color: var(--ok); background: var(--ok-soft); }
-  @media (max-width: 600px) { .pj-progress .nm { display: none; } }
-  .pj-stage { padding: 0; overflow: hidden; }
-  .pj-head { width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.25rem; background: none; border: 0; cursor: pointer; text-align: left; color: var(--ink); font: inherit; }
-  .pj-head:hover { background: var(--surface-2); }
-  .pj-title { flex: 1; display: grid; gap: .15rem; font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
-  .pj-sum { font-family: var(--font-body); font-size: .85rem; font-weight: 400; color: var(--muted); overflow-wrap: anywhere; }
-  .pj-chev { font-size: 1.4rem; color: var(--faint); width: 1.5rem; text-align: center; }
-  .pj-body { padding: 0 1.25rem 1.25rem; display: grid; gap: 1rem; }
-  .pj-body > p { max-width: 65ch; }
-  .pj-count { font-weight: 600; color: var(--accent); }
-  .pj-checks { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .85rem 1rem; margin: 0; display: grid; gap: .55rem; }
-  .pj-checks .ms-check { align-items: flex-start; }
-  .pj-checks input { margin-top: .3rem; }
-  .pj-banner { align-items: center; flex-wrap: wrap; justify-content: space-between; background: var(--accent-soft); border-color: transparent; }
-  #pbat-strip { background: var(--accent-soft); color: var(--ink); border-bottom: 1px solid var(--line); font-size: .875rem; }
-  #pbat-strip .wrap { display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; justify-content: space-between; padding-block: .55rem; }
-  #pbat-strip a { font-weight: 600; }
 
   @media print {
     .view[hidden] { display: none !important; }
-    .lib-search, .format-chips, .topic-filters, .guide-strip { display: none !important; }
+    .lib-search, .format-chips, .topic-filters { display: none !important; }
   }
 </style>
 </head>
@@ -492,12 +447,8 @@
       <a class="tab" href="#search" data-nav="search">Search databases</a>
       <a class="tab" href="#evaluate" data-nav="evaluate">Evaluate &amp; cite</a>
       <a class="tab" href="#my-sources" data-nav="my-sources">My sources<span class="count-badge" id="ms-count" hidden></span></a>
-      <a class="tab nav-cta" href="#guide" data-nav="guide">Start a PBAT →</a>
     </div>
   </nav>
-  <div id="pbat-strip" class="no-print" hidden>
-    <div class="wrap"><span id="pbat-strip-text"></span><a href="#guide">Continue →</a></div>
-  </div>
 </header>
 
 <main id="main" class="wrap">
@@ -535,10 +486,6 @@
         <h2 class="section-title" id="tools-h">Interactive tools</h2>
         <div class="grid grid-3" id="tool-grid"></div>
       </section>
-      <div class="card guide-strip">
-        <p><strong>Starting your PBAT from scratch?</strong> The guide walks you from a broad topic to a research question, then on to research and your bibliography.</p>
-        <a class="btn btn-primary" href="#guide">Start a PBAT →</a>
-      </div>
     </div>
   </section>
 
@@ -637,6 +584,21 @@
       </form>
     </div>
 
+    <div class="card" id="question">
+      <h3>Sharpen your question</h3>
+      <p class="muted small" style="margin-top:.35rem">A strong research question can't be answered by one fact. It asks how or why, and you can actually find evidence for it.</p>
+      <div class="table-scroll" style="margin-top:1rem">
+        <table class="compare">
+          <thead><tr><th scope="col">Problem</th><th scope="col">Weak</th><th scope="col">Stronger</th></tr></thead>
+          <tbody>
+            <tr><td>Too broad</td><td class="weak">What is heart disease?</td><td>How does LDL oxidation contribute to plaque formation in coronary arteries?</td></tr>
+            <tr><td>Yes/no</td><td class="weak">Is exercise good for your heart?</td><td>How does aerobic training change stroke volume, and why?</td></tr>
+            <tr><td>Can't be researched</td><td class="weak">Will heart disease be cured by 2040?</td><td>What evidence suggests gene therapy could treat inherited cardiomyopathies?</td></tr>
+            <tr><td>Opinion only</td><td class="weak">Should fast food be banned?</td><td>How have menu-labeling or sodium policies affected blood pressure in U.S. adults?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="card" id="build">
       <div class="tool-head">
         <h3><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Build your search</h3>
@@ -831,45 +793,6 @@
     </div>
   </section>
 
-  <!-- ===================== START A PBAT (guide) ===================== -->
-  <section class="view stack-lg" id="view-guide" data-view="guide" data-title="Start a PBAT" hidden>
-    <div class="card">
-      <h2>Start a PBAT</h2>
-      <p class="muted" style="margin-top:.4rem;max-width:62ch">Good research questions come from reading first. Work through these five stages in order. Your progress saves in this browser, and the sources and question you record also appear in <a href="#my-sources">My sources</a>.</p>
-      <ol class="pj-progress" id="pj-progress" aria-label="Your progress"></ol>
-      <div class="no-print" id="pj-restart-row" style="margin-top:1rem" hidden>
-        <button class="btn btn-secondary btn-sm" id="pj-restart" type="button">Start over</button>
-        <span id="pj-restart-confirm" class="ms-confirm" hidden>Clear your guide progress? Your question and sources stay in My sources.
-          <button class="btn btn-danger btn-sm" id="pj-restart-yes" type="button">Clear progress</button>
-          <button class="btn btn-secondary btn-sm" id="pj-restart-no" type="button">Cancel</button></span>
-      </div>
-    </div>
-    <div id="pj-stages" class="stack"></div>
-    <div class="card" id="question">
-      <h3>Sharpen your question</h3>
-      <p class="muted small" style="margin-top:.35rem">A strong PBAT question can't be answered by one fact. It asks how or why, and you can actually find evidence for it.</p>
-      <div class="table-scroll" style="margin-top:1rem">
-        <table class="compare">
-          <thead><tr><th scope="col">Problem</th><th scope="col">Weak</th><th scope="col">Stronger</th></tr></thead>
-          <tbody>
-            <tr><td>Too broad</td><td class="weak">What is heart disease?</td><td>How does LDL oxidation contribute to plaque formation in coronary arteries?</td></tr>
-            <tr><td>Yes/no</td><td class="weak">Is exercise good for your heart?</td><td>How does aerobic training change stroke volume, and why?</td></tr>
-            <tr><td>Can't be researched</td><td class="weak">Will heart disease be cured by 2040?</td><td>What evidence suggests gene therapy could treat inherited cardiomyopathies?</td></tr>
-            <tr><td>Opinion only</td><td class="weak">Should fast food be banned?</td><td>How have menu-labeling or sodium policies affected blood pressure in U.S. adults?</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="card reqs">
-      <h3>What your PBAT must include</h3>
-      <ol>
-        <li><strong>An essential question</strong><span>An analytical question about a mechanism or an impact. Not a yes/no question, and not a topic.</span></li>
-        <li><strong>Source synthesis</strong><span>At least 3 peer-reviewed sources, combined in your argument and cited in APA 7 or MLA 9.</span></li>
-        <li><strong>Data analysis</strong><span>At least one dataset, graph, or clinical study result that you interpret yourself.</span></li>
-        <li><strong>Visual evidence</strong><span>A labeled diagram or model that shows the physiology behind your claim.</span></li>
-      </ol>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -914,7 +837,7 @@
      Until it's set (or if it can't be reached), the site uses the
      built-in copy of the list below.
      ================================================================ */
-  const SHEET_CSV_URL = '';
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv';
 
   /* ---------------- Topics ----------------
      Names must match the Topic column in the sheet exactly. */
@@ -1216,7 +1139,6 @@
             <button type="button" class="chip-btn" data-level="Deeper" aria-pressed="false">Deeper</button></div>` : ''}
         </div>` : ''}
       </div>
-      ${topicBanner(t)}
       ${items.length ? groups.map(([name, list]) => `
         <section class="sub-section" data-sub="${esc(name)}">
           <h3>${name ? esc(name) : 'Overview'}</h3>
@@ -1271,7 +1193,7 @@
 
   /* ---------------- Pages (hash-routed, so links and Back work) ---------------- */
   // Old addresses from earlier versions of the site keep working.
-  const ALIASES = { overview: 'guide', pathways: '', sources: 'search', writing: 'evaluate', lab: 'tool/blood-flow' };
+  const ALIASES = { overview: '', guide: '', pathways: '', sources: 'search', writing: 'evaluate', lab: 'tool/blood-flow' };
   const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'resources' : v;
   let currentView = null;
 
@@ -1288,8 +1210,6 @@
     if (name === 'my-sources') renderMySources();
     if (name === 'evaluate') syncCraapTarget();
     if (name === 'search') renderBuilder();
-    if (name === 'guide') renderGuide();
-    updateStrip();
     // Move focus to the new page's heading so keyboard and screen-reader users land in the right place.
     if (focus && !firstLoad) {
       const h = $('h2', view);
@@ -1302,7 +1222,7 @@
     if (h in ALIASES) h = ALIASES[h];
     if (h.startsWith('topic/')) { renderTopic(h.slice(6)); showView('topic'); window.scrollTo(0, 0); return; }
     if (h.startsWith('tool/') && $(`#view-tool-${CSS.escape(h.slice(5))}`)) { showView('tool-' + h.slice(5)); window.scrollTo(0, 0); return; }
-    if (['search', 'evaluate', 'guide', 'my-sources'].includes(h)) { showView(h); window.scrollTo(0, 0); return; }
+    if (['search', 'evaluate', 'my-sources'].includes(h)) { showView(h); window.scrollTo(0, 0); return; }
     // A hash that names something inside a page (e.g. #craap) opens that page and scrolls to it.
     const target = h && document.getElementById(h);
     const view = target && target.closest('.view');
@@ -1998,216 +1918,8 @@
   updateMsCount();
   syncAddButtons();
 
-  /* ---------------- Start a PBAT: the guided path ----------------
-     Progress is saved in this browser. The research question is shared with the search
-     builder and My sources; sources come from My sources. */
-  const PJ_KEY = 'cvhub-project-v1';
-  const blankProject = () => ({ started: false, topic: '', wonders: '', focus: '', checks: [false, false, false, false], open: null });
-  let PROJECT = blankProject();
-  try { const saved = JSON.parse(localStorage.getItem(PJ_KEY)); if (saved && typeof saved === 'object') PROJECT = { ...PROJECT, ...saved }; } catch { /* storage unavailable */ }
-  const saveProject = () => { try { localStorage.setItem(PJ_KEY, JSON.stringify(PROJECT)); } catch { /* ignore */ } };
-  const startProject = () => { if (!PROJECT.started) { PROJECT.started = true; saveProject(); } };
-
-  const QUESTION_CHECKS = [
-    'It asks <b>how</b> or <b>why</b>, not just what.',
-    'It can’t be answered with yes or no, or with a single fact.',
-    'It’s about my narrower focus, not the whole broad topic.',
-    'I can answer it with scientific evidence. It isn’t only opinion or prediction.',
-  ];
-  const RESEARCH_GOAL = 3;
-  const STAGE_NAMES = ['Explore a broad topic', 'Narrow it with background reading', 'Develop a research question', 'Do the research', 'Evaluate and cite'];
-
-  const sourceReady = s => craapComplete(s.craap) && annotation(s) && !missingFor(s).length;
-  function stageStatus() {
-    const bg = MS.sources.filter(s => s.stage === 'Background').length;
-    const rs = MS.sources.filter(s => s.stage === 'Research').length;
-    const ready = MS.sources.filter(sourceReady).length;
-    const q = (sb.question || '').trim();
-    return [
-      { done: !!PROJECT.topic, summary: PROJECT.topic || 'No topic chosen yet' },
-      { done: !!PROJECT.focus.trim() && bg >= 1, summary: PROJECT.focus.trim() ? `Focus: ${PROJECT.focus.trim()}` : `${bg} background source${bg === 1 ? '' : 's'} saved`, bg },
-      { done: !!q && PROJECT.checks.every(Boolean), summary: q ? (q.length > 70 ? q.slice(0, 70) + '…' : q) : 'No question yet' },
-      { done: rs >= RESEARCH_GOAL, summary: `${rs} of ${RESEARCH_GOAL} research sources saved`, rs },
-      { done: MS.sources.length > 0 && ready === MS.sources.length && rs >= RESEARCH_GOAL, summary: `${ready} of ${MS.sources.length} sources ready`, ready },
-    ];
-  }
-  const currentStage = st => { const i = st.findIndex(s => !s.done); return i < 0 ? 4 : i; };
-
-  /* Progress strip shown on other pages once a student has started */
-  function updateStrip() {
-    $('.nav-cta').textContent = PROJECT.started ? 'My PBAT →' : 'Start a PBAT →';
-    const strip = $('#pbat-strip');
-    const show = PROJECT.started && currentView !== 'guide';
-    strip.hidden = !show;
-    if (!show) return;
-    const st = stageStatus(), i = currentStage(st);
-    const allDone = st.every(s => s.done);
-    $('#pbat-strip-text').innerHTML = allDone
-      ? '<b>Your PBAT:</b> all five stages done. Your bibliography is ready to copy.'
-      : `<b>Your PBAT:</b> stage ${i + 1} of 5, ${esc(STAGE_NAMES[i].toLowerCase())}`;
-  }
-
-  /* Banner on topic pages, only for students working through the guide */
-  function topicBanner(t) {
-    if (!PROJECT.started || currentStage(stageStatus()) > 1) return '';
-    if (PROJECT.topic === t.name) {
-      return `<div class="callout pj-banner" role="note"><p><strong>This is your PBAT topic.</strong> Read 2–3 Intro resources and add them to My sources. Then <a href="#guide">name your narrower focus →</a></p></div>`;
-    }
-    return `<div class="callout pj-banner" role="note"><p><strong>Exploring for your PBAT?</strong> If this topic interests you, make it your broad topic.</p>
-      <button class="btn btn-secondary btn-sm" type="button" data-choose-topic="${esc(t.name)}">Choose this topic</button></div>`;
-  }
-  document.addEventListener('click', e => {
-    const b = e.target.closest('[data-choose-topic]');
-    if (!b) return;
-    startProject();
-    PROJECT.topic = b.dataset.chooseTopic;
-    saveProject();
-    renderTopic(currentTopicSlug);
-    toast('Saved as your PBAT topic. Next: read a few Intro resources.');
-  });
-
-  /* The guide page */
-  function stageBody(n) {
-    const t = allTopics().find(x => x.name === PROJECT.topic);
-    const st = stageStatus();
-    const next = n < 4 ? `<button class="btn btn-primary btn-sm" type="button" data-open-stage="${n + 1}">Next: ${STAGE_NAMES[n + 1]} →</button>` : '';
-    if (n === 0) {
-      const topics = allTopics().filter(x => itemsFor(x.name).length);
-      return `<p>Browse the topics and skim a few resources. Notice what surprises you, or what you want to know more about. Then pick one broad topic to explore further.</p>
-        <p><a href="#/" data-start>Browse all topics →</a></p>
-        <div class="field"><label for="pj-topic">My broad topic</label>
-          <select id="pj-topic" data-pj="topic"><option value="">Choose a topic…</option>
-          ${topics.map(x => `<option ${x.name === PROJECT.topic ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></div>
-        <div class="field"><label for="pj-wonders">I wonder… <span class="hint">(questions and surprises from your browsing)</span></label>
-          <textarea id="pj-wonders" data-pj="wonders" rows="3" placeholder="I wonder why athletes have lower resting heart rates…">${esc(PROJECT.wonders)}</textarea></div>
-        <div>${next}</div>`;
-    }
-    if (n === 1) {
-      if (!t) return `<p>Choose a broad topic in stage 1 first.</p><div><button class="btn btn-secondary btn-sm" type="button" data-open-stage="0">← Back to stage 1</button></div>`;
-      const intro = itemsFor(t.name).filter(r => r.level === 'Intro').sort(byRank).slice(0, 6);
-      const subs = [...new Set(itemsFor(t.name).map(r => r.subtopic).filter(Boolean)), ...t.subs].filter((x, i, a) => a.indexOf(x) === i).slice(0, 8);
-      return `<p>Read 2–3 Intro resources about <b>${esc(t.name)}</b>. Add each one to My sources as you read, and jot down its main point. Look for a smaller piece of the topic that you could explain to a classmate.</p>
-        <p class="pj-count" data-count="bg">${st[1].bg} background source${st[1].bg === 1 ? '' : 's'} saved</p>
-        ${intro.length ? `<div class="grid grid-3">${intro.map(r => card(r)).join('')}</div>` : ''}
-        <p><a href="#topic/${t.slug}">See everything in ${esc(t.name)} →</a></p>
-        <div class="field"><label for="pj-focus">My narrower focus</label>
-          <input type="text" id="pj-focus" data-pj="focus" value="${esc(PROJECT.focus)}" placeholder="e.g. how sleep affects blood pressure in teens">
-          ${subs.length ? `<div class="sb-sugg" style="margin-top:.5rem"><span class="hint">Ideas from this topic:</span>${subs.map(x =>
-            `<button type="button" class="chip-btn sm" data-focus="${esc(x)}">${esc(x)}</button>`).join('')}</div>` : ''}
-        </div>
-        <div>${next}</div>`;
-    }
-    if (n === 2) {
-      const models = t ? t.questions : [];
-      return `<p>Turn your narrower focus into a question you can answer with evidence.${PROJECT.focus.trim() ? ` Your focus: <b>${esc(PROJECT.focus.trim())}</b>.` : ''}</p>
-        <div class="field"><label for="pj-question">My research question</label>
-          <textarea id="pj-question" data-pj="question" rows="2" placeholder="How does…? Why does…? To what extent…?">${esc(sb.question || '')}</textarea></div>
-        <fieldset class="pj-checks"><legend>Check your question</legend>
-          ${QUESTION_CHECKS.map((c, i) => `<label class="ms-check"><input type="checkbox" data-check="${i}" ${PROJECT.checks[i] ? 'checked' : ''}> <span>${c}</span></label>`).join('')}
-        </fieldset>
-        <p><a href="#question">See weak vs. strong examples ↓</a></p>
-        ${models.length ? `<div class="questions leads"><h4>Example questions from ${esc(t.name)}</h4><ul>${models.map(q => `<li>${esc(q)}</li>`).join('')}</ul></div>` : ''}
-        <div>${next}</div>`;
-    }
-    if (n === 3) {
-      return `<p>Search a database for peer-reviewed studies that help answer your question. Aim for at least ${RESEARCH_GOAL}. When you find one, cite it with the citation builder and click <b>Save to My sources</b>.</p>
-        <p class="pj-count" data-count="rs">${st[3].rs} of ${RESEARCH_GOAL} research sources saved</p>
-        <div class="cite-actions"><a class="btn btn-primary btn-sm" href="#build">Build your search →</a><a class="btn btn-secondary btn-sm" href="#cite">Citation builder →</a></div>
-        <div>${next}</div>`;
-    }
-    // Stage 5: what's left to finish
-    const todo = MS.sources.filter(s => !sourceReady(s)).map(s => {
-      const needs = [!craapComplete(s.craap) && 'CRAAP score', !annotation(s) && 'notes', ...missingFor(s).map(m => m)].filter(Boolean);
-      return `<li><b>${esc(s.title || 'Untitled source')}</b>: needs ${esc(needs.join(', '))}</li>`;
-    });
-    return `<p>For every source, rate it with the CRAAP test, finish its citation, and write your notes on how it helps answer your question. Then copy your annotated bibliography into your Google Doc.</p>
-      ${!MS.sources.length ? '<p class="pj-count">No sources saved yet.</p>'
-        : todo.length ? `<p class="pj-count">${st[4].ready} of ${MS.sources.length} sources ready. Still to do:</p><ul class="tips">${todo.join('')}</ul>`
-        : '<p class="pj-count">All your sources are ready.</p>'}
-      ${st[3].rs < RESEARCH_GOAL ? `<p class="hint">You also need at least ${RESEARCH_GOAL} research sources (stage 4).</p>` : ''}
-      <div class="cite-actions"><a class="btn btn-primary btn-sm" href="#my-sources">Open My sources →</a></div>`;
-  }
-
-  function renderGuide() {
-    const st = stageStatus();
-    const cur = currentStage(st);
-    const open = PROJECT.open ?? cur;
-    $('#pj-progress').innerHTML = STAGE_NAMES.map((name, i) => `
-      <li><button type="button" data-open-stage="${i}" class="${st[i].done ? 'done' : ''} ${i === cur ? 'current' : ''}" ${i === open ? 'aria-current="step"' : ''}>
-        <span class="dot" aria-hidden="true">${st[i].done ? '✓' : i + 1}</span><span class="nm">${name}</span>
-        <span class="sr-only">${st[i].done ? '(done)' : i === cur ? '(you are here)' : ''}</span></button></li>`).join('');
-    $('#pj-stages').innerHTML = STAGE_NAMES.map((name, i) => `
-      <section class="card pj-stage ${st[i].done ? 'done' : ''}" data-stage="${i}">
-        <h3><button type="button" class="pj-head" aria-expanded="${i === open}" aria-controls="pj-body-${i}" data-toggle-stage="${i}">
-          <span class="dot" aria-hidden="true">${st[i].done ? '✓' : i + 1}</span>
-          <span class="pj-title">${name}<span class="pj-sum">${esc(st[i].summary)}</span></span>
-          <span class="pj-chev" aria-hidden="true">${i === open ? '−' : '+'}</span></button></h3>
-        <div class="pj-body" id="pj-body-${i}" ${i === open ? '' : 'hidden'}>${i === open ? stageBody(i) : ''}</div>
-      </section>`).join('');
-    $('#pj-restart-row').hidden = !PROJECT.started;
-  }
-  // Refresh headers and progress without rebuilding the open stage (keeps typing focus).
-  function refreshGuideStatus() {
-    const st = stageStatus(), cur = currentStage(st);
-    $$('#pj-progress button').forEach((b, i) => {
-      b.classList.toggle('done', st[i].done); b.classList.toggle('current', i === cur);
-      $('.dot', b).textContent = st[i].done ? '✓' : i + 1;
-    });
-    $$('.pj-stage').forEach((sec, i) => {
-      sec.classList.toggle('done', st[i].done);
-      $('.pj-head .dot', sec).textContent = st[i].done ? '✓' : i + 1;
-      $('.pj-sum', sec).textContent = st[i].summary;
-    });
-    const bg = $('[data-count="bg"]'); if (bg) bg.textContent = `${st[1].bg} background source${st[1].bg === 1 ? '' : 's'} saved`;
-    const rs = $('[data-count="rs"]'); if (rs) rs.textContent = `${st[3].rs} of ${RESEARCH_GOAL} research sources saved`;
-    $('#pj-restart-row').hidden = !PROJECT.started;
-  }
-  function openStage(i) {
-    PROJECT.open = i; saveProject(); renderGuide();
-    const sec = $(`.pj-stage[data-stage="${i}"]`);
-    if (sec) { sec.scrollIntoView({ block: 'start' }); $('.pj-head', sec).focus({ preventScroll: true }); }
-  }
-
-  $('#view-guide').addEventListener('click', e => {
-    const tog = e.target.closest('[data-toggle-stage]');
-    if (tog) {
-      const i = +tog.dataset.toggleStage;
-      PROJECT.open = tog.getAttribute('aria-expanded') === 'true' ? -1 : i;
-      saveProject(); renderGuide();
-      $(`.pj-stage[data-stage="${i}"] .pj-head`).focus();
-      return;
-    }
-    if (e.target.closest('[data-start]')) { startProject(); return; }
-    const op = e.target.closest('[data-open-stage]');
-    if (op) { openStage(+op.dataset.openStage); return; }
-    const fc = e.target.closest('[data-focus]');
-    if (fc) { startProject(); PROJECT.focus = fc.dataset.focus; saveProject(); $('#pj-focus').value = PROJECT.focus; refreshGuideStatus(); return; }
-    // A resource added from stage 2 updates the count.
-    if (e.target.closest('[data-add-src]')) setTimeout(refreshGuideStatus, 0);
-  });
-  $('#view-guide').addEventListener('input', e => {
-    const k = e.target.dataset.pj, c = e.target.dataset.check;
-    if (!k && c === undefined) return;
-    startProject();
-    if (k === 'question') { sb.question = e.target.value; saveSb(); }
-    else if (k) PROJECT[k] = e.target.value;
-    if (c !== undefined) PROJECT.checks[+c] = e.target.checked;
-    saveProject();
-    refreshGuideStatus();
-  });
-  $('#pj-restart').addEventListener('click', () => { $('#pj-restart-confirm').hidden = false; $('#pj-restart').hidden = true; });
-  $('#pj-restart-no').addEventListener('click', () => { $('#pj-restart-confirm').hidden = true; $('#pj-restart').hidden = false; });
-  $('#pj-restart-yes').addEventListener('click', () => {
-    PROJECT = { ...blankProject(), started: true }; saveProject();
-    $('#pj-restart-confirm').hidden = true; $('#pj-restart').hidden = false;
-    renderGuide();
-    toast('Guide progress cleared. Your question and sources are still in My sources.');
-  });
-
-  // Keep the progress strip current when sources or a topic are added from other pages.
-  document.addEventListener('click', e => {
-    if (e.target.closest('[data-add-src], [data-choose-topic]')) setTimeout(updateStrip, 0);
-  });
+  // Clear progress saved by the guided path in an earlier version of the site.
+  try { localStorage.removeItem('cvhub-project-v1'); } catch { /* storage unavailable */ }
 
   /* ---------------- Blood-flow tracer ---------------- */
   const STEPS = [
