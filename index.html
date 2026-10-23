@@ -664,24 +664,6 @@
       <div class="chips format-chips" id="format-chips" role="group" aria-label="Filter by format"></div>
     </div>
 
-    <section class="card pbat-map" aria-labelledby="pbat-map-h">
-      <h2 id="pbat-map-h">Where research fits in your PBAT</h2>
-      <p>Your PBAT paper has six parts. This site helps with the ones in purple.</p>
-      <ol class="pbat-steps">
-        <li><span class="name">Abstract</span><span class="note">First to see, last to write</span></li>
-        <li class="on"><span class="name">Introduction</span><span class="note">Background research, ending with your hypothesis</span><span class="helps">Use the topics below</span></li>
-        <li class="half"><span class="name">Materials &amp; Methods</span><span class="note">Your experiment, step by step</span><span class="helps">See “How to measure it”</span></li>
-        <li><span class="name">Results</span><span class="note">Your data and graphs</span></li>
-        <li><span class="name">Discussion</span><span class="note">Did the data support your hypothesis?</span></li>
-        <li class="on"><span class="name">References</span><span class="note">Every source you used</span><span class="helps"><a href="#cite">Cite it</a> · <a href="#my-sources">My References</a></span></li>
-      </ol>
-    </section>
-
-    <div class="box box-tip">
-      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Already checked for you</p>
-      <p>Your teacher and librarian picked every resource here, so you can trust them. You still need to list each one you use in your References. Click <b>Cite this</b> on a resource, or <b>+ My References</b> to save it.</p>
-    </div>
-
     <div id="home-results" hidden>
       <div class="results-head">
         <h2 id="results-title" aria-live="polite"></h2>
@@ -692,6 +674,24 @@
     </div>
 
     <div id="home-browse" class="stack-lg">
+      <section class="card pbat-map" aria-labelledby="pbat-map-h">
+        <h2 id="pbat-map-h">Where research fits in your PBAT</h2>
+        <p>Your PBAT paper has six parts. This site helps with the ones in purple.</p>
+        <ol class="pbat-steps">
+          <li><span class="name">Abstract</span><span class="note">First to see, last to write</span></li>
+          <li class="on"><span class="name">Introduction</span><span class="note">Background research, ending with your hypothesis</span><span class="helps">Use the topics below</span></li>
+          <li class="half"><span class="name">Materials &amp; Methods</span><span class="note">Your experiment, step by step</span><span class="helps">See “How to measure it”</span></li>
+          <li><span class="name">Results</span><span class="note">Your data and graphs</span></li>
+          <li><span class="name">Discussion</span><span class="note">Did the data support your hypothesis?</span></li>
+          <li class="on"><span class="name">References</span><span class="note">Every source you used</span><span class="helps"><a href="#cite">Cite it</a> · <a href="#my-sources">My References</a></span></li>
+        </ol>
+      </section>
+
+      <div class="box box-tip">
+        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Already checked for you</p>
+        <p>Your teacher and librarian picked every resource here, so you can trust them. You still need to list each one you use in your References. Click <b>Cite this</b> on a resource, or <b>+ My References</b> to save it.</p>
+      </div>
+
       <div id="topic-groups" class="stack-lg"></div>
       <section aria-labelledby="tools-h">
         <h2 class="section-title" id="tools-h">Interactive tools</h2>
@@ -1278,10 +1278,7 @@
      Until it's set (or if it can't be reached), the site uses the
      built-in copy of the list below.
      ================================================================ */
-  // The sheet still holds the old topic list. Paste the rows from "Resources sheet - new rows.csv" into the
-  // Resources tab, then put this link back:
-  // 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv'
-  const SHEET_CSV_URL = '';
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv';
 
   /* EDIT: true shows the "Project tools" tab (topic map, research question, sub-questions,
      evidence matrix, claims). false hides it, and the rest of the site works without it. */
