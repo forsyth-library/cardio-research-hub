@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cardiovascular Research Hub · PBAT Guide</title>
-<meta name="description" content="Research guide for the cardiovascular system PBAT: topic pathways, vetted free sources, source evaluation, citation builder, and a blood-flow tracer.">
+<title>Cardio/Respiratory Research Hub · PBAT</title>
+<meta name="description" content="Research guide for the Cardio/Respiratory PBAT: background research by topic, checked free sources, a source checker, a citation builder, and a blood-flow tracer.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +48,12 @@
     --k1: #be185d; --k1-soft: #fce7f1;
     --k2: #0e7490; --k2-soft: #e0f4f8;
     --k3: #a14a07; --k3-soft: #fcf0e1;
+    /* PBAT colors, matched to the teacher's slides: purple frame, IV magenta, DV orange, reason yellow. */
+    --pbat: #6d28d9; --pbat-soft: #f1ebfd;
+    --iv: #a21caf; --iv-soft: #fae8fc;
+    --dv: #c2410c; --dv-soft: #fdeee4;
+    --why: #fde047; --why-ink: #1c1917;
+    --band: #1c1917; --band-ink: #ffffff;
 
     /* Neutral accent outside a step; each step page swaps in its own color. */
     --accent: #44403c;
@@ -72,6 +78,7 @@
       --s1: #5eead4; --s1-soft: #12302d; --s2: #c4a6ff; --s2-soft: #2a2140; --s3: #93b4ff; --s3-soft: #1b2440;
       --s4: #fcd34d; --s4-soft: #33270f; --s5: #86efac; --s5-soft: #15301f; --s6: #cbd5e1; --s6-soft: #262c35;
       --k1: #f9a8d4; --k1-soft: #3a1a2b; --k2: #67e8f9; --k2-soft: #12303a; --k3: #fcd34d; --k3-soft: #33270f;
+      --pbat: #c4a6ff; --pbat-soft: #2a2140; --iv: #f0abfc; --iv-soft: #3a1838; --dv: #fdba74; --dv-soft: #3a2214; --band: #000000;
       --accent: #e7e2dc; --accent-soft: #2c2826; --on-accent: #111111;
       --shadow: none;
     }
@@ -86,6 +93,7 @@
     --s1: #5eead4; --s1-soft: #12302d; --s2: #c4a6ff; --s2-soft: #2a2140; --s3: #93b4ff; --s3-soft: #1b2440;
     --s4: #fcd34d; --s4-soft: #33270f; --s5: #86efac; --s5-soft: #15301f; --s6: #cbd5e1; --s6-soft: #262c35;
     --k1: #f9a8d4; --k1-soft: #3a1a2b; --k2: #67e8f9; --k2-soft: #12303a; --k3: #fcd34d; --k3-soft: #33270f;
+    --pbat: #c4a6ff; --pbat-soft: #2a2140; --iv: #f0abfc; --iv-soft: #3a1838; --dv: #fdba74; --dv-soft: #3a2214; --band: #000000;
     --accent: #e7e2dc; --accent-soft: #2c2826; --on-accent: #111111;
     --shadow: none;
   }
@@ -217,6 +225,7 @@
   .tag-peer { background: var(--ok-soft); color: var(--ok); }
   .tag-bg { background: var(--warn-soft); color: var(--warn); }
   .tag-data { background: var(--deoxy-soft); color: var(--deoxy); }
+  .tag-exp { background: var(--pbat-soft); color: var(--pbat); }
   .tag-visual { background: var(--exchange-soft); color: var(--exchange); }
 
   label, legend { font-weight: 600; font-size: 1rem; }
@@ -275,6 +284,51 @@
   .topic-card h3 { font-size: 1.2rem; }
   .topic-card p { color: var(--muted); font-size: .98rem; flex: 1; }
   .topic-card .subs { font-size: .9rem; color: var(--muted); }
+
+  /* ---------- PBAT pieces: section map, variable chips, hypothesis band ---------- */
+  .pbat-map { border-top: 6px solid var(--pbat); }
+  .pbat-map h2 { font-size: 1.45rem; }
+  .pbat-map > p { margin-top: .35rem; color: var(--muted); max-width: 60ch; }
+  .pbat-steps { list-style: none; margin: 1.1rem 0 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); counter-reset: pbat; }
+  .pbat-steps li { position: relative; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .7rem .8rem .75rem 2.3rem; background: var(--surface); counter-increment: pbat; }
+  .pbat-steps li::before { content: ""; position: absolute; left: .75rem; top: .9rem; width: .95rem; height: .95rem; border: 2px solid var(--line-strong); border-radius: 3px; }
+  .pbat-steps .name { display: block; font-weight: 700; line-height: 1.25; }
+  .pbat-steps .note { display: block; font-size: .9rem; color: var(--muted); margin-top: .2rem; line-height: 1.35; }
+  .pbat-steps .helps { display: inline-block; margin-top: .45rem; font-size: .8rem; font-weight: 700; color: var(--pbat); }
+  .pbat-steps li.on { border: 2px solid var(--pbat); background: var(--pbat-soft); }
+  .pbat-steps li.on::before { border-color: var(--pbat); background: var(--pbat); }
+  .pbat-steps li.half { border: 2px dashed var(--pbat); }
+  .pbat-steps a { color: inherit; }
+
+  .var-chip { display: inline-block; font: 700 .72rem/1 var(--font-body); letter-spacing: .04em; padding: .3rem .45rem; border-radius: 5px; vertical-align: .2em; margin-right: .5rem; color: #fff; }
+  .var-iv { background: var(--iv); }
+  .var-dv { background: var(--dv); }
+  .var-why { background: var(--why); color: var(--why-ink); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .var-iv, :root:not([data-theme="light"]) .var-dv { color: #111; } }
+  :root[data-theme="dark"] .var-iv, :root[data-theme="dark"] .var-dv { color: #111; }
+
+  .topic-group-head { margin-bottom: 1rem; }
+  .topic-group-head .section-title { margin-bottom: .2rem; }
+  .role-iv .topic-card { border-top-color: var(--iv); }
+  .role-iv .topic-card:hover { border-color: var(--iv); }
+  .role-dv .topic-card { border-top-color: var(--dv); }
+  .role-dv .topic-card:hover { border-color: var(--dv); }
+
+  .hyp-card { background: var(--band); color: var(--band-ink); border-radius: var(--radius); padding: 1.3rem 1.5rem; }
+  .hyp-card .hyp-label { font-weight: 700; font-size: .9rem; letter-spacing: .03em; text-transform: uppercase; color: #fde047; }
+  .hyp-card p + p { margin-top: .6rem; }
+  .hyp-card .hyp-line { font-size: 1.15rem; line-height: 1.9; }
+  .hyp-card .kw { font-weight: 800; }
+  .hyp-card mark { padding: .12rem .35rem; border-radius: 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .hl-iv { background: #a21caf; color: #fff; }
+  .hl-dv { background: #c2410c; color: #fff; }
+  .hl-why { background: #fde047; color: #1c1917; }
+  .hyp-key { list-style: none; margin: .9rem 0 0; padding: .8rem 0 0; border-top: 1px solid rgba(255,255,255,.2); display: grid; gap: .4rem; font-size: .95rem; }
+  .hyp-key li { display: grid; grid-template-columns: 5.2rem 1fr; gap: .6rem; align-items: start; }
+  .hyp-key .var-chip { margin: .15rem 0 0; text-align: center; }
+  .hyp-key .var-iv { background: #a21caf; color: #fff; }
+  .hyp-key .var-dv { background: #c2410c; color: #fff; }
+  .hyp-blank { display: inline-block; min-width: 7rem; border-bottom: 2px solid currentColor; }
   .topic-card .count { font-size: .92rem; font-weight: 600; color: var(--accent); }
 
   .res { position: relative; display: flex; flex-direction: column; gap: .45rem; transition: border-color .15s; }
@@ -577,17 +631,17 @@
   <div class="wrap brand">
     <div class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-heart"/></svg></div>
     <div>
-      <div class="eyebrow">Science PBAT · Research Guide</div>
-      <h1><a class="brand-link" href="#/">Cardiovascular Research Hub</a></h1>
+      <div class="eyebrow">Science PBAT · Research for your paper</div>
+      <h1><a class="brand-link" href="#/">Cardio/Respiratory Research Hub</a></h1>
     </div>
   </div>
   <nav class="tabs-bar" aria-label="Main">
     <div class="wrap tabs">
       <a class="tab sec-res" href="#/" data-nav="resources">Resources</a>
-      <a class="tab sec-eval" href="#evaluate" data-nav="evaluate">Evaluate a source</a>
+      <a class="tab sec-eval" href="#evaluate" data-nav="evaluate">Check a source</a>
       <a class="tab sec-cite" href="#cite" data-nav="cite">Cite a source</a>
-      <a class="tab sec-ms" href="#my-sources" data-nav="my-sources">My sources<span class="count-badge" id="ms-count" hidden></span></a>
-      <a class="tab sec-find" href="#find" data-nav="find">Find more sources</a>
+      <a class="tab sec-ms" href="#my-sources" data-nav="my-sources">My References<span class="count-badge" id="ms-count" hidden></span></a>
+      <a class="tab sec-find" href="#find" data-nav="find">Search for studies</a>
       <a class="tab tab-optional sec-proj" href="#project" data-nav="project" id="nav-project" hidden>Project tools</a>
     </div>
   </nav>
@@ -598,21 +652,34 @@
   <!-- ===================== RESOURCES (home) ===================== -->
   <section class="view stack-lg" id="view-home" data-view="home" data-stage="1" data-title="Resources">
     <div class="card hero home-hero">
-      <h2>Explore the cardiovascular system</h2>
-      <p>Background reading, 3D models, and data, chosen by your librarian and teacher. Pick a topic to start, or search the collection.</p>
+      <h2>Background research for your PBAT</h2>
+      <p>Your Introduction needs background research: why your topic matters, and evidence for the “because” in your hypothesis. Pick the topics that match your question, or search below.</p>
       <form class="lib-search" id="lib-search" role="search">
         <label for="lib-q" class="sr-only">Search the resource collection</label>
         <div class="db-search-input">
           <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <input type="search" id="lib-q" placeholder="Search resources: valves, blood pressure, sleep…" autocomplete="off">
+          <input type="search" id="lib-q" placeholder="Search: heart rate, music, lung capacity…" autocomplete="off">
         </div>
       </form>
       <div class="chips format-chips" id="format-chips" role="group" aria-label="Filter by format"></div>
     </div>
 
+    <section class="card pbat-map" aria-labelledby="pbat-map-h">
+      <h2 id="pbat-map-h">Where research fits in your PBAT</h2>
+      <p>Your PBAT paper has six parts. This site helps with the ones in purple.</p>
+      <ol class="pbat-steps">
+        <li><span class="name">Abstract</span><span class="note">First to see, last to write</span></li>
+        <li class="on"><span class="name">Introduction</span><span class="note">Background research, ending with your hypothesis</span><span class="helps">Use the topics below</span></li>
+        <li class="half"><span class="name">Materials &amp; Methods</span><span class="note">Your experiment, step by step</span><span class="helps">See “How to measure it”</span></li>
+        <li><span class="name">Results</span><span class="note">Your data and graphs</span></li>
+        <li><span class="name">Discussion</span><span class="note">Did the data support your hypothesis?</span></li>
+        <li class="on"><span class="name">References</span><span class="note">Every source you used</span><span class="helps"><a href="#cite">Cite it</a> · <a href="#my-sources">My References</a></span></li>
+      </ol>
+    </section>
+
     <div class="box box-tip">
       <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Already checked for you</p>
-      <p>Your teacher and librarian chose and checked every resource here, so you don't need to evaluate them. You <b>do</b> need to cite them: click <b>Cite this</b> on any resource, or <b>+ My sources</b> to save it to your bibliography.</p>
+      <p>Your teacher and librarian picked every resource here, so you can trust them. You still need to list each one you use in your References. Click <b>Cite this</b> on a resource, or <b>+ My References</b> to save it.</p>
     </div>
 
     <div id="home-results" hidden>
@@ -625,10 +692,7 @@
     </div>
 
     <div id="home-browse" class="stack-lg">
-      <section aria-labelledby="topics-h">
-        <h2 class="section-title" id="topics-h">Topics</h2>
-        <div class="grid grid-3" id="topic-grid"></div>
-      </section>
+      <div id="topic-groups" class="stack-lg"></div>
       <section aria-labelledby="tools-h">
         <h2 class="section-title" id="tools-h">Interactive tools</h2>
         <div class="grid grid-3" id="tool-grid"></div>
@@ -641,12 +705,12 @@
 
   <!-- ===================== TOOL: 3D HEART ===================== -->
   <section class="view stack-lg" id="view-tool-3d-heart" data-view="tool-3d-heart" data-stage="1" data-title="3D heart model" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/the-heart-structure-and-function">The heart: structure &amp; function</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/how-the-heart-and-lungs-work">How the heart &amp; lungs work</a></nav>
     <div class="card">
       <div class="section-head">
         <div>
           <h2>3D heart model</h2>
-          <p>Rotate and zoom to study the heart's outer anatomy: chambers, great vessels, and coronary arteries. For cross-sections of valves and chambers, use <a href="https://anatomyvista.com/explore/heart" target="_blank" rel="noopener">AnatomyVista</a>.</p>
+          <p>Turn and zoom to see the outside of the heart: its chambers, the big blood vessels, and the heart’s own arteries. To see inside the heart, use <a href="https://anatomyvista.com/explore/heart" target="_blank" rel="noopener">AnatomyVista</a>.</p>
         </div>
         <span class="tag">Drag to rotate · scroll or pinch to zoom</span>
       </div>
@@ -660,10 +724,10 @@
 
   <!-- ===================== TOOL: BLOOD-FLOW TRACER ===================== -->
   <section class="view stack-lg" id="view-tool-blood-flow" data-view="tool-blood-flow" data-stage="1" data-title="Blood-flow tracer" hidden>
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/blood-vessels-and-circulation">Blood vessels &amp; circulation</a></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#/">Resources</a><span aria-hidden="true">›</span><a href="#topic/how-the-heart-and-lungs-work">How the heart &amp; lungs work</a></nav>
     <div class="topic-head">
       <h2>Blood-flow tracer &amp; quiz</h2>
-      <p>Trace one drop of blood through the pulmonary and systemic circuits, then check what you know.</p>
+      <p>Follow one drop of blood from the body, through the heart to the lungs, and back out to the body. Then check what you know.</p>
     </div>
     <div class="card" id="tracer">
       <div class="tool-head">
@@ -707,10 +771,10 @@
   </section>
 
   <!-- ===================== EVALUATE (SIFT) ===================== -->
-  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-stage="4" data-title="Evaluate a source" hidden>
+  <section class="view stack-lg" id="view-evaluate" data-view="evaluate" data-stage="4" data-title="Check a source" hidden>
     <div class="stage-head">
-      <h2>Evaluate a source</h2>
-      <p class="lede">Found something on your own? Before you trust it, check it the way fact-checkers do, with the four <b>SIFT</b> moves. It takes a few minutes per source.</p>
+      <h2>Check a source</h2>
+      <p class="lede">Found a website on your own? Remember: Googling ain’t it. Before you use a source, check it with these four steps. Fact-checkers call them <b>SIFT</b>. It takes a few minutes.</p>
     </div>
 
     <div class="card" id="sift">
@@ -725,7 +789,7 @@
           <div class="sift-letter" aria-hidden="true">S</div>
           <div class="sift-body">
             <h3>Stop</h3>
-            <p>Before you read it closely, ask: do I know what this is? Pick the closest match.</p>
+            <p>Before you read it, ask: do I know what this is? Pick the closest match.</p>
             <fieldset class="opt-row" id="sift-kind">
               <legend class="sr-only">What kind of source is it?</legend>
             </fieldset>
@@ -735,8 +799,8 @@
         <li class="sift-move">
           <div class="sift-letter" aria-hidden="true">I</div>
           <div class="sift-body">
-            <h3>Investigate the source</h3>
-            <p>Leave the page. Open a new tab and search for the <b>publisher or author</b>. Who are they? Are they experts in this? Who pays for them, and would they gain from you believing this?</p>
+            <h3>Investigate who made it</h3>
+            <p>Open a new tab and search the name of the <b>website or author</b>. Who are they? Are they experts? Are they trying to sell you something?</p>
             <div class="db-search-row" style="margin-top:.75rem">
               <div style="flex:1 1 14rem">
                 <label for="sift-who" class="sr-only">Publisher, organization, or author</label>
@@ -745,20 +809,20 @@
               <button class="btn btn-secondary" type="button" id="sift-who-go">Search what others say <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             </div>
             <label for="sift-investigate" style="display:block;margin-top:.75rem">What did you find?</label>
-            <textarea id="sift-investigate" rows="2" placeholder="e.g. A nonprofit of heart doctors and researchers; cited by the CDC; some funding from drug companies."></textarea>
+            <textarea id="sift-investigate" rows="2" placeholder="e.g. A group of heart doctors and researchers. The CDC links to them."></textarea>
           </div>
         </li>
         <li class="sift-move">
           <div class="sift-letter" aria-hidden="true">F</div>
           <div class="sift-body">
-            <h3>Find better coverage</h3>
-            <p>Search the <b>main claim</b>, not the source. Do trusted sources (NIH, CDC, the American Heart Association, research reviews) say the same thing?</p>
+            <h3>Find what other sources say</h3>
+            <p>Search the <b>main idea</b>, not the website. Do trusted sources (NIH, CDC, the American Heart Association) say the same thing?</p>
             <div class="db-search-row" style="margin-top:.75rem">
               <div style="flex:1 1 14rem">
-                <label for="sift-claim" class="sr-only">The main claim</label>
-                <input type="text" id="sift-claim" placeholder="The main claim, e.g. energy drinks raise blood pressure">
+                <label for="sift-claim" class="sr-only">The main idea</label>
+                <input type="text" id="sift-claim" placeholder="The main idea, e.g. fast music raises heart rate">
               </div>
-              <button class="btn btn-secondary" type="button" id="sift-claim-go">Check the claim <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+              <button class="btn btn-secondary" type="button" id="sift-claim-go">Check the idea <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             </div>
             <fieldset class="opt-row" id="sift-coverage" style="margin-top:.75rem">
               <legend>Do trusted sources agree?</legend>
@@ -768,15 +832,15 @@
         <li class="sift-move">
           <div class="sift-letter" aria-hidden="true">T</div>
           <div class="sift-body">
-            <h3>Trace claims to the original</h3>
-            <p>News stories and websites often describe a study. Follow the link to the <b>original research</b> and check that the claim matches what the study actually found.</p>
+            <h3>Trace it back to the study</h3>
+            <p>News stories and websites often talk about a study. Click through to the <b>study itself</b> and check that it really says that.</p>
             <ul class="trace-qs">
-              <li>Was the study <b>peer-reviewed</b> (published in a journal)?</li>
-              <li>Who or what was studied: people, animals, or cells? How many?</li>
+              <li>Was it published in a science journal? (That usually means it was <b>peer-reviewed</b>: checked by other scientists.)</li>
+              <li>Who was studied: people, animals, or cells? How many?</li>
               <li>Did it show that one thing <b>causes</b> another, or only that they happen together?</li>
             </ul>
             <label for="sift-trace" style="display:block;margin-top:.75rem">What did you find?</label>
-            <textarea id="sift-trace" rows="2" placeholder="e.g. The article was based on a 2023 study of 1,200 adults in the journal Hypertension. It found a link, not proof of cause."></textarea>
+            <textarea id="sift-trace" rows="2" placeholder="e.g. The article was about a 2006 study of 24 adults in the journal Heart. It measured heart rate during different kinds of music."></textarea>
           </div>
         </li>
       </ol>
@@ -787,7 +851,7 @@
         </fieldset>
         <div class="field" style="flex-basis:100%">
           <label for="sift-why">Why? <span class="hint">(one sentence)</span></label>
-          <input type="text" id="sift-why" placeholder="e.g. Peer-reviewed study of teens, matches what the NIH says.">
+          <input type="text" id="sift-why" placeholder="e.g. A real study in a science journal, and the NIH says the same thing.">
         </div>
       </div>
       <div class="cite-actions no-print">
@@ -800,9 +864,9 @@
       <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Watch out for</p>
       <ul>
         <li>Sites that sell a product, supplement, or treatment they write about.</li>
-        <li>“.org” sites. Anyone can buy one; it doesn't mean nonprofit or trustworthy.</li>
+        <li>“.org” sites. Anyone can buy one, so .org doesn't mean you can trust it.</li>
         <li>No author, no date, or no references.</li>
-        <li>Claims that sound too strong (“cures,” “proves”) for what one study can show.</li>
+        <li>Big promises like “cures” or “proves.” One study can’t prove that much.</li>
       </ul>
     </div>
   </section>
@@ -811,61 +875,61 @@
   <section class="view stack-lg" id="view-cite" data-view="cite" data-stage="6" data-title="Cite a source" hidden>
     <div class="stage-head">
       <h2>Cite a source</h2>
-      <p class="lede">Build an APA 7 citation. Look up an article by its DOI or PubMed ID, or fill in the form. Then copy it, or save it to My sources.</p>
+      <p class="lede">Make a citation for your References, in APA style. For a study, paste its DOI or PubMed number and the form fills itself in. For a website, fill in the form. Then copy it, or save it to My References.</p>
     </div>
 
     <div class="card" id="cite">
       <div class="box box-task" id="cite-prefill-note" hidden style="margin-bottom:1.25rem"></div>
 
       <form class="db-search cite-lookup" id="cite-lookup" autocomplete="off">
-        <label for="cite-lookup-q">Have a DOI or PubMed ID? Fill in the form automatically</label>
+        <label for="cite-lookup-q">Citing a study? Paste its DOI or PubMed number</label>
         <div class="db-search-row">
           <div class="db-search-input">
             <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-            <input type="text" id="cite-lookup-q" placeholder="10.1161/hc0902.104353 or 11877368" aria-describedby="cite-lookup-status" spellcheck="false">
+            <input type="text" id="cite-lookup-q" placeholder="10.1136/hrt.2005.064600 or 16199412" aria-describedby="cite-lookup-status" spellcheck="false">
           </div>
           <button class="btn btn-primary" type="submit" id="cite-lookup-go">Look up</button>
         </div>
-        <p class="hint" id="cite-lookup-status" aria-live="polite">Paste a DOI, a PubMed ID (PMID), a PMC ID, or a link to the article on PubMed or a journal's site. For web pages, fill in the form below by hand or try <a href="https://www.mybib.com/" target="_blank" rel="noopener">MyBib ↗</a>.</p>
+        <p class="hint" id="cite-lookup-status" aria-live="polite">A DOI is the study’s ID number. It starts with <b>10.</b> and is usually near the top of the study. A PubMed or PMC number, or a link to the study, works too. For websites, fill in the form below or try <a href="https://www.mybib.com/" target="_blank" rel="noopener">MyBib ↗</a>.</p>
       </form>
 
       <form class="form-grid" id="cite-form" autocomplete="off">
         <div class="field span-6">
           <label for="cite-type">Source type</label>
           <select id="cite-type">
-            <option value="journal">Journal article</option>
-            <option value="web">Web page (CDC, AHA, WHO…)</option>
+            <option value="journal">Study (journal article)</option>
+            <option value="web">Website (CDC, AHA, NIH…)</option>
           </select>
         </div>
         <div class="field span-6">
           <label for="cite-authors">Authors</label>
-          <textarea id="cite-authors" rows="3" placeholder="Libby, Peter&#10;Ridker, Paul M."></textarea>
-          <p class="hint">One per line as <i>Last, First Middle</i>. For an organization, type its full name.</p>
+          <textarea id="cite-authors" rows="3" placeholder="Bernardi, Luciano&#10;Porta, Cesare"></textarea>
+          <p class="hint">One per line: <i>Last name, First name</i>. If a group wrote it (like the CDC), type the group’s full name.</p>
         </div>
         <div class="field span-6">
           <label for="cite-title">Title</label>
-          <input type="text" id="cite-title" placeholder="Inflammation and atherosclerosis">
-          <p class="hint" id="title-hint">APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.</p>
+          <input type="text" id="cite-title" placeholder="Cardiovascular, cerebrovascular, and respiratory changes induced by different types of music">
+          <p class="hint" id="title-hint">In APA, only the first word, names, and the first word after a colon get capital letters.</p>
         </div>
         <div class="field span-3">
           <label for="cite-container" id="container-label">Journal</label>
-          <input type="text" id="cite-container" placeholder="Circulation">
+          <input type="text" id="cite-container" placeholder="Heart">
         </div>
         <div class="field span-3">
           <label for="cite-year">Year</label>
-          <input type="text" id="cite-year" inputmode="numeric" placeholder="2002">
+          <input type="text" id="cite-year" inputmode="numeric" placeholder="2006">
         </div>
         <div class="field span-2 journal-only">
           <label for="cite-volume">Volume</label>
-          <input type="text" id="cite-volume" placeholder="105">
+          <input type="text" id="cite-volume" placeholder="92">
         </div>
         <div class="field span-2 journal-only">
           <label for="cite-issue">Issue</label>
-          <input type="text" id="cite-issue" placeholder="9">
+          <input type="text" id="cite-issue" placeholder="4">
         </div>
         <div class="field span-2 journal-only">
           <label for="cite-pages">Pages</label>
-          <input type="text" id="cite-pages" placeholder="1135-1143">
+          <input type="text" id="cite-pages" placeholder="445-452">
         </div>
         <div class="field span-3 web-only" hidden>
           <label for="cite-date">Month &amp; day <span class="hint">(optional)</span></label>
@@ -873,7 +937,7 @@
         </div>
         <div class="field span-6">
           <label for="cite-link">DOI or URL</label>
-          <input type="text" id="cite-link" placeholder="10.1161/hc0902.104353">
+          <input type="text" id="cite-link" placeholder="10.1136/hrt.2005.064600">
         </div>
       </form>
 
@@ -883,64 +947,59 @@
       </div>
       <div class="cite-actions no-print">
         <button class="btn btn-primary" id="cite-copy" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy citation</button>
-        <button class="btn btn-secondary" id="cite-save" type="button">Save to My sources</button>
+        <button class="btn btn-secondary" id="cite-save" type="button">Save to My References</button>
         <button class="btn btn-secondary" id="cite-clear" type="button">Clear</button>
       </div>
-      <p class="hint">Pastes with italics into Google Docs and Word. Always double-check against the APA style guide.</p>
+      <p class="hint">Keeps the italics when you paste into Google Docs or Word. Always double-check it.</p>
     </div>
 
     <details class="box box-example">
-      <summary>What an APA citation looks like <span class="tag">Model</span></summary>
+      <summary>What an APA citation looks like <span class="tag">Example</span></summary>
       <div class="ex-body">
-        <p><b>Journal article</b></p>
-        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">Libby, P., Ridker, P. M., &amp; Maseri, A. (2002). Inflammation and atherosclerosis. <i>Circulation, 105</i>(9), 1135–1143. https://doi.org/10.1161/hc0902.104353</p>
-        <p><b>Web page from an organization</b></p>
+        <p><b>Study (journal article)</b></p>
+        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">Bernardi, L., Porta, C., &amp; Sleight, P. (2006). Cardiovascular, cerebrovascular, and respiratory changes induced by different types of music in musicians and non-musicians: The importance of silence. <i>Heart, 92</i>(4), 445–452. https://doi.org/10.1136/hrt.2005.064600</p>
+        <p><b>Website from a group like the NIH</b></p>
         <p class="model" style="padding-left:2.5em;text-indent:-1.5em">National Heart, Lung, and Blood Institute. (n.d.). <i>How the heart works.</i> https://www.nhlbi.nih.gov/health/heart</p>
-        <p class="hint">No date on the page? Use (n.d.). When the organization is the author, don't repeat its name as the website.</p>
+        <p class="hint">No date on the page? Use (n.d.), which means “no date.” When a group wrote the page, don't list its name twice.</p>
       </div>
     </details>
   </section>
 
   <!-- ===================== MY SOURCES ===================== -->
-  <section class="view stack-lg" id="view-my-sources" data-view="my-sources" data-stage="5" data-title="My sources" hidden>
+  <section class="view stack-lg" id="view-my-sources" data-view="my-sources" data-stage="5" data-title="My References" hidden>
     <div class="stage-head">
-      <h2>My sources</h2>
-      <p class="lede">Your working bibliography. For each source, complete the citation and write a two-part annotation: what it says, and how it helps your research. Then copy it into your Google Doc.</p>
+      <h2>My References</h2>
+      <p class="lede">The sources for the References part of your PBAT. For each one, finish the citation and write two short notes: what it says, and how it helps your PBAT. Then copy the list into your Google Doc.</p>
+    </div>
+
+    <div class="box box-tip" id="ms-leave">
+      <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Copy your list before you leave</p>
+      <p>Your sources are saved only in this browser, on this computer. They won't be here on a different computer, and school computers may erase them. <b>Before you leave the site, click Copy my References and paste it into your Google Doc.</b></p>
     </div>
 
     <div class="card">
       <div class="cite-actions" style="margin-top:0">
-        <button class="btn btn-primary" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy annotated bibliography</button>
+        <button class="btn btn-primary" id="ms-copy-all" type="button"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy my References</button>
         <button class="btn btn-secondary" id="ms-add-blank" type="button">+ Add a source by hand</button>
-        <label class="ms-check"><input type="checkbox" id="ms-include-eval"> Include my evaluation notes</label>
+        <label class="ms-check"><input type="checkbox" id="ms-include-eval"> Include my source checks</label>
       </div>
       <p class="hint" id="ms-status" aria-live="polite"></p>
     </div>
 
     <details class="box box-example">
-      <summary>Show me an example annotation <span class="tag">Model</span></summary>
+      <summary>Show me an example <span class="tag">Example</span></summary>
       <div class="ex-body">
-        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">Javaheri, S., Storfer-Isser, A., Rosen, C. L., &amp; Redline, S. (2008). Sleep quality and elevated blood pressure in adolescents. <i>Circulation, 118</i>(10), 1034–1040.</p>
-        <p><b>What it says:</b> In a study of 238 teens, those who slept poorly or less than 6.5 hours were about 3.5 times more likely to have high blood pressure, even after accounting for weight.</p>
-        <p><b>How it helps:</b> This is direct evidence that sleep affects teens' blood pressure. It's a real study of teenagers, not adults, and it gives a number I can use.</p>
+        <p class="model" style="padding-left:2.5em;text-indent:-1.5em">Bernardi, L., Porta, C., &amp; Sleight, P. (2006). Cardiovascular, cerebrovascular, and respiratory changes induced by different types of music in musicians and non-musicians: The importance of silence. <i>Heart, 92</i>(4), 445–452.</p>
+        <p><b>What it says:</b> 24 adults listened to six kinds of music. Faster music raised their breathing rate, blood pressure, and heart rate. A two-minute pause of silence lowered all three, even below where they started.</p>
+        <p><b>How it helps:</b> This backs up the “because” in my hypothesis: fast music speeds up the heart. It also shows how scientists measured heart rate before and during music, which helps me plan my experiment.</p>
       </div>
     </details>
 
     <div class="card" id="ms-empty">
       <h3>No sources yet</h3>
-      <p style="margin-top:.4rem">Add sources three ways: <b>+ My sources</b> on any <a href="#/">resource</a>, <b>Save to My sources</b> in <a href="#cite">Cite a source</a>, or <b>Add a source by hand</b> above.</p>
+      <p style="margin-top:.4rem">Add sources three ways: <b>+ My References</b> on any <a href="#/">resource</a>, <b>Save to My References</b> in <a href="#cite">Cite a source</a>, or <b>Add a source by hand</b> above.</p>
     </div>
     <div id="ms-list" class="stack"></div>
-
-    <div class="card no-print" id="backup">
-      <h3>Switching computers?</h3>
-      <p class="lede-sm" style="margin-top:.4rem">Your sources are saved in this browser, on this device only. Paste your bibliography into your Google Doc often. To move your work, download a backup file and load it on the other computer.</p>
-      <div class="cite-actions">
-        <button class="btn btn-secondary btn-sm" id="ms-download" type="button">Download backup</button>
-        <button class="btn btn-secondary btn-sm" id="ms-upload-btn" type="button">Load backup</button>
-        <input type="file" id="ms-upload" accept=".json,application/json" class="sr-only" tabindex="-1" aria-hidden="true">
-      </div>
-    </div>
 
     <div class="no-print" id="ms-danger" hidden>
       <button class="btn btn-secondary btn-sm" id="ms-clear" type="button">Remove all sources</button>
@@ -951,30 +1010,30 @@
   </section>
 
   <!-- ===================== FIND MORE SOURCES ===================== -->
-  <section class="view stack-lg" id="view-find" data-view="find" data-stage="3" data-title="Find more sources" hidden>
+  <section class="view stack-lg" id="view-find" data-view="find" data-stage="3" data-title="Search for studies" hidden>
     <div class="stage-head">
-      <h2>Find more sources</h2>
-      <p class="lede">Need research studies beyond the collection? Databases don't understand questions. They match words. Build a search, run it, and save what you find.</p>
+      <h2>Search for studies</h2>
+      <p class="lede">Need more than what’s on this site? Googling ain’t it. Search a science database instead. Databases don’t understand questions; they match words. So build your search from a few key words.</p>
     </div>
 
     <div class="card" id="build">
       <div class="tool-head">
         <h3><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg> Build your search</h3>
-        <button class="btn btn-secondary btn-sm no-print" id="sb-reset" type="button">Clear key ideas</button>
+        <button class="btn btn-secondary btn-sm no-print" id="sb-reset" type="button">Clear key words</button>
       </div>
 
       <ol class="sb-steps">
         <li>
-          <label for="sb-question" class="sb-label">What are you trying to find out?</label>
-          <textarea id="sb-question" rows="2" placeholder="How does short sleep affect blood pressure in teenagers?"></textarea>
+          <label for="sb-question" class="sb-label">What is your testable question?</label>
+          <textarea id="sb-question" rows="2" placeholder="How does music affect heart rate in teenagers?"></textarea>
           <div class="sb-spotted" id="sb-spotted" hidden>
-            <span class="hint">Key ideas we spotted. Click one to use it:</span>
+            <span class="hint">Key words we spotted. Click one to use it:</span>
             <div class="chips" id="sb-spotted-chips"></div>
           </div>
         </li>
         <li>
-          <span class="sb-label" id="sb-concepts-label">Pick 2–3 key ideas, and add other words for each</span>
-          <p class="hint">Every article must be about <b>each</b> key idea. Other words catch articles that use different vocabulary, like <i>hypertension</i> for “high blood pressure.”</p>
+          <span class="sb-label" id="sb-concepts-label">Pick 2–3 key words, and add other words that mean the same thing</span>
+          <p class="hint">Each article you get will be about <b>every</b> key word. Scientists sometimes use different words, like <i>pulse</i> for “heart rate” or <i>adolescents</i> for “teenagers,” so add those too.</p>
           <div class="sb-concepts" id="sb-concepts" role="group" aria-labelledby="sb-concepts-label"></div>
         </li>
         <li>
@@ -983,19 +1042,19 @@
           <div class="box box-tip" style="margin-top:.75rem">
             <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> How the search works</p>
             <ul>
-              <li><b>AND</b> joins key ideas. Every idea must appear, so it <b>narrows</b> results.</li>
-              <li><b>OR</b> joins words for the same idea. Any of them can appear, so it <b>widens</b> results.</li>
-              <li>Quotation marks keep a phrase together.</li>
+              <li><b>AND</b> means every key word must be in the article. You get <b>fewer</b>, closer results.</li>
+              <li><b>OR</b> means any of these words can be in the article. You get <b>more</b> results.</li>
+              <li>Quotation marks keep words together, like <i>"heart rate"</i>.</li>
             </ul>
           </div>
           <label for="sb-query" class="hint" style="display:block;margin-top:.75rem">Search text (you can edit it)</label>
-          <textarea id="sb-query" rows="2" spellcheck="false" placeholder="Your search appears here once you add a key idea."></textarea>
+          <textarea id="sb-query" rows="2" spellcheck="false" placeholder="Your search shows up here once you add a key word."></textarea>
           <div class="cite-actions no-print">
             <button class="btn btn-primary btn-sm" type="button" data-sb-go="pubmed">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             <button class="btn btn-secondary btn-sm" type="button" data-sb-go="scholar">Search Google Scholar <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
             <button class="btn btn-secondary btn-sm" type="button" id="sb-copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy search</button>
           </div>
-          <p class="hint" style="margin-top:.6rem"><b>Too many results?</b> Add another key idea. <b>Too few?</b> Remove an idea, or add more other words.</p>
+          <p class="hint" style="margin-top:.6rem"><b>Too many results?</b> Add another key word. <b>Too few?</b> Take one out, or add more words that mean the same thing.</p>
         </li>
       </ol>
     </div>
@@ -1003,11 +1062,11 @@
     <div class="card">
       <h3>Or search quickly</h3>
       <form class="db-search" id="db-search" action="https://pubmed.ncbi.nlm.nih.gov/" method="get" target="_blank" role="search">
-        <label for="db-q">Type 2–4 key terms, not a whole question</label>
+        <label for="db-q">Type 2–4 key words, not a whole question</label>
         <div class="db-search-row">
           <div class="db-search-input">
             <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-            <input type="search" id="db-q" name="term" placeholder="e.g. foam cells atherosclerosis" autocomplete="off">
+            <input type="search" id="db-q" name="term" placeholder="e.g. music heart rate" autocomplete="off">
           </div>
           <input type="hidden" name="filter" value="simsearch2.ffrft">
           <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
@@ -1016,7 +1075,7 @@
           <legend class="sr-only">Database to search</legend>
           <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
           <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
-          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>background</span></label>
+          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>easy background</span></label>
         </fieldset>
         <p class="hint">Results open in a new tab on the database's own site.</p>
       </form>
@@ -1025,9 +1084,9 @@
     <div class="box box-task">
       <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg> Found something you might use?</p>
       <ol>
-        <li><a href="#evaluate">Evaluate it</a> before you rely on it.</li>
-        <li><a href="#cite">Cite it</a>: copy the DOI or PubMed ID while the article is open, then look it up.</li>
-        <li>Click <b>Save to My sources</b> and write your annotation.</li>
+        <li><a href="#evaluate">Check it</a> before you use it.</li>
+        <li><a href="#cite">Cite it</a>: copy the DOI or PubMed number while the study is open, then paste it in.</li>
+        <li>Click <b>Save to My References</b> and write your notes.</li>
       </ol>
     </div>
 
@@ -1039,10 +1098,10 @@
     <div class="box box-tip">
       <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Search tips</p>
       <ul class="tips">
-        <li><b>Search key terms, not sentences.</b> For “How does sleep affect blood pressure in teens?”, search <i>sleep blood pressure adolescents</i>.</li>
-        <li><b>Too many results?</b> Add a term (<i>adolescents</i>, <i>exercise</i>) or choose a more specific word.</li>
-        <li><b>Too few?</b> Remove a term, or try a synonym: <i>hypertension</i> for “high blood pressure,” <i>myocardial infarction</i> for “heart attack.”</li>
-        <li><b>Can't get the full article?</b> Ask the library before you give up on it.</li>
+        <li><b>Search key words, not sentences.</b> For “How does music affect heart rate in teens?”, search <i>music heart rate adolescents</i>.</li>
+        <li><b>Too many results?</b> Add a word (<i>adolescents</i>, <i>exercise</i>) or use a more exact word.</li>
+        <li><b>Too few?</b> Take a word out, or try the word scientists use: <i>respiratory rate</i> for “breathing rate,” <i>vital capacity</i> for “lung capacity,” <i>hypertension</i> for “high blood pressure.”</li>
+        <li><b>Can't open the whole study?</b> Ask the library before you give up on it.</li>
       </ul>
     </div>
   </section>
@@ -1179,7 +1238,7 @@
 
 <footer>
   <div class="wrap">
-    <div><strong style="color:var(--ink)">Cardiovascular Research Hub</strong> · A research guide for performance-based assessment tasks (PBATs)</div>
+    <div><strong style="color:var(--ink)">Cardio/Respiratory Research Hub</strong> · Research help for your Science PBAT</div>
     <div>Links checked October 22, 2026. Found a broken link? Let your teacher or librarian know.</div>
   </div>
 </footer>
@@ -1219,57 +1278,96 @@
      Until it's set (or if it can't be reached), the site uses the
      built-in copy of the list below.
      ================================================================ */
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv';
+  // The sheet still holds the old topic list. Paste the rows from "Resources sheet - new rows.csv" into the
+  // Resources tab, then put this link back:
+  // 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7Mafr0xKvOA3sstgK57TD3fqDk-AXnLiQbx3nmN6RH2jxrl6HmdvMaf9p4GnpuvLvGCCStXqye0p-/pub?gid=1652594982&single=true&output=csv'
+  const SHEET_CSV_URL = '';
 
   /* EDIT: true shows the "Project tools" tab (topic map, research question, sub-questions,
      evidence matrix, claims). false hides it, and the rest of the site works without it. */
   const SHOW_PROJECT_TOOLS = false;
 
   /* ---------------- Topics ----------------
-     Names must match the Topic column in the sheet exactly. */
+     Names must match the Topic column in the sheet exactly.
+     group: 'basics' (how the body works), 'measure' (things you measure = dependent variables),
+     'change' (things you change = independent variables), 'more'.
+     example: a testable question and a hypothesis in the teacher's "If IV, then DV, because REASON" form.
+     searches: simple search words for PubMed (free full text). */
+  const TOPIC_GROUPS = [
+    { id: 'basics', title: 'Start here: how your body works', blurb: 'Background for the first part of your Introduction.' },
+    { id: 'change', title: 'What you change', role: 'iv', blurb: 'Your independent variable (IV): the thing you change or compare.' },
+    { id: 'measure', title: 'What you measure', role: 'dv', blurb: 'Your dependent variable (DV): the result you measure in your experiment.' },
+    { id: 'more', title: 'More topics', blurb: '' },
+  ];
   const TOPICS = [
-    { name: 'The heart: structure & function',
-      blurb: 'How the heart is built and how it pumps: chambers, valves, the electrical system that sets the beat, and how much blood it moves.',
-      subs: ['Chambers and valves', 'The heartbeat and its electrical system', 'The cardiac cycle', 'Cardiac output'],
-      questions: ['How does regular endurance training change resting heart rate and stroke volume, and what mechanism explains the change?',
-        'How does the heart’s electrical system coordinate the contraction of the atria and ventricles?'],
-      searches: ['Frank-Starling mechanism', 'athlete heart stroke volume', 'cardiac conduction system'] },
-    { name: 'Blood vessels & circulation',
-      blurb: 'The network that carries blood: how arteries, veins, and capillaries differ, the two circuits through the lungs and body, and blood pressure.',
-      subs: ['Arteries, veins, and capillaries', 'Pulmonary vs. systemic circulation', 'Blood pressure', 'Coronary arteries'],
-      questions: ['How does the baroreceptor reflex keep blood pressure stable when a person stands up quickly, and what happens when it fails?',
-        'How does arterial stiffness change with age, and how does it affect blood pressure?'],
-      searches: ['baroreflex orthostatic hypotension', 'arterial stiffness blood pressure'] },
-    { name: 'Blood',
-      blurb: 'What blood is made of, and how it carries oxygen, defends the body, and clots.',
-      subs: ['What blood is made of', 'How oxygen is carried', 'Clotting'],
-      questions: ['How does the structure of hemoglobin let it pick up oxygen in the lungs and release it in active tissues?',
-        'How does sickle cell disease change the way blood flows through small vessels?'],
-      searches: ['hemoglobin oxygen dissociation', 'sickle cell vaso-occlusion'] },
-    { name: 'Lifestyle & the heart',
-      blurb: 'How everyday habits like exercise, sleep, diet, stress, vaping, and caffeine affect the heart and blood vessels.',
-      subs: ["Exercise and the athlete's heart", 'Sleep', 'Diet and sodium', 'Stress', 'Vaping and smoking', 'Caffeine and energy drinks'],
-      questions: ['How does short or poor-quality sleep affect blood pressure in teenagers?',
-        'What does current research show about how vaping affects heart rate, blood pressure, and blood vessel function?'],
-      searches: ['sleep duration blood pressure adolescents', 'e-cigarette cardiovascular effects', 'energy drinks cardiovascular'] },
-    { name: 'Cardiovascular disease',
-      blurb: 'What goes wrong: plaque in the arteries, heart attacks, high blood pressure, heart failure, irregular rhythms, and stroke.',
-      subs: ['Atherosclerosis and heart attacks', 'High blood pressure', 'Heart failure', 'Arrhythmias', 'Stroke', 'Congenital heart defects', 'Sudden cardiac arrest in young athletes'],
-      questions: ['How does chronic inflammation of the artery lining lead to foam cell formation and plaque buildup in coronary arteries?',
-        'What changes in heart structure distinguish heart failure with reduced ejection fraction (HFrEF) from heart failure with preserved ejection fraction (HFpEF)?'],
-      searches: ['foam cell formation atherosclerosis', 'HFpEF HFrEF pathophysiology', 'sudden cardiac arrest young athletes'] },
-    { name: 'Diagnosis, treatment & technology',
-      blurb: 'How doctors find and fix heart problems, from ECGs and stents to pacemakers, CPR, transplants, and lab-grown tissue.',
-      subs: ['ECGs and diagnosis', 'Stents and bypass surgery', 'Pacemakers and defibrillators', 'CPR and AEDs', 'Transplants and artificial hearts', 'The future of treatment'],
-      questions: ['How have drug-eluting stents changed restenosis rates compared with bare-metal stents, and what trade-offs remain?',
-        'How does bystander CPR with an AED change survival after cardiac arrest outside the hospital?'],
-      searches: ['drug-eluting stent restenosis', 'bystander CPR AED survival', 'tissue-engineered heart valve'] },
-    { name: 'Public health & equity',
-      blurb: 'Who gets heart disease and why: risk factors, neighborhoods, access to care, and what prevention programs can do.',
-      subs: ['Who gets heart disease and why', 'Neighborhoods and food access', 'Prevention programs', 'Global heart health'],
-      questions: ['How do neighborhood factors such as food access and income relate to rates of high blood pressure in U.S. cities?',
-        'How much have sodium-reduction or DASH-style diets lowered blood pressure in high-risk groups?'],
-      searches: ['social determinants cardiovascular disease', 'DASH diet blood pressure', 'neighborhood food environment hypertension'] },
+    { name: 'How the heart & lungs work', group: 'basics',
+      blurb: 'How the heart pumps blood, how blood moves through the body, and how the lungs bring in oxygen. Every PBAT needs some of this background.',
+      subs: ['The heart', 'Blood vessels & blood flow', 'The lungs & breathing'],
+      searches: [] },
+    { name: 'Heart rate', group: 'measure',
+      blurb: 'How fast the heart beats, what’s normal, how to measure it, and what makes it speed up or slow down.',
+      subs: ['What it is', 'How to measure it', 'What changes it'],
+      example: { q: 'How does exercise affect heart rate?', iv: 'a person does jumping jacks for one minute', dv: 'their heart rate will go up',
+        because: 'working muscles need more oxygen, so the heart pumps faster to deliver it' },
+      searches: ['exercise heart rate', 'resting heart rate teenagers'] },
+    { name: 'Blood pressure', group: 'measure',
+      blurb: 'How hard blood pushes on the walls of your arteries, what the two numbers mean, and how to measure it.',
+      subs: ['What it is', 'How to measure it', 'What changes it'],
+      example: { q: 'How does age affect blood pressure?', iv: 'people are older', dv: 'their blood pressure will be higher',
+        because: 'arteries get stiffer with age, so blood pushes harder against them' },
+      searches: ['blood pressure age', 'blood pressure measurement'] },
+    { name: 'Breathing rate', group: 'measure',
+      blurb: 'How many breaths a person takes in a minute, what’s normal, and what makes breathing speed up.',
+      subs: ['What it is', 'How to measure it', 'What changes it'],
+      example: { q: 'How does exercise affect breathing rate?', iv: 'a person runs in place for two minutes', dv: 'their breathing rate will go up',
+        because: 'the body needs more oxygen and has to get rid of more carbon dioxide' },
+      searches: ['exercise respiratory rate', 'breathing rate anxiety'] },
+    { name: 'Lung capacity', group: 'measure',
+      blurb: 'How much air your lungs can hold and blow out, how to measure it, and why it differs from person to person.',
+      subs: ['What it is', 'How to measure it', 'What changes it'],
+      example: { q: 'How does age affect lung capacity?', iv: 'people are older adults', dv: 'their lung capacity will be smaller than teenagers’',
+        because: 'lungs and breathing muscles lose some strength and stretch with age' },
+      searches: ['lung capacity age', 'vital capacity exercise'] },
+    { name: 'Exercise & yoga', group: 'change',
+      blurb: 'How cardio exercise, yoga, and breathing exercises change heart rate, blood pressure, and breathing.',
+      subs: ['Cardio exercise', 'Yoga & breathing exercises'],
+      example: { q: 'Does yoga lower heart rate?', iv: 'people do 10 minutes of yoga', dv: 'their heart rate will go down',
+        because: 'slow, deep breathing calms the body’s stress response' },
+      searches: ['yoga heart rate', 'breathing exercises blood pressure', 'aerobic exercise blood pressure'] },
+    { name: 'Music & movies', group: 'change',
+      blurb: 'How different kinds of music and movie genres change heart rate, blood pressure, and breathing.',
+      subs: ['Music', 'Movies'],
+      example: { q: 'How does movie genre affect heart rate?', iv: 'people watch a horror clip instead of a comedy clip', dv: 'their heart rate will go up more',
+        because: 'fear sets off the body’s “fight or flight” response' },
+      searches: ['music heart rate', 'music tempo blood pressure', 'film fear heart rate'] },
+    { name: 'Emotions & stress', group: 'change',
+      blurb: 'How feelings like fear, stress, and calm show up in your heart rate, blood pressure, and breathing.',
+      subs: ['Emotions', 'Stress'],
+      example: { q: 'How does stress affect heart rate?', iv: 'students take a timed math quiz', dv: 'their heart rate will go up',
+        because: 'stress releases adrenaline, which speeds up the heart' },
+      searches: ['emotion heart rate', 'mental stress heart rate'] },
+    { name: 'Scents & temperature', group: 'change',
+      blurb: 'Whether smells like lavender calm the body, and how hot or cold surroundings change heart rate and blood pressure.',
+      subs: ['Scents', 'Temperature'],
+      example: { q: 'Do scents affect heart rate?', iv: 'people smell lavender', dv: 'their heart rate will go down',
+        because: 'calming scents may relax the body’s stress response' },
+      searches: ['lavender heart rate', 'heat heart rate'] },
+    { name: 'Age, gender & body size', group: 'change',
+      blurb: 'How heart rate, blood pressure, and lung capacity differ by age, gender, and the size of the heart and blood vessels.',
+      subs: ['Age', 'Gender', 'Heart & blood vessel size'],
+      example: { q: 'How does gender affect lung capacity?', iv: 'participants are male', dv: 'their lung capacity will be larger',
+        because: 'on average, males have larger lungs and chests' },
+      searches: ['sex differences heart rate', 'lung function sex adolescents'] },
+    { name: 'THC & other substances', group: 'change',
+      blurb: 'What research shows about THC and the heart and lungs. For this topic, your background research comes from studies like these.',
+      subs: [],
+      example: { q: 'How does THC affect heart rate?', iv: 'people have used THC', dv: 'their heart rate will be higher',
+        because: 'THC acts on the nervous system in a way that speeds up the heart' },
+      searches: ['cannabis heart rate'] },
+    { name: 'Heart health & disease', group: 'more',
+      blurb: 'Heart disease, high blood pressure, and who is most affected. Useful for explaining why your topic matters.',
+      subs: [],
+      searches: [] },
   ];
   const slug = s => s.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   TOPICS.forEach(t => { t.slug = slug(t.name); });
@@ -1277,34 +1375,98 @@
   /* ---------------- Built-in tools (pages on this site) ---------------- */
   const TOOLS = [
     { id: '3d-heart', title: '3D heart model', source: 'On this site · model by Mox3DModels', format: '3D model', level: 'Intro',
-      why: 'Rotate and zoom a detailed heart to see the chambers, great vessels, and coronary arteries.',
-      placements: { 'The heart: structure & function': 'Chambers and valves' },
+      why: 'Turn and zoom a detailed heart to see the chambers, big blood vessels, and the heart’s own arteries.',
+      placements: { 'How the heart & lungs work': 'The heart' },
       replaces: 'sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4' },
     { id: 'blood-flow', title: 'Blood-flow tracer & quiz', source: 'On this site', format: 'Interactive', level: 'Intro',
-      why: 'Follow one drop of blood through both circuits, stage by stage, then test yourself.',
-      placements: { 'Blood vessels & circulation': 'Pulmonary vs. systemic circulation', 'The heart: structure & function': 'Chambers and valves' } },
+      why: 'Follow one drop of blood through the heart, lungs, and body, step by step, then test yourself.',
+      placements: { 'How the heart & lungs work': 'Blood vessels & blood flow' } },
   ];
 
   /* ---------------- Built-in copy of the resource sheet ----------------
      Used until SHEET_CSV_URL is set, and as a backup if the sheet can't load. */
   const BUNDLED = [
-    { title: 'How the Heart Works', url: 'https://www.nhlbi.nih.gov/health/heart', source: 'National Heart, Lung, and Blood Institute', topic: 'The heart: structure & function', subtopic: '', format: 'Article', level: 'Intro', why: 'Plain-language NIH explainer on the heart’s anatomy, blood flow, and electrical system, with illustrations. A good first stop.', access: 'Free', featured: 'Yes' },
-    { title: 'OpenStax Anatomy & Physiology 2e, Ch. 19: The Cardiovascular System: The Heart', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/19-introduction', source: 'OpenStax (Rice University)', topic: 'The heart: structure & function', subtopic: '', format: 'Textbook chapter', level: 'Deeper', why: 'Free peer-reviewed college textbook. Clear labeled diagrams of chambers, valves, conduction, and the cardiac cycle.', access: 'Free', featured: '' },
-    { title: 'AnatomyVista Heart Explorer', url: 'https://anatomyvista.com/explore/heart', source: 'AnatomyVista', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: '3D model', level: 'Intro', why: 'Rotate the heart, slice cross-sections, and isolate structures to see chambers and valves from inside.', access: 'Free', featured: 'Yes' },
-    { title: 'Anatomical Heart (3D model)', url: 'https://sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4', source: 'Sketchfab: Mox3DModels (CC BY 4.0)', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: '3D model', level: 'Intro', why: 'Detailed outside view of the heart, great vessels, and coronary arteries. Embedded on the site.', access: 'Free', featured: '' },
-    { title: 'GetBodySmart: Circulatory System', url: 'https://www.getbodysmart.com/circulatory-system', source: 'GetBodySmart', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: 'Interactive', level: 'Intro', why: 'Illustrated tutorials and quizzes on heart anatomy, valves, and vessels.', access: 'Free', featured: '' },
-    { title: 'OpenStax Anatomy & Physiology 2e, Ch. 20: The Cardiovascular System: Blood Vessels and Circulation', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/20-introduction', source: 'OpenStax (Rice University)', topic: 'Blood vessels & circulation', subtopic: '', format: 'Textbook chapter', level: 'Deeper', why: 'How arteries, veins, and capillaries are built, how blood pressure works, and the major circulation routes.', access: 'Free', featured: 'Yes' },
-    { title: 'Innerbody: The Heart: Anatomy and 3D Illustrations', url: 'https://www.innerbody.com/image/card01.html', source: 'Innerbody Research', topic: 'The heart: structure & function', subtopic: 'Chambers and valves', format: 'Diagram', level: 'Intro', why: 'Labeled interactive illustrations of the heart’s structures. Useful for labeling diagrams.', access: 'Free', featured: '' },
-    { title: 'MedlinePlus: Heart Diseases', url: 'https://medlineplus.gov/heartdiseases.html', source: 'National Library of Medicine', topic: 'Cardiovascular disease', subtopic: '', format: 'Article', level: 'Intro', why: 'Plain-language overviews of heart conditions, tests, and treatments, with links to trusted organizations.', access: 'Free', featured: 'Yes' },
-    { title: 'CDC: Heart Disease Facts', url: 'https://www.cdc.gov/heart-disease/data-research/facts-stats/index.html', source: 'Centers for Disease Control and Prevention', topic: 'Public health & equity', subtopic: 'Who gets heart disease and why', format: 'Data', level: 'Intro', why: 'National statistics on heart disease deaths and risk factors by age, race and ethnicity, and sex.', access: 'Free', featured: 'Yes' },
-    { title: 'CDC PLACES: Local Data for Better Health', url: 'https://www.cdc.gov/places/index.html', source: 'Centers for Disease Control and Prevention', topic: 'Public health & equity', subtopic: 'Neighborhoods and food access', format: 'Data', level: 'Deeper', why: 'Local estimates of high blood pressure, high cholesterol, and heart disease by county, city, and census tract.', access: 'Free', featured: '' },
-    { title: 'WHO: Cardiovascular Diseases (fact sheet)', url: 'https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)', source: 'World Health Organization', topic: 'Public health & equity', subtopic: 'Global heart health', format: 'Data', level: 'Intro', why: 'Global key facts on deaths, risk factors, and prevention.', access: 'Free', featured: '' },
-    { title: 'AHA Heart and Stroke Statistics', url: 'https://www.heart.org/en/about-us/heart-and-stroke-association-statistics', source: 'American Heart Association', topic: 'Public health & equity', subtopic: 'Who gets heart disease and why', format: 'Data', level: 'Deeper', why: 'Summaries of the AHA’s annual statistical update, the standard source for U.S. cardiovascular numbers.', access: 'Free', featured: '' },
+    { title: 'How the Heart Works', url: 'https://www.nhlbi.nih.gov/health/heart', source: 'National Heart, Lung, and Blood Institute (NIH)', topic: 'How the heart & lungs work', subtopic: 'The heart', format: 'Article', level: 'Intro', why: 'A clear explainer on how the heart pumps blood, with pictures. A good first stop.', access: 'Free', featured: 'Yes' },
+    { title: 'Your Heart & Circulatory System', url: 'https://kidshealth.org/en/teens/heart.html', source: 'Nemours TeensHealth', topic: 'How the heart & lungs work', subtopic: 'The heart', format: 'Article', level: 'Intro', why: 'Written for teens. Follows blood through the heart and body in plain words.', access: 'Free', featured: '' },
+    { title: 'Heart: Anatomy & Function', url: 'https://my.clevelandclinic.org/health/body/21704-heart', source: 'Cleveland Clinic', topic: 'How the heart & lungs work', subtopic: 'The heart', format: 'Article', level: 'Intro', why: 'Short sections on the heart’s parts, what each one does, and common questions.', access: 'Free', featured: '' },
+    { title: 'AnatomyVista Heart Explorer', url: 'https://anatomyvista.com/explore/heart', source: 'AnatomyVista', topic: 'How the heart & lungs work', subtopic: 'The heart', format: '3D model', level: 'Intro', why: 'Turn the heart around and slice it open to see the chambers and valves inside.', access: 'Free', featured: '' },
+    { title: 'Anatomical Heart (3D model)', url: 'https://sketchfab.com/models/53417f59a9cb4f0687575b274a04a0a4', source: 'Sketchfab: Mox3DModels (CC BY 4.0)', topic: 'How the heart & lungs work', subtopic: 'The heart', format: '3D model', level: 'Intro', why: 'Detailed outside view of the heart and its big blood vessels. Shown on this site.', access: 'Free', featured: '' },
+    { title: 'Innerbody: The Heart', url: 'https://www.innerbody.com/image/card01.html', source: 'Innerbody Research', topic: 'How the heart & lungs work', subtopic: 'The heart', format: 'Diagram', level: 'Intro', why: 'Labeled pictures of the heart’s parts. Handy if you want a diagram for your paper.', access: 'Free', featured: '' },
+    { title: 'GetBodySmart: Circulatory System', url: 'https://www.getbodysmart.com/circulatory-system', source: 'GetBodySmart', topic: 'How the heart & lungs work', subtopic: 'The heart', format: 'Interactive', level: 'Intro', why: 'Picture tutorials and quick quizzes on the heart and blood vessels.', access: 'Free', featured: '' },
+    { title: 'OpenStax Anatomy & Physiology, Ch. 19: The Heart', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/19-introduction', source: 'OpenStax (Rice University)', topic: 'How the heart & lungs work', subtopic: 'The heart', format: 'Textbook chapter', level: 'Deeper', why: 'A free college textbook chapter. Use it when you need more detail than the articles give.', access: 'Free', featured: '' },
+    { title: 'OpenStax Anatomy & Physiology, Ch. 20: Blood Vessels and Circulation', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/20-introduction', source: 'OpenStax (Rice University)', topic: 'How the heart & lungs work', subtopic: 'Blood vessels & blood flow', format: 'Textbook chapter', level: 'Deeper', why: 'How arteries, veins, and capillaries work, and where blood pressure comes from.', access: 'Free', featured: '' },
+    { title: 'How the Lungs Work', url: 'https://www.nhlbi.nih.gov/health/lungs', source: 'National Heart, Lung, and Blood Institute (NIH)', topic: 'How the heart & lungs work', subtopic: 'The lungs & breathing', format: 'Article', level: 'Intro', why: 'A clear explainer on breathing in, breathing out, and how oxygen gets into your blood.', access: 'Free', featured: 'Yes' },
+    { title: 'Your Lungs & Respiratory System', url: 'https://kidshealth.org/en/teens/lungs.html', source: 'Nemours TeensHealth', topic: 'How the heart & lungs work', subtopic: 'The lungs & breathing', format: 'Article', level: 'Intro', why: 'Written for teens. How the lungs, airways, and diaphragm work together.', access: 'Free', featured: '' },
+    { title: 'How Lungs Work', url: 'https://www.lung.org/lung-health-diseases/how-lungs-work', source: 'American Lung Association', topic: 'How the heart & lungs work', subtopic: 'The lungs & breathing', format: 'Article', level: 'Intro', why: 'Short pages on each part of the breathing system, from your nose to the tiny air sacs.', access: 'Free', featured: '' },
+    { title: 'Respiratory System', url: 'https://my.clevelandclinic.org/health/body/21205-respiratory-system', source: 'Cleveland Clinic', topic: 'How the heart & lungs work', subtopic: 'The lungs & breathing', format: 'Article', level: 'Intro', why: 'The parts of the respiratory system and what each one does.', access: 'Free', featured: '' },
+    { title: 'OpenStax Anatomy & Physiology, 22.3: The Process of Breathing', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/22-3-the-process-of-breathing', source: 'OpenStax (Rice University)', topic: 'How the heart & lungs work', subtopic: 'The lungs & breathing', format: 'Textbook chapter', level: 'Deeper', why: 'Free textbook section on how breathing works, including normal breathing rates and lung volumes.', access: 'Free', featured: '' },
+    { title: 'Pulse: What It Is and How To Take It', url: 'https://my.clevelandclinic.org/health/articles/23918-how-to-take-your-pulse', source: 'Cleveland Clinic', topic: 'Heart rate', subtopic: 'How to measure it', format: 'Article', level: 'Intro', why: 'Step by step: find a pulse at the wrist or neck and count it. Use this when you write your Materials & Methods.', access: 'Free', featured: 'Yes' },
+    { title: 'All About Heart Rate (Pulse)', url: 'https://www.heart.org/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/all-about-heart-rate-pulse', source: 'American Heart Association', topic: 'Heart rate', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'What heart rate is, what’s normal at rest, and what can make it go up or down.', access: 'Free', featured: 'Yes' },
+    { title: 'Pulse', url: 'https://medlineplus.gov/ency/article/003399.htm', source: 'MedlinePlus (National Library of Medicine)', topic: 'Heart rate', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'Normal pulse ranges by age, and how to count beats per minute.', access: 'Free', featured: '' },
+    { title: 'Heart Rate: What’s Normal and How To Check It', url: 'https://www.bhf.org.uk/informationsupport/how-a-healthy-heart-works/your-heart-rate', source: 'British Heart Foundation', topic: 'Heart rate', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'A short guide to resting heart rate and the everyday things that change it.', access: 'Free', featured: '' },
+    { title: 'Target Heart Rates Chart', url: 'https://www.heart.org/en/healthy-living/fitness/fitness-basics/target-heart-rates', source: 'American Heart Association', topic: 'Heart rate', subtopic: 'What changes it', format: 'Data', level: 'Intro', why: 'A chart of heart rates during exercise by age. Useful for comparing your own results.', access: 'Free', featured: '' },
+    { title: 'A Day in the Life of Your Heart', url: 'https://www.sciencebuddies.org/science-fair-projects/project_ideas/HumBio_p014.shtml', source: 'Science Buddies', topic: 'Heart rate', subtopic: 'What changes it', format: 'Experiment idea', level: 'Intro', why: 'A ready-made experiment: measure your pulse during different activities. Shows how to set up the steps and data table.', access: 'Free', featured: '' },
+    { title: 'Accuracy of Vital Signs Measurements by a Smartwatch and a Portable Health Device', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7055753/', source: 'JMIR mHealth and uHealth (2020)', topic: 'Heart rate', subtopic: 'How to measure it', format: 'Study', level: 'Deeper', why: 'Tested whether a smartwatch measures heart rate as well as medical equipment. Read this if you plan to use a watch or phone.', access: 'Free', featured: '' },
+    { title: 'Understanding Blood Pressure Readings', url: 'https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings', source: 'American Heart Association', topic: 'Blood pressure', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'What the top and bottom numbers mean, and a chart of normal and high readings.', access: 'Free', featured: 'Yes' },
+    { title: 'Blood Pressure Measurement', url: 'https://medlineplus.gov/ency/article/007490.htm', source: 'MedlinePlus (National Library of Medicine)', topic: 'Blood pressure', subtopic: 'How to measure it', format: 'Article', level: 'Intro', why: 'How a blood pressure cuff works and how to get a good reading. Use this for your Materials & Methods.', access: 'Free', featured: 'Yes' },
+    { title: 'Children Can Have High Blood Pressure, Too', url: 'https://www.heart.org/en/news/2023/04/13/children-can-have-high-blood-pressure-too-heres-what-to-know', source: 'American Heart Association News', topic: 'Blood pressure', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'What normal blood pressure looks like for kids and teens, which is different from adults.', access: 'Free', featured: '' },
+    { title: 'High Blood Pressure', url: 'https://www.nhlbi.nih.gov/health/high-blood-pressure', source: 'National Heart, Lung, and Blood Institute (NIH)', topic: 'Blood pressure', subtopic: 'What changes it', format: 'Article', level: 'Intro', why: 'What raises blood pressure over time, including age, diet, and activity.', access: 'Free', featured: '' },
+    { title: 'High Blood Pressure (for teens)', url: 'https://kidshealth.org/en/teens/hypertension.html', source: 'Nemours TeensHealth', topic: 'Blood pressure', subtopic: 'What changes it', format: 'Article', level: 'Intro', why: 'Written for teens. What blood pressure is and what makes it go up.', access: 'Free', featured: '' },
+    { title: 'Vital Signs: How To Check Your Vitals at Home', url: 'https://my.clevelandclinic.org/health/articles/10881-vital-signs', source: 'Cleveland Clinic', topic: 'Breathing rate', subtopic: 'How to measure it', format: 'Article', level: 'Intro', why: 'How to count breaths per minute (and take pulse and blood pressure). Use this for your Materials & Methods.', access: 'Free', featured: 'Yes' },
+    { title: 'Vital Signs (Body Temperature, Pulse Rate, Respiration Rate, Blood Pressure)', url: 'https://www.hopkinsmedicine.org/health/conditions-and-diseases/vital-signs-body-temperature-pulse-rate-respiration-rate-blood-pressure', source: 'Johns Hopkins Medicine', topic: 'Breathing rate', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'Normal ranges for breathing rate, heart rate, and blood pressure, all in one place.', access: 'Free', featured: 'Yes' },
+    { title: 'Vital Signs', url: 'https://medlineplus.gov/ency/article/002341.htm', source: 'MedlinePlus (National Library of Medicine)', topic: 'Breathing rate', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'A short overview of the body’s basic measurements, including breathing rate.', access: 'Free', featured: '' },
+    { title: 'Tachypnea (Fast Breathing)', url: 'https://my.clevelandclinic.org/health/symptoms/24124-tachypnea', source: 'Cleveland Clinic', topic: 'Breathing rate', subtopic: 'What changes it', format: 'Article', level: 'Intro', why: 'Why people breathe faster than normal, including exercise, heat, and anxiety.', access: 'Free', featured: '' },
+    { title: 'Lung Capacity and Aging', url: 'https://www.lung.org/lung-health-diseases/how-lungs-work/lung-capacity-and-aging', source: 'American Lung Association', topic: 'Lung capacity', subtopic: 'What changes it', format: 'Article', level: 'Intro', why: 'How much air the lungs hold, and how that changes as people get older.', access: 'Free', featured: 'Yes' },
+    { title: 'Lung Capacity and Age', url: 'https://www.sciencebuddies.org/science-fair-projects/project-ideas/HumBio_p003/human-biology-health/lung-capacity-and-age', source: 'Science Buddies', topic: 'Lung capacity', subtopic: 'How to measure it', format: 'Experiment idea', level: 'Intro', why: 'A ready-made experiment comparing lung capacity across ages, with a simple way to measure it.', access: 'Free', featured: 'Yes' },
+    { title: 'Breath of Life: Does Exercise Increase Vital Capacity?', url: 'https://www.sciencebuddies.org/science-fair-projects/project_ideas/HumBio_p009.shtml', source: 'Science Buddies', topic: 'Lung capacity', subtopic: 'How to measure it', format: 'Experiment idea', level: 'Deeper', why: 'An experiment on whether regular exercise increases how much air you can breathe out.', access: 'Free', featured: '' },
+    { title: 'Spirometry', url: 'https://my.clevelandclinic.org/health/diagnostics/17833-spirometry', source: 'Cleveland Clinic', topic: 'Lung capacity', subtopic: 'How to measure it', format: 'Article', level: 'Intro', why: 'How doctors measure how much air you can blow out, and how fast.', access: 'Free', featured: '' },
+    { title: 'Peak Flow Meter', url: 'https://my.clevelandclinic.org/health/treatments/peak-flow-meter', source: 'Cleveland Clinic', topic: 'Lung capacity', subtopic: 'How to measure it', format: 'Article', level: 'Intro', why: 'A simple handheld tool that measures how hard you can blow air out.', access: 'Free', featured: '' },
+    { title: 'Pulmonary Function Tests', url: 'https://medlineplus.gov/ency/article/003853.htm', source: 'MedlinePlus (National Library of Medicine)', topic: 'Lung capacity', subtopic: 'What it is', format: 'Article', level: 'Intro', why: 'The tests that measure lung size and airflow, and what the results mean.', access: 'Free', featured: '' },
+    { title: 'Handgrip Strength Is Associated with Improved Spirometry in Adolescents', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5894972/', source: 'PLOS ONE (2018)', topic: 'Lung capacity', subtopic: 'What changes it', format: 'Study', level: 'Deeper', why: 'A study of about 1,800 15-year-olds. Stronger teens had bigger lung measurements, and boys and girls differed.', access: 'Free', featured: '' },
+    { title: 'Association between Cardiorespiratory Fitness and Lung Health from Young Adulthood to Middle Age', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5439017/', source: 'American Journal of Respiratory and Critical Care Medicine (2017)', topic: 'Lung capacity', subtopic: 'What changes it', format: 'Study', level: 'Deeper', why: 'Followed young adults for about 20 years. People who stayed fit kept better lung function.', access: 'Free', featured: '' },
+    { title: 'Physical Activity for Children and Teens', url: 'https://www.cdc.gov/physical-activity-basics/guidelines/children.html', source: 'Centers for Disease Control and Prevention', topic: 'Exercise & yoga', subtopic: 'Cardio exercise', format: 'Article', level: 'Intro', why: 'How much exercise teens need and what counts as moderate and hard activity.', access: 'Free', featured: 'Yes' },
+    { title: 'Walking for Hypertension', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8128358/', source: 'Cochrane Database of Systematic Reviews (2021)', topic: 'Exercise & yoga', subtopic: 'Cardio exercise', format: 'Study', level: 'Deeper', why: 'Combines results from many studies on walking and blood pressure. Has a plain-language summary near the top.', access: 'Free', featured: '' },
+    { title: 'Breathing Exercises', url: 'https://www.lung.org/lung-health-diseases/wellness/breathing-exercises', source: 'American Lung Association', topic: 'Exercise & yoga', subtopic: 'Yoga & breathing exercises', format: 'Article', level: 'Intro', why: 'Two simple breathing exercises with steps. A starting point for “best respiratory exercises.”', access: 'Free', featured: 'Yes' },
+    { title: 'Yoga (for teens)', url: 'https://kidshealth.org/en/teens/yoga.html', source: 'Nemours TeensHealth', topic: 'Exercise & yoga', subtopic: 'Yoga & breathing exercises', format: 'Article', level: 'Intro', why: 'Written for teens. What yoga is and how it affects the body.', access: 'Free', featured: '' },
+    { title: 'Yoga: Effectiveness and Safety', url: 'https://www.nccih.nih.gov/health/yoga-effectiveness-and-safety', source: 'National Center for Complementary and Integrative Health (NIH)', topic: 'Exercise & yoga', subtopic: 'Yoga & breathing exercises', format: 'Article', level: 'Intro', why: 'What research has found about yoga, including stress and blood pressure.', access: 'Free', featured: '' },
+    { title: 'Effect of Breathing Exercises on Blood Pressure and Heart Rate', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10765252/', source: 'International Journal of Cardiology: Cardiovascular Risk and Prevention (2024)', topic: 'Exercise & yoga', subtopic: 'Yoga & breathing exercises', format: 'Study', level: 'Deeper', why: 'Combines many studies: slow breathing exercises lowered blood pressure and heart rate.', access: 'Free', featured: '' },
+    { title: 'Resting Heart Rate Variability after Yogic Training and Swimming', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4479905/', source: 'International Journal of Yoga (2015)', topic: 'Exercise & yoga', subtopic: 'Yoga & breathing exercises', format: 'Study', level: 'Deeper', why: 'Compared a yoga group with a swimming group. A good model for an experiment with two groups.', access: 'Free', featured: '' },
+    { title: 'Music and Health: What You Need To Know', url: 'https://www.nccih.nih.gov/health/music-and-health-what-you-need-to-know', source: 'National Center for Complementary and Integrative Health (NIH)', topic: 'Music & movies', subtopic: 'Music', format: 'Article', level: 'Intro', why: 'What research says about music and the body, including heart rate, blood pressure, and stress.', access: 'Free', featured: 'Yes' },
+    { title: 'The Effect of Classical Music on Heart Rate, Blood Pressure, and Mood', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9417331/', source: 'Cureus (2022)', topic: 'Music & movies', subtopic: 'Music', format: 'Study', level: 'Intro', why: 'One of the easiest studies here to read. Measured heart rate and blood pressure before and after classical music.', access: 'Free', featured: 'Yes' },
+    { title: 'Cardiovascular, Cerebrovascular, and Respiratory Changes Induced by Different Types of Music', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC1860846/', source: 'Heart (2006)', topic: 'Music & movies', subtopic: 'Music', format: 'Study', level: 'Deeper', why: 'A well-known study: fast music raised breathing and heart rate, and slow music and pauses calmed them.', access: 'Free', featured: '' },
+    { title: 'Relaxing Music Reduces Blood Pressure and Heart Rate among Pre-hypertensive Young Adults', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8029898/', source: 'Journal of Clinical Hypertension (2021)', topic: 'Music & movies', subtopic: 'Music', format: 'Study', level: 'Deeper', why: 'Young adults who listened to relaxing music had lower blood pressure and heart rate than a group that didn’t.', access: 'Free', featured: '' },
+    { title: 'Effect of Music Tempo on Exercise Performance and Heart Rate among Young Adults', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5435671/', source: 'International Journal of Physiology, Pathophysiology and Pharmacology (2017)', topic: 'Music & movies', subtopic: 'Music', format: 'Study', level: 'Deeper', why: 'Compared fast music, slow music, and no music during exercise.', access: 'Free', featured: '' },
+    { title: 'Predicting Individuals’ Experienced Fear from Physiological Responses to a Fear-Inducing Stimulus', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7778447/', source: 'Advances in Cognitive Psychology (2020)', topic: 'Music & movies', subtopic: 'Movies', format: 'Study', level: 'Deeper', why: 'About 230 people watched a scary film clip and a calm one. Heart rate and breathing rate both went up during the scary clip.', access: 'Free', featured: 'Yes' },
+    { title: 'How Stress Affects Your Body', url: 'https://www.apa.org/topics/stress/body', source: 'American Psychological Association', topic: 'Emotions & stress', subtopic: 'Stress', format: 'Article', level: 'Intro', why: 'How stress changes heart rate, blood pressure, and breathing.', access: 'Free', featured: 'Yes' },
+    { title: 'Understanding the Stress Response', url: 'https://www.health.harvard.edu/staying-healthy/understanding-the-stress-response', source: 'Harvard Health Publishing', topic: 'Emotions & stress', subtopic: 'Stress', format: 'Article', level: 'Intro', why: 'What happens in the body during “fight or flight,” step by step.', access: 'Free', featured: '' },
+    { title: 'Stress (for teens)', url: 'https://kidshealth.org/en/teens/stress.html', source: 'Nemours TeensHealth', topic: 'Emotions & stress', subtopic: 'Stress', format: 'Article', level: 'Intro', why: 'Written for teens. What stress feels like in the body and why.', access: 'Free', featured: '' },
+    { title: 'Stress', url: 'https://medlineplus.gov/stress.html', source: 'MedlinePlus (National Library of Medicine)', topic: 'Emotions & stress', subtopic: 'Stress', format: 'Article', level: 'Intro', why: 'Trusted links on stress and health in one place.', access: 'Free', featured: '' },
+    { title: 'Stress Management for Different Stressors', url: 'https://www.sciencebuddies.org/science-fair-projects/project-ideas/HumBio_p074/human-biology-health/Stress-Management-for-Different-Stressors', source: 'Science Buddies', topic: 'Emotions & stress', subtopic: 'Stress', format: 'Experiment idea', level: 'Intro', why: 'A ready-made experiment: raise heart rate with a stressor, then test which calming method brings it down fastest.', access: 'Free', featured: '' },
+    { title: 'Reliability of Physiological Responses Induced by Basic Emotions', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6883530/', source: 'Journal of Physiological Anthropology (2019)', topic: 'Emotions & stress', subtopic: 'Emotions', format: 'Study', level: 'Deeper', why: 'College students watched film clips meant to cause happiness, sadness, fear, and other emotions while their heart rate was measured.', access: 'Free', featured: 'Yes' },
+    { title: 'Aromatherapy: What You Need To Know', url: 'https://www.nccih.nih.gov/health/aromatherapy', source: 'National Center for Complementary and Integrative Health (NIH)', topic: 'Scents & temperature', subtopic: 'Scents', format: 'Article', level: 'Intro', why: 'What scents like lavender can and can’t do, according to research.', access: 'Free', featured: 'Yes' },
+    { title: 'Evaluation of Aromatherapy with Lavender Oil on Academic Stress', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6431726/', source: 'Contemporary Clinical Trials Communications (2019)', topic: 'Scents & temperature', subtopic: 'Scents', format: 'Study', level: 'Deeper', why: 'Students smelled lavender or a fake scent during exams while their heart rate and blood pressure were measured. A good model for a scent experiment.', access: 'Free', featured: '' },
+    { title: 'Weather and Your Heart', url: 'https://www.bhf.org.uk/informationsupport/support/practical-support/weather-and-your-heart', source: 'British Heart Foundation', topic: 'Scents & temperature', subtopic: 'Temperature', format: 'Article', level: 'Intro', why: 'How hot and cold weather make the heart work harder.', access: 'Free', featured: 'Yes' },
+    { title: 'Heart Health and Summer Heat', url: 'https://www.massgeneralbrigham.org/en/about/newsroom/articles/heart-health-and-summer-heat', source: 'Mass General Brigham', topic: 'Scents & temperature', subtopic: 'Temperature', format: 'Article', level: 'Intro', why: 'Why heat speeds up the heart and widens blood vessels.', access: 'Free', featured: '' },
+    { title: 'Heart Health and Aging', url: 'https://www.nia.nih.gov/health/heart-health/heart-health-and-aging', source: 'National Institute on Aging (NIH)', topic: 'Age, gender & body size', subtopic: 'Age', format: 'Article', level: 'Intro', why: 'How the heart and blood vessels change with age, including blood pressure.', access: 'Free', featured: 'Yes' },
+    { title: 'Women’s Heart Rate: What’s Normal and What Impacts It', url: 'https://my.clevelandclinic.org/health/articles/17644-women-and-heart-rate', source: 'Cleveland Clinic', topic: 'Age, gender & body size', subtopic: 'Gender', format: 'Article', level: 'Intro', why: 'Why women’s resting heart rates tend to be a little faster than men’s, partly because of heart size.', access: 'Free', featured: 'Yes' },
+    { title: 'Sex Matters: A Comprehensive Comparison of Female and Male Hearts', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC8980481/', source: 'American Journal of Physiology: Heart and Circulatory Physiology (2022)', topic: 'Age, gender & body size', subtopic: 'Gender', format: 'Study', level: 'Deeper', why: 'A review comparing female and male hearts: size, heart rate, and blood pressure.', access: 'Free', featured: '' },
+    { title: 'OpenStax Anatomy & Physiology, 20.2: Blood Flow, Blood Pressure, and Resistance', url: 'https://openstax.org/books/anatomy-and-physiology-2e/pages/20-2-blood-flow-blood-pressure-and-resistance', source: 'OpenStax (Rice University)', topic: 'Age, gender & body size', subtopic: 'Heart & blood vessel size', format: 'Textbook chapter', level: 'Deeper', why: 'How the width of blood vessels changes blood pressure and blood flow. Start here for heart size or vessel size questions.', access: 'Free', featured: '' },
+    { title: 'Cannabis and Heart Health', url: 'https://www.cdc.gov/cannabis/health-effects/heart-health.html', source: 'Centers for Disease Control and Prevention', topic: 'THC & other substances', subtopic: '', format: 'Article', level: 'Intro', why: 'How cannabis affects heart rate and blood pressure right after use and over time.', access: 'Free', featured: 'Yes' },
+    { title: 'Cannabis (Marijuana)', url: 'https://nida.nih.gov/research-topics/cannabis-marijuana', source: 'National Institute on Drug Abuse (NIH)', topic: 'THC & other substances', subtopic: '', format: 'Article', level: 'Intro', why: 'Facts and research on how cannabis affects the body and brain.', access: 'Free', featured: '' },
+    { title: 'Marijuana (for teens)', url: 'https://kidshealth.org/en/teens/marijuana.html', source: 'Nemours TeensHealth', topic: 'THC & other substances', subtopic: '', format: 'Article', level: 'Intro', why: 'Written for teens. What THC does in the body, including the heart.', access: 'Free', featured: '' },
+    { title: 'Marijuana and Lung Health', url: 'https://www.lung.org/quit-smoking/smoking-facts/health-effects/marijuana-and-lung-health', source: 'American Lung Association', topic: 'THC & other substances', subtopic: '', format: 'Article', level: 'Intro', why: 'How smoking cannabis affects the lungs and breathing.', access: 'Free', featured: '' },
+    { title: 'The Impact of Marijuana on the Cardiovascular System', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7355963/', source: 'Cureus (2020)', topic: 'THC & other substances', subtopic: '', format: 'Study', level: 'Deeper', why: 'A review of what studies have found about cannabis and the heart.', access: 'Free', featured: '' },
+    { title: 'MedlinePlus: Heart Diseases', url: 'https://medlineplus.gov/heartdiseases.html', source: 'MedlinePlus (National Library of Medicine)', topic: 'Heart health & disease', subtopic: '', format: 'Article', level: 'Intro', why: 'Plain-language overviews of heart conditions, tests, and treatments.', access: 'Free', featured: 'Yes' },
+    { title: 'CDC: Heart Disease Facts', url: 'https://www.cdc.gov/heart-disease/data-research/facts-stats/index.html', source: 'Centers for Disease Control and Prevention', topic: 'Heart health & disease', subtopic: '', format: 'Data', level: 'Intro', why: 'U.S. numbers on heart disease by age, race and ethnicity, and sex.', access: 'Free', featured: '' },
+    { title: 'WHO: Cardiovascular Diseases (fact sheet)', url: 'https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)', source: 'World Health Organization', topic: 'Heart health & disease', subtopic: '', format: 'Data', level: 'Intro', why: 'Key facts on heart disease around the world.', access: 'Free', featured: '' },
+    { title: 'AHA Heart and Stroke Statistics', url: 'https://www.heart.org/en/about-us/heart-and-stroke-association-statistics', source: 'American Heart Association', topic: 'Heart health & disease', subtopic: '', format: 'Data', level: 'Deeper', why: 'Summaries of the yearly U.S. heart and stroke numbers.', access: 'Free', featured: '' },
+    { title: 'CDC PLACES: Local Data for Better Health', url: 'https://www.cdc.gov/places/index.html', source: 'Centers for Disease Control and Prevention', topic: 'Heart health & disease', subtopic: '', format: 'Data', level: 'Deeper', why: 'High blood pressure and heart disease rates by county and city.', access: 'Free', featured: '' },
+
   ];
 
-  const FORMAT_ORDER = ['Article', 'Textbook chapter', 'Video', 'Interactive', '3D model', 'Diagram', 'Data'];
-  const FORMAT_PLURAL = { 'Article': 'Articles', 'Textbook chapter': 'Textbook chapters', 'Video': 'Videos', 'Interactive': 'Interactives', '3D model': '3D models', 'Diagram': 'Diagrams', 'Data': 'Data' };
-  const FORMAT_TAG = { 'Data': 'tag-data', 'Video': 'tag-visual', 'Interactive': 'tag-visual', '3D model': 'tag-visual', 'Diagram': 'tag-visual' };
+  const FORMAT_ORDER = ['Article', 'Experiment idea', 'Study', 'Textbook chapter', 'Video', 'Interactive', '3D model', 'Diagram', 'Data'];
+  const FORMAT_PLURAL = { 'Article': 'Articles', 'Experiment idea': 'Experiment ideas', 'Study': 'Studies', 'Textbook chapter': 'Textbook chapters', 'Video': 'Videos', 'Interactive': 'Interactives', '3D model': '3D models', 'Diagram': 'Diagrams', 'Data': 'Data' };
+  const FORMAT_TAG = { 'Study': 'tag-peer', 'Experiment idea': 'tag-exp', 'Data': 'tag-data', 'Video': 'tag-visual', 'Interactive': 'tag-visual', '3D model': 'tag-visual', 'Diagram': 'tag-visual' };
   const pubmed = q => 'https://pubmed.ncbi.nlm.nih.gov/?term=' + encodeURIComponent(q).replace(/%20/g, '+') + '&filter=simsearch2.ffrft';
 
   /* ---------------- Loading the sheet ---------------- */
@@ -1384,7 +1546,7 @@
   // All topics: the defined ones first, then any new topic names that appear in the sheet.
   function allTopics() {
     const extra = [...new Set(RESOURCES.map(r => r.topic))].filter(n => !TOPICS.some(t => t.name === n)).sort()
-      .map(n => ({ name: n, slug: slug(n), blurb: '', subs: [], questions: [], searches: [] }));
+      .map(n => ({ name: n, slug: slug(n), group: 'more', blurb: '', subs: [], searches: [] }));
     return [...TOPICS, ...extra];
   }
   function toolItems(topicName) {
@@ -1396,6 +1558,20 @@
   }
   const itemsFor = topicName => [...RESOURCES.filter(r => r.topic === topicName), ...toolItems(topicName)];
   const byRank = (a, b) => (b.featured - a.featured) || (a.level === 'Deeper') - (b.level === 'Deeper') || a.title.localeCompare(b.title);
+
+  /* The teacher's hypothesis form: If IV, then DV, because REASON. Colors match her slides. */
+  function hypothesisCard(ex) {
+    return `<div class="hyp-card">
+      <p class="hyp-label">Example PBAT question</p>
+      <p><b>Testable question:</b> ${esc(ex.q)}</p>
+      <p class="hyp-line"><b>Hypothesis:</b> <span class="kw">If</span> <mark class="hl-iv">${esc(ex.iv)}</mark>, <span class="kw">then</span> <mark class="hl-dv">${esc(ex.dv)}</mark>, <span class="kw">because</span> <mark class="hl-why">${esc(ex.because)}</mark>.</p>
+      <ul class="hyp-key">
+        <li><span class="var-chip var-iv">IV</span> Independent variable: what you change</li>
+        <li><span class="var-chip var-dv">DV</span> Dependent variable: what you measure</li>
+        <li><span class="var-chip var-why">BECAUSE</span> Your reason. The resources on this page help you back it up.</li>
+      </ul>
+    </div>`;
+  }
 
   function card(r, { showTopic = false } = {}) {
     const ext = !r.onSite;
@@ -1416,23 +1592,36 @@
       ${r.why ? `<p class="why">${esc(r.why)}</p>` : ''}
       ${where}
       ${ext ? `<div class="res-actions"><button type="button" class="add-src" data-cite-src="${esc(r.url)}">Cite this</button>
-        <button type="button" class="add-src${msHas(r.url) ? ' added' : ''}" data-add-src="${esc(r.url)}">${msHas(r.url) ? '✓ In My sources' : '+ My sources'}</button></div>` : ''}
+        <button type="button" class="add-src${msHas(r.url) ? ' added' : ''}" data-add-src="${esc(r.url)}">${msHas(r.url) ? '✓ In My References' : '+ My References'}</button></div>` : ''}
     </article>`;
   }
 
   /* ---------------- Home: topics, tools, search ---------------- */
   let libFormat = 'all';
   function renderHome() {
-    $('#topic-grid').innerHTML = allTopics().map(t => {
+    const topicCard = t => {
       const items = itemsFor(t.name);
       if (!items.length) return '';
-      const subs = [...new Set(items.map(i => i.subtopic).filter(Boolean))];
+      const present = new Set(items.map(i => i.subtopic).filter(Boolean));
+      const subs = [...t.subs.filter(x => present.has(x)), ...[...present].filter(x => !t.subs.includes(x))];
       return `<a class="card topic-card" href="#topic/${t.slug}">
         <h3>${esc(t.name)}</h3>
         ${t.blurb ? `<p>${esc(t.blurb)}</p>` : '<p></p>'}
         ${subs.length ? `<span class="subs">Includes ${esc(subs.slice(0, 3).join(' · '))}${subs.length > 3 ? ' · more' : ''}</span>` : ''}
         <span class="count">${items.length} resource${items.length === 1 ? '' : 's'} →</span>
       </a>`;
+    };
+    const topics = allTopics();
+    $('#topic-groups').innerHTML = TOPIC_GROUPS.map(g => {
+      const cards = topics.filter(t => (t.group || 'more') === g.id).map(topicCard).join('');
+      if (!cards) return '';
+      return `<section class="topic-group${g.role ? ' role-' + g.role : ''}" aria-labelledby="tg-${g.id}">
+        <div class="topic-group-head">
+          <h2 class="section-title" id="tg-${g.id}">${g.role ? `<span class="var-chip var-${g.role}">${g.role.toUpperCase()}</span>` : ''}${esc(g.title)}</h2>
+          ${g.blurb ? `<p class="muted">${esc(g.blurb)}</p>` : ''}
+        </div>
+        <div class="grid grid-3">${cards}</div>
+      </section>`;
     }).join('');
     $('#tool-grid').innerHTML = toolItems().map(r => card(r)).join('');
 
@@ -1528,22 +1717,17 @@
             <button type="button" class="chip-btn" data-level="Deeper" aria-pressed="false">Deeper</button></div>` : ''}
         </div>` : ''}
       </div>
+      ${t.example ? hypothesisCard(t.example) : ''}
       ${items.length ? groups.map(([name, list]) => `
         <section class="sub-section" data-sub="${esc(name)}">
           <h3>${name ? esc(name) : 'Overview'}</h3>
           <div class="grid grid-3">${list.map(r => `<div data-level="${r.level}">${card(r)}</div>`).join('')}</div>
         </section>`).join('')
         : '<div class="card"><p class="empty-note">No resources here yet. Check back soon, or <a href="#/">browse other topics</a>.</p></div>'}
-      ${t.questions.length ? `
-      <div class="box box-tip">
-        <p class="box-label"><svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg> Questions this topic could lead to</p>
-        <ul>${t.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul>
-        ${SHOW_PROJECT_TOOLS ? `<p style="margin-top:.6rem"><a href="#ask/${t.slug}">Map this topic in Project tools →</a></p>` : ''}
-      </div>` : ''}
       ${t.searches.length ? `
       <div class="card">
-        <h3>Looking for research studies?</h3>
-        <p style="margin-top:.35rem">These PubMed searches (free full text) show the kind of research this topic leads to. For your own searches, use <a href="#find">Find more sources</a>.</p>
+        <h3>Want more studies?</h3>
+        <p style="margin-top:.35rem">These searches open PubMed, a free library of real science studies. For your own search, use <a href="#find">Search for studies</a>.</p>
         <div class="search-links" style="margin-top:.75rem">${t.searches.map(q =>
           `<a href="${pubmed(q)}" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>${esc(q)}</a>`).join('')}</div>
       </div>` : ''}`;
@@ -1565,16 +1749,16 @@
 
   /* ---------------- Databases page ---------------- */
   const DATABASES = [
-    { name: 'MedlinePlus', pub: 'National Library of Medicine', tag: ['Background', 'tag-bg'], url: 'https://medlineplus.gov/',
-      desc: 'Plain-language health information. Use it to understand a condition or treatment before reading studies about it.' },
-    { name: 'PubMed', pub: 'National Library of Medicine', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://pubmed.ncbi.nlm.nih.gov/',
-      desc: 'The main search engine for biomedical research. Click <b>Free full text</b> in the left sidebar to see only articles you can read.' },
-    { name: 'PubMed Central (PMC)', pub: 'National Library of Medicine', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://pmc.ncbi.nlm.nih.gov/',
-      desc: 'A free archive of complete journal articles. Every result can be read in full, including its methods, data, and figures.' },
-    { name: 'AHA Journals', pub: 'American Heart Association', tag: ['Peer-reviewed', 'tag-peer'], url: 'https://www.ahajournals.org/',
-      desc: 'Leading cardiology journals such as <i>Circulation</i> and <i>Hypertension</i>, plus scientific statements. Many articles are free.' },
+    { name: 'MedlinePlus', pub: 'National Library of Medicine', tag: ['Easy background', 'tag-bg'], url: 'https://medlineplus.gov/',
+      desc: 'Easy-to-read health information from the government. Use it to understand your topic before you read studies.' },
+    { name: 'PubMed', pub: 'National Library of Medicine', tag: ['Real studies', 'tag-peer'], url: 'https://pubmed.ncbi.nlm.nih.gov/',
+      desc: 'The main place to search for health and body studies. Click <b>Free full text</b> on the left to see only studies you can read for free.' },
+    { name: 'PubMed Central (PMC)', pub: 'National Library of Medicine', tag: ['Real studies', 'tag-peer'], url: 'https://pmc.ncbi.nlm.nih.gov/',
+      desc: 'A free library of whole studies. You can read every result all the way through, including the methods, data, and graphs.' },
+    { name: 'AHA Journals', pub: 'American Heart Association', tag: ['Real studies', 'tag-peer'], url: 'https://www.ahajournals.org/',
+      desc: 'Heart research from the American Heart Association’s journals. Many studies are free to read.' },
     { name: 'Google Scholar', pub: 'Google', tag: ['Mixed', ''], url: 'https://scholar.google.com/',
-      desc: 'The broadest search. Results mix peer-reviewed studies with other material, and some are paywalled, so check each one.' },
+      desc: 'Searches the most places. Results mix real studies with other things, and some cost money to read, so check each one.' },
   ];
   $('#db-grid').innerHTML = DATABASES.map(d => `
     <article class="card card-tight db-card">
@@ -1599,7 +1783,7 @@
       if (a.dataset.nav === NAV_FOR(name)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     const view = $(`.view[data-view="${name}"]`);
-    document.title = (name === 'home' ? '' : view.dataset.title + ' · ') + 'Cardiovascular Research Hub';
+    document.title = (name === 'home' ? '' : view.dataset.title + ' · ') + 'Cardio/Respiratory Research Hub';
     if (name === 'tool-3d-heart') loadEmbed();
     if (name === 'project') renderProject();
     if (name === 'my-sources') renderMySources();
@@ -1678,7 +1862,14 @@
     'arrhythmia': ['atrial fibrillation', 'irregular heartbeat'], 'irregular heartbeat': ['arrhythmia'],
     'atherosclerosis': ['arterial plaque', 'coronary artery disease'], 'plaque': ['atherosclerosis'],
     'cholesterol': ['LDL cholesterol', 'lipids'], 'blood clot': ['thrombosis'],
-    'heart rate': ['resting heart rate'], 'valve': ['heart valve disease'],
+    'heart rate': ['pulse', 'resting heart rate'], 'pulse': ['heart rate'], 'valve': ['heart valve disease'],
+    'breathing rate': ['respiratory rate'], 'respiratory rate': ['breathing rate'], 'breathing': ['respiration'],
+    'lung capacity': ['vital capacity', 'lung function'], 'vital capacity': ['lung capacity', 'lung function'],
+    'music': ['music listening', 'tempo'], 'movie': ['film'], 'film': ['movie'], 'horror': ['fear', 'scary film'],
+    'scent': ['aroma', 'aromatherapy', 'odor'], 'smell': ['aroma', 'odor'], 'lavender': ['aromatherapy'],
+    'temperature': ['heat', 'cold'], 'heat': ['hot environment'], 'emotion': ['mood', 'emotional arousal'],
+    'yoga': ['meditation', 'yoga breathing'], 'gender': ['sex differences'], 'age': ['aging'],
+    'thc': ['cannabis', 'marijuana'], 'marijuana': ['cannabis', 'THC'], 'cannabis': ['marijuana', 'THC'],
     'teenager': ['adolescents', 'youth'], 'teen': ['adolescents', 'youth'], 'adolescent': ['teenagers', 'youth'],
     'kid': ['children', 'pediatric'], 'child': ['pediatric', 'youth'], 'student': ['adolescents', 'young adults'],
     'athlete': ['sports', 'athletic training'], 'women': ['sex differences'], 'woman': ['sex differences'],
@@ -1743,7 +1934,7 @@
       const used = splitSyns(c.syns).map(x => x.toLowerCase());
       const sugg = suggestionsFor(c.term).filter(x => !used.includes(x.toLowerCase()));
       return `${i ? '<div class="sb-and-col" aria-hidden="true">AND</div>' : ''}<div class="sb-concept k${i + 1}" data-i="${i}">
-        <label for="sb-term-${i}">Key idea ${i + 1}${i === 2 ? ' (optional)' : ''}</label>
+        <label for="sb-term-${i}">Key word ${i + 1}${i === 2 ? ' (optional)' : ''}</label>
         <input type="text" id="sb-term-${i}" data-field="term" value="${esc(c.term)}" placeholder="${['sleep', 'blood pressure', 'teenagers'][i]}">
         <label for="sb-syns-${i}" class="sb-or">OR other words for it</label>
         <input type="text" id="sb-syns-${i}" data-field="syns" value="${esc(c.syns)}" placeholder="separated by commas">
@@ -1757,11 +1948,11 @@
   function renderSbVisual() {
     const groups = sb.concepts.map((c, i) => ({ i, terms: [...new Set([c.term.trim(), ...splitSyns(c.syns)].filter(Boolean))] })).filter(g => g.terms.length);
     $('#sb-visual').innerHTML = sb.edited
-      ? '<span class="empty">You edited the search text directly, so this picture is paused. Change a key idea to rebuild it.</span>'
+      ? '<span class="empty">You edited the search text directly, so this picture is paused. Change a key word to rebuild it.</span>'
       : groups.length
         ? groups.map((g, n) => `${n ? '<span class="and">AND</span>' : ''}<span class="grp k${g.i + 1}">${g.terms.map((t, j) =>
             `${j ? '<span class="op">OR</span>' : ''}<span class="term">${esc(t)}</span>`).join('')}</span>`).join('')
-        : '<span class="empty">Add a key idea above to see your search.</span>';
+        : '<span class="empty">Add a key word above to see your search.</span>';
   }
   function renderSpotted() {
     const used = sb.concepts.map(c => c.term.toLowerCase().trim());
@@ -1786,7 +1977,7 @@
     const b = e.target.closest('[data-spot]');
     if (!b) return;
     let slot = sb.concepts.findIndex(c => !c.term.trim());
-    if (slot < 0) { toast('All three key ideas are filled. Clear one to swap it out.'); return; }
+    if (slot < 0) { toast('All three key words are filled. Clear one to swap it out.'); return; }
     sb.concepts[slot].term = b.dataset.spot;
     sb.edited = false;
     renderConcepts(); renderSpotted(); refreshQuery();
@@ -1811,7 +2002,7 @@
   $('#sb-query').addEventListener('input', e => { sb.edited = true; sb.query = e.target.value; renderSbVisual(); saveSb(); });
   $$('[data-sb-go]').forEach(btn => btn.addEventListener('click', () => {
     const q = $('#sb-query').value.trim();
-    if (!q) { toast('Add at least one key idea first.'); $('#sb-term-0').focus(); return; }
+    if (!q) { toast('Add at least one key word first.'); $('#sb-term-0').focus(); return; }
     window.open(DBS[btn.dataset.sbGo].url(q), '_blank', 'noopener');
   }));
   $('#sb-copy').addEventListener('click', async () => {
@@ -1830,14 +2021,14 @@
      Stop, Investigate the source, Find better coverage, Trace claims to the original
      (Mike Caulfield's method, built on lateral reading). Students reach their own decision. */
   const KINDS = [
-    ['study', 'Research study', 'Original research in a journal. Strong evidence if it was peer-reviewed, but check who was studied (T).'],
-    ['review', 'Review article', 'Sums up many studies. Good for the big picture and for finding the original studies.'],
-    ['agency', 'Health agency or medical group', 'Like NIH, CDC, the American Heart Association, or WHO. Usually reliable for facts and statistics.'],
-    ['news', 'News or magazine article', 'Describes research for the public. Trace the claim back to the original study (T).'],
+    ['study', 'Research study', 'Scientists report their own experiment in a journal. Strong evidence, but check who was studied (T).'],
+    ['review', 'Review article', 'Sums up many studies. Good for the big picture, and it lists the studies it used.'],
+    ['agency', 'Health agency or medical group', 'Like NIH, CDC, the American Heart Association, or WHO. Usually reliable for facts and numbers.'],
+    ['news', 'News or magazine article', 'Explains research for the public. Trace it back to the study (T).'],
     ['edu', 'Textbook or educational site', 'Good for background. Check who wrote it (I).'],
-    ['commercial', 'Company or product site', 'It may want to sell you something. Investigate carefully (I) and find better coverage (F).'],
-    ['personal', 'Blog, social media, or video', 'Anyone can post. Only use it if you can confirm the claim elsewhere (F).'],
-    ['unsure', 'Not sure', 'That’s a signal to investigate the source carefully (I).'],
+    ['commercial', 'Company or product site', 'It may want to sell you something. Investigate who made it (I) and see what other sources say (F).'],
+    ['personal', 'Blog, social media, or video', 'Anyone can post. Only use it if trusted sources say the same thing (F).'],
+    ['unsure', 'Not sure', 'That’s a sign to look up who made it (I).'],
   ];
   const COVERAGE = [['agree', 'Yes, they agree'], ['mixed', 'Partly, or it’s debated'], ['disagree', 'No, they disagree'], ['none', 'Couldn’t find any']];
   const VERDICTS = [['use', 'Use it', 'v-good'], ['caution', 'Use with caution', 'v-mid'], ['skip', 'Don’t use it', 'v-low']];
@@ -1881,7 +2072,7 @@
     $('#eval-target-hint').innerHTML = !s
       ? (MS.sources.length
         ? 'Practice mode: nothing is saved. Pick one of your sources to keep your check with it.'
-        : 'Practice mode: nothing is saved. Save a source to <a href="#my-sources">My sources</a> to keep your check with it.')
+        : 'Practice mode: nothing is saved. Save a source to <a href="#my-sources">My References</a> to keep your check with it.')
       : isVetted(s)
         ? 'This one is from your teacher and librarian’s collection, so it has already been checked. You can still practice on it.'
         : 'Your answers save to this source automatically.';
@@ -1916,8 +2107,8 @@
   let citeStyle = 'APA';
   const F = id => $('#cite-' + id).value.trim();
   const EXAMPLE = {
-    type: 'journal', authors: 'Libby, Peter\nRidker, Paul M.\nMaseri, Attilio', title: 'Inflammation and atherosclerosis',
-    container: 'Circulation', year: '2002', volume: '105', issue: '9', pages: '1135-1143', date: '', link: '10.1161/hc0902.104353',
+    type: 'journal', authors: 'Bernardi, Luciano\nPorta, Cesare\nSleight, Peter', title: 'Cardiovascular, cerebrovascular, and respiratory changes induced by different types of music in musicians and non-musicians: The importance of silence',
+    container: 'Heart', year: '2006', volume: '92', issue: '4', pages: '445-452', date: '', link: '10.1136/hrt.2005.064600',
   };
 
   // Organization names can contain commas ("National Heart, Lung, and Blood Institute"), so don't
@@ -2023,12 +2214,12 @@
     $$('.journal-only').forEach(el => { el.hidden = isWeb; });
     $$('.web-only').forEach(el => { el.hidden = !isWeb; });
     $('#container-label').textContent = isWeb ? 'Website name' : 'Journal';
-    $('#cite-container').placeholder = isWeb ? 'Centers for Disease Control and Prevention' : 'Circulation';
+    $('#cite-container').placeholder = isWeb ? 'Centers for Disease Control and Prevention' : 'Heart';
     $('#title-hint').textContent = citeStyle === 'APA'
-      ? 'APA uses sentence case: capitalize only the first word, proper nouns, and the word after a colon.'
-      : 'MLA uses title case: capitalize the major words.';
+      ? 'In APA, only the first word, names, and the first word after a colon get capital letters.'
+      : 'In MLA, capitalize the important words in the title.';
     $('#cite-label').textContent = empty ? 'Example · APA 7' : 'Your citation · APA 7';
-    $('#cite-output').innerHTML = buildCitation(empty ? (citeStyle === 'MLA' ? { ...EXAMPLE, title: 'Inflammation and Atherosclerosis' } : EXAMPLE) : d);
+    $('#cite-output').innerHTML = buildCitation(empty ? (citeStyle === 'MLA' ? { ...EXAMPLE, title: 'Cardiovascular, Cerebrovascular, and Respiratory Changes Induced by Different Types of Music in Musicians and Non-musicians: The Importance of Silence' } : EXAMPLE) : d);
   }
   $('#cite-form').addEventListener('input', renderCitation);
   $('#cite-form').addEventListener('submit', e => e.preventDefault());
@@ -2150,7 +2341,7 @@
     const raw = $('#cite-lookup-q').value;
     const id = parseLookup(raw);
     if (!raw.trim()) { $('#cite-lookup-q').focus(); setLookupStatus('Paste a DOI or PubMed ID first.', 'bad'); return; }
-    if (!id) { setLookupStatus('That doesn\'t look like a DOI or PubMed ID. A DOI starts with <b>10.</b> and a PubMed ID is a number like <b>11877368</b>.', 'bad'); return; }
+    if (!id) { setLookupStatus('That doesn\'t look like a DOI or PubMed ID. A DOI starts with <b>10.</b> and a PubMed number looks like <b>16199412</b>.', 'bad'); return; }
     if (id.web) { setLookupStatus(`That link doesn't include a DOI, so it can't be looked up here. If it's a web page, set <b>Source type</b> to Web page and fill in the form, or try ${MYBIB}. If it's an article, look for its DOI on the page.`, 'bad'); return; }
 
     const btn = $('#cite-lookup-go');
@@ -2283,8 +2474,8 @@
   renderCitation();
 
   /* ---------------- My sources (annotated bibliography) ----------------
-     Saved in this browser only (localStorage). Students copy it into their Google Doc,
-     or move it between computers with a backup file. */
+     Saved in this browser only (localStorage), so students copy it into their Google Doc
+     before they leave. */
   const MS_KEY = 'cvhub-my-sources-v1';
   let MS = { style: 'APA', includeEval: false, sources: [] };
   try {
@@ -2321,7 +2512,7 @@
     $$('[data-add-src]').forEach(b => {
       const has = msHas(b.dataset.addSrc);
       b.classList.toggle('added', has);
-      b.textContent = has ? '✓ In My sources' : '+ My sources';
+      b.textContent = has ? '✓ In My References' : '+ My References';
     });
   }
   document.addEventListener('click', e => {
@@ -2333,7 +2524,7 @@
     // We know the title, site, and link. Students check the page for the author and date.
     const d = splitDate(r.date);
     addSource({ type: 'web', authors: authorLines(r.author || r.source), title: r.title, container: r.source, year: d.year, date: d.md, link: r.url, stage: 'Background' });
-    toast(r.author && d.year ? 'Added to My sources. Write your annotation there.' : 'Added to My sources. Check the page for the author and date, and write your annotation.');
+    toast(r.author && d.year ? 'Added to My References. Write your notes there.' : 'Added to My References. Check the page for the author and date, and write your notes.');
   });
   // "Cite this" buttons on resource cards.
   document.addEventListener('click', e => {
@@ -2352,9 +2543,9 @@
   function evalTag(s) {
     if (isVetted(s)) return '<span class="tag tag-peer">From the collection · already checked</span>';
     const v = s.sift && s.sift.verdict;
-    if (v) return `<span class="verdict ${VERDICT_CLS[v]} tag">Evaluated: ${esc(VERDICT_LABEL[v])}</span>`;
+    if (v) return `<span class="verdict ${VERDICT_CLS[v]} tag">Checked: ${esc(VERDICT_LABEL[v])}</span>`;
     if (craapComplete(s.craap)) return `<span class="tag">CRAAP score ${craapTotal(s.craap)}/25</span>`;
-    return '<span class="tag tag-warn">Not evaluated yet</span>';
+    return '<span class="tag tag-warn">Not checked yet</span>';
   }
   const needsEval = s => !isVetted(s) && !(s.sift && s.sift.verdict) && !craapComplete(s.craap);
   function evalNote(s) {
@@ -2387,7 +2578,7 @@
         <span class="tag">${esc(STAGES[s.stage] || s.stage)}</span>
         ${evalTag(s)}
         ${missing.length ? `<span class="tag tag-warn">Missing: ${esc(missing.join(', '))}</span>` : ''}
-        ${annotation(s) ? '' : '<span class="tag tag-warn">No annotation yet</span>'}
+        ${annotation(s) ? '' : '<span class="tag tag-warn">No notes yet</span>'}
       </div>
       ${annotation(s) ? `<p class="ms-annot">${esc(annotation(s))}</p>` : ''}`;
   }
@@ -2408,7 +2599,7 @@
           <select id="ms-type-${id}" data-field="type"><option value="journal" ${!isWeb ? 'selected' : ''}>Journal article</option><option value="web" ${isWeb ? 'selected' : ''}>Web page</option></select></div>
         <div class="field span-3"><label for="ms-stage-${id}">Used for</label>
           <select id="ms-stage-${id}" data-field="stage">${Object.entries(STAGES).map(([k, l]) => `<option value="${k}" ${s.stage === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
-        ${f('authors', 'Authors <span class="hint">(one per line: Last, First)</span>', { span: 6, area: true, ph: 'Libby, Peter' })}
+        ${f('authors', 'Authors <span class="hint">(one per line: Last, First)</span>', { span: 6, area: true, ph: 'Bernardi, Luciano' })}
         ${f('title', 'Title', { span: 6 })}
         <div class="field span-3"><label for="ms-container-${id}">${isWeb ? 'Website name' : 'Journal'}</label>
           <input type="text" id="ms-container-${id}" data-field="container" value="${esc(s.container)}"></div>
@@ -2419,10 +2610,10 @@
         ${f('date', 'Month &amp; day <span class="hint">(optional)</span>', { hideFor: 'journal' })}
         ${f('link', 'DOI or URL', { span: 6 })}
       </div>
-      <h4>Annotation</h4>
+      <h4>Notes</h4>
       <div class="form-grid">
-        ${f('summary', 'Main point: what does this source say?', { span: 6, area: true, ph: 'In 1–2 sentences, in your own words.' })}
-        ${f('helps', 'How does it help my research?', { span: 6, area: true, ph: 'Background? Evidence for a claim? Data I can use?' })}
+        ${f('summary', 'What does it say?', { span: 6, area: true, ph: 'In 1–2 sentences, in your own words.' })}
+        ${f('helps', 'How does it help my PBAT?', { span: 6, area: true, ph: 'Background for my Introduction? Backs up my “because”? Shows how to measure something?' })}
       </div>
       <div><button class="btn btn-secondary btn-sm" type="button" data-act="edit">Done</button></div>
     </div>`;
@@ -2437,8 +2628,8 @@
       <article class="card ms-entry" data-id="${s.id}">
         <div class="ms-head">${entryHead(s)}</div>
         <div class="cite-actions no-print">
-          <button class="btn btn-secondary btn-sm" type="button" data-act="edit" aria-expanded="false">Edit details &amp; annotation</button>
-          ${isVetted(s) ? '' : `<a class="btn btn-secondary btn-sm" href="#evaluate/${s.id}">${needsEval(s) ? 'Evaluate this source' : 'Review evaluation'}</a>`}
+          <button class="btn btn-secondary btn-sm" type="button" data-act="edit" aria-expanded="false">Edit details &amp; notes</button>
+          ${isVetted(s) ? '' : `<a class="btn btn-secondary btn-sm" href="#evaluate/${s.id}">${needsEval(s) ? 'Check this source' : 'See my check'}</a>`}
           ${/^https?:\/\//i.test(s.link) || /^10\./.test(s.link) ? `<a class="btn btn-secondary btn-sm" href="${esc(normLink(s.link))}" target="_blank" rel="noopener">Open source <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></a>` : ''}
           <span class="ms-remove"><button class="btn btn-secondary btn-sm" type="button" data-act="remove">Remove</button></span>
         </div>
@@ -2731,12 +2922,12 @@
       .sort((a, b) => plain(a.cite).localeCompare(plain(b.cite)));
     let html = '', text = '';
     if (heading) {
-      const title = style === 'APA' ? 'Annotated Bibliography' : 'Annotated Works Cited';
+      const title = style === 'APA' ? 'References' : 'Works Cited';
       html += `<p style="${FONT}text-align:center;font-weight:bold;">${title}</p>`;
       text += title + '\n\n';
       if ((sb.question || '').trim()) {
-        html += `<p style="${FONT}"><b>Research question:</b> ${esc(sb.question.trim())}</p>`;
-        text += 'Research question: ' + sb.question.trim() + '\n\n';
+        html += `<p style="${FONT}"><b>Testable question:</b> ${esc(sb.question.trim())}</p>`;
+        text += 'Testable question: ' + sb.question.trim() + '\n\n';
       }
     }
     items.forEach(({ s, cite }) => {
@@ -2793,7 +2984,7 @@
     if (!(sb.question || '').trim()) gaps.push('no research question');
     if (!qs.length) gaps.push('no sub-questions');
     if (missing) gaps.push(`${missing} source${missing === 1 ? '' : 's'} missing citation details`);
-    if (noNotes) gaps.push(`${noNotes} source${noNotes === 1 ? '' : 's'} without an annotation`);
+    if (noNotes) gaps.push(`${noNotes} source${noNotes === 1 ? '' : 's'} without notes`);
     if (noClaim) gaps.push(`${noClaim} sub-question${noClaim === 1 ? '' : 's'} without a claim`);
     return gaps;
   }
@@ -2808,14 +2999,14 @@
     const missing = n(s => missingFor(s).length), noNotes = n(s => !annotation(s)), unchecked = n(needsEval);
     return [
       missing && `${missing} source${missing === 1 ? '' : 's'} missing citation details`,
-      noNotes && `${noNotes} source${noNotes === 1 ? '' : 's'} without an annotation`,
-      unchecked && `${unchecked} source${unchecked === 1 ? '' : 's'} not evaluated yet`,
+      noNotes && `${noNotes} source${noNotes === 1 ? '' : 's'} without notes`,
+      unchecked && `${unchecked} source${unchecked === 1 ? '' : 's'} not checked yet`,
     ].filter(Boolean);
   }
   function renderMsStatus() {
     const gaps = bibGaps();
     $('#ms-status').innerHTML = !MS.sources.length ? ''
-      : gaps.length ? `<b>Still to do:</b> ${esc(gaps.join('; '))}.` : '✓ Every source has a complete citation, an annotation, and an evaluation.';
+      : gaps.length ? `<b>Still to do:</b> ${esc(gaps.join('; '))}.` : '✓ Every source has a full citation, notes, and a check.';
   }
   $('#ms-include-eval').addEventListener('change', e => { MS.includeEval = e.target.checked; saveMS(); });
   $('#ms-copy-all').addEventListener('click', () => {
@@ -2824,7 +3015,7 @@
     const { html, text } = bibHTML(MS.sources);
     copyRich(html, text, gaps.length
       ? `Copied. Before you hand it in: ${gaps.join('; ')}.`
-      : 'Annotated bibliography copied. Paste it into your Google Doc.');
+      : 'References copied. Paste them into your Google Doc.');
   });
   $('#ms-copy-packet').addEventListener('click', () => {
     const gaps = packetGaps();
@@ -2833,50 +3024,12 @@
     renderPacketStatus();
   });
 
-  /* Backup file, for moving to another computer */
-  $('#ms-download').addEventListener('click', () => {
-    const data = JSON.stringify({ app: 'cardiovascular-research-hub', version: 2, saved: new Date().toISOString(), question: sb.question || '', sources: MS.sources, project: PJ }, null, 2);
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([data], { type: 'application/json' }));
-    a.download = 'my-research-backup.json';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  });
-  $('#ms-upload-btn').addEventListener('click', () => $('#ms-upload').click());
-  $('#ms-upload').addEventListener('change', async e => {
-    const file = e.target.files[0];
-    e.target.value = '';
-    if (!file) return;
-    try {
-      const data = JSON.parse(await file.text());
-      if (!data || !Array.isArray(data.sources)) throw new Error('not a backup');
-      let added = 0;
-      data.sources.forEach(raw => {
-        if (!raw || typeof raw !== 'object' || MS.sources.some(x => x.id === raw.id)) return;
-        const s = { id: typeof raw.id === 'string' ? raw.id : newId(), stage: 'Background', craap: null, sift: null, summary: '', helps: '' };
-        [...CITE_FIELDS, 'stage', 'summary', 'helps'].forEach(k => { if (typeof raw[k] === 'string') s[k] = raw[k]; });
-        if (raw.craap && typeof raw.craap === 'object') s.craap = Object.fromEntries(CRAAP_IDS.map(k => [k, Number.isInteger(raw.craap[k]) ? raw.craap[k] : undefined]));
-        if (raw.sift && typeof raw.sift === 'object') s.sift = Object.fromEntries(['kind', 'coverage', 'verdict', ...SIFT_TEXT].map(k => [k, typeof raw.sift[k] === 'string' ? raw.sift[k] : '']));
-        if (!['web', 'journal'].includes(s.type)) s.type = 'web';
-        MS.sources.push(s); added++;
-      });
-      if (!(sb.question || '').trim() && typeof data.question === 'string') { sb.question = data.question; saveSb(); }
-      // Take the backup's project work only if this browser doesn't have any yet, so nothing gets overwritten.
-      let tookProject = false;
-      if (data.project && !liveSubqs().length && !Object.keys(PJ.matrix).length) { PJ = cleanProject(data.project); savePJ(); tookProject = true; }
-      saveMS(); syncAddButtons(); renderMySources();
-      toast(added || tookProject ? `Loaded ${added} source${added === 1 ? '' : 's'}${tookProject ? ' and your project notes' : ''} from the backup.` : 'Those sources are already here.');
-    } catch {
-      toast('That file isn’t a backup from this site.');
-    }
-  });
-
   /* Save from the citation builder */
   $('#cite-save').addEventListener('click', () => {
     const d = readForm();
     if (!['authors', 'title', 'container', 'link'].some(k => d[k])) { toast('Fill in the form first.'); return; }
     addSource({ ...d, stage: d.type === 'journal' ? 'Research' : 'Background' });
-    toast('Saved to My sources. Write your annotation there.');
+    toast('Saved to My References. Write your notes there.');
   });
 
   updateMsCount();
