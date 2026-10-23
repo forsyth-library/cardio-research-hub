@@ -199,6 +199,9 @@
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
   .grid-3 { grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); }
   .grid-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+  .featured { background: var(--pbat-soft); border: 1px solid color-mix(in srgb, var(--pbat) 30%, transparent); border-radius: var(--radius); padding: 1.25rem; }
+  .featured .section-title .icon { color: var(--pbat); }
+  .featured-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
   .numbered-h { display: flex; align-items: center; gap: .6rem; }
   .numbered-h .n { flex: none; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--on-accent); font: 700 .95rem/1 var(--font-body); }
 
@@ -286,19 +289,6 @@
   .topic-card .subs { font-size: .9rem; color: var(--muted); }
 
   /* ---------- PBAT pieces: section map, variable chips, hypothesis band ---------- */
-  .pbat-map { border-top: 6px solid var(--pbat); }
-  .pbat-map h2 { font-size: 1.45rem; }
-  .pbat-map > p { margin-top: .35rem; color: var(--muted); max-width: 60ch; }
-  .pbat-steps { list-style: none; margin: 1.1rem 0 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); counter-reset: pbat; }
-  .pbat-steps li { position: relative; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: .7rem .8rem .75rem 2.3rem; background: var(--surface); counter-increment: pbat; }
-  .pbat-steps li::before { content: ""; position: absolute; left: .75rem; top: .9rem; width: .95rem; height: .95rem; border: 2px solid var(--line-strong); border-radius: 3px; }
-  .pbat-steps .name { display: block; font-weight: 700; line-height: 1.25; }
-  .pbat-steps .note { display: block; font-size: .9rem; color: var(--muted); margin-top: .2rem; line-height: 1.35; }
-  .pbat-steps .helps { display: inline-block; margin-top: .45rem; font-size: .8rem; font-weight: 700; color: var(--pbat); }
-  .pbat-steps li.on { border: 2px solid var(--pbat); background: var(--pbat-soft); }
-  .pbat-steps li.on::before { border-color: var(--pbat); background: var(--pbat); }
-  .pbat-steps li.half { border: 2px dashed var(--pbat); }
-  .pbat-steps a { color: inherit; }
 
   .var-chip { display: inline-block; font: 700 .72rem/1 var(--font-body); letter-spacing: .04em; padding: .3rem .45rem; border-radius: 5px; vertical-align: .2em; margin-right: .5rem; color: #fff; }
   .var-iv { background: var(--iv); }
@@ -349,6 +339,9 @@
   .topic-filters { display: grid; gap: .6rem; margin-top: 1.25rem; }
   .topic-filters .label { font-size: .95rem; font-weight: 700; margin-right: .25rem; align-self: center; }
   .sub-section h3 { font-size: 1.25rem; margin-bottom: .9rem; }
+  .sub-section h3:has(+ .sub-note) { margin-bottom: .25rem; }
+  .sub-note { color: var(--muted); margin-bottom: .9rem; }
+  .res .plan-note { font-size: .9rem; color: var(--pbat); font-weight: 600; }
   .empty-note { color: var(--muted); }
   .questions ul { margin: .5rem 0 0; padding-left: 1.1rem; display: grid; gap: .5rem; }
   .search-links { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
@@ -674,17 +667,12 @@
     </div>
 
     <div id="home-browse" class="stack-lg">
-      <section class="card pbat-map" aria-labelledby="pbat-map-h">
-        <h2 id="pbat-map-h">Where research fits in your PBAT</h2>
-        <p>Your PBAT paper has six parts. This site helps with the ones in purple.</p>
-        <ol class="pbat-steps">
-          <li><span class="name">Abstract</span><span class="note">First to see, last to write</span></li>
-          <li class="on"><span class="name">Introduction</span><span class="note">Background research, ending with your hypothesis</span><span class="helps">Use the topics below</span></li>
-          <li class="half"><span class="name">Materials &amp; Methods</span><span class="note">Your experiment, step by step</span><span class="helps">See “How to measure it”</span></li>
-          <li><span class="name">Results</span><span class="note">Your data and graphs</span></li>
-          <li><span class="name">Discussion</span><span class="note">Did the data support your hypothesis?</span></li>
-          <li class="on"><span class="name">References</span><span class="note">Every source you used</span><span class="helps"><a href="#cite">Cite it</a> · <a href="#my-sources">My References</a></span></li>
-        </ol>
+      <section class="featured" id="featured" aria-labelledby="featured-h" hidden>
+        <div class="topic-group-head">
+          <h2 class="section-title" id="featured-h"><svg class="icon" aria-hidden="true"><use href="#i-cube"/></svg> Featured</h2>
+          <p class="muted">Start here for the big picture, or explore the heart and lungs up close.</p>
+        </div>
+        <div class="grid featured-grid" id="featured-grid"></div>
       </section>
 
       <div class="box box-tip">
@@ -1069,13 +1057,13 @@
             <input type="search" id="db-q" name="term" placeholder="e.g. music heart rate" autocomplete="off">
           </div>
           <input type="hidden" name="filter" value="simsearch2.ffrft">
-          <button class="btn btn-primary" type="submit" id="db-go">Search PubMed <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
+          <button class="btn btn-primary" type="submit" id="db-go">Search MedlinePlus <svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg></button>
         </div>
         <fieldset class="db-pick">
           <legend class="sr-only">Database to search</legend>
-          <label><input type="radio" name="db" value="pubmed" checked> PubMed <span>free full text</span></label>
+          <label><input type="radio" name="db" value="medline" checked> MedlinePlus <span>easy background</span></label>
+          <label><input type="radio" name="db" value="pubmed"> PubMed <span>free full text</span></label>
           <label><input type="radio" name="db" value="scholar"> Google Scholar <span>broadest</span></label>
-          <label><input type="radio" name="db" value="medline"> MedlinePlus <span>easy background</span></label>
         </fieldset>
         <p class="hint">Results open in a new tab on the database's own site.</p>
       </form>
@@ -1369,6 +1357,15 @@
   const slug = s => s.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   TOPICS.forEach(t => { t.slug = slug(t.name); });
 
+  /* EDIT: the Featured section at the top of Resources. List 4–5 links from the sheet
+     (or '#tool/...' for tools on this site), in the order they should appear. */
+  const FEATURED = [
+    'https://anatomyvista.com/explore/heart',
+    '#tool/blood-flow',
+    'https://www.nhlbi.nih.gov/health/heart',
+    'https://www.nhlbi.nih.gov/health/lungs',
+  ];
+
   /* ---------------- Built-in tools (pages on this site) ---------------- */
   const TOOLS = [
     { id: '3d-heart', title: '3D heart model', source: 'On this site · model by Mox3DModels', format: '3D model', level: 'Intro',
@@ -1587,6 +1584,7 @@
         ? '<svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only"> (opens in new tab)</span>' : ''}</a></h3>
       ${r.source ? `<p class="publisher">${esc(r.source)}</p>` : ''}
       ${r.why ? `<p class="why">${esc(r.why)}</p>` : ''}
+      ${r.format === 'Experiment idea' ? '<p class="plan-note">Helps you plan your Materials &amp; Methods.</p>' : ''}
       ${where}
       ${ext ? `<div class="res-actions"><button type="button" class="add-src" data-cite-src="${esc(r.url)}">Cite this</button>
         <button type="button" class="add-src${msHas(r.url) ? ' added' : ''}" data-add-src="${esc(r.url)}">${msHas(r.url) ? '✓ In My References' : '+ My References'}</button></div>` : ''}
@@ -1621,6 +1619,10 @@
       </section>`;
     }).join('');
     $('#tool-grid').innerHTML = toolItems().map(r => card(r)).join('');
+    const pool = [...RESOURCES, ...toolItems()];
+    const featured = FEATURED.map(u => pool.find(r => r.url === u)).filter(Boolean);
+    $('#featured').hidden = !featured.length;
+    $('#featured-grid').innerHTML = featured.map(r => card(r, { showTopic: true })).join('');
 
     const formats = FORMAT_ORDER.filter(f => [...RESOURCES, ...toolItems()].some(r => r.format === f));
     if (libFormat !== 'all' && !formats.includes(libFormat)) libFormat = 'all';
@@ -1718,6 +1720,7 @@
       ${items.length ? groups.map(([name, list]) => `
         <section class="sub-section" data-sub="${esc(name)}">
           <h3>${name ? esc(name) : 'Overview'}</h3>
+          ${name === 'How to measure it' ? '<p class="sub-note">Use these when you write your <b>Materials &amp; Methods</b>.</p>' : ''}
           <div class="grid grid-3">${list.map(r => `<div data-level="${r.level}">${card(r)}</div>`).join('')}</div>
         </section>`).join('')
         : '<div class="card"><p class="empty-note">No resources here yet. Check back soon, or <a href="#/">browse other topics</a>.</p></div>'}
@@ -1837,7 +1840,7 @@
   dbForm.addEventListener('submit', e => {
     e.preventDefault();
     const q = $('#db-q').value.trim();
-    if (!q) { $('#db-q').focus(); toast('Type a few key terms first.'); return; }
+    if (!q) { $('#db-q').focus(); toast('Type a few key words first.'); return; }
     window.open(dbChoice().url(q), '_blank', 'noopener');
   });
 
