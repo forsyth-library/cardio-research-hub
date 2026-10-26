@@ -170,6 +170,7 @@
   .sec-ms { --c: var(--s5); --c-soft: var(--s5-soft); }
   .sec-find { --c: var(--s3); --c-soft: var(--s3-soft); }
   .sec-proj { --c: var(--s2); --c-soft: var(--s2-soft); }
+  .sec-ex { --c: var(--pbat); --c-soft: var(--pbat-soft); }
   @media (max-width: 640px) {
     .tabs { flex-wrap: wrap; overflow: visible; gap: 0; }
     .tab { padding: .6rem .7rem; font-size: .95rem; }
@@ -401,6 +402,15 @@
   .source-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; flex-wrap: wrap; }
   .db-card { display: flex; flex-direction: column; gap: .5rem; }
   .db-card .btn { margin-top: auto; align-self: flex-start; }
+  .ex-card { display: flex; flex-direction: column; gap: .5rem; }
+  .ex-card h3 { font-size: 1.1rem; }
+  .ex-card h3 a { color: var(--ink); text-decoration: none; }
+  .ex-card h3 a:hover { color: var(--accent); text-decoration: underline; }
+  .ex-card h3 .icon { width: 1em; height: 1em; vertical-align: -.1em; margin-left: .25rem; color: var(--muted); }
+  .ex-card .ex-note { color: var(--muted); font-size: .95rem; }
+  .tag-o { background: var(--ok-soft); color: var(--ok); }
+  .tag-g { background: var(--deoxy-soft); color: var(--deoxy); }
+  .tag-c { background: var(--warn-soft); color: var(--warn); }
   .tool-head { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1.25rem; }
   .tool-head h3 { display: flex; align-items: center; gap: .5rem; }
   .tool-head h3 .icon { color: var(--accent); }
@@ -635,6 +645,7 @@
       <a class="tab sec-cite" href="#cite" data-nav="cite">Cite a source</a>
       <a class="tab sec-ms" href="#my-sources" data-nav="my-sources">My References<span class="count-badge" id="ms-count" hidden></span></a>
       <a class="tab sec-find" href="#find" data-nav="find">Search for studies</a>
+      <a class="tab sec-ex" href="#examples" data-nav="examples">Student PBAT examples</a>
       <a class="tab tab-optional sec-proj" href="#project" data-nav="project" id="nav-project" hidden>Project tools</a>
     </div>
   </nav>
@@ -1094,6 +1105,14 @@
     </div>
   </section>
 
+  <!-- ===================== STUDENT PBAT EXAMPLES (list is EXAMPLES in the script) ===================== -->
+  <section class="view stack-lg" id="view-examples" data-view="examples" data-stage="2" data-title="Student PBAT examples" hidden>
+    <div class="stage-head">
+      <h2>Student PBAT examples</h2>
+    </div>
+    <div id="ex-groups" class="stack-lg"></div>
+  </section>
+
   <!-- ===================== PROJECT TOOLS (optional; turn on with SHOW_PROJECT_TOOLS) ===================== -->
   <section class="view stack-lg" id="view-project" data-view="project" data-stage="2" data-title="Project tools" hidden>
     <div class="stage-head">
@@ -1271,6 +1290,22 @@
   /* EDIT: true shows the "Project tools" tab (topic map, research question, sub-questions,
      evidence matrix, claims). false hides it, and the rest of the site works without it. */
   const SHOW_PROJECT_TOOLS = false;
+
+  /* EDIT: student PBAT examples (files in the "Student PBAT examples" Drive folder).
+     grade is O, G, or C. drive is the file's ID from its Drive link (…/file/d/ID/view).
+     note is optional text shown under the title. */
+  const EXAMPLE_GRADES = { O: 'Outstanding', G: 'Good', C: 'Competent' };
+  const EXAMPLES = [
+    { grade: 'O', title: 'Will the figure eight eye exercise improve scores on the eye test chart?', drive: '1I3dm6dk0kSrhFcihpudWSExkQl-zXIFu' }, // Aden
+    { grade: 'O', title: 'The effects of THC on sleep & memory', drive: '1beg2Es60FvYh_WF6Ys4mOAfk9p7MX9GN' }, // Evelyn
+    { grade: 'O', title: 'What’s Your Feelings?', drive: '1jIiNJN4KY15tmGdpKwz0M2ub4_mX2uEr' }, // Njeri
+    { grade: 'G', title: 'Effects of Different Music Genres on Heartrate', drive: '1io5vs5ncmDTwiAMsW40oidWXy6Y71cBn' }, // Anji
+    { grade: 'G', title: 'ILLUSIONS ; GLASSES VS NO GLASSES', drive: '1hyzqz0kkslCCvMSnRbheLht7kn2KF6BV' }, // Kevon
+    { grade: 'G', title: 'Does sensitivity increase in cold temperatures?', drive: '14N2Hw20bbPyKmsuYAeJh60yP3akF7VbW' }, // Leyvin
+    { grade: 'C', title: 'Music effect on short term memory', drive: '1LIKCcVPY4QWaw5B9uyVX4hltA8VXIxUX' }, // Melody
+    { grade: 'C', title: 'Stroop Test in 2025: Paper vs. Digital', drive: '1Mmg9xrUUnW2PjrGycB3_BmliG58sX1Mv' }, // "Competent - Experimental Science"
+    { grade: 'C', title: 'Stroop Test in 2025: Paper vs. Digital', drive: '18jjPlV-AOyeX-DJSyLXRcja4V8YVBQPS' }, // Ondre (same paper plus a research-notes bank)
+  ];
 
   /* ---------------- Topics ----------------
      Names must match the Topic column in the sheet exactly.
@@ -1747,6 +1782,22 @@
     });
   }
 
+  /* ---------------- Student PBAT examples ---------------- */
+  $('#ex-groups').innerHTML = Object.entries(EXAMPLE_GRADES).map(([g, name]) => {
+    const items = EXAMPLES.filter(x => x.grade === g);
+    if (!items.length) return '';
+    return `<section aria-labelledby="ex-h-${g}">
+      <h2 class="section-title" id="ex-h-${g}">${esc(name)}</h2>
+      <div class="grid grid-3">${items.map(x => `
+        <article class="card card-tight ex-card">
+          <div class="source-top"><span class="tag tag-${g.toLowerCase()}">${esc(name)}</span></div>
+          <h3><a href="https://drive.google.com/file/d/${encodeURIComponent(x.drive)}/view" target="_blank" rel="noopener">${esc(x.title)}<svg class="icon" aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only">(opens in new tab)</span></a></h3>
+          ${x.note ? `<p class="ex-note">${esc(x.note)}</p>` : ''}
+        </article>`).join('')}
+      </div>
+    </section>`;
+  }).join('');
+
   /* ---------------- Databases page ---------------- */
   const DATABASES = [
     { name: 'MedlinePlus', pub: 'National Library of Medicine', tag: ['Easy background', 'tag-bg'], url: 'https://medlineplus.gov/',
@@ -1772,7 +1823,7 @@
   // Old addresses from earlier versions of the site keep working.
   const ALIASES = { overview: '', guide: '', pathways: '', sources: 'find', search: 'find', writing: 'evaluate', craap: 'evaluate', lab: 'tool/blood-flow', organize: 'my-sources', ask: 'project' };
   const NAV_FOR = v => (v === 'home' || v === 'topic' || v.startsWith('tool-')) ? 'resources' : v;
-  const PAGES = ['evaluate', 'cite', 'my-sources', 'find', 'project'];
+  const PAGES = ['evaluate', 'cite', 'my-sources', 'find', 'examples', 'project'];
   let currentView = null;
 
   function showView(name, { focus = true } = {}) {
